@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Annexe A. Gérer le système Wheezy avant la mise à niveau</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="up" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="prev" href="ch-moreinfo.fr.html" title="Chapitre 6. Plus d'informations sur Debian" /><link rel="next" href="apb.fr.html" title="Annexe B. Contributeurs des notes de publication" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Annexe A. Gérer le système Wheezy avant la mise à niveau</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-moreinfo.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apb.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr></table><hr /></div><div xml:lang="fr" class="appendix" lang="fr"><div class="titlepage"><div><div><h1 class="title"><a id="ap-old-stuff"></a>Annexe A. Gérer le système Wheezy avant la mise à niveau</h1></div></div></div><div class="toc"><p><strong>Table des matières</strong></p><dl class="toc"><dt><span class="section"><a href="ap-old-stuff.fr.html#old-upgrade">A.1. Mettre à niveau le système Wheezy</a></span></dt><dt><span class="section"><a href="ap-old-stuff.fr.html#old-sources">A.2. Vérifier la liste de sources</a></span></dt><dt><span class="section"><a href="ap-old-stuff.fr.html#old-config">A.3. Supprimer les fichiers de configuration obsolètes</a></span></dt><dt><span class="section"><a href="ap-old-stuff.fr.html#switch-utf8">A.4. Mettre à niveau les anciens paramètres linguistiques régionaux vers UTF-8</a></span></dt></dl></div><p>
+Cette annexe contient des informations sur la façon de vous assurer que vous
+pouvez installer ou mettre à jour des paquets de Wheezy avant de
+faire une mise à niveau vers Jessie. Cela ne devrait être nécessaire
+que dans des situations spécifiques.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-upgrade"></a>A.1. Mettre à niveau le système Wheezy</h2></div></div></div><p>
+En gros, cela n'est pas différent de toutes les autres mises à niveau de
+Wheezy qui ont déjà été faites. La seule différence est que vous
+devez tout d'abord vous assurer que la liste de paquets contient toujours
+des références à Wheezy comme expliqué en <a class="xref" href="ap-old-stuff.fr.html#old-sources" title="A.2. Vérifier la liste de sources">Section A.2, « Vérifier la liste de sources »</a> .
+</p><p>
+Si vous mettez le système à niveau en utilisant un miroir Debian, il sera
+automatiquement mis à niveau vers la dernière version mineure de
+Wheezy.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-sources"></a>A.2. Vérifier la liste de sources</h2></div></div></div><p>
+Si l'une des lignes de <code class="filename">/etc/apt/sources.list</code> se réfère
+à « stable », c'est que Jessie est déjà <span class="quote">« <span class="quote">utilisé</span> »</span>. Ce
+n'est pas forcément ce que vous voulez si vous n'êtes pas encore prêt pour
+la mise à niveau. Si <code class="literal">apt-get update</code> a déjà été exécuté,
+vous pouvez encore revenir en arrière sans problème en suivant la procédure
+ci-dessous.
+</p><p>
+Si des paquets de Jessie ont déjà été installés, il n'y a
+probablement plus beaucoup d'intérêt à installer des paquets de
+Wheezy. Dans ce cas, vous devrez décider vous-même si vous voulez
+continuer ainsi ou non. Il est possible de revenir à des versions
+antérieures pour des paquets, mais cela n'est pas traité ici.
+</p><p>
+Ouvrez le fichier <code class="filename">/etc/apt/sources.list</code> avec votre
+éditeur favori (en tant que <code class="literal">superutilisateur</code>) et
+recherchez une référence à <span class="quote">« <span class="quote"><code class="literal">stable</code></span> »</span> dans
+toutes les lignes commençant par <code class="literal">deb http:</code> ou
+<code class="literal">deb ftp:</code>. Si vous en trouvez, changez
+<code class="literal">stable</code> en <code class="literal">wheezy</code>.
+</p><p>
+Si des lignes commencent par <code class="literal">deb file:</code>, vous devrez
+vérifier vous-même si l'emplacement auquel elles se réfèrent contient une
+archive de Wheezy ou de Jessie.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/important.png" /></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p>
+    Ne changez pas les lignes qui commencent par <code class="literal">deb
+cdrom:</code>. Faire cela invaliderait la ligne et vous devriez à nouveau
+exécuter <span class="command"><strong>apt-cdrom</strong></span>. Ne vous inquiétez pas si une ligne de
+source « cdrom » se réfère à
+<span class="quote">« <span class="quote"><code class="literal">unstable</code></span> »</span>. C'est normal, bien que cela
+paraisse trompeur.
+  </p></td></tr></table></div><p>
+Si des modifications ont déjà été effectuées, sauvegardez le fichier et
+exécutez :
+</p><pre class="screen">
+# apt-get update
+</pre><p>
+pour rafraîchir la liste des paquets.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-config"></a>A.3. Supprimer les fichiers de configuration obsolètes</h2></div></div></div><p>
+Avant de mettre à jour le système vers Jessie, il est recommandé de
+supprimer les vieux fichiers de configuration (tels que les fichiers
+<code class="filename">*.dpkg-{new,old}</code> dans <code class="filename">/etc</code>) du
+système.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="switch-utf8"></a>A.4. Mettre à niveau les anciens paramètres linguistiques régionaux vers UTF-8</h2></div></div></div><p>
+Si le système utilise des paramètres linguistiques régionaux non basés sur
+UTF-8, vous êtes fortement encouragé à changer et utiliser des paramètres
+linguistiques régionaux compatibles UTF-8. Par le passé, certains
+bogues<a href="#ftn.idp60777776" class="footnote" id="idp60777776"><sup class="footnote">[6]</sup></a> ne se manifestaient que sur des
+systèmes n'utilisant pas des paramètres linguistiques régionaux compatibles
+UTF-8. Pour le bureau, de vilains correctifs dans les bibliothèques internes
+permettent d'utiliser ces anciens paramètres linguistiques régionaux, mais
+il ne sera plus possible à terme de les gérer correctement.
+</p><p>
+Pour configurer les paramètres linguistiques régionaux du système, vous
+pouvez exécuter la commande <span class="command"><strong>dpkg-reconfigure
+locales</strong></span>. Sélectionnez des paramètres linguistiques régionaux
+compatibles UTF-8 lors du choix du jeu de paramètres régionaux actifs par
+défaut pour le système. De plus, vous devriez examiner les paramètres
+linguistiques régionaux des utilisateurs et vous assurer que la
+configuration de leur environnement n'active pas d'anciens paramètres
+linguistiques régionaux.
+</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp60777776" class="footnote"><p><a href="#idp60777776" class="para"><sup class="para">[6] </sup></a>Dans l'économiseur d'écran GNOME qui utilise des mots de passe avec des
+caractères non ASCII, la prise en charge de pam_ldap ou même la possibilité
+de déverrouiller l'écran ne sont pas forcément fiables quand on n'utilise
+pas UTF-8. Le lecteur d'écran de GNOME est touché par le bogue <a class="ulink" href="http://bugs.debian.org/599197" target="_top">nº 599197</a>. Le gestionnaire de
+fichiers Nautilus (ainsi que tous les programmes utilisant glib et
+probablement ceux utilisant Qt) suppose que les noms de fichiers sont en
+UTF-8 alors que l'interpréteur de commandes suppose qu'ils sont écrits avec
+l'encodage des paramètres linguistiques régionaux (« locales »)
+actuels. Pour un usage quotidien, les noms de fichiers non ASCII ne sont pas
+utilisables sur de telles installations. De plus, le lecteur d'écran
+gnome-orca (qui permet aux utilisateurs ayant une déficience visuelle
+d'accéder à l'environnement de bureau GNOME) réclame les paramètres
+linguistiques régionaux UTF-8 depuis Squeeze ; avec un jeu de caractères
+ancien, il sera incapable de lire des informations de la fenêtre pour les
+éléments du bureau tels que le panneau Nautilus/GNOME ou le menu Alt-F1.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-moreinfo.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="apb.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 6. Plus d'informations sur Debian </td><td width="20%" align="center"><a accesskey="h" href="index.fr.html"><img src="images/home.png" alt="Sommaire" /></a></td><td width="40%" align="right" valign="top"> Annexe B. Contributeurs des notes de publication</td></tr></table></div></body></html>

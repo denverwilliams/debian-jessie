@@ -1,0 +1,3137 @@
+
+          Udgivelsesnoter til Debian 8 (jessie), 64-bit PC
+
+
+---------------------------------------------------------------------
+
+Debian-dokumentationsprojektet (http://www.debian.org/doc/)
+
+    Dette dokument er fri software. Du kan videredistribuere og/eller
+    modificere det under de betingelser, som er angivet i GNU General
+    Public License, version 2, som er udgivet af Free Software
+    Foundation.
+
+    Dette dokument distribueres i håb om at det vil vise sig nyttigt,
+    men UDEN NOGEN FORM FOR GARANTI, uden selv de underforståede
+    garantier omkring SALGBARHED eller EGNETHED TIL ET BESTEMT
+    FORMÅL. Yderligere detaljer kan læses i GNU General Public
+    License.
+
+    Du bør have modtaget en kopi af GNU General Public License sammen
+    med dette dokument. Hvis ikke, så skriv til Free software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301, USA.
+
+    Licensteksten kan også findes på http://www.gnu.org/licenses/
+    gpl-2.0.html (http://www.gnu.org/licenses/gpl-2.0.html) og /usr/
+    share/common-licenses/GPL-2 på Debian.
+
+---------------------------------------------------------------------
+
+Indholdsfortegnelse
+
+1. Introduktion
+
+    1.1. Rapporter fejl i dette dokument
+    1.2. Bidrag med opgraderingsrapporter
+    1.3. Kilder til dette dokument
+
+2. Nyt i Debian 8
+
+    2.1. Understøttede arkitekturer
+    2.2. Nyt i distributionen
+
+        2.2.1. Cd'er, dvd'er og Blu-ray
+        2.2.2. Ændringer i GNOME-skrivebordet
+        2.2.3. Nyt standardsystem for init (systemd)
+        2.2.4. Sikkerhed
+        2.2.5. MariaDB ved siden af MySQL
+        2.2.6. PHP-programmer
+        2.2.7. Dbians spilblend
+        2.2.8. News from Debian Med Blend
+        2.2.9. News from Debian Science Blend
+        2.2.10. News from Debian Geographical Information Systems
+            (GIS) Blend
+        2.2.11. News from the Debian Java Team
+
+3. Installeringssystemet
+
+    3.1. Hvad er nyt i installeringssystemet?
+
+        3.1.1. Større ændringer
+        3.1.2. Automatisk installering
+
+4. Opgraderinger fra Debian 7 (wheezy)
+
+    4.1. Forberedelse af opgraderingen
+
+        4.1.1. Sikkerhedskopier alle data og
+            konfigurationsinformation
+        4.1.2. Informer brugerne i forvejen
+        4.1.3. Forbered nedetid for tjenester
+        4.1.4. Forbered for gendannelse
+        4.1.5. Forbered et sikkert miljø for opgraderingen
+
+    4.2. Kontrollerer systemstatus
+
+        4.2.1. Gennemse handlinger der afventer i pakkehåndteringen
+        4.2.2. Deaktivering af APT-pinning
+        4.2.3. Kontrol af pakkestatus
+        4.2.4. Afsnittet foreslåede opdateringer (proposed-updates)
+        4.2.5. Uofficielle kilder
+
+    4.3. Forberedelse af kilder for APT
+
+        4.3.1. Tilføjelse af APT-internetkilder
+        4.3.2. Tilføjelse af APT-kilder for et lokalt spejl
+        4.3.3. Tilføjelse af APT-kilder fra et optisk medie
+
+    4.4. Opgradering af pakker
+
+        4.4.1. Optagelse af sessionen
+        4.4.2. Opdatering af pakkelisten
+        4.4.3. Sikr dig, at du har tilstrækkelig med plads til
+            opgraderingen
+        4.4.4. Minimal systemopgradering
+        4.4.5. Opgradering af systemet
+
+    4.5. Mulige problemstillinger under opgradering
+
+        4.5.1. Dist-upgrade fejler med “Kunne ikke udføre
+            øjeblikkelig konfiguration”
+        4.5.2. Forventede fjernelser
+        4.5.3. Konflikter eller forhåndsafhængige (Pre-Depends) loop
+        4.5.4. Filkonflikter
+        4.5.5. Konfigurationsændringer
+        4.5.6. Ændring af session til konsol
+        4.5.7. Specielle forhold for specifikke pakker
+
+    4.6. Opgradering af din kerne og relaterede pakker
+
+        4.6.1. Installation af en kernens metapakke
+        4.6.2. Changes to root and /usr filesystem mounting and
+            checking
+
+    4.7. Ting der skal udføres før genstart
+    4.8. Forberedelse af den næste udgivelse
+
+        4.8.1. Fuld fjernelse af afinstallerede pakker
+
+    4.9. Forældede komponenter
+    4.10. Forældede pakker
+
+        4.10.1. Overgangspakker
+
+5. Ting man skal være opmærksom på i forbindelse med jessie
+
+    5.1. Begrænsninger i sikkerhedsunderstøttelse
+
+        5.1.1. Sikkerhedsstatus på internetbrowsere
+        5.1.2. Mangel på sikkerhedsmæssig understøttelse for
+            økosystemet omkring libv8 og Node.js
+        5.1.3. Early termination of MediaWiki security support
+
+    5.2. OpenSSH-server har som standard »PermitRootLogin
+        without-password«
+    5.3. Puppet 2.7 / 3.7-kompatibilitet
+    5.4. PHP 5.6-opgradering har ændringer i opførslen
+    5.5. Inkompatible ændringer i Apache HTTPD 2.4
+    5.6. Upgrading installs the new default init system for Jessie
+
+        5.6.1. Stricter handling of failing mounts during boot under
+            systemd
+        5.6.2. Obsolete init-scripts should be purged
+        5.6.3. Locally modified init-scripts may need to be ported to
+            systemd
+        5.6.4. Plymouth needed for boot-prompts under systemd boots
+        5.6.5. Interaction between logind and acpid
+        5.6.6. Unsupported crypttab features under systemd (e.g.
+            "keyscript=...")
+        5.6.7. systemd: issues SIGKILL too early [fixed in 8.1]
+        5.6.8. systemd: behavior of 'halt' command
+
+    5.7. Required kernel config options for Jessie
+    5.8. Upgrade considerations for LXC hosts and containers
+
+        5.8.1. Upgrading LXC guests running on Wheezy hosts
+        5.8.2. Upgrading LXC guests running on Jessie hosts
+        5.8.3. Further information
+
+    5.9. Manual migration of disks encrypted with LUKS whirlpool
+        (non-standard setups)
+    5.10. The GNOME desktop requires basic 3D graphics
+    5.11. The GNOME desktop does not work with the AMD proprietary
+        FGLRX driver
+    5.12. Changes in the GNOME default keyboard shortcuts
+    5.13. Changes to default shell of system users provided by
+        base-passwd
+    5.14. Migrering til ny KDE E-post, kalender og kontakter
+        (Kontact)
+    5.15. Manglende virtuelle konsoller (»getty'er«) med flere
+        skrivebordsmiljøer
+    5.16. »VGA signal out of range« / blank skærm under opstart med
+        grub-pc
+    5.17. Strengere validering af cronfiler i crontab
+    5.18. Change in handling of unreadable module paths by perl
+    5.19. Upgrade considerations for Ganeti clusters
+
+        5.19.1. Problem upgrading Ganeti clusters with DRBD-backed
+            instances [fixed in 8.1]
+        5.19.2. General notes on upgrading Ganeti clusters
+
+    5.20. New requirements for file execution in Samba4
+    5.21. Cryptsetup can break boot with BUSYBOX=n
+    5.22. Backwards incompatible changes in the Squid webproxy
+
+6. Yderligere oplysninger om Debian
+
+    6.1. Yderligere læsning
+    6.2. Få hjælp
+
+        6.2.1. E-post-lister
+        6.2.2. Internet Relay Chat
+
+    6.3. Fejlrapportering
+    6.4. Bidrag til Debian
+
+A. Håndter dit wheezy-system før opgraderingen
+
+    A.1. Opgradering af dit wheezy-system
+    A.2. Kontroller din kildeliste
+    A.3. Fjerner forældede konfigurationsfiler
+    A.4. Opgrader forældede sprogindstillinger til UTF-8
+
+B. Bidragydere til udgivelsesnoterne
+Stikordsregister
+ordliste
+
+Kapitel 1. Introduktion
+
+    Dette dokument informerer brugere af Debian-distributionen om
+    større ændringer i version 8 (kodenavn jessie).
+
+    Udgivelsesnoterne har information om, hvordan du sikkert
+    opgraderer fra version 7 (kodenavn wheezy) til den aktuelle
+    udgave og informerer brugere om kendte problemstillinger, som kan
+    opstå under opgraderingen.
+
+    Du kan se den seneste version af dette dokument på https://
+    www.debian.org/releases/jessie/releasenotes (https://
+    www.debian.org/releases/jessie/releasenotes) . Du kan sikre dig,
+    at du læser den seneste version af dokumentet ved at tjekke
+    datoen på den første side.
+
+    Pas på
+
+    Bemærk at det er umuligt at skrive om alle kendte
+    problemstillinger, og at udvælgelsen er baseret på en kombination
+    af forventet forekomst og omfang.
+
+    Bemærk at vi alene understøtter og dokumenterer opgradering fra
+    den forrige version af Debian (i dette tilfælde, opgradering fra
+    wheezy). Hvis du har brug for at opgradere fra en ældre version,
+    foreslår vi, at du læser tidligere udgaver af udgivelsesnoterne
+    og først opgraderer til wheezy.
+
+1.1. Rapporter fejl i dette dokument
+
+    Vi har forsøgt at teste alle trin i opgraderingen, som beskrives
+    i det her dokument og at forudse alle de mulige
+    problemstillinger, som en bruger kan møde.
+
+    Alligevel opstår fejl og hvis du mener, at du har fundet en sådan
+    (forkert information eller information som mangler) i denne
+    dokumentation, så indsend venligst en fejlrapport her
+    fejlrapporteringssystemet (https://bugs.debian.org/) mod pakken
+    release-notes. Du bør først kontrollere de eksisterende
+    fejlrapporter (https://bugs.debian.org/release-notes) for at
+    sikre dig, at fejlen ikke allerede er rapporteret. Du kan frit
+    tilføje yderligere information til en eksisterende fejlrapport,
+    hvis du kan bidrage med indhold til dette dokument.
+
+    Vi er taknemlige for og opfordrer til fejlrettelser til
+    dokumentets kilder, som er vedhæftet fejlrapporten. Du kan finde
+    yderligere information, der beskriver hvordan du kan finde
+    kilderne til dette dokument, i Afsnit 1.3, “Kilder til dette
+    dokument”.
+
+1.2. Bidrag med opgraderingsrapporter
+
+    Vi er glade for al information fra brugere, som har forbindelse
+    til opgraderinger fra wheezy til jessie. Hvis du vil dele din
+    information med os, så kan du sende denne ind via en fejlrapport
+    i fejlrapporteringssystemet (https://bugs.debian.org/) mod pakken
+    upgrade-reports med dine erfaringer. Vi vil bede dig om, at du
+    komprimerer eventuelle bilag som inkluderes (med gzip).
+
+    Inkluder følgende information når du indsender din
+    opgraderingsrapport:
+
+      * Status på din pakkedatabase før og efter opgraderingen: dpkg
+        's statusdatabase tilgængelig i /var/lib/dpkg/status og apt's
+        pakketilstandsinformation, tilgængelig i /var/lib/apt/
+        extended_states. Du bør lave en sikkerhedskopi før
+        opgraderingen som beskrevet i Afsnit 4.1.1, “Sikkerhedskopier
+        alle data og konfigurationsinformation”, men du kan også
+        finde sikkerhedskopier af /var/lib/dpkg/status i /var/
+        backups.
+
+      * Sessionslog fra script, læs mere om dette i Afsnit 4.4.1,
+        “Optagelse af sessionen”.
+
+      * Dine apt-logge, tilgængelige i /var/log/apt/term.log eller
+        dine aptitude-logge tilgængelige i /var/log/aptitude.
+
+    Bemærk
+
+    Du bør gennemgå og fjerne al personlig og/eller fortrolig
+    information fra logge, før du inkluderer dem i en fejlrapport, da
+    informationen vil blive udgivet i en offentlig database.
+
+1.3. Kilder til dette dokument
+
+    Kilden til dette dokument er i formatet DocBook XML.
+    HTML-versionen er oprettet med docbook-xsl og xsltproc.
+    PDF-versionen er oprettet med dblatex eller xmlroff. Kilder for
+    udgivelsesnoterne er tilgængelige i SVN-arkivet for Debian
+    Documentation Project. Du kan anvende internetbrugerfladen
+    (https://anonscm.debian.org/viewvc/ddp/manuals/trunk/
+    release-notes/) for at tilgå disse filer individuelt via
+    internettet og se ændringer i dem. For yderligere information om
+    hvordan SVN tilgås, så læs SVN-siderne for Debian Documentation
+    Project (https://www.debian.org/doc/cvs) .
+
+Kapitel 2. Nyt i Debian 8
+
+    Der er mere om dette emne på Wiki (https://wiki.debian.org/
+    NewInJessie) .
+
+2.1. Understøttede arkitekturer
+
+    Debian 8 introducerer to nye arkitekturer:
+
+      * arm64, 64-bit portering for ARM-maskiner.
+   
+      * ppc64el, 64-bit little-endian-portering for POWER-maskiner.
+
+    Følgende er de officielt understøttede arkitekturer i Debian 8:
+
+      * 32-bit PC (»i386«) og 64-bit PC (»amd64«
+
+      * 64-bit ARM (»amd64«)
+
+      * ARM EABI (»armel«)
+
+      * ARMv7 (EABI hard-float ABI, »armhf«)
+   
+      * MIPS (»mips« (big endian) og »mipsel« (little endian))
+
+      * PowerPC (»powerpc«)
+
+      * 64-bit little-endian PowerPC (»ppc64el«)
+
+      * IBM System z (»s390x«)
+
+    Tre arkitekturer som var en del af Debian 7 bliver ikke udgivet
+    med jessie.
+
+      * Som annonceret da Debian 7 blev udgivet, er 32-bit
+        s390-porteringen blevet afbrudt og erstattet med s390x.
+
+      * Som annonceret er portene til IA-64 og Sparc blevet fjernet
+        fra denne udgivelse på grund af utilstrækkelig
+        udviklerunderstøttelse. Sparc var en understøttet arkitektur
+        i Debian siden 2.1 (1999), mens ia64 blev introduceret i
+        Debian 3.0 (2002).
+
+   
+
+    Finally, the Debian ports to the FreeBSD kernel, kfreebsd-amd64
+    and kfreebsd-i386, included as technology previews in Debian 6.0
+    and Debian 7, are not part of this release.
+
+    Du kan læse mere om porteringsstatus og porteringsspecifik
+    information om din arkitektur på Debians websider om porteringer
+    (https://www.debian.org/ports/) .
+
+2.2. Nyt i distributionen
+
+    Denne nye udgave af Debian leveres med mange flere programmer end
+    dens forgænger wheezy. Distributionen indeholder over 12253 nye
+    pakker, og i alt 43512 pakker. Det meste af softwaren i
+    distributionen er blevet opdateret: over 24573 softwarepakker
+    (dette svarer til 66 % af alle pakker i wheezy). Et betydeligt
+    antal pakker (over 5441, 14 % af alle pakker i wheezy) er af
+    forskellige grunde blevet fjernet fra distributionen. Du vil ikke
+    se opdateringer for disse pakker, og de markeres »forældet« i
+    pakkehåndteringsprogrammer; se Afsnit 4.10, “Forældede pakker”.
+
+    Debian leveres igen med flere skrivebordsprogrammer og miljøer.
+    Blandt andre inkluderer Debian nu skrivebordsmiljøerne GNOME
+    3.14, KDE 4.11 Xfce 4.10, og LXDE.
+
+    Produktivitetsprogrammer er også blevet opgraderet, inklusive
+    kontorpakkerne:
+
+      * LibreOffice er opgraderet til version 4.3
+
+      * Calligra er opgraderet til 2.8
+
+      * GNUcash er opgraderet til 2.6
+
+      * GNUmeric er opgraderet til 1.12
+
+      * Abiword er opgraderet til 3.0
+
+    Opdateringer af andre skrivebordsprogrammer inkluderer
+    opgraderingen til Evolution 3.12.
+
+    Blandt meget andet inkluderer denne udgave følgende opdateringer:
+
+    +---------------------------------------------------------------+
+    |           Pakker            |    Version i 7    | Version i 8 |
+    |                             |     (wheezy)      |  (jessie)   |
+    |-----------------------------+-------------------+-------------|
+    |Apache                       |2.2.22             |2.4.10       |
+    |-----------------------------+-------------------+-------------|
+    |BIND DNS-server              |9.8                |9.9          |
+    |-----------------------------+-------------------+-------------|
+    |Courier - MTA                |0.68               |0.73         |
+    |-----------------------------+-------------------+-------------|
+    |Dia                          |0.97.2             |0.97.3       |
+    |-----------------------------+-------------------+-------------|
+    |Exim som                     |4.80               |4.84         |
+    |standard-e-postserver        |                   |             |
+    |-----------------------------+-------------------+-------------|
+    |GNU Compiler Collection som  |4.7 på pc'er, 4.6  |4.9          |
+    |standardcompiler             |andre steder       |             |
+    |-----------------------------+-------------------+-------------|
+    |GNU C-programbiblioteket     |2.13               |2.19         |
+    |-----------------------------+-------------------+-------------|
+    |lighttpd                     |1.4.31             |1.4.35       |
+    |-----------------------------+-------------------+-------------|
+    |Linux-kerneaftryk            |3.2-serie          |3.16-serie   |
+    |-----------------------------+-------------------+-------------|
+    |OpenLDAP                     |2.4.31             |2.4.40       |
+    |-----------------------------+-------------------+-------------|
+    |OpenSSH                      |6.0p1              |6.7p1        |
+    |-----------------------------+-------------------+-------------|
+    |Perl                         |5.14               |5.20         |
+    |-----------------------------+-------------------+-------------|
+    |PHP                          |5.4                |5.6          |
+    |-----------------------------+-------------------+-------------|
+    |Postfix MTA                  |2.9                |2.11         |
+    |-----------------------------+-------------------+-------------|
+    |PostgreSQL                   |9.1                |9.4          |
+    |-----------------------------+-------------------+-------------|
+    |Python 3                     |3.2                |3.4          |
+    |-----------------------------+-------------------+-------------|
+    |Samba                        |3.6                |4.1          |
+    +---------------------------------------------------------------+
+
+2.2.1. Cd'er, dvd'er og Blu-ray
+
+    The official Debian distribution now ships on 9 to 10 binary DVDs
+    or 75 to 85 binary CDs (depending on the architecture) and 10
+    source DVDs or 59 source CDs. Additionally, there is a multi-arch
+    DVD, with a subset of the release for the amd64 and i386
+    architectures, along with the source code. Debian is also
+    released as Blu-ray (BD) images, 2 each for the amd64 and i386
+    architectures, or 2 for the source code. For size reasons, some
+    very large packages are omitted from the CD builds; these
+    packages fit better in the DVD and BD builds, so are still
+    included there.
+
+2.2.2. Ændringer i GNOME-skrivebordet
+
+    Med opgraderingen til version 3.14 har det nye GNOME-skrivebord
+    mange nye funktioner og anvendelsesforbedringer.
+
+    Designet for GNOME-skallen er blevet opdateret. Statusfeltet i
+    bunden er større, nemmere at bruge og mindre udsat for at
+    fremkomme ved en fejl. Et nyt systemstatusområde i det øvre højre
+    hjørne placerer alle nyttige indstillinger det samme sted.
+
+    Pauseskærmen er blevet erstattet af en »lås skærm«, som stadig
+    har minimal funktionalitet, når brugeren er væk. For eksempel kan
+    du sætte musikken på pause, blive informeret om ny e-post eller
+    ændre skærmens lysstyrke, alt sammen uden at indtaste en
+    adgangskode. Tryk på tasten Escape eller indtastning af
+    adgangskoden får logindet tilbaget. GNOME-skærmhåndteringen
+    bruger det præcist samme design for konsistens.
+
+    Flere programmer, inklusive filhåndteringen Nautilus,
+    redigeringsprogrammet Gedit og dokumentfremviseren Evince har
+    fået deres design gjort meget mere kompakt, vinduestitellinjen er
+    føjet sammen med værktøjslinjen. Dette giver mere plads for
+    dokumenterne, som brugeren arbejder på. Standarddialogboksene har
+    gennemgået lignende ændringer.
+
+    Understøttelse for trykskærme er blevet fuldt integreret,
+    inklusvie intuitive bevægelser baseret på flere fingre. GNOME
+    understøtter nu også højopløste skærme (HiDPI), og udnytter
+    dermed fordelen ved detaljerede billedpunktsopløsning for den
+    klareste optegning.
+
+    GNOME understøtter geolokation og inkluderer et kort- og
+    navigationssystem.
+
+    Brugerdokumentationen er meget mere komplet, og inkluderer
+    videoøvelser for nye brugere.
+
+    Yderligere information kan findes i GNOME 3.14's
+    udgivelsesbemærkninger (https://help.gnome.org/misc/release-notes
+    /3.14/) .
+
+2.2.3. Nyt standardsystem for init (systemd)
+
+    Introduceret i Debian 7, systemd er nu init-standardsystemet. Det
+    tilbyder avanceret overvågning, logning og tjenestehåndtering.
+
+    Selv om den er designet som en direkte sysvinit-erstatning og som
+    sådan gør brug af eksisterende SysV init-skripter, så kan pakken
+    systemd installeres sikkert sammen med sysvinit og startes via
+    kerneindstillingen init=/bin/systemd. Pakken systemd-sysv
+    tilbyder /sbin/init-erstatningen.
+
+    For yderligere information om dette emne, så se Debians wiki
+    (http://wiki.debian.org/systemd) .
+
+2.2.4. Sikkerhed
+
+    Den forældede sikre sokkellagsprotokol SSLv3 er blevet
+    deaktiveret i denne udgivelse. Mange systemkryptografibiblioteker
+    smat server- og klientprogrammer er blevet kompileret eller
+    konfigureret uden understøttelse for denne protokol.
+
+    Linuxkernen har en sikkerhedsmekanisme, som nulstiller mange
+    angreb via symbolske henvisninger. Den er aktiveret i Debian
+    Linux-kernen som standard. /tmp-relaterede fejl som anses for
+    ikke at kunne udnytte denne mekansime opfattes ikke som
+    sikkerhedsmæssige sårbarheder. Hvis du bruger en tilpasset
+    Linuxkerne, så skal du aktivere den via en sysctl-indstilling:
+
+    echo 1 > /proc/sys/fs/protected_symlinks
+
+    I nogle sjældne tilfælde skal sikkerhedsunderstøttelsen for en
+    pakke leveret i en Debianudgivelse termineres før slutningen af
+    understøttelse for den fulde distribution. Jessie tilbyder en ny
+    pakke (debian-security-support), som udsender en advarsel hvis
+    understøttelse for en pakke skal afsluttes tidligere. Den
+    dokumenterer også pakker hvor omfanget af
+    sikkerhedsunderstøttelse er begrænset. Som sådan anbefales det at
+    installere debian-security-support på alle sikkerhedsrelevante
+    systemer.
+
+    Continuing on the path set by Wheezy, more packages have been
+    built with hardened compiler flags. Also, the stack protector
+    flag has been switched to stack-protector-strong for extra
+    hardening. Note that the hardened build flags are not enabled by
+    default in gcc, so they are not used automatically when locally
+    building software.
+
+    Ny i denne udgivelse er pakken needrestart. Når installeret vil
+    den udføre en kontrol efter hver APT-opgraderingssession. Hvis
+    tjenester, der kører på systemet kræver en genstart for at få
+    fordel af ændringer i de opgraderede pakker, så tilbyder pakken
+    at udføre disse genstarter. Det anbefales at installere pakken
+    needrestart for at sikre, at sikkerhedsopdateringer i biblioteker
+    sendes ud til kørende tjenester.
+
+2.2.5. MariaDB ved siden af MySQL
+
+    Sammen med den ældre MysQL 5.5, har Jessie den nye MariaDB 10.0.
+    Se Debian MySQL-holdets wikiside (http://wiki.debian.org/Teams/
+    MySQL) for yderligere information. Kun en af dem vil
+    sandsynligvis blive inkluderet i Debian 9.
+
+    Bemærk at opstrømsunderstøttelse for MySQL 5.5 vil stoppe i
+    december 2018 (og Debians sikkerhedsunderstøttelse vil skulle
+    følge dette), mens MariaDB 10.0 vil modtage
+    sikkerhedsunderstøttelse fra opstrøm indtil marts 2019.
+
+2.2.6. PHP-programmer
+
+    Horde Application Framework er tilgængelig i Jessie, via pakken
+    php-horde.
+
+2.2.7. Dbians spilblend
+
+    Debians spilblend kan med stolthed præsentere Debians spil Blend
+    (http://blends.debian.org/blends/) der består af 33 metapakker
+    (https://tracker.debian.org/pkg/debian-games) som forenkler
+    installationen af spil per kategori. Udvalget inkluderer blandt
+    andet strategi, simulation, kortspil og programmeringsspil.
+    Debians spil tilbyder også udviklere med en hurtig måde at
+    installere anbefalede programmer for udvikling af spil i
+    programmeringssprogene C++, Java, Perl eller Python 3.
+    Indholdsudviklere vil finde nyttige værktøjer til oprettelse af
+    spilkunst i games-content-dev. Projektets hjemmeside tilbyder
+    skærmbilleder og yderligere information samt tilbyder et kompakt
+    overblik over alle spillene inklusive Debians bedste spil (http:/
+    /blends.debian.org/games/tasks/finest) .
+
+2.2.8. News from Debian Med Blend
+
+    The Debian Med team has again considerably increased not only the
+    number of packages in the fields of biology and medicine but also
+    their quality in terms of testing (at package build time as well
+    as autopkgtest). These enhancements in version 2.0 of the Debian
+    Med Blend metapackages reflect the demand from scientists for
+    reliable software to provide reproducible results. Visit the
+    Debian Med tasks pages (http://blends.debian.org/med/tasks) to
+    see the full range of biological and medical software in Debian.
+
+2.2.9. News from Debian Science Blend
+
+    Due to the continuous work of the Debian Science team not only
+    new scientific applications were added to the Debian package pool
+    but also new fields of science are covered by certain
+    applications. Visit Debian Science tasks pages (http://
+    blends.debian.org/science/tasks) to see the full range of
+    scientific software inside Debian.
+
+2.2.10. News from Debian Geographical Information Systems (GIS) Blend
+
+    During the jessie development cycle many changes from UbuntuGIS
+    were merged back into Debian GIS. The collaboration with
+    UbuntuGIS and OSGeo-Live projects was improved, resulting in new
+    packages and contributors. Visit Debian GIS tasks pages (http://
+    blends.debian.org/gis/tasks) to see the full range of GIS
+    software inside Debian and the Debian GIS homepage (https://
+    wiki.debian.org/DebianGis) for more information.
+
+2.2.11. News from the Debian Java Team
+
+    Jessie ships with 799 source packages (442 updated, +130 new ones
+    since Wheezy) which will be maintained by the Java Team (https://
+    qa.debian.org/developer.php?login=
+    pkg-java-maintainers@lists.alioth.debian.org) . Notable changes:
+
+      * OpenJDK 7 is the new supported default Java runtime.
+
+      * OpenJDK 8 will be available from jessie-backports.
+   
+      * Tomcat 7 and Tomcat 8 are supported and Tomcat 6 was removed.
+
+      * New developer tools including VisualVM, the Dynamic Code
+        Evolution VM (openjdk-7-jre-dcevm), Gradle,
+        eclipse-wtp-webtools, closure-compiler and more.
+
+      * Inclusion of androidsdk-tools (https://packages.debian.org/
+        source/jessie/androidsdk-tools)
+
+Kapitel 3. Installeringssystemet
+
+    Debian Installer er Debians officielle installeringssystem. Det
+    tilbyder en række forskellige installeringsmetoder. Hvilke af
+    disse som fungerer på dit system, afhænger af din platform.
+
+    Aftryk af installeringsprogrammet til jessie kan findes sammen
+    med installeringsguiden på Debians hjemmeside (https://
+    www.debian.org/releases/jessie/debian-installer/) .
+
+    Installeringsguiden findes også inkluderet på den første cd-/
+    dvd-skive af de officielle cd-/dvd-skiver på:
+
+    /doc/install/manual/da/index.html
+
+    Du vil måske også læse errata (https://www.debian.org/releases/
+    jessie/debian-installer/index#errata ) til debian-installer hvor
+    en liste over kendte problemer findes.
+
+3.1. Hvad er nyt i installeringssystemet?
+
+    Det er sket en hel del udvikling af
+    Debian-installationsprogrammet, siden dens sidste officielle
+    udgivelse med Debian 7, som har resulteret i både forbedret
+    understøttelse af hardware, samt nogle nye spændende funktioner.
+
+    I disse Kommentarer til udgaven, vil vi kun opliste de større
+    ændringer i installeringsprogrammet. Læs udgivelsesnoterne til
+    beta- og RC-udgaverne i nyhedsarkivet (https://www.debian.org/
+    devel/debian-installer/News/) til Debian Installer, hvis du er
+    interesseret i en oversigt over detaljerede ændringer siden
+    wheezy.
+
+3.1.1. Større ændringer
+
+    Removed ports
+
+        Support for the 'ia64' and 'sparc' architectures has been
+        dropped from the installer since they have been removed from
+        the archive.
+
+    Nye porteringer
+
+        Support for the 'arm64' and 'ppc64el' architectures has been
+        added to the installer.
+
+    New default init system
+
+        The installation system now installs systemd as the default
+        init system.
+
+    Desktop selection
+
+        The desktop can now be chosen within tasksel during
+        installation. Note that several desktops can be selected at
+        the same time, but some combinations of desktops may not be
+        co-installable.
+
+    Replacing "--" by "---" for boot parameters
+
+        Due to a change on the Linux kernel side, the "---" separator
+        is now used instead of the historical "--" to separate kernel
+        parameters from userland parameters.
+   
+    Nye sprog
+
+        Thanks to the huge efforts of translators, Debian can now be
+        installed in 75 languages, including English. This is one
+        more language than in wheezy. Most languages are available in
+        both the text-based installation user interface and the
+        graphical user interface, while some are only available in
+        the graphical user interface.
+
+        Languages added in this release:
+
+          + Tajik has been added to the graphical and text-based
+            installer.
+
+        Sprog som kun kan vælges i det grafiske installationsprogram,
+        på grund af at deres tegn ikke kan vises i et ikke-grafisk
+        miljø er: amharisk, bengali, dzongkha, gujarati, hindi,
+        georgisk, kannada, khmer, malayalam, marathi, nepalesisk,
+        punjabi, tamil, telugu, tibetansk og uyghur.
+
+    UEFI-opstart
+
+        The Jessie installer improves support for a lot of UEFI
+        firmware and also supports installing on 32-bit UEFI firmware
+        with a 64-bit kernel.
+
+        Bemærk at dette ikke inkluderer understøttelse ofr
+        UEFI-sikker opstart.
+
+3.1.2. Automatisk installering
+
+    Nogle ændringer som er nævnt ovenover indebærer også ændringer i
+    understøttelsen af automatisk installering med forindstillede
+    filer. Dette betyder at hvis du har forindstillede filer, der
+    fungerede med installeringsprogrammet til wheezy, så kan du ikke
+    forvente at disse fungerer med det nye installeringsprogram, uden
+    at de redigeres.
+
+    Installeringsguiden (https://www.debian.org/releases/jessie/
+    installmanual) har et separat bilag med omfattende dokumentation
+    for, hvordan forindstillinger skal bruges.
+
+Kapitel 4. Opgraderinger fra Debian 7 (wheezy)
+
+4.1. Forberedelse af opgraderingen
+
+    Du bør læse informationen i Kapitel 5, Ting man skal være
+    opmærksom på i forbindelse med jessie, inden du opgraderer. Det
+    kapitel dækker mulige problemer, som ikke er direkte relateret
+    til opgraderingsprocessen, men som stadig kan være vigtige at
+    kende til, inden du begynder.
+
+4.1.1. Sikkerhedskopier alle data og konfigurationsinformation
+
+    Inden opgradering af dit system anbefales det kraftigt, at du
+    foretager en fuldstændig sikkerhedskopiering, eller i det mindste
+    laver en sikkerhedskopi af alle de data og den
+    konfigurationsinformation, som du ikke vil risikere at miste.
+    Opgraderingsværktøjerne og -processen er meget pålidelige, men en
+    maskinel fejl midt i en opgradering kan resultere i et alvorligt
+    skadet system.
+
+    De vigtigste dele, det vil være en god ide at lave
+    sikkerhedskopier af, er indholdet af /etc, /var/lib/dpkg, /var/
+    lib/apt/extended_states og uddata fra dpkg --get-selections "*"
+    (citationstegn er vigtige). Hvis du bruger aptitude til at hente
+    pakker på dit system, vil en sikkerhedskopiering af /var/lib/
+    aptitude/pkgstates også være en god ide.
+
+    Selve opgraderingsprocessen ændrer ingenting i mappen /home. Dog
+    er det kendt at visse programmer (for eksempel dele af
+    Mozilla-pakken og skrivebordsmiljøerne GNOME og KDE) overskriver
+    eksisterende brugerindstillinger med nye standardværdier, når en
+    ny version af programmet startes for første gang af en bruger.
+    Som en sikkerhedsforanstaltning bør du foretage en
+    sikkerhedskopiering af de skjulte filer og mapper (såkaldte “
+    punktum-filer”) i brugernes hjemmemapper. Denne
+    sikkerhedskopiering kan hjælpe til at gendanne eller genoprette
+    de gamle indstillinger. Du ønsker måske også at informere dine
+    brugere om dette.
+
+    Alle pakkeinstallationshandlinger skal køres med
+    superbrugerprivilegier, så log ind som root (administrator) eller
+    brug su eller sudo for at få de nødvendige adgangsrettigheder.
+
+    Opgraderingen har nogle få forudsætninger; du bør tjekke dem, før
+    du gennemfører opgraderingen.
+
+4.1.2. Informer brugerne i forvejen
+
+    Det er klogt at informere alle brugerne i forvejen om eventuelle
+    opgraderinger, du planlægger, også selv om brugere der tilgår dit
+    system via en ssh-forbindelse ikke vil mærke meget under
+    opgraderingen, og bør kunne fortsætte deres arbejde.
+
+    Hvis du vil være ekstra omhyggelig, så lav en sikkerhedskopi af
+    eller afmonter /home før opgraderingen.
+
+    Du skal udføre en kerneopgradering under opgraderingen til
+    jessie, så en genstart er nødvendig. Typisk vil dette udføres
+    efter opgraderingen er afsluttet.
+
+4.1.3. Forbered nedetid for tjenester
+
+    Under opgraderingsprocessen kan der være tjenester, som er
+    tilknyttet pakker, som er en del af opgraderingen. Hvis dette er
+    tilfældet, vil disse tjenester måske stoppe mens pakkerne, som
+    skal opgraderes bliver omplaceret og konfigureret. I dette
+    tidsrum vil disse tjenester ikke være tilgængelige.
+
+    Præcis hvor lang nedetiden er for disse tjenester vil afhænge af
+    antallet af pakker, som opgraderes på systemet, og vil også
+    inkludere den tid som systemadministratoren er om at besvare
+    konfigurationsspørgsmål fra forskellige pakkeopgraderinger.
+    Bemærk at hvis opgraderingsprocessen foregår uovervåget og
+    systemet kræver svar under opgraderingen, er der stor
+    sandsynlighed for, at tjenester er utilgængelige^[1] i en
+    væsentlig tidsperiode.
+
+    Hvis systemet som opgraderes tilbyder kritiske tjenester for dine
+    brugere eller netværk^[2], så kan du minimere nedetiden, hvis du
+    foretager en minimal systemopgradering som beskrevet i
+    Afsnit 4.4.4, “Minimal systemopgradering”, efterfulgt af en
+    kerneopgradering og en genstart og efterfølgende opgraderer
+    pakker, som hører til dine kritiske tjenester. Opgrader disse
+    pakker inden den komplette opgradering udføres jævnfør
+    instruktionen i Afsnit 4.4.5, “Opgradering af systemet”. På denne
+    måde kan du sikre dig, at disse vigtige tjenester er startet op
+    og er tilgængelige gennem hele opgraderingsprocessen, og at deres
+    nedetid er reduceret.
+
+4.1.4. Forbered for gendannelse
+
+    Selom Debian forsøger at sikre, a dit system kan startes op på
+    alle tidspunkter, er der en reel risko for, at du kan opleve
+    problemer efter genstart af dit system, når opgraderingen er
+    færdig. En del kendte problemer er dokumenteret i dette og de
+    næste kapitler af udgivelsesnoterne.
+
+    Af den grund er det klogt at sikre sig, at du vil kunne gendanne
+    dit system, såfremt det skulle fejle i at genstarte eller, for
+    eksternt håndterede systemer, ikke kan få netværket til at
+    fungere.
+
+    Hvis du fjernopgraderer via en ssh-henvisning, anbefales det
+    kraftigt, at du foretager de nødvendige forholdsregler for at
+    kunne tilgå serveren via en ekstern seriel terminal. Der er en
+    risiko for, at efter opgradering af kernen og en genstart, at du
+    skal rette systemkonfigurationen via en lokal konsol. Hvis
+    systemet ved et uheld genstartes i midten af en opgradering, er
+    der en risiko for, at du vil skulle gendanne via en lokal konsol.
+
+    Generelt anbefaler vi at bruge redningstilstanden for Debians
+    jessie-installationsprogram. Fordelen ved at bruge
+    installationsprogrammet er, at du kan vælge mellem dets mange
+    installationsmetoder efter en som bedst passer til din situation.
+    For yderligere information, så se venligst afsnittet “Gendannelse
+    af et ødelagt system” i kapitel 8 i Installationsvejledningen
+    (https://www.debian.org/releases/jessie/installmanual) og OSS for
+    Debians installationsprogram (https://wiki.debian.org/
+    DebianInstaller/FAQ) .
+
+    Hvis dette mislykkes, skal du bruge en alternativ måde for at
+    starte dit system op, så du kan tilgå det og reparere det. En
+    mulighed er at bruge et specielt redningsaftryk eller en
+    Linux-live-cd. Efter opstart fra denne, bør du kunne montere dit
+    rodfilsystem og chroot ind i det for at undersøge og rette
+    problemet.
+
+4.1.4.1. Fejlsøg skal under opstart med initrd
+
+    Pakken initramfs-tools inkluderer en fejlsøgningsskal^[3] i
+    initrds'en den opretter. Hvis for eksempel initrd'en ikke kan
+    montere dit rodfilsystem, vil du blive placeret i denne
+    fejlsøgningsskal, som har nogle grundlæggende kommandoer
+    tilgængelige til at hjælpe med at spore problemet og eventuelt
+    rette det.
+
+    Grundlæggende ting der kan kontrolleres: tilstedeværelse af
+    korrekte enhedsfiler i /dev; hvilke moduler indlæses (cat /proc/
+    modules); resultat af dmesg for fejl under indlæsning af drivere.
+    Resultatet af dmesg vil også vise hvilke enhedsfiler, der er
+    blevet tildelt til hvilke diske; du bør kontrollere det imod
+    resultatet af echo $ROOT for at sikre, at rodfilsystemet er på
+    den forventede enhed.
+
+    Hvis du lykkes med at rette problemet, vil indtastning af exit
+    afslutte fejlsøgningsskallen og fortsætte opstartsprocessen på
+    det punkt hvor den fejlede. Selvfølgelig skal du også rette det
+    underliggende problem og genoprette initrd'en så den næste
+    opstart ikke fejler igen.
+
+4.1.4.2. Fejlsøg skal under opstart med systemd
+
+    Hvis opstarten fejler under systemd, er det muligt at indhente en
+    fejlsøg root-skal ved at ændre kernens kommandolinje. Hvis
+    standardopstarten lykkes, men nogle tjenester ikke kan starte, så
+    kan det være nyttigt at tilføje systemd.unit=rescue.target til
+    kerneparametrene.
+
+    Ellers vil kerneparameteren systemd.unit=emergency.target tilbyde
+    dig en root-skal på det tidligste mulige punkt. Dette gøres dog
+    før montering af root-filsystemet med læse-skrive rettigheder. Du
+    skal gøre det manuelt med:
+
+    mount -o remount,rw /
+
+    Yderligere information om fejlsøgning af en ødelagt opstart under
+    systemd kan findes i artiklen Diagnose for opstartsproblemer
+    (http://freedesktop.org/wiki/Software/systemd/Debugging/) .
+
+    Hvis alt andet mislykkes, så kan du måske starte op via det gamle
+    sysvinit-system. Dette kræver at sysvinit stadig installeres og
+    den binære /lib/sysvinit/init er inkluderet i din initramfs. Hvis
+    disse krav opfyldes, tilføj init=/lib/sysvinit/init på
+    kernekommandolinjen og den vil starte op med sysvinits binære
+    fil.
+
+4.1.5. Forbered et sikkert miljø for opgraderingen
+
+    Distributionsopgraderingen bør udføres enten lokalt fra en
+    virtuel konsol i teksttilstand (eller en direkte forbundet seriel
+    terminal), eller eksternt via en ssh-lænke.
+
+    Vigtigt
+
+    Hvis du bruger VPN-tjenester (såsom tinc), så er de måske ikke
+    tilgængelige igennem hele opgraderingsprocessen. Se venligst
+    Afsnit 4.1.3, “Forbered nedetid for tjenester”.
+
+    For at opnå en ekstra sikkerhedsmargen når der opgraderes
+    eksternt, så foreslår vi, at du kører opgraderingsprocesser i den
+    virtuelle konsol tilbudt af programmet screen, som aktiverer
+    sikker gentilslutning og sikrer at opgraderingsprocessen ikke
+    afbrydes selv hvis den eksterne tilslutningsproces mislykkes.
+
+    Vigtigt
+
+    Du bør ikke opgradere med telnet, rlogin, rsh eller fra en
+    X-session håndteret af xdm, gdm eller kdm etc. på maskinen du
+    opgraderer. Dette skyldes at hver af disse tjenester kan bliver
+    termineret under opgraderingen, hvilket kan resultere i et 
+    utilgængeligt system som kun er halvt opgraderet. Brug af
+    GNOME-programmet update-manager frarådes på det kraftigste for
+    opgraderinger til nye versioner, da dette værktøj afhænger af at
+    skrivebordet forbliver aktivt.
+
+4.2. Kontrollerer systemstatus
+
+    Opgraderingsprocessen - beskrevet i dette kapitel - er blevet
+    designet for opgraderinger fra “rene” wheezy-systemer uden
+    tredjepartspakker. For den største troværdighed i
+    opgraderingsprocessen, kan du fjerne tredjepartspakker fra dit
+    system, før du begynder opgraderingen.
+
+    Direkte opgraderinger fra Debianudgivelser ældre end 7 (wheezy)
+    er ikke understøttet. Følg venligst instruktionerne i
+    Udgivelsesnoter for Debian 7 (https://www.debian.org/releases/
+    wheezy/releasenotes) for at opgradere til 7 først.
+
+    Denne procedure antager også, at dit sytem er blevet opdateret
+    til den sidste punktversion af wheezy. Hvis du ikke har udført
+    dette eller er usikker, så følg instruktionerne i Afsnit A.1,
+    “Opgradering af dit wheezy-system”.
+
+4.2.1. Gennemse handlinger der afventer i pakkehåndteringen
+
+    I nogle tilfælde kan brugen af apt-get til installation af pakker
+    i stedet for aptitude få aptitude til at anse en pakke som “
+    ubrugt” og planlægge den for fjernelse. Generelt, skal du sikre
+    dig, at systemet er fuldt opdateret og “rent” før du fortsætter
+    med opgraderingen.
+
+    På grund af dette bør du gennemse om der er nogle afventende
+    handlinger i pakkehåndteringen aptitude. Hvis en pakke er
+    planlagt til fjernelse eller opdatering i pakkehåndteringen, kan
+    det negativt påvirke opgraderingsproceduren. Bemærk at rettelse
+    af dette kun er muligt hvis din sources.list stadig peger på 
+    wheezy og ikke på stable eller jessie; se Afsnit A.2, “Kontroller
+    din kildeliste”.
+
+    For at udføre denne gennemgang, så start aptitude i “visuel
+    tilstand ” og tryk på g (“Go”). Hvis den viser nogle handlinger,
+    så bør du gennemse dem og enten rette dem eller implementere de
+    foreslåede handlinger. Hvis ingen handlinger foreslås, vil du
+    blive præsenteret med en besked der siger “Ingen pakker er
+    planlagt for installation, fjernelse eller opgradering”.
+
+4.2.2. Deaktivering af APT-pinning
+
+    Hvis du har konfigureret APT til at installere bestemte pakker
+    fra en distribution udover stable (f.eks. fra testing), så skal
+    du måske ændre din APT-pinnings konfiguration (gemt i /etc/apt/
+    preferences) for at tillade pakkeopgraderinger af versioner i den
+    nye stabile version. Yderligere information om APT-pinning kan
+    findes i apt_preferences(5).
+
+4.2.3. Kontrol af pakkestatus
+
+    Uanset den anvendte opgraderingsmetode, så anbefales det, at du
+    kontrollerer pakkernes status først, og verificerer at alle
+    pakker er i en opgraderbar tilstand. Den følgende kommando vil
+    vise alle pakker, som har en status som halvt installeret
+    (Half-Installed) eller som ikke kunne konfigureres,
+    (Failed-Config) og dem med en eventuel fejlstatus.
+
+    # dpkg --audit
+
+    Du kan også inspicere tilstanden for alle pakker på dit system
+    med aptitude, eller med kommandoer såsom
+
+    # dpkg -l | pager
+
+    eller
+
+    # dpkg --get-selections "*" > ~/curr-pkgs.txt
+
+    Det er ønskværdigt at fjerne alle pakker på hold før en
+    opgradering. Hvis en pakke - som er essentiel for opgraderingen -
+    er på hold, så vil opgraderingen fejle.
+
+    Bemærk at aptitude bruger en anden metode for registrering af
+    pakker, som er på hold end apt-get og dselect. Du kan
+    identificere pakker på hold for aptitude med
+
+    # aptitude search "~ahold"
+
+    Hvis du ønsker at kontrollere hvilke pakker du havde på hold for 
+    apt-get, så skal du bruge
+
+    # dpkg --get-selections | grep 'hold$'
+
+    Hvis du ændrede og genkompilerede en pakke lokalt, og ikke
+    omdøbte den eller placerede en epoch i versionen, så skal du
+    sætte den på hold for at forhindre at den bliver opgraderet.
+
+    Pakketilstanden “hold” for apt-get kan ændres med:
+
+    # echo pakkenavn hold | dpkg --set-selections
+
+    Erstat hold med install for at fjerne tilstanden “hold”.
+
+    Hvis der er noget som skal rettes, så er det bedst at sikre sig
+    at din sources.list stadig refererer til wheezy som forklaret i
+    Afsnit A.2, “Kontroller din kildeliste”.
+
+4.2.4. Afsnittet foreslåede opdateringer (proposed-updates)
+
+    Hvis du har afsnittet proposed-updates i din /etc/apt/
+    sources.list-fil, så skal du fjerne afsnittet fra den fil før du
+    forsøger en opgradering af dit system. Dette er en forberedelse
+    for at reducere sandsynligheden for konflikter.
+
+4.2.5. Uofficielle kilder
+
+    Hvis du har pakker, som ikke stammer fra Debian, på dit system,
+    så skal du være opmærksom på at disse kan blive fjernet under
+    opgraderingen på grund af afhængigheder i konflikt. Hvis disse
+    pakker blev installeret ved at tilføje et ekstra pakkearkiv i din
+    /etc/apt/sources.list, så skal du kontrollere om dette arkiv også
+    tilbyder pakker kompileret for jessie og ændre kildelinjen
+    tilsvarende på samme tidspunkt som dine kildelinjer for
+    Debianpakker.
+
+    Nogle brugere kan have uofficielle tilbageporterede “nyere”
+    versioner af pakker som i Debian er installeret på deres
+    wheezy-system. Sådanne pakker vil højst sandsynlig medføre
+    problemer under en opgradering, da de kan resultere i
+    filkonflikter^[4]. Afsnit 4.5, “Mulige problemstillinger under
+    opgradering” har lidt information om hvordan filkonflikter skal
+    håndteres, såfremt de opstår.
+
+4.3. Forberedelse af kilder for APT
+
+    Før du starter opgraderingen skal du opsætte apt's
+    konfigurationsfil for pakkelister, /etc/apt/sources.list.
+
+    apt vil overveje alle pakker som kan findes via en “deb-linje” og
+    installere en pakke med højere versionsnummer. Den første linje i
+    filen får prioritet (så hvor du har flere spejlplaceringer, så
+    har du typisk som første navn en lokal harddisk, derefter cd-rom
+    -drev og derefter HTTP/FTP-spejle).
+
+    En udgivelse kan ofte refereres til både efter dets kodenavn
+    (f.eks. wheezy, jessie) og efter sit statusnavn (dvs. oldstable,
+    stable, testing, unstable). En reference til en udgivelse med sit
+    kodenavn har den fordel, at du aldrig vil blive overrasket af en
+    ny udgivelse og er derfor fremgangsmåden anvendt her. Det betyder
+    selvfølgelig, at du selv skal holde øje med udgivelsesnoter. Hvis
+    du bruger statusnavnet i stedet for, så vil du bare se en masse
+    opdateringer for pakker så snart en udgivelse er tilgængelig.
+
+4.3.1. Tilføjelse af APT-internetkilder
+
+    Standardkonfigurationen er opsat til installation fra internettes
+    hovedservere for Debian, men du kan ændre /etc/apt/sources.list
+    til at bruge andre spejle, helst til et spejl som er tæt på dig
+    netværksmæssigt.
+
+    Debians HTTP- eller FTP-spejladresser kan findes på https://
+    www.debian.org/distrib/ftplist (https://www.debian.org/distrib/
+    ftplist) (kig i afsnittet “liste over Debians spejle” section).
+    HTTP-spejle er generelt hurtigere end FTP-spejle.
+
+    For eksempel antag at dit nærmeste Debianspejl er http://
+    mirrors.kernel.org. Når du kigger på spejlet med en
+    internetbrowser eller FTP-program, så vil du bemærke at
+    hovedmapperne er organiseret således:
+
+    http://mirrors.kernel.org/debian/dists/jessie/main/binary-amd64/...
+    http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-amd64/...
+
+    For at bruge dette spejl med apt, så kan du tilføje denne linje
+    til din sources.list-fil:
+
+    deb http://mirrors.kernel.org/debian jessie main contrib
+
+    Bemærk at “dists” tilføjes implicit, og parametrene efter
+    udgivelsesnavnet bruges til at udvide stien til flere mapper.
+
+    Efter tilføjelse af dine nye kilder, så deaktiver de tidligere “
+    deb”-liner i sources.list ved at placere en havelåge (#) foran
+    dem.
+
+4.3.2. Tilføjelse af APT-kilder for et lokalt spejl
+
+    I stedet for at bruge HTTP eller FTP-pakkespejl, kan du ønske at
+    ændre /etc/apt/sources.list så der bruges et spejl på en lokal
+    disk (sandsynligvis monteret over NFS).
+
+    For eksempel kan dit pakkespejl være under /var/ftp/debian/, og
+    have hovedmapper som disse:
+
+    /var/ftp/debian/dists/jessie/main/binary-amd64/...
+    /var/ftp/debian/dists/jessie/contrib/binary-amd64/...
+
+    For at bruge dette med apt, så tilføj denne linje til din
+    sources.list-fil:
+
+    deb file:/var/ftp/debian jessie main contrib
+
+    Bemærk at “dists” tilføjes implicit, og parametrene efter
+    udgivelsesnavnet bruges til at udvide stien til flere mapper.
+
+    Efter tilføjelse af dine nye kilder, så deaktiver de tidligere “
+    deb”-liner i sources.list ved at placere en havelåge (#) foran
+    dem.
+
+4.3.3. Tilføjelse af APT-kilder fra et optisk medie
+
+    Hvis du ønsker kun at bruge cd'er (eller dvd'er eller
+    Blu-ray-diske), så udkommenter de eksisterende “deb”-linjer i /
+    etc/apt/sources.list ved at placere en havelåge (#) foran dem.
+
+    Make sure there is a line in /etc/fstab that enables mounting
+    your CD-ROM drive at the /media/cdrom mount point. For example,
+    if /dev/sr0 is your CD-ROM drive, /etc/fstab should contain a
+    line like:
+
+    /dev/sr0 /media/cdrom auto noauto,ro 0 0
+
+    Bemærk at der ikke må være mellemrum mellem ordene noauto,ro i
+    det fjerde felt.
+
+    For at verificere, at det virker, så indsæt en cd og prøv igen
+
+    # mount /media/cdrom    # this will mount the CD to the mount point
+    # ls -alF /media/cdrom  # this should show the CD's root directory
+    # umount /media/cdrom   # this will unmount the CD
+
+    Næste, kør:
+
+    # apt-cdrom add
+
+    for hver Debian binær cd-rom du har, at tilføje dataene om hver
+    cd til APT's database.
+
+4.4. Opgradering af pakker
+
+    Den anbefalede måde at opgradere fra tidligere Debian-udgivelser
+    er at bruge pakkehåndteringsværktøjet apt-get. I forrige
+    udgivelser blev aptitude anbefalet til dette formål, men de
+    seneste versioner af apt-get tilbyder lignende funktionalitet og
+    har også vist sig at give de ønskede opgraderingsresultater mere
+    konsistent.
+
+    Glem ikke at montere alle krævede partitioner (vigtigst
+    partitionerne for root og /usr som skrivbare med en kommando
+    såsom:
+
+    # mount -o remount,rw /monteringspunkt
+
+    Efterfølgende skal du dobbeltkontrollere at APT-kildepunkterne (i
+    /etc/apt/sources.list) refererer enten til “jessie” eller til “
+    stable”. Der bør ikke være kildepunkter, der peget på wheezy.
+
+    +--------------------------------------------------+
+    |Bemærk                                            |
+    |                                                  |
+    |Kildelinjer for en cd-rom kan undertiden referere |
+    |til “unstable”; selvom dette kan være forvirrende,|
+    |så skal du ikke ændre det.                        |
+    +--------------------------------------------------+
+
+4.4.1. Optagelse af sessionen
+
+    Det anbefales at du bruger programmet /usr/bin/script til at
+    optage et sammendrag af opgraderingssessionen. Hvis der så opstår
+    et problem, så vil du have en log over hvad der skete, og hvis
+    krævet, kan give præcis information i en fejlrapport. For at
+    starte registreringen tastes:
+
+    # script -t 2>~/upgrade-jessiestep.time -a ~/upgrade-jessiestep.script
+
+    eller lignende. Hvis du skal køre typeskriptet igen (f.eks. hvis
+    du skal genstarte systemet) så brug forskellige værdier for step
+    for at indikere hvilket trin af opgraderingen du logger fra.
+    Placer ikke typeskriptfilen i en midlertidig mappe såsom /tmp
+    eller /var/tmp (filer i disse mapper kan blive slettet under
+    opgraderingen eller under en genstart).
+
+    Typeskriptet vil også give dig mulighed for at gennemse
+    information, som er rullet forbi skærmen. Hvis du er ved
+    systemets konsol, så skift til VT2 (med Alt+F2) og efter at du er
+    logget ind, så brug less -R ~root/upgrade-jessie.script for at se
+    filen.
+
+    Efter at du har færdiggjort opgraderingen, så kan du stoppe 
+    script ved at taste exit i prompten.
+
+    Hvis du har brugt tilvalget -t for script så kan du bruge
+    programmet scriptreplay for at afspille hele sessionen:
+
+    # scriptreplay ~/upgrade-jessie.time ~/upgrade-jessie.script
+
+4.4.2. Opdatering af pakkelisten
+
+    Først skal listen over tilgængelige pakker for den nye udgivelse
+    hentes. Dette gøres ved at køre:
+
+    # apt-get update
+
+4.4.3. Sikr dig, at du har tilstrækkelig med plads til opgraderingen
+
+    Du skal sikre dig, at du har tilstrækkelig med harddiskplads før
+    du opgraderer med den fulde systemopgradering beskrevet i
+    Afsnit 4.4.5, “Opgradering af systemet”. Først, alle pakker
+    krævet for installation som hentes fra netværket gemmes i /var/
+    cache/apt/archives (og undermappen partial/, under overførsel),
+    så du skal sikre dig, at du har nok plads på partitionen for
+    filsystemet, som indeholder /var/ til midlertidigt at hente
+    pakkerne, som skal installeres på dit system. Efter overførslen
+    skal du sikkert bruge ekstra plads i andre filsystempartitioner
+    for både at installere opgraderede pakker (som kan indeholder
+    større binære filer eller mere data) og nye pakker, som vil blive
+    hentet ned for opgraderingen. Hvis dit system ikke har
+    tilstrækkelig med plads, kan du ende med en ufuldstændig
+    opgradering, som det kan være svært at fortryde.
+
+    apt-get kan vise dig detaljeret information om diskpladsen krævet
+    for installationen. Før udførsel af opgraderingen, kan du se
+    dette estimat ved at køre:
+
+    # apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+    [ ... ]
+    XXX opgraderes, XXX nyinstalleres, XXX fjernes og XXX bliver ikke opgraderet.
+    Skal hente xx.xMB fra arkiverne.
+    Efter denne operation vil AAAMB yderligere diskplads være brugt.
+
+    Bemærk
+
+    Kørsel af denne kommando i begyndelsen af opgraderingsprocessen
+    kan medføre en fejl, på grund af årsagerne beskrevet i de næste
+    afsnit. I disse tilfælde skal du vente indtil du har udført den
+    minimale systemopgradering som i Afsnit 4.4.4, “Minimal
+    systemopgradering” før du kører denne kommando for at estimere
+    diskpladsen.
+
+    Hvis du ikke har nok plads for opgraderingen, så vil apt-get
+    advare dig med en besked:
+
+    E: Du har ikke nok ledig plads i /var/cache/apt/archives/.
+
+    I denne situation, så skab først ledig plads. Du kan:
+
+      * Fjerne pakker som tidligere er blevet hentet for installation (i
+        /var/cache/apt/archives). Oprydning i pakkemellemlageret med 
+        apt-get clean vil fjerne alle tidligere hentede pakkefiler.
+
+      * Fjern glemte pakker. Hvis du har brugt aptitude eller apt-get til
+        manuelt at installere pakker i wheezy vil programmet have styr på
+        hvilke pakker du har installeret manuelt og vil kunne markere
+        forældet på de pakker der er trukket ind af afhængigheder alene
+        og som ikke længere er krævet hvis en pakke er blevet fjernet. De
+        vil ikke markere pakker til fjernelse, hvis du har installeret
+        dem manuelt. For at fjerne automatisk installerede pakker som
+        ikke længere bruges, kør:
+
+        # apt-get autoremove
+
+        Du kan også deborphan, debfoster eller cruft ti lat finde
+        redundante pakker. Fjern ikke blindt pakkerne disse værktøjer
+        præsenterer, specielt hvis du bruger aggressive indstillinger,
+        der ikke er standard, som er mere udsat for at give falske
+        positive resultater. Det anbefales stærkt, at du manuelt
+        gennemser pakkerne der bliver foreslået for fjernelse (dvs. deres
+        indhold, størrelse og beskrivelse) før du fjerner dem.
+
+      * Fjern pakker som fylder for meget og ikke skal bruges i
+        øjeblikket (du kan altid geninstallere dem efter opgraderingen).
+        Hvis du har popularity-contest installeret, så kan du bruge 
+        popcon-largest-unused til at vise pakkerne, du ikke bruger og som
+        bruger mest plads. Du kan finde pakkerne som bare bruger mest
+        plads med dpigs (tilgængelig i pakken debian-goodies) eller med 
+        wajig (kør wajig size). De kan også findes med aptitude. Start 
+        aptitude i “visual mode”, vælg Visninger → Ny flad pakkeliste,
+        tryk l og indtast ~i, tryk S og indtast ~installsize. Så får du
+        en liste at arbejde med.
+
+      * Fjern oversættelser og sprogfiler fra system hvis de ikke er
+        krævet. Du kan installere pakken localepurge og konfigurere den
+        så at kun nogle få udvalgte sprog bevares i systemet. Dette vil
+        reducere den forbrugt diskplads i /usr/share/locale.
+
+      * Flyt midlertidigt til et andet system, eller fjern permanent,
+        systemlogge under /var/log/.
+
+      * Brug en midlertidig /var/cache/apt/archives: Du kan bruge en
+        midlertidigt mellemlagermappe fra et andet filsystem (USB
+        -lagerenhed, midlertidig harddisk, filsystem allerede i brug,
+        ...)
+
+        +-----------------------------------------------------+
+        |Bemærk                                               |
+        |                                                     |
+        |Brug ikke en NFS-montering da netværksforbindelsen   |
+        |kan blive afbrudt under opgraderingen.               |
+        +-----------------------------------------------------+
+
+        For eksempel hvis du har et USB-drev monteret på /media/usbkey:
+
+         1. fjern pakkerne som tidligere er blevet hentet for
+            installation:
+
+            # apt-get clean
+
+         2. kopier mappen /var/cache/apt/archives til USB-drevet:
+
+            # cp -ax /var/cache/apt/archives /media/usbkey/
+
+         3. monter den midlertidige mappe for mellemlageret på den
+            aktuelle:
+
+            # mount --bind /media/usbkey/archives /var/cache/apt/archives
+
+         4. efter opgraderingen, gendan den originale /var/cache/apt/
+            archives-mappe:
+
+            # umount /media/usbkey/archives
+
+         5. fjern den tilbageværende /media/usbkey/archives.
+
+        Du kan oprette den midlertidige mappe for mellemlageret på det
+        filsystem som er monteret på dit system.
+
+      * Udfør en minimal opgradering af systemet (se Afsnit 4.4.4,
+        “Minimal systemopgradering”) eller delvise opgraderinger af
+        systemet efterfulgt af en fuld opgradering. Dette vil gøre det
+        muligt at opgradere systemet delvist, og give dig mulighed for at
+        rydde pakkemellemlageret før den fulde opgradering.
+
+    Bemærk at for sikkert at fjerne pakker, så er det tilrådeligt at
+    skifte din sources.list tilbage til wheezy som beskrevet i
+    Afsnit A.2, “Kontroller din kildeliste”.
+
+4.4.4. Minimal systemopgradering
+
+    I nogle tilfælde under udførelse af den fulde opgradering (som
+    beskrevet nedenfor) kan der blive fjernet et stort antal pakker,
+    som du måske ønsker at beholde. Vi anbefaler derfor en todelt
+    opgraderingsproces, først en minimal opgradering til at forbigå
+    disse konflikter, og så en fuld opgradering som beskrevet i
+    Afsnit 4.4.5, “Opgradering af systemet”.
+
+    For at gøre dette, så kør først:
+
+    # apt-get upgrade
+
+    Bemærk
+
+    Opgraderingsprocessen for tidligere udgivelser anbefalede brugen
+    af aptitude til opgraderingen. Dette værktøj er ikke anbefalet
+    for opgraderinger fra wheezy til jessie.
+
+    Dette medfører en opgradering af de pakker, som kan opgraderes
+    uden at kærve at andre pakker fjernes eller installeres.
+
+    Den mimimale systemopgradering kan også være nyttig når systemet
+    har lidt ledig plads og en fuld opgradering ikke kan køres på
+    grund af pladsbegrænsninger.
+
+    Hvis pakken apt-listchanges er installeret, så vil den (i sin
+    standardkonfiguration) vise vigtig information om opgraderede
+    pakker i en tekstviser. Tryk på q efter du har læst informationen
+    for at afslutte tekstviseren og fortsæt opgraderingen.
+
+4.4.5. Opgradering af systemet
+
+    Når du har udført de tidligere trin, er du nu klar til at
+    fortsætte med hoveddelen af opgraderingen. Kør:
+
+    # apt-get dist-upgrade
+
+    Bemærk
+
+    Opgraderingsprocessen for tidligere udgivelser anbefalede brugen
+    af aptitude til opgraderingen. Dette værktøj er ikke anbefalet
+    for opgraderinger fra wheezy til jessie.
+
+    Dette vil udføre en fuldstændig opgradering af systemet, dvs.
+    installere de nyeste tilgængelige versioner af alle pakker, og
+    løse alle eventuelle afhængighedsændringer mellem pakker i
+    forskellige udgivelser. Hvis nødvendigt vil den installere nogle
+    nye pakker (normalt nye biblioteksversioner, eller omdøbte
+    pakker), og fjerne alle forældede pakker der er i konflikt med
+    andre pakker.
+
+    Når der opgraderes fra et sæt af cd-rommer (eller dvd'er), så vil
+    du blive spurgt om at indsætte specifikke cd'er på flere punkter
+    under opgraderingen. Du skal måske indsætte den samme cd flere
+    gange; dette skyldes forbundne pakker som er blevet spredt ud
+    over cd'erne.
+
+    Nye versioner af aktuelt installerede pakker, som ikke kan
+    opgraderes uden at ændre installationsstatus for andre pakker vil
+    blive efterladt med deres aktuelle version (vist som “held back”
+    ). Dette kan løses ved enten at bruge aptitude til at vælge disse
+    pakker for installation elelr ved at prøve apt-get install
+    package.
+
+4.5. Mulige problemstillinger under opgradering
+
+    De følgende afsnit beskriver kendte problemstillinger, som kan
+    opstå under en opgradering til jessie.
+
+4.5.1. Dist-upgrade fejler med “Kunne ikke udføre øjeblikkelig
+konfiguration”
+
+    I nogle tilfælde kan trinet apt-get dist-upgrade fejl efter
+    overførsel af pakker med:
+
+    E: Kunne ikke udføre øjeblikkelig konfiguration på »package«. Se venligt man 5 apt.conf under APT::Immediate-Configure for detaljer.
+
+    Hvis det sker, så bør kørsel af apt-get dist-upgrade -o
+    APT::Immediate-Configure=0 i stedet for tillade at opgraderingen
+    fortsætter.
+
+    En anden mulig omgåelse af dette problem er midlertidig at
+    tilføje både wheezy- og jessie-kilder til din sources.list og
+    køre apt-get update.
+
+4.5.2. Forventede fjernelser
+
+    Opgraderingsprocessen for jessie kan anmode om fjernelse af
+    pakker i systemet. Den præcise liste over disse pakker vil
+    variere afhængig af det pakkesæt du har installeret. Disse
+    udgivelsesnoter giver generelle råd om disse fjernelser, men hvis
+    du er i tvivl, så anbefales det, at du undersøger
+    pakkefjernelserne foreslået af hver metode før du fortsætter. For
+    yderligere information om pakker, der er blevet forældet i
+    jessie, se Afsnit 4.10, “Forældede pakker”.
+
+4.5.3. Konflikter eller forhåndsafhængige (Pre-Depends) loop
+
+    Undertiden er det nødvendigt at aktivere tilvalget
+    APT::Force-LoopBreak i ATP for midlertidigt at kunne fjerne en
+    essentiel pakke på grund af en konflikt/forhåndsafhængig loop. 
+    apt-get vil påminde dig om dette og afbryde opgraderingen. Du kan
+    omgå dette ved at angive tilvalget -o APT::Force-LoopBreak=1 på
+    kommandolinjen for apt-get.
+
+    Det kan ske, at et systems afhængighedsstruktur kan være så
+    ødelagt, at det kræver manuel intervention. Normalt betyder dette
+    brug af apt-get eller
+
+    # dpkg --remove pakkenavn
+
+    for at eliminere nogle af de stridende pakker, eller
+
+    # apt-get -f install
+    # dpkg --configure --pending
+
+    I ekstreme tilfælde kan det være nødvendigt at fremtvinge
+    reinstallation med en kommando som
+
+    # dpkg --install /path/to/package_name.deb
+
+4.5.4. Filkonflikter
+
+    Filkonflikter bør ikke opstå hvis du opgraderer fra et “rent”
+    wheezy-system, men kan opstå hvis du har uofficielle backports
+    installeret. En filkonflikt vil resultere i en fejl såsom:
+
+    Udpakker <package-foo> (fra <package-foo-file>) ...
+    dpkg: fejl under behandling af <package-foo> (--install):
+     forsøger at overskrive »<some-file-name>«,
+     som også er i pakke <package-bar>
+    dpkg-deb: indsætning af underproces dræbt af signal (ødelagt datakanal)
+     Der opstod fejl under behandlingen:
+     <package-foo>
+
+    Du kan forsøge at løse en filkonflikt ved med tvang at fjerne
+    pakken nævnt på den sidste linje i fejlbeskeden:
+
+    # dpkg -r --force-depends pakkenavn
+
+    Efter rettelse, bør du være i stand til at genoptage
+    opgraderingen ved at gentage de tidligere beskrevne kommandoer
+    for apt-get.
+
+4.5.5. Konfigurationsændringer
+
+    Under opgraderingen vil du blive stillet nogle spørgsmål angående
+    konfigurationen eller omkonfigurationen af flere pakker. Når du
+    bliver spurgt om en fil i mappen /etc/init.d eller filen /etc/
+    manpath.config skal erstattes af pakkevedligeholderens version,
+    så er det normalt nødvendigt at svare »ja« for at sikre
+    systemkonsistens. Du kan altid vende tilbage til de ældre
+    versioner, da de bliver gemt med filendelsen .dpkg-old.
+
+    Hvis du ikke er sikker på, hvad du skal gøre, så skriv navnet på
+    pakken eller filen ned og udred så problemstillingen senere. Du
+    kan søge i typescript-filen for at gennemse informationen på
+    skærmen fra opgraderingen.
+
+4.5.6. Ændring af session til konsol
+
+    Hvis du kører opgraderingen med systemets lokale konsol, så vil
+    du måske opleve, at under visse steder af opgraderingen så
+    skifter konsollen over til en anden visning og du mister
+    synlighed over opgraderingsprocessen. For eksempel vil dette ske
+    på skrivebordssystemer når skærmhåndteringen genstartes.
+
+    For at gendanne konsollen hvor opgraderingen var nået til, skal
+    du bruge Ctrl+Alt+F1 (hvis i den grafiske opstartsskærm) eller
+    bruge Alt+F1 (hvis i den lokale konsol for teksttilstand) for at
+    skifte tilbage til den virtuelle terminal 1. Erstat F1 med
+    funktionstasten med det samme antal som den virtuelle terminal
+    opgraderingen kørte i. Du kan også bruge Alt+Venstre piletast
+    eller Alt+Højre piletast for at skifte mellem de forskellige
+    terminaler i teksttilstand.
+
+4.5.7. Specielle forhold for specifikke pakker
+
+    I de fleste tilfælde, bør pakker blive opgraderet uden problemer
+    mellem wheezy og jessie. Der er nogle få tilfælde, hvor
+    intervention kan være krævet, enten før eller under
+    opgraderingen; disse er detaljeret beskrevet nedenfor per pakke.
+
+4.5.7.1. systemd
+
+    Debianopgraderingen fra wheezy til jessie vil som standard
+    migrere dit init-system fra SysV til systemd. Afhængig af dit
+    system og opsætning, skal du udføre nogle manuelle ændringer. Vi
+    har detaljerede kendte problemstillinger i Afsnit 5.6, “Upgrading
+    installs the new default init system for Jessie”.
+
+4.5.7.2. LXC
+
+    Hvis du har LXC installeret, så skal du tage specielle hensyn,
+    når du opgraderer dit system og dine containere. Se venligst
+    Afsnit 5.8, “Upgrade considerations for LXC hosts and containers”
+    for kendte problemstillinger og løsninger.
+
+4.6. Opgradering af din kerne og relaterede pakker
+
+    Dette afsnit forklarer hvordan du opgraderer din kerne og
+    identificerer potentielle problemstillinger forbundet med denne
+    opgradering. Du kan enten installere en af linux-image-*-pakkerne
+    tilbudt af Debian, eller kompilere en tilpasset kerne fra kilde.
+
+    Bemærk at en masse informaton i dette afsnit er baseret på den
+    antagelse, at du vil bruge en af de modulære Debiankerner, sammen
+    med initramfs-tools og udev. Hvis du vælger at bruge en tilpasset
+    kerne, som ikke kræver en initrd eller hvis du bruger en anden
+    initrd-opretter, kan noget af informationen være urelevant for
+    dig.
+
+4.6.1. Installation af en kernens metapakke
+
+    Når du laver en dist-upgrade (distributionsopgradering) fra
+    wheezy til jessie, så anbefales det, at du installerer en
+    linux-image-*-metapakke, hvis du ikke har gjort det tidligere.
+    Disse metapakker vil automatisk placere en nyere version af
+    kernen under opgraderinger. Du kan verificere om du har en
+    installeret ved at køre:
+
+    # dpkg -l "linux-image*" | grep ^ii | grep -i meta
+
+    Hvis du ikke ser et resultat, så skal du installere en ny pakke
+    for linux-image manuelt eller installere en
+    linux-image-metapakke. For at se en liste over tilgængelige
+    metapakker for linux-image, så kør:
+
+    # apt-cache search linux-image- | grep -i meta | grep -v transition
+
+    If you are unsure about which package to select, run uname -r and
+    look for a package with a similar name. For example, if you see
+    '2.6.32-5-amd64', it is recommended that you install
+    linux-image-amd64. You may also use apt-cache to see a long
+    description of each package in order to help choose the best one
+    available. For example:
+
+    # apt-cache show linux-image-amd64
+
+    Du skal så bruge apt-get install til at installere den. Når først
+    denne nye kerne er installeret, så skal du genstarte ved næste
+    tilgængelige mulighed for at få fordelene tilbudt af den nye
+    kerneversion. Kig dog venligst på Afsnit 4.7, “Ting der skal
+    udføres før genstart” før du udfører den første genstart efter
+    opgraderingen.
+
+    For de mere eventyrllystne er der en nem måde at kompilere din
+    egen tilpasset kerne på Debian. Installer kernekilderne, tilbudt
+    i pakken linux-source. Du kan også gøre brug af målet deb-pkg
+    tilgængelig i kildernes makefile for bygning af en binær pakke.
+    Yderligere information kan findes i Håndbogen for Debians
+    Linux-kerne (http://kernel-handbook.alioth.debian.org/) , som
+    også kan findes i pakken debian-kernel-handbook.
+
+    Hvis muligt så er det en fordel for dig at opgradere kernepakken
+    adskilt fra hoveddelen af dist-upgrade for at reducere risikoen
+    for et midlertidigt system der ikke kan startes op. Bemærk at
+    dette kun skal gøres efter den minimale opgraderingsproces
+    beskrevet i Afsnit 4.4.4, “Minimal systemopgradering”.
+
+4.6.2. Changes to root and /usr filesystem mounting and checking
+
+    initramfs-tools will now also run fsck on the root filesystem
+    before mounting it. If the chosen init program is systemd and
+    there is a separate /usr filesystem, it will also fsck and mount
+    /usr.
+
+      * If /usr is a separate filesystem on a RAID device and the
+        INITRDSTART setting in /etc/default/mdadm is not 'all', you
+        will need to change it to include that device.
+
+      * If /usr is a separate filesystem on an LVM logical volume,
+        and the line for /usr in /etc/fstab specifies the device by
+        UUID or LABEL, you must change this line to specify the
+        device using the format /dev/mapper/VG-LV or /dev/VG/LV.
+
+      * It is no longer possible to bind-mount the /usr filesystem.
+
+      * If the RTC (real time clock) is set to local time and the
+        local time is ahead of UTC, e2fsck will print a warning
+        during boot about the time changing backward (bug #767040
+        (https://bugs.debian.org/767040) ). You can disable this by
+        putting the following lines in /etc/e2fsck.conf:
+
+        [options]
+        broken_system_clock=1
+
+4.7. Ting der skal udføres før genstart
+
+    Når apt-get dist-upgrade er færdig, så er den “formelle”
+    opgradering færdig, men der er nogle få andre forhold, som der
+    skal tages hånd om før den næste genstart.
+
+      * Når der opgraderes fra Wheezy til Jessie, så kan det være en
+        god ide helt at fjerne gamle pakker før den første genstart.
+        Specielt forældede init-skripter kan medføre
+        problemstillinger. Se venligst Afsnit 4.8.1, “Fuld fjernelse
+        af afinstallerede pakker” for detaljer om hvordan du finder
+        og helt fjerner disse pakker.
+
+4.8. Forberedelse af den næste udgivelse
+
+    Efter opgraderingen er der nogle ting, du kan forberede for din
+    næste udgivelse.
+
+      * Fjern nye redundante og forældede pakker som beskrevet i
+        Afsnit 4.4.3, “Sikr dig, at du har tilstrækkelig med plads
+        til opgraderingen” og Afsnit 4.10, “Forældede pakker”. Du bør
+        gennemgå hvilke konfigurationsfiler de bruger og overveje at
+        fjerne pakkerne, så deres konfigurationsfiler forsvinder. Se
+        også Afsnit 4.8.1, “Fuld fjernelse af afinstallerede pakker”.
+
+4.8.1. Fuld fjernelse af afinstallerede pakker
+
+    Det er generelt et godt råd at fjerne afinstallerde pakker. Dette
+    gælder specielt hvis de er blevet afinstalleret i en tidligere
+    udgivelsesopgradering f.eks. fra opgraderingen til wheezy) eller
+    de kom fra en tredjeparts leverandør. Specielt gamle
+    init.d-skripter vides at kunne medføre problemer.
+
+    Pas på
+   
+    Fuld fjernelse af en pakke vil generelt også fjerne logfilerne,
+    så du vil skulle lave en sikkerhedskopi af dem først.
+
+    Den følgende kommando viser en liste over alle fjernede pakker,
+    som kan have konfigurationsfiler tilbage på systemet (hvis
+    nogen):
+
+    # dpkg -l | awk '/^rc/ { print $2 }'
+
+    Pakkerne kan fjernes ved at bruge apt-get purge. Hvis vi antager
+    du vil fjerne dem alle på en gang, så kan du bruge den følgende
+    kommando:
+
+    # apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+
+    Hvis du bruger aptitude, så kan du også bruge det følgende
+    alternativ til kommandoerne ovenfor:
+
+    $ aptitude search '~c'
+    $ aptitude purge '~c'
+
+4.9. Forældede komponenter
+
+    Med den næste udgivelse af Debian 9 (kodenavn stretch) vil nogle
+    funktioner blive forældet. Brugere vil skulle migrere til andre
+    alternativer for at forhindre problemer under opgradering til 9.
+
+    Dette inkluderer de følgende funktioner:
+
+      * The hardening-wrapper package is deprecated and is expected
+        to be removed in Stretch.
+
+4.10. Forældede pakker
+
+    Der introduceres en masse nye pakker i jessie, men der fjernes og
+    udelades også en del gamle pakker, som var i wheezy. Der
+    tilbydese ingen opgraderingssti for disse forældede pakker. Selv
+    om intet forhindrer dig i fortsat at benytte en forældet pakke,
+    så vil Debianprojektet normat ikke fortsætte den
+    sikkerhedsmæssige support af pakken mere end et år efter jessies
+    udgivelse^[5], og vil normalt heller ikke tilbyde anden støtte i
+    mellemperioden. Erstatning af dem med tilgængelige alternativer,
+    hvis sådanne findes, anbefales.
+
+    Der kan være mange årsager til at pakker er blevet fjernet fra
+    distributionen: De bliver ikke længere vedligeholdt opstrøms, der
+    er ikke længere en Debianudvikler interesseret i at vedligeholde
+    pakkerne; funktionaliteten de tilbyder er blevet efterfulgt af
+    andre programmer (eller en ny version); eller de anses ikke
+    længere for at være egnet for jessie på grund af fejl i dem. I
+    det sidste tilfælde, kan pakker stadig være til stede i
+    distributionen “unstable”.
+
+    Detektering af hvilke pakker på et opdateret system som er “
+    obsolete” (forældet) er meget nemt da pakkehåndteringernes
+    brugerflader vil markere dem som sådan. Hvis du bruger aptitude,
+    så vil du se en liste over disse pakker under punktet “Forældede
+    og lokalt oprettede pakker”.
+
+    Debians fejlsporingssystem (https://bugs.debian.org/) tilbyder
+    ofte yderligere information om hvorfor pakkerne blev fjernet. Du
+    bør gennemse både de arkiverede fejlrapporter for selve pakken og
+    de arkiverede fejlrapporter for ftp.debian.org pseudo-package
+    (https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org
+    &archive=yes) .
+
+    Listen over forældede pakker inkluderer:
+
+      * postgresql-9.1, efterfølger er postgresql-9.4. Når først
+        operativsystemets opgradering er afsluttet, så bør du
+        planlægge også at opgradere din PostgreSQL
+        9.1-databaseklynger til den nye PostgreSQL version 9.4 via
+        værktøjet pg_upgradecluster. For brugere af det
+        proceduremæssige sprog PL/perl tilbyder Jessie en opdateret
+        pakke postgresql-plperl-9.1 lænkedt mod Jessies version af
+        libperl for at kunne aktivere opgradering til den nye
+        Perlversion i Jessie, mens de gamle PL/
+        perl-databasefunktioner stadig er brugbare indtil også
+        databasen er opgraderet.
+
+      * python3.2, efterfølger er python3.4. (Version 2.7 er
+        understøttet i både wheezy og jessie.)
+
+      * ruby1.8 og ruby1.9.1; efterfølger er ruby2.1. Installer
+        venligst pakken ruby for automatisk at spore den nuværende
+        Ruby-version.
+
+      * mplayer; alternativer er mplayer2, og mpv (ny i jessie). Mens
+        den første hovedsagelig er kompatibel med mplayer i form af
+        kommandolinjeparametre og konfiguration (og tilføjer nogle
+        nye funktioner), så tilføjer den sidste en masse nye
+        funktioner og forbedringer, og bliver aktivt vedligeholdt af
+        opstrømsudviklerne.
+
+      * openoffice.org, brug venligst libreoffice.
+
+      * squid, efterfølger er squid3.
+
+      * libjpeg-progs, efterfølger er libjpeg-turbo-progs.
+
+      * openjdk-6-*, efterfølger er openjdk-7-*.
+
+4.10.1. Overgangspakker
+
+    Nogle pakker fra wheezy er blevet delt op i flere pakker i
+    jessie, ofte for at forbedre vedligeholdelsen. For at gøre
+    opgraderingsstien nemmere i sådanne tilfælde, tilbyder jessie
+    ofte “overgangspakker”: Tomme pakker som har det samme navn som
+    den gamle pakke i wheezy med afhængigheder som medfører, at de
+    nye pakker bliver installeret. Disse “overgangspakker” anses for
+    at ævre redundante efter opgraderingen og kan fjernes igen.
+
+    De fleste (men ikke alle) tomme pakkers beskrivelser indikerer
+    deres formål. Pakkebeskrivelser for tomme pakker er dog ikke
+    ensartet, så du kan også finde deborphan med tilvalgene --guess-*
+    (f.eks. --guess-dummy) nyttige til at detektere dem i dit system.
+    Bemærk at nogle tomme pakker ikke skal fjernes efter en
+    opgradering, men i stedet bruges til at holde styr på den
+    aktuelle tilgængelig version af et program over tid.
+
+
+---------------------------------------------------------------------
+
+    ^[1] Hvis debconf-prioriteten er sat til et meget højt niveau kan
+    du måske forhindre konfigurationsprompter, men tjenester som
+    afhænger af standardsvar som ikke er gældende for dit system vil
+    ikke starte.
+
+    ^[2] Eksempelvis: DNS- eller DHCP-tjenester, specielt hvis der
+    ikke er nogen redundans eller reserve. I tilfældet med DHCP kan
+    slutbrugere blive frakoblet fra netværket, hvis låneperioden er
+    kortere end tiden, det tager for opgraderingsprocessen at blive
+    færdig.
+
+    ^[3] Denne funktion kan deaktiveres ved at tilføje parameteren
+    panic=0 til dine opstartsparametre.
+
+    ^[4] Debians pakkehåndteringssystem tillader normalt ikke at en
+    pakke fjerner en fil ejet af en anden pakke medmindre, at den er
+    blevet defineret til at erstatte denne pakke.
+
+    ^[5] Eller i den periode hvor der endnu ikke er en ny udgivelse.
+    Typisk er kun to stabile udgivelser understøttet på samme
+    tidspunkt.
+
+Kapitel 5. Ting man skal være opmærksom på i forbindelse med jessie
+
+    Sommetider kan ændringer, som er introduceret i en ny udgave,
+    have bivirkninger som vi ikke med rimelighed kan undgå, eller
+    disse ændringer kan afsløre fejl andre steder. Dette afsnit
+    dokumenterer problemer som vi er bekendt med. Læs også gerne
+    errata, dokumentationen for de relevante pakker, fejlrapporter og
+    anden information som er nævnt i Afsnit 6.1, “Yderligere læsning”
+    .
+
+5.1. Begrænsninger i sikkerhedsunderstøttelse
+
+    Der er nogle pakker hvor Debian ikke kan love at tilbyde minimale
+    tilbageporteringer for sikkerhedsmæssige problemstillinger. Disse
+    dækkes i de følgende underafsnit.
+
+    Bemærk at pakken debian-security-support, introduceret i Jessie,
+    hjælper med at registrere status for sikkerhedsmæssig
+    understøttelse for installerede pakker.
+
+5.1.1. Sikkerhedsstatus på internetbrowsere
+
+    Debian 8 inkluderer adskillige browsermotorer, som er påvirket af
+    en stadig strøm af sikkerhedsbrister. Den høje forekomst af
+    sårbarheder og den delvist manglende støtte fra udviklerne i form
+    af langtidsunderstøttede versionsgrene, gør det meget svært at
+    understøtte disse browsere med bagudporterede
+    sikkerhedsrettelser. Hertil kommer at gensidige afhængigheder
+    mellem programbiblioteker gør det umuligt at opdatere til en
+    nyere opstrøms-udgave. Derfor er browsere der bygger på motorerne
+    webkit, qtwebkit og khtml inkluderet i Jessie, men de er ikke
+    fuldt dækket af sikkerhedsunderstøttelse. Disse browsere bør ikke
+    bruges til at tilgå upålidelige internetsider.
+
+    Som generel internetbrowser, anbefaler vi Iceweasel eller
+    Chromium.
+
+    Chromium - selvom bygget på Webkit-kodebasen - er en leaf-pakke,
+    som vil blive holdt opdateret ved at genbygge de nuværende
+    Chromium-udgivelser for stable. Iceweasel og Icedove vil også
+    blive holdt opdateret ved at genbygge den nuværende
+    ESR-udgivelser for stable.
+
+5.1.2. Mangel på sikkerhedsmæssig understøttelse for økosystemet
+omkring libv8 og Node.js
+
+    The Node.js platform is built on top of libv8-3.14, which
+    experiences a high volume of security issues, but there are
+    currently no volunteers within the project or the security team
+    sufficiently interested and willing to spend the large amount of
+    time required to stem those incoming issues.
+
+    Unfortunately, this means that libv8-3.14, nodejs, and the
+    associated node-* package ecosystem should not currently be used
+    with untrusted content, such as unsanitized data from the
+    Internet.
+
+    Derudover vil disse pakker ikke modtage nogle sikkerhedsmæssige
+    opdateringer i Jessie-udgivelsens livstid.
+
+5.1.3. Early termination of MediaWiki security support
+
+    Upstream security support for the 1.19 series of mediawiki ends
+    during the expected lifecycle of Jessie. The mediawiki package is
+    included in Jessie to satisfy dependencies in other packages.
+
+    Security support for mediawiki will end in conjunction with
+    support for Wheezy in April 2016.
+
+5.2. OpenSSH-server har som standard »PermitRootLogin
+without-password«
+
+    I et forsøg på at forstærke standardopsætningen, vil
+    konfigurationen for openssh-server nu anvende standarden
+    »PermitRootLogin without-password«. Hvis du afhænger af en
+    adgangskodegodkendelse for brugeren root, så er du måske påvirket
+    af denne ændring.
+
+    openssh-server vil forsøge at detektere sådanne tilfælde og øge
+    prioriteten for dets debconf-prompt.
+
+    Hvis du ønsker at bevare adgangskodegodkendelse for brugeren root, så
+    kan du også forhåndskonfigurere dette spørgsmål ved at bruge:
+   
+    # The "false" value is in fact correct despite being confusing.
+    $ echo 'openssh-server openssh-server/permit-root-login boolean false' | debconf-set-selections
+
+5.3. Puppet 2.7 / 3.7-kompatibilitet
+
+    If you are using Puppet, please be aware that Puppet 3.7 is not
+    backwards compatible with Puppet 2.7. Among other things, the
+    scoping rules have changed and many deprecated constructs have
+    been removed. See the Puppet 3.x release notes (https://
+    docs.puppetlabs.com/puppet/3/reference/release_notes.html#
+    puppet-300) for some of the changes, although be aware that there
+    are further changes in 3.7.
+
+    Checking the log files of your current puppetmaster for
+    deprecation warnings and resolving all of those warnings before
+    proceeding with the upgrade will make it much easier to complete
+    the upgrade. Alternatively, or additionally, testing the
+    manifests with a tool like Puppet catalog test (https://
+    github.com/duritong/puppet_catalog_test) may also find potential
+    issues prior to the upgrade.
+
+    Når der opgraderes et Puppet-håndteret system fra Wheezy til
+    Jessie, så skal du sikre dig, at den tilsvarende puppetmaster
+    kører mindst Puppet version 3.7. Hvis masteren kører Wheezys
+    puppetmaster, så vil det håndterede Jessie-system ikke kunne
+    forbinde til denne.
+
+    For yderligere information om inkompatibilitetsændringer, så tag
+    et kig på Telly upgrade issues (https://projects.puppetlabs.com/
+    projects/puppet/wiki/Telly_Upgrade_Issues) og "The Angry Guide to
+    Puppet 3" (http://somethingsinistral.net/blog/
+    the-angry-guide-to-puppet-3/) .
+
+5.4. PHP 5.6-opgradering har ændringer i opførslen
+
+    Opgraderingen til Jessie inkluderer en opgradering af PHP fra 5.4
+    til 5.6. Dette kan påvirke lokale PHP-skripter og du rådes til at
+    kontrollere disse skripter før opgradering. Nedenfor er et
+    udvalgt undersæt af disse problemstillinger:
+
+      * To prevent man-in-the-middle attacks against encrypted
+        transfers, client streams now verify peer certificates by
+        default.
+
+        As a result of this change, existing code using ssl:// or
+        tls:// stream wrappers (e.g. file_get_contents(), fsockopen
+        (), stream_socket_client()) may no longer connect
+        successfully without manually disabling peer verification via
+        the stream context's "verify_peer" setting.
+
+        For yderligere information om denne specifikke
+        problemstilling, så læs venligst dette dokument (https://
+        wiki.php.net/rfc/tls-peer-verification) .
+
+      * PHP ændrer håndteringen for versaler på mange områder:
+
+          + Alle interne versalhåndtering for klasse-, funktion- og
+            konstantnavne udføres jævnfør ASCII-regler. Den aktuelle
+            sprogindstilling ignoreres.
+
+          + Nøgleordene »self«, »parent« og »static« er nu altid
+            versalfølsom.
+
+          + json_decode()-funktionen accepterer ikke længere ikke-små
+            bogstaver varianter af »booleske« værdier.
+
+      * Logo GUID-funktionerne (f.eks. php_logo_guid()) er blevet
+        fjernet.
+
+      * Der er ikke længere muligt at overskrive nøgler i statiske
+        skalartabeller. Se venligst PHP-fejl 66015 (https://
+        bugs.php.net/bug.php?id=66015) for et eksempel og yderligere
+        information om denne specifikke problemstilling.
+
+      * The mcrypt_encrypt(), mcrypt_decrypt() and mcrypt_{MODE}()
+        functions no longer accept keys or IVs with incorrect sizes.
+        Furthermore an IV is now required if the used block cipher
+        mode requires it.
+
+      * For legal reasons, the JSON implementation bundled with PHP
+        has been replaced with the version provided by the "jsonc"
+        PECL module. Code that makes assumptions about the finer
+        implementation details of the PHP JSON parser may need to be
+        reviewed.
+
+      * The "short_open_tag" setting is now disabled by default. The
+        ASP variant of the short tags ("<%" and "%>") are scheduled
+        for removal in PHP7.
+
+    For more information or the full list of potential issues, please
+    have a look at upstream's list of backwards incompatible changes
+    for PHP 5.5 (https://php.net/manual/en/
+    migration55.incompatible.php) and 5.6 (https://php.net/manual/en/
+    migration56.incompatible.php) .
+
+5.5. Inkompatible ændringer i Apache HTTPD 2.4
+
+    Bemærk
+   
+    This section only applies to systems which have installed an
+    Apache HTTPD server and configured it manually.
+
+    There have been a number of changes to the configuration of the
+    Apache HTTPD server in version 2.4. On the upstream side, the
+    syntax has changed. Notably, the access control directives have
+    changed considerably and will need manual migration to the new
+    directives.
+
+    The mod_access_compat module is mentioned in the upstream upgrade
+    guide as a possible alternative to immediate migration. However,
+    the reports suggest it may not always work.
+
+    The managing of configuration files has also been changed in the
+    Debian packaging. In particular, all configuration files and
+    sites must now end with ".conf" to be parsed by default. This
+    change also replaces the existing use of /etc/apache2/conf.d/.
+
+    Bemærk
+
+    During the upgrade, you may also see warnings about configuration
+    files placed in /etc/apache2/conf.d/, which are provided by
+    packages from Debian. This warning is unavoidable but harmless as
+    the affected packages will move their configuration once their
+    upgrade completes (which will generally happen after the Apache
+    HTTPD emits its warning).
+
+    For more information and the full list of changes, please refer
+    to:
+
+      * Upgrading to 2.4 from 2.2 (http://httpd.apache.org/docs/2.4/
+        upgrading.html) document provided by Apache for the upstream
+        side.
+
+      * The /usr/share/doc/apache2/NEWS.Debian.gz file provided by
+        the apache2 package.
+
+5.6. Upgrading installs the new default init system for Jessie
+
+    Jessie ships with systemd-sysv as default init system. This
+    package is installed automatically on upgrades.
+
+    If you have a preference for another init such as sysvinit-core
+    or upstart, it is recommended to set up APT pinning prior to the
+    upgrade. This may also be required if you are upgrading LXC
+    containers before the host. In this case, please refer to
+    Afsnit 5.8.1, “Upgrading LXC guests running on Wheezy hosts”.
+
+    As an example, to prevent systemd-sysv from being installed
+    during the upgrade, you can create a file called /etc/apt/
+    preferences.d/local-pin-init with the following contents:
+
+    Package: systemd-sysv
+    Pin: release o=Debian
+    Pin-Priority: -1
+
+    Pas på
+   
+    Be advised that some packages may have degraded behavior or may
+    be lacking features under a non-default init system.
+
+    Please note that the upgrade may install packages containing
+    "systemd" in their name even with APT pinning. These alone do not
+    change your init system. To use systemd as your init system, the
+    systemd-sysv package must be installed first.
+
+    If APT or aptitude has issues computing an upgrade path with the
+    pin in place, you may be able to help it by manually installing
+    both sysvinit-core and systemd-shim.
+
+5.6.1. Stricter handling of failing mounts during boot under systemd
+
+    The new default init system, systemd-sysv, has a stricter
+    handling of failing "auto" mounts during boot compared to
+    sysvinit. If it fails to mount an "auto" mount (without the
+    "nofail" option), systemd will drop to an emergency shell rather
+    than continuing the boot.
+
+    We recommend that all removable or "optional" mount points (e.g.
+    non-critical network drives) listed in /etc/fstab either have the
+    "noauto" or the "nofail" option.
+
+5.6.2. Obsolete init-scripts should be purged
+
+    If you are upgrading from previous releases, your system may
+    contain obsolete init-scripts provided by (now) removed packages.
+    These scripts may have inaccurate or no dependency metadata,
+    which can lead to dependency cycles in your init configuration.
+
+    To avoid this, we recommend that you go and review the list of
+    packages that are in the "rc" ("Removed, but Config-files
+    remain") state, and purge at least all those containing
+    init-scripts.
+
+    Please see Afsnit 4.8.1, “Fuld fjernelse af afinstallerede
+    pakker” for details on finding and purging removed packages.
+
+5.6.3. Locally modified init-scripts may need to be ported to systemd
+
+    Bemærk
+   
+    This section only applies to systems where Debian-provided init
+    scripts have been modified locally.
+
+    If you have modified some of the init scripts provided by Debian,
+    please be aware that these may now have been superseded by a
+    systemd unit file or by systemd itself. If you have debsums
+    installed, you can check for locally modified init scripts by
+    using the following shell command.
+
+    debsums -c -e | grep ^/etc/init.d
+
+    Alternatively, the following can be used in the absence of
+    debsums.
+
+    dpkg-query --show -f'${Conffiles}' | sed 's, /,\n/,g' | \
+      grep /etc/init.d | awk 'NF,OFS="  " {print $2, $1}' | \
+      md5sum --quiet -c
+
+    If either command flags any files and their corresponding
+    packages or the systemd now provides an systemd unit file for
+    that service, the systemd unit file will take precedence to your
+    locally modified init script. Depending on the nature of the
+    change, there are different way to perform the migration.
+
+    If necessary, it is possible to override the systemd unit file to
+    have it start the sysvinit script. For more information on
+    systemd unit files, please have a look at the following
+    resources.
+
+      * How Do I Convert A SysV Init Script Into A systemd Service
+        File? (http://0pointer.de/blog/projects/
+        systemd-for-admins-3.html)
+
+      * systemd.special — Special systemd units (http://0pointer.de/
+        public/systemd-man/systemd.special.html)
+
+      * My Service Can't Get Realtime! (http://www.freedesktop.org/
+        wiki/Software/systemd/MyServiceCantGetRealtime/) (also
+        contains a very short mention on invoking init scripts from
+        unit files)
+
+5.6.4. Plymouth needed for boot-prompts under systemd boots
+
+    If your boot is interactive (e.g. needs a password for an
+    encrypted disk), please ensure that you have plymouth installed 
+    and configured. Please refer to /usr/share/doc/plymouth/
+    README.Debian for information on how to configure plymouth.
+
+    Without plymouth, you may find that your boot prompt disappears.
+    Reports suggest that the cryptsetup prompt still accepts input
+    despite not being visible. Should you experience this issue,
+    typing the correct password may still work.
+
+5.6.5. Interaction between logind and acpid
+
+    ACPI events can be handled by logind or acpid. In case both
+    services are configured to handle events in different ways, this
+    can lead to undesired results.
+
+    We recommend to migrate any non-default settings to logind and
+    uninstall acpid. Alternatively it is also possible to configure
+    logind to ignore ACPI events by adding:
+
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+    HandleLidSwitch=ignore
+
+    to /etc/systemd/logind.conf. Note that this might change
+    behaviour of desktop environments relying on logind.
+
+5.6.6. Unsupported crypttab features under systemd (e.g. "keyscript
+=...")
+
+    There are some cryptsetup features that are unfortunately not
+    supported when running with systemd as the init system. These
+    are:
+
+      * precheck
+
+      * check
+
+      * checkargs
+   
+      * noearly
+
+      * loud
+
+      * keyscript
+
+    If your system relies on any of these for successful booting, you
+    will have to use sysvinit (sysvinit-core) as init system. Please
+    refer to Afsnit 5.6, “Upgrading installs the new default init
+    system for Jessie” for how to avoid a particular init system.
+
+    You can check if any of these options are in use on your system
+    by running the following command:
+
+    grep -e precheck -e check -e checkargs -e noearly -e loud -e keyscript /etc/crypttab
+
+    If there is no output from the above, your system does not use
+    any of the affected options.
+
+5.6.7. systemd: issues SIGKILL too early [fixed in 8.1]
+
+    Bemærk
+   
+    This issue was fixed in the 8.1 Jessie point release.
+
+    A regression was reported in systemd after the Jessie release.
+    The bug occurs during shutdown or reboot, where systemd does not
+    give any reasonable delay before issuing SIGKILL to processes.
+    This can lead to data loss in processes that have not saved all
+    data at the time of the reboot (e.g. running databases).
+
+    This issue is tracked in the Debian bug #784720 (https://
+    bugs.debian.org/784720)
+
+5.6.8. systemd: behavior of 'halt' command
+
+    The sysvinit implementation of the halt command powered off the
+    machine as well. The systemd-sysv implementation halts the
+    system, but does not power off the machine. To halt the machine
+    and turn it off, use the poweroff command.
+
+    See also Debian bug #760923 (https://bugs.debian.org/760923)
+
+5.7. Required kernel config options for Jessie
+
+    Bemærk
+
+    This section is only for people who compile their own kernel. If
+    you use the kernels compiled by Debian, you can disregard this
+    section.
+
+    The following kernel configuration options are now either
+    required or recommended for Jessie (in addition to existing ones
+    from previous releases):
+
+    # Required for udev
+    CONFIG_DEVTMPFS=y
+    # Required for *some* systemd services
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+    # Required by "bluez" (GNOME)
+    CONFIG_BT=y
+    # Required for cups + systemd.
+    CONFIG_PPDEV=y
+
+    The systemd services which require
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y will typically contain at
+    least one of the following directives:
+
+    PrivateTmp=yes
+    PrivateDevices=yes
+    PrivateNetwork=yes
+    ProtectSystem=yes
+
+    If you do not use systemd, or can assert that none of the systemd
+    services will use the above directives, the config option might
+    not be required for your particular system.
+
+    For more information about the requirements, please refer to the
+    section called "REQUIREMENTS" in the README (https://
+    sources.debian.net/src/systemd/jessie/README/) file for the
+    package systemd.
+
+5.8. Upgrade considerations for LXC hosts and containers
+
+    Bemærk
+   
+    This section only applies to systems that have LXC containers and
+    hosts. Normal end user systems usually do not have these.
+
+    The upgrade from Wheezy to Jessie will migrate your system to the
+    systemd init system by default (see Afsnit 5.6, “Upgrading
+    installs the new default init system for Jessie”).
+
+    When upgrading an LXC container or an LXC virtual machine, this
+    will have different consequences depending on whether the host
+    system has already been upgraded to Jessie or not.
+
+5.8.1. Upgrading LXC guests running on Wheezy hosts
+
+    If you are upgrading an LXC guest container that is running on a 
+    Wheezy host system, then you will need to prevent the guest from
+    being automatically migrated to systemd. You prevent the
+    migration via pinning, as described in Afsnit 5.6, “Upgrading
+    installs the new default init system for Jessie”.
+
+    This is required as the Wheezy host lacks functionality to boot a
+    system running systemd.
+
+    You should be able to switch over to systemd inside the LXC guest
+    once you have upgraded the host system to Jessie. See the next
+    paragraph for things that need to be adapted on Jessie hosts.
+
+5.8.2. Upgrading LXC guests running on Jessie hosts
+
+    In order to be able to boot LXC guests with systemd, you need to
+    adapt your LXC container configuration. The container
+    configuration can usually be found in /var/lib/lxc/CONTAINER_NAME
+    /config You need to add the following two settings to the
+    configuration:
+
+    lxc.autodev = 1
+    lxc.kmsg = 0
+
+5.8.3. Further information
+
+    You can find further information on LXC in Debian in the Debian
+    wiki (https://wiki.debian.org/LXC) .
+
+5.9. Manual migration of disks encrypted with LUKS whirlpool
+(non-standard setups)
+
+    Bemærk
+
+    This section is only for people who have set up LUKS encrypted
+    disks themselves using the whirlpool hash. The debian-installer
+    has never supported creating such disks.
+
+    If you have manually set up an encrypted disk with LUKS
+    whirlpool, you will need to migrate it manually to a stronger
+    hash. You can check if your disk is using whirlpool by using the
+    following command:
+
+    # /sbin/cryptsetup luksDump <disk-device> | grep -i whirlpool
+
+    For more information on migrating, please see item "8.3 Gcrypt
+    1.6.x and later break Whirlpool" of the cryptsetup FAQ (https://
+    code.google.com/p/cryptsetup/wiki/FrequentlyAskedQuestions) .
+
+    Pas på
+
+    If you have such a disk, cryptsetup will refuse to decrypt it by
+    default. If your rootdisk or other system disks (e.g. /usr) are
+    encrypted with whirlpool, you should migrate them prior to the
+    first reboot after upgrading cryptsetup.
+
+5.10. The GNOME desktop requires basic 3D graphics
+
+    The GNOME 3.14 desktop in Jessie no longer has fallback support
+    for machines without basic 3D graphics. To run properly, it needs
+    either a recent enough PC (any PC built in the last 10 years
+    should have the required SSE2 support) or, for architectures
+    other than i386 and amd64, a 3D-accelerated graphics adapter with
+    EGL drivers.
+
+5.11. The GNOME desktop does not work with the AMD proprietary FGLRX
+driver
+
+    Unlike other OpenGL drivers, the AMD FGLRX driver for Radeon
+    adapters does not support the EGL interface. As such, several
+    GNOME applications, including the core of the GNOME desktop, will
+    not start at all when this driver is in use.
+
+    It is recommended to use the free radeon driver, which is the
+    default in jessie, instead.
+
+5.12. Changes in the GNOME default keyboard shortcuts
+
+    The default keyboard shortcuts in the GNOME desktop have changed
+    in order to match more closely those of some other operating
+    systems.
+
+    Shortcut settings previously modified by the user will be
+    preserved upon upgrade. These settings can still be configured
+    from the GNOME control center, accessible from the top right menu
+    by clicking on the "settings" icon.
+
+5.13. Changes to default shell of system users provided by
+base-passwd
+
+    Opgraderingen af pakken base-passwd vil nulstille skallen for
+    nogle systembrugere til »nologin«-skallen. Dette inkluderer de
+    følgende brugere:
+
+      * daemon
+
+      * bin
+
+      * sys
+
+      * sync
+
+      * games
+
+      * man
+
+      * lp
+
+      * mail
+
+      * news
+
+      * uucp
+
+      * proxy
+
+      * www-data
+
+      * backup
+
+      * list
+
+      * irc
+
+      * gnats
+
+      * nobody
+
+    If your local setup requires that any of these users have a
+    shell, you should say no to migrating, or migrate and then change
+    the shell of the corresponding users. Notable examples include
+    local backups done via the "backup" user with "ssh-key"
+    authentication.
+
+    Pas på
+   
+    Migreringen vil ske automatisk, hvis din
+    debconf-spørgsmålsprioritet er høj (»high«) eller over.
+
+    Hvis du ønsker at beholde den nuværende skal for en given bruger,
+    så kan du forhåndsudfylde spørgsmålene ved at bruge følgende:
+
+    echo 'base-passwd base-passwd/system/username/shell/current-shell-mangled/_usr_sbin_nologin boolean false' | debconf-set-selections
+
+    Hvor username er navnet på brugeren og current-shell-mangled er
+    det ødelagte navn på skallen. Ødelæggelsen udføres ved at
+    erstatte alle tegn udover alfanumeriske tegn, streger og
+    understreger med understreger. F.eks. /bin/bash bliver _bin_bash.
+
+5.14. Migrering til ny KDE E-post, kalender og kontakter (Kontact)
+
+    The Kontact Personal Information Management system has received a
+    major upgrade. The new version makes much greater use of metadata
+    indexing and each user's data must be migrated into these new
+    indices.
+
+    E-mail, calendar events, and addressbook contacts are
+    automatically migrated when the user logs in and the relevant
+    component is started. Some advanced settings such as e-mail
+    filters and custom templates require manual intervention. Further
+    details and troubleshooting suggestions are collected on the
+    Debian Wiki (https://wiki.debian.org/KDE/Jessie/kontact) .
+
+5.15. Manglende virtuelle konsoller (»getty'er«) med flere
+skrivebordsmiljøer
+
+    Bemærk
+
+    This issue is currently reported as fixed in Jessie. Should you
+    still be able to reproduce it, then please follow up to Debian
+    Bug#766462 (https://bugs.debian.org/766462) . Note that you may
+    have to unarchive the issue first (please refer to the Debian BTS
+    control server (https://www.debian.org/Bugs/server-control)
+    documentation on how to unarchive bugs).
+
+    Hvis du har flere skrivebordsmiljøet installeret, så kan du
+    opleve at ingen af de virtuelle konsoller (»virtual consoles«)
+    viser et logind.
+
+    This issue seems to occur when plymouth, systemd, and GNOME are
+    all installed. This issue is reported as Debian Bug#766462
+    (https://bugs.debian.org/766462) .
+
+    It has been reported that removing the "splash" argument from the
+    kernel command-line may work around the issue. Please see /etc/
+    default/grub and remember to run update-grub after updating the
+    file.
+
+5.16. »VGA signal out of range« / blank skærm under opstart med
+grub-pc
+
+    There is a compatibility issue in grub-pc with older graphics
+    cards (e.g. the "ATI Rage 128 Pro Ultra TR") that can cause it to
+    show a blank screen during boot. The display may issue a "VGA
+    signal out of range" message (or something similar).
+
+    En simpel måde at komme omkring det på er at angive GRUB_TERMINAL
+    =console i /etc/default/grub.
+
+5.17. Strengere validering af cronfiler i crontab
+
+    The crontab program is now more strict and may refuse to save a
+    changed cron file if it is invalid. If you experience issues with
+    crontab -e, please review your crontab for existing mistakes.
+
+5.18. Change in handling of unreadable module paths by perl
+
+    From version 5.18 (and 5.20, which is included in Jessie), Perl
+    will exit with a fatal error if it encounters unreadable module
+    paths in @INC. The previous behavior was to skip such entries. It
+    is recommended to check the contents of @INC in your environment
+    for directories which are not world-readable, and take
+    appropriate action.
+
+    Du kan se standarden @INC for Perl ved at køre perl -V.
+
+5.19. Upgrade considerations for Ganeti clusters
+
+5.19.1. Problem upgrading Ganeti clusters with DRBD-backed instances
+[fixed in 8.1]
+
+    Bemærk
+   
+    This issue was fixed in the 8.1 Jessie point release.
+
+    The version of ganeti (2.12.0-3) released with Jessie does not
+    support migrations from installations running 2.5 or earlier
+    (including Wheezy) in cases where there are instances with DRBD
+    disks. It is hoped that this issue will be fixed in a point
+    release, and recommended that you do not upgrade affected Ganeti
+    clusters in the meantime. You can find more information about
+    this issue at Debian Bug#783186 (https://bugs.debian.org/783186)
+    .
+
+5.19.2. General notes on upgrading Ganeti clusters
+
+    The recommended procedure to upgrade a Ganeti cluster from
+    Wheezy's ganeti version (2.5.2-1) to Jessie's (2.12.0-3) is to
+    stop all instances and then upgrade and reboot all nodes at once.
+    This will ensure that all instances run with Jessie's hypervisor
+    version and that all nodes run the same versions of Ganeti and
+    DRBD.
+
+    Note that running a cluster with mixed 2.5 and 2.12 nodes is not
+    supported. Also note that, depending on the hypervisor, instance
+    live migrations may not work between Wheezy and Jessie hypervisor
+    versions.
+
+5.20. New requirements for file execution in Samba4
+
+    If a client requests that a file should be "opened for
+    execution", Samba4 will require the executable bit to be set on
+    the file in addition to the regular read permissions. This also
+    causes "netlogon" scripts to be silently ignored if they lack
+    this executable bit.
+
+5.21. Cryptsetup can break boot with BUSYBOX=n
+
+    Bemærk
+   
+    This section only applies to people that have manually changed
+    their /etc/initramfs-tools/initramfs.conf to not use busybox.
+
+    If you have both busybox and cryptsetup installed plus configured
+    initramfs to not use busybox, then it may render your system
+    unbootable.
+
+    Please check the value of your BUSYBOX setting in /etc/
+    initramfs-tools/initramfs.conf if you have both of these packages
+    installed. At this time, known work arounds are uninstalling
+    busybox or setting BUSYBOX=y in /etc/initramfs-tools/
+    initramfs.conf.
+
+    Advarsel
+
+    If you had to make any changes, please remember to run
+    update-initramfs -u to update your initramfs. Otherwise, you may
+    still end up with a broken boot.
+
+    Please see Debian Bug#783297 (https://bugs.debian.org/783297) for
+    more information.
+
+5.22. Backwards incompatible changes in the Squid webproxy
+
+    Bemærk
+   
+    This section only applies to people that have installed the squid
+    webproxy.
+
+    The configuration of squid has changed in an incompatible way.
+    Notably some of the squid "helpers" have changed their name. If
+    your configuration relies on old features no longer present or on
+    the old names for the helpers, your squid service may fail to
+    start after the upgrade.
+
+    Please see the upstream release notes for more information. These
+    are:
+
+      * Release notes for Squid 3.2 (http://www.squid-cache.org/
+        Versions/v3/3.2/RELEASENOTES.html) (The renamed helpers can
+        be found in 2.6 Helper Name Changes (http://
+        www.squid-cache.org/Versions/v3/3.2/RELEASENOTES.html#ss2.6)
+        )
+
+      * Release notes for Squid 3.3 (http://www.squid-cache.org/
+        Versions/v3/3.3/RELEASENOTES.html)
+
+      * Release notes for Squid 3.4 (http://www.squid-cache.org/
+        Versions/v3/3.4/RELEASENOTES.html)
+
+Kapitel 6. Yderligere oplysninger om Debian
+
+6.1. Yderligere læsning
+
+    Ud over disse udgivelsesnoter og installationsvejledningen, kan
+    man finde yderligere dokumentation til Debian hos Debian
+    Documentation Project (DDP), hvis mål er at skabe dokumentation
+    af høj kvalitet til Debians brugere og udviklere. Blandt den
+    tilgængelige dokumentation findes Debian Reference, Debian New
+    Maintainers Guide og Debian OSS samt meget mere. De fuldstændige
+    detaljer om eksisterende materiale kan findes på Debians
+    dokumentationsprojekts internetside (https://www.debian.org/doc/)
+    og Debians wiki (https://wiki.debian.org/) .
+
+    Dokumentationen for enkelte pakker installeres i /usr/share/doc/
+    pakke. Dette kan omfatte oplysninger om ophavsret,
+    Debian-specifikke detaljer samt dokumentation fra programmets
+    ophavssted.
+
+6.2. Få hjælp
+
+    Der er mange steder at finde hjælp og rådgivning for
+    Debianbrugere, men disse bør først bruges, når man ikke kan finde
+    svar på sit spørgsmål via de andre dokumentationskilder. Dette
+    afsnit giver en kort indledning til disse, som kan være nyttige
+    for nye Debianbrugere.
+
+6.2.1. E-post-lister
+
+    De mest interessante e-post-lister til Debianbrugere er den
+    engelske liste debian-user plus listerne debian-user-sprog for
+    andre sprog (den danske er debian-user-danish). Oplysninger om
+    disse lister og hvordan man abonnerer på dem kan findes på https:
+    //lists.debian.org/ (https://lists.debian.org/) . Se venligst i
+    arkiverne om dit spørgsmål allerede er besvaret, før du skriver,
+    og følg i øvrigt standard-etiketten for e-post-lister.
+
+6.2.2. Internet Relay Chat
+
+    Debian har en IRC-kanal med det formål at hjælpe Debianbrugere.
+    Kanalen kan findes på IRC-netværket OFTC. Brug din foretrukne
+    IRC-klient til at forbinde til irc.debian.org og gå så ind på
+    kanalen #debian.
+
+    Følg kanalens retningslinjer og udvis respekt for andre brugere.
+    Retningslinjerne kan findes på Debians wiki (https://
+    wiki.debian.org/DebianIRC) .
+
+    Yderligere oplysninger om OFTC kan findes på websiden (http://
+    www.oftc.net/) .
+
+6.3. Fejlrapportering
+
+    Vi gør vores bedste for at gøre Debian til et
+    højkvalitetsstyresystem, men dette betyder ikke at pakkerne altid
+    er fri for fejl. Jævnfør Debians filosofi om “åben udvikling”, og
+    som en tjeneste for vores brugere i almindelighed, kan alle
+    oplysninger om de indrapporterede fejl findes på vores
+    fejlsporingssystem, BTS. BTS kan gennemses på https://
+    bugs.debian.org/ (https://bugs.debian.org/) .
+
+    Hvis du finder en fejl i distributionen eller i de programpakker,
+    som er en del af den, så rapporter dem venligst så de kan blive
+    rettet i fremtidige udgivelser. Fejlrapportering kræver en gyldig
+    e-postadresse. Vi beder om dette for, at vi kan spore
+    fejlrapporterne, og så udviklerne kan kontakte ophavspersonen
+    hvis der kræves flere oplysninger.
+
+    Du kan indsende en fejlrapport ved hjælp af programmet reportbug
+    eller manuelt via e-post. Du kan læse mere om
+    fejlsporingssystemet og hvordan det bruges ved at læse
+    referencedokumentationen (som er tilgængelig i /usr/share/doc/
+    debian, hvis du har installeret doc-debian) eller på nettet via
+    fejlsporingssystemet (https://bugs.debian.org/) .
+
+6.4. Bidrag til Debian
+
+    Du behøver ikke være ekspert for at kunne bidrage til Debian. Ved
+    at hjælpe andre brugere med at løse problemer via de forskellige
+    hjælpelister (https://lists.debian.org/) , bidrager du til
+    fællesskabet. Fejlfinding (og også rettelse af) af problemet
+    relateret til distributionens udvikling via deltagelse på
+    udviklerlisterne (https://lists.debian.org/) er også særdeles
+    nyttigt. For at hjælpe til med at vedligeholde
+    Debiandistributionens kvalitet, kan du indsende fejlrapporter
+    (https://bugs.debian.org/) og hjælpe udvikere med at finde og
+    fikse dem. Værktøjet how-can-i-help hjælper dig med at finde
+    egnede rapporter at arbejde på. Hvis du er god med ord, kan du
+    også bidrage aktivt ved at skrive dokumentation (https://
+    www.debian.org/doc/cvs) eller oversætte (https://www.debian.org/
+    international/) eksisterende dokumentation til dit eget sprog.
+
+    Hvis du kan afsætte mere tid, kan du håndtere et stykke af
+    Debians fri softwaresamling. Det er især en hjælp hvis folk tager
+    ansvaret for eller vedligeholder ting, hvis inklusion i Debian
+    forespørges af andre. Databasen Work Needing and Prospective
+    Packages (https://www.debian.org/devel/wnpp/) indeholder denne
+    type oplysninger. Hvis du er interesseret i specifikke grupper,
+    vil du måske finde det underholdende at bidrage til nogle af
+    Debians underprojekter (https://www.debian.org/devel/#projects) ,
+    inklusive portering til bestemte arkitekturer og Debian Pure
+    Blends (https://wiki.debian.org/DebianPureBlends) for specifikke
+    brugergrupper, blandt mange andre.
+
+    Under alle omstændigheder: Hvis du på nogen måde arbejder inden
+    for den frie programbevægelse, enten som bruger, programmør,
+    dokumentationsforfatter eller oversætter, hjælper du allerede de
+    frie programmer. At bidrage er både lønsomt og morsomt, lader dig
+    møde nye mennesker, og giver dig en rar fornemmelse indeni.
+
+Appendiks A. Håndter dit wheezy-system før opgraderingen
+
+    Dette bilag indeholder information om, hvordan du kontrollerer,
+    at du kan installere eller opgradere pakker fra wheezy inden du
+    opgraderer til jessie. Dette bør kun være nødvendigt i specifikke
+    situationer.
+
+A.1. Opgradering af dit wheezy-system
+
+    Det er grundlæggende ikke forskelligt fra enhver anden
+    opgradering af wheezy som du har udført. Den eneste forskel er,
+    at du først skal sikre dig, at din pakkeliste stadig indeholder
+    referencer til wheezy som forklaret i Afsnit A.2, “Kontroller din
+    kildeliste”.
+
+    Hvis du opgraderer dit system via et Debianspejl, vil systemet
+    automatisk blive opgraderet til den seneste punktudgave (point
+    release) af wheezy.
+
+A.2. Kontroller din kildeliste
+
+    Hvis nogen af linjerne i /etc/apt/sources.list refererer til
+    »stable«, “anvender” du allerede jessie. Dette er måske ikke,
+    hvad du ønsker, hvis du ikke er klar til opgraderingen endnu.
+    Hvis du allerede har kørt apt-get update, kan du stadig gå
+    baglæns ved at følge nedenstående procedure.
+
+    Hvis du allerede har installeret pakker fra jessie, er der ikke
+    længere meget mening i at installere pakker fra wheezy. I dette
+    tilfælde skal du bestemme dig for, om du vil fortsætte eller ej.
+    Det er muligt at nedgradere pakker, men det beskrives ikke her.
+
+    Åbn filen /etc/apt/sources.list med din foretrukne tekstbehandler
+    (som root) og kontroller alle linjer som begynder med deb http:
+    eller deb ftp: efter en reference til “stable”. Hvis du finder
+    nogen, så ændr stable til wheezy.
+
+    Hvis du har linjer som begynder med deb file:, skal du selv
+    kontrollere om placeringen, som de refererer til indeholder et
+    arkiv for wheezy eller jessie.
+
+    Vigtigt
+
+    Ændr ikke linjer som begynder med deb cdrom:. Hvis du gør det, så
+    gøres linjen ugyldig og du skal så køre apt-cdrom igen. Bliv ikke
+    foruroliget hvis en “cdrom”-kildelinje refererer til “unstable”.
+    Selvom det er forvirrende, så er det normalt.
+
+    Hvis du har foretaget ændringer, så gem filen og kør
+
+    # apt-get update
+
+    for at opdatere pakkelisten.
+
+A.3. Fjerner forældede konfigurationsfiler
+
+    Før du opgraderer dit system til jessie, så anbefales det at
+    fjerne gamle konfigurationsfiler (såsom *.dpkg-{new,old}-filer
+    under /etc fra systemet.
+
+A.4. Opgrader forældede sprogindstillinger til UTF-8
+
+    Hvis dit system er sprogoversat og anvender et sprog, som ikke er
+    baseret på UTF-8, bør du overveje at konvertere dit system til at
+    bruge UTF-8-baserede sprogindstillinger. Tidligere har der været
+    identificeret fejl^[6], som kun har vist sig, når der bruges et
+    tegnsæt forskelligt fra UTF-8. På skrivebordet er sådanne
+    forældede sprogindstillinger understøttet via grimme hackninger
+    internt i bibliotekerne, og vi kan ikke yde hjælp til brugere,
+    som stadig anvender dem.
+
+    For at vælge systemets sprogindstillinger kan du køre 
+    dpkg-reconfigure locales. Sikr dig at du vælger en UTF-8-baseret
+    sprogindstilling, når du bliver præsenteret for spørgsmålet om
+    hvilken sprogindstilling, som skal anvendes som standard af
+    systemet. Udover dette bør du kontrollere dine brugeres
+    sprogindstillinger i deres konfigurationsmiljø og sikre dig, at
+    de ikke har forældede sprogdefinitioner i deres
+    konfigurationsmiljø.
+
+
+---------------------------------------------------------------------
+
+    ^[6] I GNOME-pauseskærmen er brug af adgangskoder med
+    ikke-ASCII-tegn, pam_ldap-understøttelse, eller endda muligheden
+    for at låse skærmen op, utroværdig når der ikke anvendes UTF8.
+    GNOME-pauseskærmen er påvirket af denne fejl #599197 (http://
+    bugs.debian.org/599197) . Nautilus-filhåndteringen (og alle
+    glib-baserede programmer, og sandsynligvis også alle Qt-baserede
+    programmer) antager at filnavne er i UTF-8, mens skallen antager,
+    at de er i den aktuelle sprogindstillings kodning. I daglig brug,
+    er ikke-ASCII-filnavne bare ubrugelige i sådanne opsætninger.
+    Derudover kræver gnome-orca-skærmlæseren (som giver bruger med
+    synsnedsættelse adgang til GNOME-skrivebordsmiljøet) en
+    UTF-8-sprogindstilling siden Squeeze; under et forældet tegnsæt,
+    vil programmet ikke kunne læse vinduesinformation ud for
+    skrivebordselementer såsom Nautilus/GNOME Panel eller
+    Alt-F1-menuen.
+
+Appendiks B. Bidragydere til udgivelsesnoterne
+
+    Mange har hjulpet til med udgivelsesnoterne, blandt andre
+
+    Adam Di Carlo, Andreas Barth, Andrei Popescu, Anne Bezemer, Bob 
+    Hilliard, Charles Plessy, Christian Perrier, Daniel Baumann, 
+    David Prévot, Eddy Petrișor, Emmanuel Kasper, Esko Arajärvi, 
+    Frans Pop, Giovanni Rapagnani, Gordon Farquharson, Javier 
+    Fernández-Sanguino Peña, Jens Seidel, Jonas Meurer, Jonathan 
+    Nieder, Joost van Baal-Ilić, Josip Rodin, Julien Cristau, Justin
+    B Rye, LaMont Jones, Luk Claes, Martin Michlmayr, Michael Biebl, 
+    Moritz Mühlenhoff, Niels Thykier, Noah Meyerhans, Noritada 
+    Kobayashi, Osamu Aoki, Peter Green, Rob Bradford, Samuel Thibault
+    , Simon Bienlein, Simon Paillard, Stefan Fritsch, Steve Langasek,
+    Steve McIntyre, Tobias Scherer, Vincent McIntyre, och W. Martin 
+    Borgert.
+
+    Dette dokument er oversat til mange sprog. Mange tak til alle
+    oversætterne!
+
+    Oversat til dansk af: Joe Hansen, Torben Grøn Helligsø, Morten Bo
+    Johansen, Ask Hjorth Larsen, Nicky Thomassen.
+
+Stikordsregister
+
+A
+
+Abiword, Nyt i distributionen
+Apache, Nyt i distributionen
+
+B
+
+BIND, Nyt i distributionen
+Blu-ray, Cd'er, dvd'er og Blu-ray
+
+C
+
+Calligra, Nyt i distributionen
+CD, Cd'er, dvd'er og Blu-ray
+Courier, Nyt i distributionen
+
+D
+
+Dia, Nyt i distributionen
+DocBook XML, Kilder til dette dokument
+DVD, Cd'er, dvd'er og Blu-ray
+
+E
+
+Evolution, Nyt i distributionen
+Exim, Nyt i distributionen
+
+G
+
+GCC, Nyt i distributionen
+GNOME, Nyt i distributionen
+GNUcash, Nyt i distributionen
+GNUmeric, Nyt i distributionen
+
+K
+
+KDE, Nyt i distributionen
+
+L
+
+LibreOffice, Nyt i distributionen
+LXDE, Nyt i distributionen
+
+O
+
+OpenSSH, Nyt i distributionen
+
+P
+
+packages
+
+    apache2, Inkompatible ændringer i Apache HTTPD 2.4
+    apt, Bidrag med opgraderingsrapporter, Forberedelse af kilder for
+        APT, Tilføjelse af APT-internetkilder, Tilføjelse af
+        APT-kilder for et lokalt spejl
+    apt-listchanges, Minimal systemopgradering
+    aptitude, Sikr dig, at du har tilstrækkelig med plads til
+        opgraderingen, Fuld fjernelse af afinstallerede pakker
+    base-passwd, Changes to default shell of system users provided by
+        base-passwd
+    busybox, Cryptsetup can break boot with BUSYBOX=n
+    cryptsetup, Manual migration of disks encrypted with LUKS
+        whirlpool (non-standard setups), Cryptsetup can break boot
+        with BUSYBOX=n
+    dblatex, Kilder til dette dokument
+    debian-goodies, Sikr dig, at du har tilstrækkelig med plads til
+        opgraderingen
+    debian-kernel-handbook, Installation af en kernens metapakke
+    debian-security-support, Sikkerhed, Begrænsninger i
+        sikkerhedsunderstøttelse
+    doc-debian, Fejlrapportering
+    docbook-xsl, Kilder til dette dokument
+    dpkg, Bidrag med opgraderingsrapporter
+    games-content-dev, Dbians spilblend
+    ganeti, Problem upgrading Ganeti clusters with DRBD-backed
+        instances [fixed in 8.1], General notes on upgrading Ganeti
+        clusters
+    gcc, Sikkerhed
+    grub-pc, »VGA signal out of range« / blank skærm under opstart
+        med grub-pc
+    hardening-wrapper, Forældede komponenter
+    how-can-i-help, Bidrag til Debian
+    initramfs-tools, Fejlsøg skal under opstart med initrd, 
+        Opgradering af din kerne og relaterede pakker, Changes to
+        root and /usr filesystem mounting and checking
+    libjpeg-progs, Forældede pakker
+    libjpeg-turbo-progs, Forældede pakker
+    libreoffice, Forældede pakker
+    libv8-3.14, Mangel på sikkerhedsmæssig understøttelse for
+        økosystemet omkring libv8 og Node.js
+    linux-image-*, Opgradering af din kerne og relaterede pakker
+    linux-image-amd64, Installation af en kernens metapakke
+    linux-source, Installation af en kernens metapakke
+    localepurge, Sikr dig, at du har tilstrækkelig med plads til
+        opgraderingen
+    mediawiki, Early termination of MediaWiki security support
+    mplayer, Forældede pakker
+    mplayer2, Forældede pakker
+    mpv, Forældede pakker
+    needrestart, Sikkerhed
+    nodejs, Mangel på sikkerhedsmæssig understøttelse for økosystemet
+        omkring libv8 og Node.js
+    openjdk-6-*, Forældede pakker
+    openjdk-7-*, Forældede pakker
+    openoffice.org, Forældede pakker
+    openssh-server, OpenSSH-server har som standard »PermitRootLogin
+        without-password«
+    perl, Change in handling of unreadable module paths by perl
+    php-horde, PHP-programmer
+    plymouth, Plymouth needed for boot-prompts under systemd boots, 
+        Manglende virtuelle konsoller (»getty'er«) med flere
+        skrivebordsmiljøer
+    popularity-contest, Sikr dig, at du har tilstrækkelig med plads
+        til opgraderingen
+    postgresql-9.1, Forældede pakker
+    postgresql-9.4, Forældede pakker
+    postgresql-plperl-9.1, Forældede pakker
+    puppetmaster, Puppet 2.7 / 3.7-kompatibilitet
+    python3.2, Forældede pakker
+    python3.4, Forældede pakker
+    release-notes, Rapporter fejl i dette dokument
+    ruby, Forældede pakker
+    ruby1.8, Forældede pakker
+    ruby1.9.1, Forældede pakker
+    ruby2.1, Forældede pakker
+    squid, Forældede pakker
+    squid3, Forældede pakker
+    systemd, Nyt standardsystem for init (systemd), Locally modified
+        init-scripts may need to be ported to systemd, Required
+        kernel config options for Jessie, Manglende virtuelle
+        konsoller (»getty'er«) med flere skrivebordsmiljøer
+    systemd-shim, Upgrading installs the new default init system for
+        Jessie
+    systemd-sysv, Nyt standardsystem for init (systemd), Upgrading
+        installs the new default init system for Jessie, Stricter
+        handling of failing mounts during boot under systemd, 
+        systemd: behavior of 'halt' command
+    sysvinit, Nyt standardsystem for init (systemd), Fejlsøg skal
+        under opstart med systemd, systemd: behavior of 'halt'
+        command
+    sysvinit-core, Upgrading installs the new default init system for
+        Jessie, Unsupported crypttab features under systemd (e.g.
+        "keyscript=...")
+    tinc, Forbered et sikkert miljø for opgraderingen
+    udev, Opgradering af din kerne og relaterede pakker
+    upgrade-reports, Bidrag med opgraderingsrapporter
+    upstart, Upgrading installs the new default init system for
+        Jessie
+    xmlroff, Kilder til dette dokument
+    xsltproc, Kilder til dette dokument
+
+Perl, Nyt i distributionen
+PHP, Nyt i distributionen
+Postfix, Nyt i distributionen
+PostgreSQL, Nyt i distributionen
+
+X
+
+Xfce, Nyt i distributionen
+
+ordliste
+
+ACPI
+
+    Advanced Configuration and Power Interface
+
+ALSA
+
+    Advanced Linux Sound Architecture (avanceret lydarkitektur for
+    Linux)
+
+APM
+
+    Advanced Power Management (avanceret strømhåndtering)
+
+BD
+
+    blu-ray-disk
+
+cd
+
+    Compact Disc
+
+cd-rom
+
+    Compact Disc Read Only Memory
+
+DHCP
+
+    Dynamic Host Configuration Protocol (konfigurationsprotokol for
+    dynamisk vært)
+
+DNS
+
+    Domain Name System (domænenavnsystem)
+
+dvd
+
+    Digital Versatile Disc
+
+GIMP
+
+    GNU Image Manipulation Program (billedbehandlingsprogrammet GIMP)
+
+GNU
+
+    GNU's Not Unix (GNU er ikke Unix)
+
+GPG
+
+    GNU Privacy Guard
+
+IDE
+
+    Integrated Drive Electronics
+
+LDAP
+
+    Lightweight Directory Access Protocol
+
+LILO
+
+    LInux LOader
+
+LSB
+
+    Linux Standard Base
+
+LVM
+
+    Logical Volume Manager (logisk diskenhedshåndtering)
+
+MTA
+
+    Mail Transport Agent (postbehandlingsagent)
+
+NBD
+
+    Network Block Device (netværksblokenhed)
+
+NFS
+
+    Network File System (netværksfilsystem)
+
+NIC
+
+    Network Interface Card (netværksgrænsefladekort)
+
+NIS
+
+    Network Information Service (netværksinformationstjeneste)
+
+OSS
+
+    Open Sound System (åbent lydsystem)
+
+RAID
+
+    Redundant Array of Independent Disks
+
+RPC
+
+    Remote Procedure Call (ekstern procedurekald)
+
+SATA
+
+    Serial Advanced Technology Attachment
+
+SSL
+
+    Secure Sockets Layer (sikkert sokkellag)
+
+TLS
+
+    Transport Layer Security (sikkerhed for transportlag)
+
+UEFI
+
+    Unified Extensible Firmware Interface
+
+USB
+
+    Universal Serial Bus
+
+UUID
+
+    Universally Unique Identifier
+
+VGA
+
+    Video Graphics Array
+
+WPA
+
+    Wi-Fi Protected Access (Wi-Fi-beskyttet adgang)
+

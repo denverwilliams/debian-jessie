@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitola 3. Inštalačný systém</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-whats-new.sk.html" title="Kapitola 2. Čo je nové v Debian 8" /><link rel="next" href="ch-upgrading.sk.html" title="Kapitola 4. Aktualizácie z Debian 7 (wheezy)" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitola 3. Inštalačný systém</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-whats-new.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-upgrading.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr></table><hr /></div><div xml:lang="sk" class="chapter" lang="sk"><div class="titlepage"><div><div><h1 class="title"><a id="ch-installing"></a>Kapitola 3. Inštalačný systém</h1></div></div></div><div class="toc"><p><strong>Obsah</strong></p><dl class="toc"><dt><span class="section"><a href="ch-installing.sk.html#inst-new">3.1. Čo je nové v inštalačnom systéme?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-installing.sk.html#inst-changes">3.1.1. Hlavné zmeny</a></span></dt><dt><span class="section"><a href="ch-installing.sk.html#inst-auto">3.1.2. Automatizovaná inštalácia</a></span></dt></dl></dd></dl></div><p>
+Inštalátor Debianu (Debian Installer) je oficiálny inštalačný systém
+Debianu. Ponúka rôzne spôsoby inštalácie. Metódy inštalácie dostupné pre váš
+systém závisia na architektúre, ktorú používate.
+</p><p>
+Obrazy inštalátora pre jessie nájdete spolu s Inštalačnou príručkou
+na <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/" target="_top">webe Debianu</a>.
+</p><p>
+Inštalačná príručka sa tiež nachádza na prvom CD/DVD oficiálnej sady CD/DVD
+Debianu na adrese:
+</p><pre class="screen">
+/doc/install/manual/<em class="replaceable"><code>jazyk</code></em>/index.html
+</pre><p>
+Tiež si môžete pozrieť zoznam známych problémov s debian-installer - <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/index#errata" target="_top">errata</a>.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="inst-new"></a>3.1. Čo je nové v inštalačnom systéme?</h2></div></div></div><p>
+Inštalátor Debianu prešiel množstvom vývoja od svojho prvého oficiálneho
+vydania v Debian 7, čo prinieslo zlepšenú podporu hardvéru aj
+niektoré vzrušujúce nové vlastnosti.
+</p><p>
+V týchto Poznámkach k vydaniu uvedieme iba hlavné zmeny inštalátora. Ak vás
+zaujíma podrobný prehľad zmien od wheezy, pozrite si prosím
+oznámenia o vydaní jessie beta a RC dostupné z <a class="ulink" href="https://www.debian.org/devel/debian-installer/News/" target="_top">histórie noviniek</a> Inštalátora Debianu.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-changes"></a>3.1.1. Hlavné zmeny</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+</span></dt><dd><p>
+
+
+</p></dd><dt><span class="term">Odstránené porty</span></dt><dd><p>
+Podpora architektúr „ia64“ a „sparc“ bola odstránená z inštalátora, pretože
+boli odstránené z archívu.
+</p></dd><dt><span class="term">Nové porty</span></dt><dd><p>
+Do inštalátora bola pridaná podpora architektúr „arm64“ a „ppc64el“.
+</p></dd><dt><span class="term">Nový predvolený init systém</span></dt><dd><p>
+Inštalačný systém teraz nainštaluje systemd ako predvolený init systém:
+</p></dd><dt><span class="term">Výber pracovného prostredia</span></dt><dd><p>
+Pracovné prostredie je teraz možné zvoliť pomocou tasksel počas
+inštalácie. Všimnite si, že síce je možné zvoliť niekoľko pracovných
+prostredí naraz, ale niektoré kombinácie pracovných prostredí nemožno
+nainštalovať naraz.</p></dd><dt><span class="term">Nahradenie „--“ v parametroch zavádzača systému za „---“</span></dt><dd><p>
+Kvôli zmene na strane linuxového jadra sa teraz na oddelenie parametrov
+jadra od parametrov používateľského priestoru teraz používa oddeľovač „---“
+namiesto historického „--“.
+</p></dd><dt><span class="term">Nové jazyky</span></dt><dd><p>
+Vďaka obrovskej snahe prekladateľov je možné Debian nainštalovať v 75
+jazykoch vrátane slovenčiny. To je ešte viac jazykov ako v
+wheezy. Väčšina jazykov je dostupná ako v textovom inštalátore,
+tak aj v jeho grafickom rozhraní, ale niektoré sú dostupné iba v grafickom
+rozhraní. 
+</p><p>
+Jazyky pridané v tomto vydaní:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Tadžičtina boli pridané do grafického a textového inštalátora.
+</p></li></ul></div><p>
+Jazyky, ktoré je možné vybrať iba pomocou grafického inštalátora, pretože
+ich znakové sady nie je možné vykresliť v negrafickom prostredí, sú:
+amharčina, bengálčina, dzongkä, gudžarátčina, hindčina, gruzínčina,
+kannadčina, khmérčina, malajálamčina, maráthčina, nepálčina, pandžábčina,
+tamilčina, telugčina, tibetčina a ujgurčina.
+</p></dd><dt><span class="term">Zavádzanie prostredníctvom UEFI</span></dt><dd><p>
+      Inštalátor Jessie vylepšuje podporu množstva firmvéru UEFI a tiež podporuje
+inštaláciu 32-bitového firmvéru UEFI s 64-bitovým jadrom.
+    </p><p>
+      Prosím, pamätajte, že toto nezahŕňa podporu UEFI Secure Boot.
+    </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-auto"></a>3.1.2. Automatizovaná inštalácia</h3></div></div></div><p>
+Niektoré zmeny spomenuté v predošlej sekcii tiež majú vplyv na podporu
+automatickej inštalácie na základe vopred zostavených konfiguračných
+súborov. To znamená, že ak máte existujúce vopred zostavené konfiguračné
+súbory, ktoré fungovali v inštalátore wheezy, nemôžete očakávať,
+že budú bezo zmien fungovať v novom inštalátore.
+</p><p>
+<a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">Inštalačná príručka</a> obsahuje
+samostatnú aktualizovanú prílohu s rozsiahlou dokumentáciou týkajúcu sa
+vopred zostavenej konfigurácie.
+</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-whats-new.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-upgrading.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 2. Čo je nové v Debian 8 </td><td width="20%" align="center"><a accesskey="h" href="index.sk.html"><img src="images/home.png" alt="Domov" /></a></td><td width="40%" align="right" valign="top"> Kapitola 4. Aktualizácie z Debian 7 (wheezy)</td></tr></table></div></body></html>

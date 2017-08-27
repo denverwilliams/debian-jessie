@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>付録A アップグレードの前に wheezy システムを調整する</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="up" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="prev" href="ch-moreinfo.ja.html" title="第6章 Debian に関するさらなる情報" /><link rel="next" href="apb.ja.html" title="付録B リリースノートの貢献者たち" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">付録A アップグレードの前に wheezy システムを調整する</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-moreinfo.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apb.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr></table><hr /></div><div xml:lang="ja" class="appendix" lang="ja"><div class="titlepage"><div><div><h1 class="title"><a id="ap-old-stuff"></a>付録A アップグレードの前に wheezy システムを調整する</h1></div></div></div><div class="toc"><p><strong>目次</strong></p><dl class="toc"><dt><span class="section"><a href="ap-old-stuff.ja.html#old-upgrade">A.1. wheezy システムのアップグレード</a></span></dt><dt><span class="section"><a href="ap-old-stuff.ja.html#old-sources">A.2. ソースリストのチェック</a></span></dt><dt><span class="section"><a href="ap-old-stuff.ja.html#old-config">A.3. 古く不要になった設定ファイルを削除する</a></span></dt><dt><span class="section"><a href="ap-old-stuff.ja.html#switch-utf8">A.4. 古いロケールから UTF-8 へアップグレードする</a></span></dt></dl></div><p>
+この付録には、jessie へアップグレードする前に wheezy
+パッケージを確実にインストールしたりアップグレードする方法についての情報が述べられています。特定の状況でのみ必要となるでしょう。
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-upgrade"></a>A.1. wheezy システムのアップグレード</h2></div></div></div><p>
+基本的には、これまで行ってきた wheezy のあらゆるアップグレードと違いはありません。唯一異なるのは、<a class="xref" href="ap-old-stuff.ja.html#old-sources" title="A.2. ソースリストのチェック">「ソースリストのチェック」</a>で説明するように、パッケージリスト内に wheezy
+への参照がまだ含まれているのを確認する必要があることです。
+</p><p>
+Debian ミラーを使用してシステムをアップグレードする場合、システムは自動的に最新の wheezy
+ポイントリリースへとアップグレードされます。
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-sources"></a>A.2. ソースリストのチェック</h2></div></div></div><p>
+<code class="filename">/etc/apt/sources.list</code> 内で 'stable' を指定している行があるなら、効率よく
+jessie を <span class="quote">「<span class="quote">使う</span>」</span>
+用意ができています。もしアップグレードの準備がまだできていない場合には、これはお望みの設定ではないかもしれません。すでに
+<code class="literal">apt-get update</code> を実行済みでも、以下の手順に従えば問題なく元に戻すことができます。
+</p><p>
+jessie からパッケージのインストールもしてしまっているなら、おそらくこれ以上 wheezy
+からパッケージをインストールしても無意味でしょう。この場合、続けるかどうかを自分で決断しなければなりません。パッケージをダウングレードすることはできますが、その方法はここでは扱いません。
+</p><p>
+(<code class="literal">root</code> になってから) お気に入りのエディタで
+<code class="filename">/etc/apt/sources.list</code> を開き、<code class="literal">deb http:</code>
+や <code class="literal">deb ftp:</code> で始まるすべて行の中に
+<span class="quote">「<span class="quote"><code class="literal">stable</code></span>」</span>
+が指定されているかどうかを調べてください。もしあるなら、<code class="literal">stable</code> を
+<code class="literal">wheezy</code> に変更してください。
+</p><p>
+<code class="literal">deb file:</code> で始まっている行があるなら、その行が指定している場所が wheezy か
+jessie のどちらのアーカイブなのかを独力で調べなければならないでしょう。
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[重要]" src="images/important.png" /></td><th align="left">重要</th></tr><tr><td align="left" valign="top"><p>
+    <code class="literal">deb cdrom:</code> で始まっている行は、絶対に変更しないでください。変更するとその行は無効になって、もう一度
+<span class="command"><strong>apt-cdrom</strong></span> を実行しなければならなくなるでしょう。'cdrom' ソースが
+<span class="quote">「<span class="quote"><code class="literal">unstable</code></span>」</span>
+を指定していても心配しないでください。混乱するかもしれませんが、これで正常なのです。
+  </p></td></tr></table></div><p>
+変更が済んだら、ファイルを保存してから
+</p><pre class="screen">
+# apt-get update
+</pre><p>
+と実行して、パッケージリストを更新してください。
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-config"></a>A.3. 古く不要になった設定ファイルを削除する</h2></div></div></div><p>
+システムを jessie へアップグレードする前に、古い設定ファイル (<code class="filename">/etc</code> 以下にある
+<code class="filename">*.dpkg-{new,old}</code> ファイルなど) をシステムから削除することを推奨します。
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="switch-utf8"></a>A.4. 古いロケールから UTF-8 へアップグレードする</h2></div></div></div><p>
+システムがローカライズされており、UTF-8 ベースではないロケールを使っている場合、システムが UTF-8
+を使うように変更するのをよく考えるべきです。過去、UTF-8 ではないロケールを使っている場合のみ明らかになるバグ<a href="#ftn.idp65954592" class="footnote" id="idp65954592"><sup class="footnote">[6]</sup></a>がありました。デスクトップでは、このようなレガシーなロケールはライブラリ内部での醜いハックによってサポートされているので、まだレガシーロケールを使ってるユーザに対してきちんとしたサポートを提供できません。
+</p><p>
+<span class="command"><strong>dpkg-reconfigure
+locales</strong></span>を実行すれば、システムのロケールを設定できます。どのロケールをシステムのデフォルトとして使うかの質問を提示された時、確実に
+UTF-8
+ロケールを選んでください。さらに、ロケールを再度調査して、ユーザの環境設定中でレガシーなロケール定義がされていないことを確認する必要があります。
+</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp65954592" class="footnote"><p><a href="#idp65954592" class="para"><sup class="para">[6] </sup></a>UTF-8 を使っていない場合には、GNOME
+スクリーンセーバーでスクリーンロックを解除する機能を有効にしていても、以下のような設定では動作が保証されない可能性があります: ASCII
+文字列以外のパスワードを利用している、pam_ldap サポートを有効にしている。GNOME スクリーンリーダーは、バグ<a class="ulink" href="http://bugs.debian.org/599197" target="_top">#599197</a> の影響を受けます。shell
+が現在のロケールでのエンコーディングであると仮定しているにも関わらず、Nautilus ファイルマネージャー (そして全ての glib
+ベースのプログラム、加えておそらく全ての Qt ベースのプログラム) は、ファイル名を UTF-8 として取扱います。さらに gnome-orca
+スクリーンリーダーは、Squeeze から UTF-8 ロケールを必要としています。レガシーな文字コードセット使用下では、Nautilus/GNOME
+パネルあるいは Alt-F1 メニューのようなウィンドウ情報を読み取ることができません。</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-moreinfo.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="apb.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr><tr><td width="40%" align="left" valign="top">第6章 Debian に関するさらなる情報 </td><td width="20%" align="center"><a accesskey="h" href="index.ja.html"><img src="images/home.png" alt="ホーム" /></a></td><td width="40%" align="right" valign="top"> 付録B リリースノートの貢献者たち</td></tr></table></div></body></html>

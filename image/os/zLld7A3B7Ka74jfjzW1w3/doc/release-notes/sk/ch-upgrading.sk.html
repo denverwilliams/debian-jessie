@@ -1,0 +1,946 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitola 4. Aktualizácie z Debian 7 (wheezy)</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-installing.sk.html" title="Kapitola 3. Inštalačný systém" /><link rel="next" href="ch-information.sk.html" title="Kapitola 5. Problémy vyskytujúce sa v jessie" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitola 4. Aktualizácie z Debian 7 (wheezy)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-installing.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-information.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr></table><hr /></div><div xml:lang="sk" class="chapter" lang="sk"><div class="titlepage"><div><div><h1 class="title"><a id="ch-upgrading"></a>Kapitola 4. Aktualizácie z Debian 7 (wheezy)</h1></div></div></div><div class="toc"><p><strong>Obsah</strong></p><dl class="toc"><dt><span class="section"><a href="ch-upgrading.sk.html#backup">4.1. Príprava na aktualizáciu</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#data-backup">4.1.1. Zálohujte všetky dáta a konfiguračné údaje</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#inform-users">4.1.2. Vopred informujte používateľov</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#services-downtime">4.1.3. Pripravte sa na odstávku služieb</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#recovery">4.1.4. Pripravte sa na obnovu</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#upgrade-preparations">4.1.5. Pripravte bezpečné prostredie na aktualizáciu</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#system-status">4.2. Kontrola stavu systému</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#review-actions">4.2.1. Skontrolujte operácie čakajúce na vykonanie v správcovi balíkov</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#disable-apt-pinning">4.2.2. Vypnite pripevňovanie balíkov APT (APT pinning)</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#package-status">4.2.3. Skontrolujte stav balíkov</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#proposed-updates">4.2.4. Sekcia proposed-updates</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#unofficial-sources">4.2.5. Neoficiálne zdroje</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#upgrade-process">4.3. Príprava zdrojov APT</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#network">4.3.1. Pridávanie internetových zdrojov APT</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#localmirror">4.3.2. Pridanie zdrojov APT lokálneho zrkadla</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#cdroms">4.3.3. Pridanie zdrojov APT z optických médií</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#upgradingpackages">4.4. Aktualizácia balíkov</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#record-session">4.4.1. Nahranie relácie príkazového riadka</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#updating-lists">4.4.2. Aktualizácia zoznamu balíkov</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#sufficient-space">4.4.3. Uistite sa, že na aktualizáciu máte dosť miesta na disku</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#minimal-upgrade">4.4.4. Minimálna aktualizácia systému</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#upgrading-full">4.4.5. Aktualizácia systému</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#trouble">4.5. Možné problémy počas aktualizácie</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#immediate-configure">4.5.1. Dist-upgrade zlyhá s chybou „Nebolo možné vykonať okamžitú konfiguráciu“</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#expected-removals">4.5.2. Očakávané odstránenia</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#conflicts-loops">4.5.3. Cykly Konfliktov alebo Predzávislostí</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#file-conflicts">4.5.4. Konflikty súborov</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#configuration-changes">4.5.5. Zmeny v konfigurácii</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#console-change">4.5.6. Zmena relácie na konzolu</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#package-specific-issues">4.5.7. Špeciálna starostlivosť o niektoré balíky</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#newkernel">4.6. Aktualizácia jadra a súvisiacich balíkov</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#kernel-metapackage">4.6.1. Inštalácia metabalíka jadra</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#initramfs-tools-issues">4.6.2. Zmeny pripájania a kontroly koreňového súborového systému a
+<code class="filename">/usr</code></a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#nownownow">4.7. Čo urobiť pred reštartom sytému</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#for-next">4.8. Príprava na ďalšie vydanie</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#purge-removed-packages">4.8.1. Vyčistenie (purge) odstránených balíkov</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.sk.html#deprecated">4.9. Zavrhované komponenty</a></span></dt><dt><span class="section"><a href="ch-upgrading.sk.html#obsolete">4.10. Zastaralé balíky</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.sk.html#dummy">4.10.1. Fiktívne balíky</a></span></dt></dl></dd></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="backup"></a>4.1. Príprava na aktualizáciu</h2></div></div></div><p>
+Odporúčame, aby ste si pred aktualizáciou prečítali aj informácie v časti
+<a class="xref" href="ch-information.sk.html" title="Kapitola 5. Problémy vyskytujúce sa v jessie">Kapitola 5, <em>Problémy vyskytujúce sa v jessie</em></a>, ktorá pokrýva možné problémy nie priamo sa
+týkajúce procesu aktualizácie, ale o ktorých je dôležité vedieť predtým, než
+začnete.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="data-backup"></a>4.1.1. Zálohujte všetky dáta a konfiguračné údaje</h3></div></div></div><p>
+Dôrazne odporúčame, aby ste pred aktualizáciou systému vykonali úplnú zálohu
+alebo aspoň zálohovali všetky dáta a konfiguračné údaje, ktoré si nemôžete
+dovoliť stratiť. Aktualizačné nástroje a proces aktualizácie sú dosť
+spoľahlivé, ale chyba hardvéru uprostred aktualizácie môže spôsobiť ťažké
+poškodenie systému.
+</p><p>
+Hlavné veci, ktoré budete chcieť zálohovať sú obsah
+<code class="filename">/etc</code>, <code class="filename">/var/lib/dpkg</code>,
+<code class="filename">/var/lib/aptitude/pkgstates</code> a výstup <code class="literal">dpkg
+--get-selections "*"</code> (úvodzovky sú dôležité). Ak používate na
+správu balíkov vášho systému <span class="command"><strong>aptitude</strong></span>, budete si tiež
+chcieť zálohovať <code class="filename">/var/lib/aptitude/pkgstates</code>.
+</p><p>
+Samotný proces aktualizácie nemení nič v adresári
+<code class="filename">/home</code>. Ale niektoré aplikácie (napr. časti balíka
+Mozilla a pracovné prostredia GNOME a KDE) prepisujú existujúce nastavenia
+používateľa novými štandardnými hodnotami, keď používateľ prvýkrát spustí
+novú verziu aplikácie. Preventívne si môžete urobiť zálohu skrytých súborov
+a adresárov (súbory začínajúce bodkou) v domovských adresároch
+používateľov. Táto záloha môže pomôcť v obnovení alebo opätovnom vytvorení
+pôvodných nastavení. Tiež o tom možno budete chcieť informovať používateľov.
+</p><p>
+Všetky operácie inštalácie balíkov musíte spúšťať s oprávnením
+superpoužívateľa, takže sa buď prihláste ako <code class="literal">root</code> alebo
+použite príkaz <span class="command"><strong>su</strong></span> alebo <span class="command"><strong>sudo</strong></span> na
+získanie potrebných oprávnení.
+</p><p>
+Aktualizácia má niekoľko predpokladov. Pred jej vykonaním by ste mali
+skontrolovať, či sú splnené.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inform-users"></a>4.1.2. Vopred informujte používateľov</h3></div></div></div><p>
+Je rozumné informovať všetkých používateľov o plánovaných aktualizáciách,
+hoci používatelia pristupujúci k systému pomocou <span class="command"><strong>ssh</strong></span>
+pripojenia by si toho počas aktualizácie nemuseli mnoho všimnúť a mali by
+byť schopní pokračovať v práci. 
+</p><p>
+Ak si želáte vykonať ďalšie opatrenia, pred aktualizáciou zálohujte alebo
+odpojte <code class="filename">/home</code>.
+</p><p>
+Pri aktualizácii na jessie budete musieť vykonať aktualizáciu jadra,
+takže bude potrebné reštartovať systém. Spravidla sa to robí po dokončení
+aktualizácie.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="services-downtime"></a>4.1.3. Pripravte sa na odstávku služieb</h3></div></div></div><p>
+Výš systém môže ponúkať služby poskytované balíkmi, ktoré sa budú
+aktualizovať. V tom prípade, prosím, pamätajte, že počas aktualizácie budú
+služby zastavené, pokým sa príslušné balíky nenahradia a nenakonfigurujú. V
+tejto dobe tieto službu nebudú dostupné.
+</p><p>
+Presná odstávka týchto služieb bude závisieť na počte balíkov systému, ktoré
+sa aktualizujú a predĺži sa tiež o čas, ktorý bude správca potrebovať na to,
+aby odpovedal na konfiguračné otázky od rôznych aktualizovaných balíkov (ak
+sa vyskytnú). Pamätajte, že ak necháte bežať proces aktualizácie bez dozoru
+a systém bude počas aktualizácie požadovať vstup, je veľká pravdepodobnosť
+nedostupnosti služieb<a href="#ftn.idp56070288" class="footnote" id="idp56070288"><sup class="footnote">[1]</sup></a> po nezanedbateľnú
+dobu.
+</p><p>
+Ak systém, ktorý aktualizujete, poskytuje nevyhnutné služby pre vašich
+používateľov alebo sieť<a href="#ftn.idp56071888" class="footnote" id="idp56071888"><sup class="footnote">[2]</sup></a>, môžete čas
+odstávky znížiť vykonaním minimálnej aktualizácie systému ako popisuje <a class="xref" href="ch-upgrading.sk.html#minimal-upgrade" title="4.4.4. Minimálna aktualizácia systému">Oddiel 4.4.4, “Minimálna aktualizácia systému”</a>, následne aktualizáciou jadra a reštartom, a
+potom aktualizovať balíky súvisiace s vašimi nevyhnutnými
+službami. Aktualizáciu týchto balíkov pred vykonaním úplnej aktualizácie
+popisuje <a class="xref" href="ch-upgrading.sk.html#upgrading-full" title="4.4.5. Aktualizácia systému">Oddiel 4.4.5, “Aktualizácia systému”</a>. Takto môžete zabezpečiť, že tieto
+nevyhnutné služby pobežia a budú dostupné počas úplnej aktualizácie a tak sa
+zníži doba ich nedostupnosti.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="recovery"></a>4.1.4. Pripravte sa na obnovu</h3></div></div></div><p>
+Hoci Debian sa snaží zabezpečiť, aby váš systém zostal po celú dobu v
+spustiteľnom stave, vždy existuje riziko, že po reštartovaní systému po
+aktualizácii môžete naraziť na problémy. Známe potenciálne problémy sú
+zdokumentované v tejto a ďalšej kapitole týchto Poznámok k vydaniu.
+</p><p>
+Z toho dôvodu sa uistite, že budete schopní obnoviť systém v prípade, že sa
+mu nepodarí znova naštartovať alebo, v prípade systémov spravovaných na
+diaľku, ak sa nepodarí aktivovať sieťové pripojenie.
+</p><p>
+Ak vykonávate vzdialenú aktualizáciu prostredníctvom spojenia
+<span class="command"><strong>ssh</strong></span>, odporúčame, aby ste vykonali nutné opatrenia, aby
+ste mali prístup k serveru prostredníctvom vzdialeného sériového
+terminálu. Existuje totiž možnosť, že po aktualizácii jadra a reštartovaní
+budete musieť opraviť konfiguráciu systému z lokálnej konzoly. Tiež v
+prípade, že sa systém náhodou uprostred aktualizácie reštartuje, existuje
+možnosť, že budete musieť opraviť konfiguráciu systému z lokálnej konzoly.
+</p><p>
+Vo všeobecnosti odporúčame použitie <span class="emphasis"><em>záchranného režimu</em></span>
+inštalátora Debianu jessie. Výhodou použitia inštalátora je, že si
+môžete vybrať medzi jeho mnohými spôsobmi inštalácie taký, ktorý sa najviac
+hodí vašej situácii. Viac informácií nájdete v kapitole 8 <a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">Inštalačnej príručky</a> „Obnova pokazeného
+systému“ a v <a class="ulink" href="https://wiki.debian.org/DebianInstaller/FAQ" target="_top">Debian Installer
+FAQ</a>.
+</p><p>
+Ak sa to nepodarí,  budete potrebovať iný spôsob ako naštartovať váš systém,
+aby ste k nemu získali prístup a mohli ho opraviť. Jednou z volieb je použiť
+špeciálny záchranný obraz alebo linuxové live CD. Po naštartovaní systému z
+neho by ste mali byť schopní pripojiť svoj koreňový súborový systém, vykonať
+doňho <code class="literal">chroot</code> a opraviť problém.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-initrd"></a>4.1.4.1. Ladiaci shell počas štartu pomocou initrd</h4></div></div></div><p>
+Balík <code class="systemitem">initramfs-tools</code><a id="idp56086304" class="indexterm"></a> obsahuje
+ladiaci shell<a href="#ftn.idp56087072" class="footnote" id="idp56087072"><sup class="footnote">[3]</sup></a> v obrazoch initrd, ktoré
+generuje. Ak napríklad initrd nie je schopný pripojiť váš koreňový súborový
+systém, dostanete sa do tohto ladiaceho shellu, ktorý má základné príkazy na
+to, aby vám pomohol vystopovať problém a prípadne ho opraviť.
+</p><p>
+Základné veci, ktoré by ste mali skontrolovať: prítomnosť správnych súborov
+zariadení v <code class="filename">/dev</code>; aké moduly sú načítané (<code class="literal">cat
+/proc/modules</code>); chyby pri načítaní ovládačov vo výstupe
+<span class="command"><strong>dmesg</strong></span>. Výstup príkazu <span class="command"><strong>dmesg</strong></span> vám tiež
+ukáže ktoré súbory zariadení boli pridelené ktorým diskom; mali by ste si to
+overiť porovnaním s výstupom <code class="literal">echo $ROOT</code>, aby ste sa
+uistili, že koreňový systém je na zariadení, na ktorom ho očakávate.
+</p><p>
+Ak sa vám podarí opraviť problém, napísaním <code class="literal">exit</code> opustíte
+ladiaci shell a proces zavádzania bude pokračovať od bodu, kde bol
+prerušený. Samozrejme budete tiež musieť opraviť podstatu problému a znova
+vytvoriť initrd, aby nasledujúci štart už nezlyhal.
+</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-shell-systemd"></a>4.1.4.2. Ladiaci shell počas štartu pomocou systemd</h4></div></div></div><p>
+    Ak zavedenie systému pod systemd zlyhá, je root shell na ladenie získate
+zmenou príkazového riadka jadra. Ak zavedenie systému ako také uspeje, ale
+nepodarí sa spustiť niektoré služby, môže byť užitočné pridať k parametrom
+jadra <code class="literal">systemd.unit=rescue.target</code>.
+  </p><p>
+    V opačnom vám prípade parameter jadra
+<code class="literal">systemd.unit=emergency.target</code> poskytne root shell v
+najbližšom možnom momente. Toto sa však deje pred pripojením koreňového
+súborového systému s povoleniami na čítanie aj zápis. To budete musieť
+urobiť ručne pomocou:
+  </p><pre class="screen">
+mount -o remount,rw /
+</pre><p>
+    Ďalšie informácie o ladení pokazeného zavádzania systému používajúceho
+systemd nájdete v článku <a class="ulink" href="http://freedesktop.org/wiki/Software/systemd/Debugging/" target="_top">Diagnostikovanie
+problémov pri štarte</a> .
+  </p><p>
+    Ak všetko ostatné zlyhá, je možné, že sa vám podarí zaviesť systém pomocou
+starého init systému sysvinit. To vyžaduje, aby bol ešte nainštalovaný balík
+<code class="systemitem">sysvinit</code><a id="idp56102960" class="indexterm"></a> a aby bol binárny súbor
+<code class="filename">/lib/sysvinit/init</code> súčasťou vášho initramfs. Ak sú
+splnené tieto požiadavky, pridajte
+<code class="literal">init=/lib/sysvinit/init</code> medzi parametre príkazového
+riadka jadra a zavedenie systému prebehne pomocou binárneho súboru sysvinit.
+  </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrade-preparations"></a>4.1.5. Pripravte bezpečné prostredie na aktualizáciu</h3></div></div></div><p>
+Aktualizáciu distribúcie by ste mali vykonávať buď lokálne z textovej
+virtuálnej konzoly  (alebo z priamo pripojeného sériového terminálu) alebo
+vzdialene pomocou <span class="command"><strong>ssh</strong></span> spojenia. 
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Dôležité]" src="images/important.png" /></td><th align="left">Dôležité</th></tr><tr><td align="left" valign="top"><p>
+  Ak používate nejaké služby VPN (ako <code class="systemitem">tinc</code><a id="idp56109552" class="indexterm"></a>), nemusia byť počas aktualizácie
+dostupné. Prosím, pozri <a class="xref" href="ch-upgrading.sk.html#services-downtime" title="4.1.3. Pripravte sa na odstávku služieb">Oddiel 4.1.3, “Pripravte sa na odstávku služieb”</a>.
+  </p></td></tr></table></div><p>
+Ako ďalšiu bezpečnostnú poistku pri vzdialenej aktualizácii odporúčame, aby
+ste spúšťali proces aktualizácie vo virtuálnej konzole programu
+<span class="command"><strong>screen</strong></span>, ktorý vám umožní bezpečné znovupripojenie a
+zabezpečí, že sa proces aktualizácie nepreruší ani v prípade zlyhania
+vzdialeného spojenia.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Dôležité]" src="images/important.png" /></td><th align="left">Dôležité</th></tr><tr><td align="left" valign="top"><p>
+    <span class="emphasis"><em>Nemali</em></span> by ste vykonávať aktualizáciu pomocou príkazov
+<span class="command"><strong>telnet</strong></span>, <span class="command"><strong>rlogin</strong></span>, <span class="command"><strong>rsh</strong></span>
+ani z relácie X, ktorú spravuje <span class="command"><strong>xdm</strong></span>,
+<span class="command"><strong>gdm</strong></span> či <span class="command"><strong>kdm</strong></span> atď na stroji, ktorý
+aktualizujete. To je z dôvodu, že každá z týchto služieb môže byť počas
+aktualizácie prerušená, čo môže mať za následok
+<span class="emphasis"><em>neprístupný</em></span> systém, ktorý je iba spolovice
+aktualizovaný. <span class="emphasis"><em>Dôrazne sa neodporúča</em></span> použitie aplikácie
+<span class="command"><strong>update-manager</strong></span> na aktualizáciu na nové vydania, pretože
+tento nástroj závisí na tom, že pracovné prostredie zostane bežať.
+  </p></td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="system-status"></a>4.2. Kontrola stavu systému</h2></div></div></div><p>
+Proces aktualizácie popísaný v tejto kapitole bol navrhnutý na aktualizácie
+z „čistého“ systému wheezy bez balíkov tretích strán. Ak chcete
+dosiahnuť čo najväčšiu spoľahlivosť procesu aktualizácie, budete zrejme
+chcieť odstrániť zo svojho systému pred začatím aktualizácie balíky tretích
+strán.
+</p><p>
+Priame aktualizácie z vydaní Debianu starších ako 7
+(wheezy) nie sú podporované. Prosím, najskôr vykonajte
+aktualizáciu na 7 a riaďte sa pri tom inštrukciami v <a class="ulink" href="https://www.debian.org/releases/wheezy/releasenotes" target="_top">Poznámkach
+k vydaniu Debian 7</a>.
+</p><p>
+Tento postup tiež predpokladá, že váš systém bol aktualizovaný na najnovšie
+vydanie stabilnej vetvy (point release) wheezy. Ak ste tak
+nespravili alebo si nie ste istý, riaďte sa inštrukciami v časti <a class="xref" href="ap-old-stuff.sk.html#old-upgrade" title="A.1. Ako aktualizovať váš systém wheezy">Oddiel A.1, “Ako aktualizovať váš systém wheezy”</a>.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="review-actions"></a>4.2.1. Skontrolujte operácie čakajúce na vykonanie v správcovi balíkov</h3></div></div></div><p>
+V niektorých prípadoch môže použitie <span class="command"><strong>apt-get</strong></span> na
+inštaláciu balíkov namiesto <span class="command"><strong>aptitude</strong></span> spôsobiť, že
+<span class="command"><strong>aptitude</strong></span> bude považovať balík za „nepoužitý“ a naplánuje
+jeho odstránenie. Vo všeobecnosti by ste sa mali uistiť, že systém je celkom
+aktualizovaný a „čistý“ predtým, než budete pokračovať v aktualizácii.
+</p><p>
+Z tohto dôvodu by ste mali skontrolovať, či sa nečaká na nejaké operácie v
+správcovi balíkov <span class="command"><strong>aptitude</strong></span>. Ak je naplánované odstránenie
+alebo aktualizácia balíka v správcovi balíkov, môže to mať negatívny vplyv
+na aktualizáciu. Náprava tohto problému je možná iba v prípade, že váš
+<code class="filename">sources.list</code> ešte stále obsahuje
+<span class="emphasis"><em>wheezy</em></span>; a nie <span class="emphasis"><em>stable</em></span> či
+<span class="emphasis"><em>jessie</em></span>; pozri <a class="xref" href="ap-old-stuff.sk.html#old-sources" title="A.2. Ako skontrolovať váš zoznam zdrojov">Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”</a>.
+</p><p>
+Aby ste mohli vykonať túto kontrolu, budete musieť spustiť
+<span class="command"><strong>aptitude</strong></span> vo „vizuálnom režime“ a stlačiť tlačidlo
+<span class="keycap"><strong>g</strong></span> („Go“). Ak sa zobrazia nejaké operácie, mali by ste ich
+skontrolovať a napraviť ich alebo vykonať navrhované operácie. Ak nie sú
+navrhované žiadne operácie, zobrazí sa vám správa „Žiadne balíky nie sú
+označené na inštaláciu, aktualizáciu alebo odstránenie“.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="disable-apt-pinning"></a>4.2.2. Vypnite pripevňovanie balíkov APT (APT pinning)</h3></div></div></div><p>
+Ak ste nastavili APT, aby pripevňoval určité balíky z distribúcie inej ako
+stable (napr. z testing), je možné, že budete musieť zmeniť svoje nastavenie
+pripevňovania APT (ukladá sa v <code class="filename">/etc/apt/preferences</code>),
+aby umožnilo aktualizáciu balíkov na verzie z nového stabilného
+vydania. Ďalšie informácie o pripevňovaní APT nájdete v <span class="citerefentry"><span class="refentrytitle">apt_preferences</span>(5)</span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-status"></a>4.2.3. Skontrolujte stav balíkov</h3></div></div></div><p>
+Bez ohľadu na použitú metódu aktualizácie sa odporúča, aby ste najskôr
+skontrolovali stav všetkých balíkov a overili, že sú v stave, aby sa dali
+aktualizovať. Nasledovný príkaz zobrazí všetky balíky, ktoré sú v stave
+„napoly inštalovaný“ alebo „konfigurácia zlyhala“ a všetky ostatné s
+chybovým stavom.
+</p><pre class="screen">
+# dpkg --audit
+</pre><p>
+Môžete tiež skontrolovať stav všetkých balíkov na vašom systéme pomocou
+<span class="command"><strong>aptitude</strong></span> alebo pomocou príkazov ako
+</p><pre class="screen">
+# dpkg -l | pager
+</pre><p>
+alebo
+</p><pre class="screen">
+# dpkg --get-selections "*" &gt; ~/curr-pkgs.txt
+</pre><p>
+Je žiaduce odstrániť pred aktualizáciou podržania. Ak je podržaný niektorý z
+dôležitých balíkov, ktoré sa majú aktualizovať, aktualizácia zlyhá.
+</p><p>
+Pamätajte, že <span class="command"><strong>aptitude</strong></span> používa odlišný spôsob registrácie
+balíkov, ktoré sú podržané ako <span class="command"><strong>apt-get</strong></span> a
+<span class="command"><strong>dselect</strong></span>. Podržané balíky <span class="command"><strong>aptitude</strong></span>
+zistíte pomocou
+</p><pre class="screen">
+# aptitude search "~ahold" 
+</pre><p>
+Ak chcete skontrolovať, ktoré balíky ste mali podržané pomocou
+<span class="command"><strong>apt-get</strong></span>, mali by ste použiť
+</p><pre class="screen">
+# dpkg --get-selections | grep 'hold$'
+</pre><p>
+Ak ste zmenili alebo prekompilovali balík lokálne a nepremenovali ste ho
+alebo ste dali do verzie epochu, musíte ho podržať, aby sa neaktualizoval.
+</p><p>
+Stav balíka „podržať“ v <span class="command"><strong>apt-get</strong></span> je možné zmeniť pomocou:
+</p><pre class="screen">
+# echo <em class="replaceable"><code>package_name</code></em> hold | dpkg --set-selections
+</pre><p>
+Stav balíka „podržať“ zrušíte nahradením príkazu <code class="literal">hold</code>
+príkazom <code class="literal">install</code>.
+</p><p>
+Ak je niečo, čo potrebujete opraviť, je najlepšie sa ubezpečiť, že váš
+<code class="filename">sources.list</code> stále odkazuje na wheezy ako
+vysvetľuje <a class="xref" href="ap-old-stuff.sk.html#old-sources" title="A.2. Ako skontrolovať váš zoznam zdrojov">Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="proposed-updates"></a>4.2.4. Sekcia proposed-updates</h3></div></div></div><p>
+    Ak ste vo svojom súbore <code class="filename">/etc/apt/sources.list</code> uviedli
+sekciu  <code class="literal">proposed-updates</code>, mali by ste ju z neho odstrániť
+predtým, než sa pokúsite o aktualizáciu, aby ste predišli možným konfliktom.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="unofficial-sources"></a>4.2.5. Neoficiálne zdroje</h3></div></div></div><p>
+Ak váš systém obsahuje nejaké balíky, ktoré nie sú súčasťou Debianu, mali by
+ste si byť vedomí, že môžu byť počas aktualizácie odstránené z dôvodu
+konfliktných závislostí. Ak boli takéto balíky nainštalované z ďalšieho
+archívu balíkov pridaného do vášho
+<code class="filename">/etc/apt/sources.list</code>, mali by ste tiež skontrolovať,
+či daný archív neobsahuje aj balíky skompilované pre jessie a zmeniť
+podľa toho príslušný riadok vtedy, keď budete meniť riadky archívov Debianu.
+</p><p>
+Niektorí používatelia môžu používať <span class="emphasis"><em>neoficiálne</em></span> spätne
+portované „novšie“ verzie balíkov, ktoré <span class="emphasis"><em>sú</em></span> v Debiane
+nainštalované na ich systéme wheezy. Také balíky pravdepodobne
+spôsobia problémy počas aktualizácie, pretože môžu mať konfliktné
+súbory<a href="#ftn.idp56168624" class="footnote" id="idp56168624"><sup class="footnote">[4]</sup></a>. <a class="xref" href="ch-upgrading.sk.html#trouble" title="4.5. Možné problémy počas aktualizácie">Oddiel 4.5, “Možné problémy počas aktualizácie”</a>
+obsahuje informácie o tom, ako sa vyrovnať s konfliktami ak nastanú.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-process"></a>4.3. Príprava zdrojov APT</h2></div></div></div><p>
+Pred začatím aktualizácie musíte nastaviť konfiguračný súbor <code class="systemitem">apt</code><a id="idp56172912" class="indexterm"></a> so zoznamom zdrojov softvéru,
+<code class="filename">/etc/apt/sources.list</code>.
+</p><p>
+<code class="systemitem">apt</code><a id="idp56175664" class="indexterm"></a> vezme do úvahy všetky balíky,
+ktoré nájde prostredníctvom riadka „<code class="literal">deb</code>“ a nainštaluje
+balík s najvyšším číslom verzie, pričom uprednostní prvé z uvedených riadkov
+(preto v prípade viacerých zrkadiel zvyčajne najprv uvediete lokálny pevný
+disk, potom <acronym title="Compact Disc Read Only Memory">CD-ROM</acronym> a potom HTTP/FTP zrkadlá).
+</p><p>
+Na vydanie je často možné odkazovať jednak prostredníctvom jeho kódového
+označenia (napr.  <code class="literal">wheezy</code>,
+<code class="literal">jessie</code>) a jednak jeho stavom
+(i.e. <code class="literal">oldstable</code>, <code class="literal">stable</code>,
+<code class="literal">testing</code>, <code class="literal">unstable</code>). Ak odkazujete na
+vydanie jeho kódovým označením má to tú výhodu, že vás nikdy neprekvapí nové
+vydanie a preto je to tu popísaný postup. To samozrejme tiež znamená, že
+budete musieť sledovať oznámenia o novom vydaní sami. Ak použijete namiesto
+kódového označenia stav, po vydaní uvidíte iba veľké množstvo aktualizácií
+balíkov.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="network"></a>4.3.1. Pridávanie internetových zdrojov APT</h3></div></div></div><p>
+Štandardné nastavenie je inštalovať z hlavných internetových serverov
+Debianu, ale možno to budete chcieť zmeniť v súbore
+<code class="filename">/etc/apt/sources.list</code>, aby sa použili iné zrkadlá,
+prednostne tie, ktoré sú k vám najbližšie (z hľadiska siete).
+</p><p>
+Adresy HTTP a FTP zrkadiel Debianu nájdete na <a class="ulink" href="https://www.debian.org/distrib/ftplist" target="_top">https://www.debian.org/distrib/ftplist</a> (pozri časť „Zoznam zrkadiel
+Debianu“). HTTP zrkadlá sú vo všeobecnosti rýchlejšie ako FTP zrkadlá.
+</p><p>
+Napríkad predpokladajme, že vaše najbližšie zrkadlo Debianu je
+<code class="literal">http://mirrors.kernel.org</code>. Keď sa na toto zrkadlo pozriete
+svojim webovým prehliadačom, všimnete si, že adresáre sú organizované
+nasledovne:
+</p><pre class="programlisting">
+http://mirrors.kernel.org/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Ak chcete toto zrkadlo použiť v systéme <code class="systemitem">apt</code><a id="idp56192416" class="indexterm"></a>, pridáte do
+<code class="filename">sources.list</code> nasledovný riadok:
+</p><pre class="programlisting">deb http://mirrors.kernel.org/debian jessie main contrib</pre><p>
+Všimnite si, že „<code class="literal">dists</code>“ sa pridáva implicitne a argumenty
+za názvom vydania sa použijú na doplnenie cesty o viaceré adresáre.
+</p><p>
+Po pridaní vašich nových zdrojov zrušte pôvodné riadky
+„<code class="literal">deb</code>“ v <code class="filename">sources.list</code> tým, že pred ne
+pridáte znak mriežky (<code class="literal">#</code>).
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="localmirror"></a>4.3.2. Pridanie zdrojov APT lokálneho zrkadla</h3></div></div></div><p>
+Namiesto použitia HTTP či FTP zrkadiel balíkov môžete nastaviť v
+<code class="filename">/etc/apt/sources.list</code>, aby sa používalo zrkadlo na
+lokálnom pevnom disku (prípadne pripojené prostredníctvom
+<acronym title="Network File System">NFS</acronym>).
+</p><p>
+Napríklad, ak máte zrkadlo balíkov vo <code class="filename">/var/ftp/debian/</code>
+a adresárová štruktúra je nasledovná:
+</p><pre class="programlisting">
+/var/ftp/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+/var/ftp/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Pridaním nasledovného riadka do súboru <code class="filename">sources.list</code> ho
+môžete použiť v systéme <code class="systemitem">apt</code><a id="idp56207152" class="indexterm"></a>:
+</p><pre class="programlisting">deb file:/var/ftp/debian jessie main contrib</pre><p>
+Všimnite si, že „<code class="literal">dists</code>“ sa pridáva implicitne a argumenty
+za názvom vydania sa použijú na doplnenie cesty o viaceré adresáre.
+</p><p>
+Po pridaní vašich nových zdrojov zrušte pôvodné riadky
+„<code class="literal">deb</code>“ v <code class="filename">sources.list</code> tým, že pred ne
+pridáte znak mriežky (<code class="literal">#</code>).
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cdroms"></a>4.3.3. Pridanie zdrojov APT z optických médií</h3></div></div></div><p>
+Ak chcete použiť <span class="emphasis"><em>výlučne</em></span> CD (alebo DVD alebo Blu-ray),
+zakomentujte existujúce „<code class="literal">deb</code>“ riadky v súbore
+<code class="filename">/etc/apt/sources.list</code> tak, že pred ne napíšete znak
+mriežky (<code class="literal">#</code>).
+</p><p>
+Uistite sa, že sa v súbore <code class="filename">/etc/fstab</code> nachádza riadok,
+ktorý umožňuje pripojiť vašu mechaniku CD-ROM na prípojný bod
+<code class="filename">/media/cdrom</code>. Napríklad, ak je vaša mechanika CD-ROM
+<code class="filename">/dev/sr0</code>, <code class="filename">/etc/fstab</code> by mal
+obsahovať takýto riadok:
+</p><pre class="programlisting">
+/dev/sr0 /media/cdrom auto noauto,ro 0 0
+</pre><p>
+Pamätajte, že medzi slovami <code class="literal">noauto,ro</code> v štvrtom poli
+nesmú byť <span class="emphasis"><em>žiadne medzery</em></span>.
+</p><p>
+Overte, že to funguje tak, že vložíte CD a skúsite spustiť
+</p><pre class="screen">
+# mount /media/cdrom    # pripojiť CD na prípojný bod
+# ls -alF /media/cdrom  # toto by malo zobraziť obsah koreňového adresára CD
+# umount /media/cdrom   # odpojiť CD
+</pre><p>
+Potom spustite:
+</p><pre class="screen">
+# apt-cdrom add
+</pre><p>
+pre každé binárne CD Debianu, ktoré máte, čím sa pridajú údaje o každom CD
+do databázy APT.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgradingpackages"></a>4.4. Aktualizácia balíkov</h2></div></div></div><p>
+Odporúčaný spôsob aktualizácie z predošlých vydaní Debianu je použiť nástroj
+na správu balíkov <span class="command"><strong>apt-get</strong></span>. V predošlých vydaniach bol na
+tento účel odporúčaný <span class="command"><strong>aptitude</strong></span>, ale posledné verzie
+<span class="command"><strong>apt-get</strong></span> podkytujú ekvivalentnú funkcionalitu a tiež
+konzistentnejšie dosahujú požadované výsledky počas aktualizácie.
+</p><p>
+Nezabudnite pripojiť všetky potrebné diskové oblasti (predovšetkým koreňovú
+oblasť a oblasť obsahujúcu <code class="filename">/usr</code>) na zápis pomocou
+príkazu ako:
+</p><pre class="screen">
+# mount -o remount,rw /<em class="replaceable"><code>bod_pripojenia</code></em>
+</pre><p>
+Potom by ste mali dvakrát skontrolovať, že všetky riadky APT (v súbore
+<code class="filename">/etc/apt/sources.list</code>) odkazujú buď na
+„<code class="literal">jessie</code>“ alebo na
+„<code class="literal">stable</code>“. Nemali by zostať žiadne riadky odkazujúce na
+wheezy.
+</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Poznámka]" src="images/note.png" /></td><th align="left">Poznámka</th></tr><tr><td align="left" valign="top"><p>
+    Riadky zdrojov softvéru týkajúce sa CD-ROM môžu niekedy odkazovať na
+„<code class="literal">unstable</code>“; a hoci to môže byť mätúce,
+<span class="emphasis"><em>nemali</em></span> by ste to meniť.
+  </p></td></tr></table></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="record-session"></a>4.4.1. Nahranie relácie príkazového riadka</h3></div></div></div><p>
+Dôrazne sa odporúča použiť program <span class="command"><strong>/usr/bin/script</strong></span> na
+zaznamenanie priebehu relácie aktualizácie. Ak sa potom vyskytne problém,
+budete mať záznam toho, čo sa stalo a ak to bude potrebné, budete schopní
+poskytnúť presné informácie pri hlásení chyby. Zaznamenávanie spustíte
+príkazom:
+</p><pre class="screen">
+# script -t 2&gt;~/aktualizácia-jessie<em class="replaceable"><code>krok</code></em>.čas -a ~/aktualizácia-jessie<em class="replaceable"><code>krok</code></em>.script
+</pre><p>
+alebo podobným. Ak budete musieť znova spustiť záznam (napr. ak musíte
+reštartovať systém), použite inú hodnotu <em class="replaceable"><code>krok</code></em> na
+rozlíšenie, ktorý krok aktualizácie zaznamenávate. Neukladajte súbor so
+záznamom do odkladacieho adresára ako <code class="filename">/tmp</code> či
+<code class="filename">/var/tmp</code> (súbory v týchto adresároch môžu byť počas
+aktualizácie alebo akéhokoľvek reštartu zmazané).
+</p><p>
+Záznam vám tiež umožní skontrolovať informácie, ktoré sa posunuli mimo
+obrazovky. Ak ste na konzole systému, stačí prepnúť na druhý virtuálny
+terminál (pomocou <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F2</strong></span>) a po
+prihlásení použiť na zobrazenie súboru <code class="literal">less -R
+~root/upgrade-jessie.script</code>.
+</p><p>
+Po dokončení aktualizácie môžete zastaviť <span class="command"><strong>script</strong></span>
+napísaním <code class="literal">exit</code> na príkazovom riadku.
+</p><p>
+Ak ste použili voľbu <span class="emphasis"><em>-t</em></span> príkazu
+<span class="command"><strong>script</strong></span>, môžete použiť program
+<span class="command"><strong>scriptreplay</strong></span> na opätovné prehranie celej relácie:
+</p><pre class="screen">
+# scriptreplay ~/upgrade-jessie.time ~/upgrade-jessie.script
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="updating-lists"></a>4.4.2. Aktualizácia zoznamu balíkov</h3></div></div></div><p>
+Najprv je potrebné stiahnuť zoznam dostupných balíkov nového vydania. To
+spravíte príkazom:
+</p><pre class="screen">
+# apt-get update
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sufficient-space"></a>4.4.3. Uistite sa, že na aktualizáciu máte dosť miesta na disku</h3></div></div></div><p>
+Pred aktualizáciou systému sa musíte uistiť, že máte dostatok miesta na
+disku než začnete úplnú aktualizáciu systému ako ju popisuje <a class="xref" href="ch-upgrading.sk.html#upgrading-full" title="4.4.5. Aktualizácia systému">Oddiel 4.4.5, “Aktualizácia systému”</a>. Všetky balíky potrebné na inštaláciu sa najprv
+stiahnu zo siete a uložia do adresára
+<code class="filename">/var/cache/apt/archives</code> (a počas sťahovania do
+podadresára <code class="filename">partial/</code>), takže sa musíte uistiť, že máte
+na oblasti, ktorá obsahuje <code class="filename">/var/</code> dostatok miesta na
+stiahnutie balíkov, ktoré sa budú inštalovať. Po stiahnutí pravdepodobne
+bude potrebné ďalšie miesto na disku v iných oblastiach na inštaláciu
+aktualizovaných balíkov (ktoré môžu obsahovať väčšie binárne súbory alebo
+viac dát) ako aj nových balíkov, ktoré sa stiahnu počas aktualizácie. Ak váš
+systém nebude mať dostatočné miesto na disku, môžete skončiť s neúplnou
+aktualizáciou, z čoho je ťažké systém zotaviť.
+</p><p>
+<span class="command"><strong>apt-get</strong></span> vám dokáže zobraziť podrobné informácie o mieste
+na disku potrebnom na inštaláciu. Pred vykonaním aktualizácie môžete tento
+odhad zobraziť príkazom:
+</p><pre class="screen">
+# apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+[ ... ]
+XXX aktualizovaných, XXX nových nainštalovaných, XXX na odstránenie a XXX neaktualizovaných.
+Je potrebné stiahnuť xx.xMB/yyyMB archívov. 
+Po tejto operácii sa na disku použije ďalších AAAMB.
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Poznámka]" src="images/note.png" /></td><th align="left">Poznámka</th></tr><tr><td align="left" valign="top"><p>
+Spustenie tohto príkazu na začiatku aktualizácie môže zobraziť chybovú
+správu z dôvodov popísaných v ďalších častiach. V takom prípade budete
+musieť počkať, kým sa vykoná minimálna aktualizácia systému podľa <a class="xref" href="ch-upgrading.sk.html#minimal-upgrade" title="4.4.4. Minimálna aktualizácia systému">Oddiel 4.4.4, “Minimálna aktualizácia systému”</a> a aktualizovať jadro pred spustením tohto
+príkazu na odhad miesta na disku.
+</p></td></tr></table></div><p>
+Ak nemáte na aktualizáciu dostatok miesta na disku,
+<span class="command"><strong>apt-get</strong></span> vás upozorní takouto správou:
+</p><pre class="screen">
+E: Na /var/cache/apt/archives/ nemáte dostatok voľného miesta.
+</pre><p>V takejto situácii vopred uvoľnite miesto na disku. Môžete:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Odstrániť balíky, ktoré boli doteraz stiahnuté na inštaláciu (v adresári
+<code class="filename">/var/cache/apt/archives</code>). Vyčistenie vyrovnávacej
+pamäte balíkov príkazom <span class="command"><strong>apt-get clean</strong></span> odstráni doteraz
+stiahnuté súbory balíkov.
+</p></li><li class="listitem"><p>
+Odstráňte zabudnuté balíky. Ak ste použili <span class="command"><strong>aptitude</strong></span> na
+ručnú inštaláciu balíkov v wheezy, bude si pamätať tieto ručne
+nainštalované balíky a dokáže ich označiť ako nadbytočné balíky nainštalovné
+iba ako závislosti, ktoré už nie sú potrebné, ak bol balík
+odstránený. Neoznačia na odstránenie balíky, ktoré ste nainštalovali
+ručne. Ak chcete odstrániť automaticky nainštalované balíky, ktoré sa už
+nepoužívajú, spustite:
+</p><pre class="screen">
+# apt-get autoremove
+</pre><p>
+Na nájdenie zastaralých balíkov môžete tiež použiť
+<span class="command"><strong>debfoster</strong></span> alebo <span class="command"><strong>cruft</strong></span>. Nemali by ste
+balíky, ktoré vám tieto nástroje nájdu iba slepo odstraňovať, obzvlášť ak
+používate agresívne neštandardné voľby, ktoré často označia aj používané
+balíky. Dôrazne sa odporúča, aby ste manuálne skontrolovali balíky navrhnuté
+na odstránenie (t.j. ich obsah, veľkosť a popis) než ich necháte odstrániť.
+</p></li><li class="listitem"><p>
+Odstránte balíky, ktoré zaberajú príliš mnoho miesta a momentálne nie sú
+potrebné (po aktualizácii ich môžete vždy nainštalovať). Ak máte
+nainštalovaný <code class="systemitem">popularity-contest</code><a id="idp56279216" class="indexterm"></a>,
+môžete použiť príkaz <span class="command"><strong>popcon-largest-unused</strong></span> na vypísanie
+zoznamu balíkov, ktoré nepoužívate a ktoré zaberajú najviac miesta. Balíky,
+ktoré len zaberajú najviac miesta na disku nájdete pomocou
+<span class="command"><strong>dpigs</strong></span> (dostupné v balíku <code class="systemitem">debian-goodies</code><a id="idp56282736" class="indexterm"></a>) alebo <span class="command"><strong>wajig</strong></span>
+(príkazom <code class="literal">wajig size</code>). Tiež sa dajú nájsť pomocou
+<code class="systemitem">aptitude</code><a id="idp56285936" class="indexterm"></a>.  Spustite
+<span class="command"><strong>aptitude</strong></span> vo „vizuálnom režime“, vyberte
+<span class="guimenu">Pohľady</span> → <span class="guimenuitem">Nový Plochý Zoznam
+Balíkov</span>, stlačte <span class="keycap"><strong>l</strong></span> a zadajte
+<code class="literal">~i</code>, potom stlačte <span class="keycap"><strong>S</strong></span> a zadajte
+<code class="literal">~installsize</code>. To vám dá šikovný zoznam, s ktorým môžete
+ďalej pracovať. 
+</p></li><li class="listitem"><p>
+  Odstrániť preklady a lokalizačné súbory zo systému, ak nie sú
+potrebné. Možete nainštalovať balík <code class="systemitem">localepurge</code><a id="idp56294128" class="indexterm"></a> a nastaviť ho, aby ponechal na
+systéme iba niekoľko vybraných locales. Tým sa zníži využité miesto na
+disku, ktoré zaberá <code class="filename">/usr/share/locale</code>.
+</p></li><li class="listitem"><p>
+   Dočasne presunúť na iný systém alebo natrvalo odstrániť systémové záznamy
+nachádzajúce sa vo <code class="filename">/var/log/</code>.
+</p></li><li class="listitem"><p>
+    Použiť dočasný adresár <code class="filename">/var/cache/apt/archives</code>: Môžete
+použiť dočasný adresár pre vyrovnávaciu pamäť na inom súborovom systéme
+(<acronym title="Universal Serial Bus">USB</acronym> pamäť, dočasný pevný disk, už používaný súborový
+systém, ...)
+  </p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Poznámka]" src="images/note.png" /></td><th align="left">Poznámka</th></tr><tr><td align="left" valign="top"><p>
+      Nepoužívajte prípojný bod <acronym title="Network File System">NFS</acronym>, pretože sieťové pripojenie
+sa môže počas aktualizácie prerušiť.
+    </p></td></tr></table></div><p>
+  Napríklad, ak máte <acronym title="Universal Serial Bus">USB</acronym> pamäť pripojenú na
+<code class="filename">/media/usbkey</code>:
+  </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+	odstráňte balíky, ktoré boli doteraz stiahnuté na inštaláciu:
+
+	</p><pre class="screen"># apt-get clean</pre><p>
+      </p></li><li class="listitem"><p>
+	skopírujte adresár <code class="filename">/var/cache/apt/archives</code> na
+<acronym title="Universal Serial Bus">USB</acronym> pamäť:
+
+	</p><pre class="screen"># cp -ax /var/cache/apt/archives /media/usbkey/</pre><p>
+      </p></li><li class="listitem"><p>
+	pripojte dočasný adresár vyrovnávacej pamäte balíkov na aktuálny:
+
+	</p><pre class="screen"># mount --bind /media/usbkey/archives /var/cache/apt/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	po aktualizácii obnovte pôvodný adresár
+<code class="filename">/var/cache/apt/archives</code>:
+
+	</p><pre class="screen"># umount /media/usbkey/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	odstráňte zostávajúce <code class="filename">/media/usbkey/archives</code>.
+      </p></li></ol></div><p>
+  Dočasný adresár vyrovnávacej pamäte balíkov môžete vytvoriť na ľubovoľnom
+pripojenom súborovom systéme.
+  </p></li><li class="listitem"><p>
+    Vykonať minimálnu aktualizáciu systému (pozri <a class="xref" href="ch-upgrading.sk.html#minimal-upgrade" title="4.4.4. Minimálna aktualizácia systému">Oddiel 4.4.4, “Minimálna aktualizácia systému”</a>) alebo čiastočné aktualizácie systému
+nasledované úplnou aktualizáciou. To umožní aktualizovať systém po častiach
+a umožní vám vyčistiť vyrovnávaciu pamäť balíkov pred úplnou aktualizáciou.
+  </p></li></ul></div><p>
+Pamätajte, že aby ste mohli bezpečne odstrániť balíky, mali by ste svoj
+<code class="filename">sources.list</code> upraviť späť na wheezy ako
+popisuje <a class="xref" href="ap-old-stuff.sk.html#old-sources" title="A.2. Ako skontrolovať váš zoznam zdrojov">Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="minimal-upgrade"></a>4.4.4. Minimálna aktualizácia systému</h3></div></div></div><p>
+V niektorých prípadoch môže priame spustenie úplnej aktualizácie odstrániť
+veľké množstvo balíkov, ktoré si chcete ponechať. Preto odporúčame
+dvojfázový proces aktualizácie. V prvej fáze minimálnu aktualizáciu, aby sa
+vyriešili tieto konflikty a následne úplnú aktualizáciu ako popisuje <a class="xref" href="ch-upgrading.sk.html#upgrading-full" title="4.4.5. Aktualizácia systému">Oddiel 4.4.5, “Aktualizácia systému”</a>. 
+</p><p>
+Najprv spustite:
+</p><pre class="screen">
+# apt-get upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Poznámka]" src="images/note.png" /></td><th align="left">Poznámka</th></tr><tr><td align="left" valign="top"><p>
+      Proces aktualizácie niektorých starších vydaní odporúčal použiť na
+aktualizáciu <span class="command"><strong>aptitude</strong></span>. Tento nástroj neodporúčame na
+aktualizáciu z vydania wheezy na jessie.
+    </p></td></tr></table></div><p>
+Toto aktualizuje tie balíky, ktoré je možné aktualizovať bez nutnosti
+odstránenia alebo inštalácie iných balíkov.
+</p><p>
+Minimálna aktualizácia systému tiež môže byť užitočná v prípade, keď má
+systém málo miesta a úplnú aktualizáciu nemožno spustiť z dôvodu obmedzeného
+miesta.
+</p><p>
+  Ak je nainštalovaný balík <code class="systemitem">apt-listchanges</code><a id="idp56326816" class="indexterm"></a>, (vo svojej predvolenej
+konfigurácii) ukáže dôležité informácie o aktualizovaných balíkov v
+stránkovači. Stlačením tlačidla <span class="keycap"><strong>q</strong></span> po prečítaní stránkovač
+ukončíte a budete môcť pokračovať v aktualizácii.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrading-full"></a>4.4.5. Aktualizácia systému</h3></div></div></div><p>
+Po dokončení týchto krokov budete pripravený pokračovať v hlavnej časti
+aktualizácie. Spustite:
+</p><pre class="screen">
+# apt-get dist-upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Poznámka]" src="images/note.png" /></td><th align="left">Poznámka</th></tr><tr><td align="left" valign="top"><p>
+      Proces aktualizácie niektorých starších vydaní odporúčal použiť na
+aktualizáciu <span class="command"><strong>aptitude</strong></span>. Tento nástroj neodporúčame na
+aktualizáciu z vydania wheezy na jessie.
+    </p></td></tr></table></div><p>
+Tým sa vykoná kompletná aktualizácia systému, nainštalujú sa najnovšie
+dostupné verzie všetkých balíkov a vyriešia sa všetky možné zmeny závislostí
+medzi balíkmi v rôznych vydaniach. Ak je to potrebné, nainštalujú sa
+niektoré nové balíky (zvyčajne nové verzie knižníc a premenované balíky) a
+odstránia sa všetky konfliktné zastaralé balíky.
+</p><p>
+Pri aktualizácii z diskov CD-ROM (alebo DVD) vás sytém požiada o vloženie
+niektorých konkrétnych CD niekoľkokrát počas aktualizácie. Je možné, že
+budete musieť vložiť rovnaké CD viac než raz; to je z dôvodu navzájom
+závisiacich balíkov, ktoré sa nachádzajú na rôznych CD.
+</p><p>
+Nové verzie momentálne nainštalovaných balíkov, ktoré nie je možné
+aktualizovať bez zmeny stavu inštalácie iného balíka budú ponechané v
+aktuálnej verzii (zobrazia sa ako „podržané“). To je možné vyriešiť buď
+pomocou  <span class="command"><strong>aptitude</strong></span> tak, že zvolíte tieto balíky na
+inštaláciu alebo tak, že skúsite spustiť <code class="literal">apt-get install
+<em class="replaceable"><code>balík</code></em></code>.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="trouble"></a>4.5. Možné problémy počas aktualizácie</h2></div></div></div><p>
+Nasledovné oddiely popisujú známe problémy, ktoré sa môžu vyskytnúť pri
+aktualizácii na jessie.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="immediate-configure"></a>4.5.1. Dist-upgrade zlyhá s chybou „Nebolo možné vykonať okamžitú konfiguráciu“</h3></div></div></div><p>
+V niektorých prípadoch môže krok <span class="command"><strong>apt-get dist-upgrade</strong></span>
+zlyhať po stiahnutí balíčkov s chybou:
+</p><pre class="screen">
+E: Nebolo možné vykonať okamžitú konfiguráciu už rozbaleného „%s“. Pozri prosím podrobnosti v man 5 apt.conf pod APT::Immediate-Configure.
+</pre><p>
+</p><p>
+Ak sa tak stane, spustenie <span class="command"><strong>apt-get dist-upgrade -o
+APT::Immediate-Configure=0</strong></span> namiesto tohto kroku by malo umožniť
+aktualizácii pokračovať.
+</p><p>
+Iné možné obídenie tohto problému je dočasne pridať oba zdroje -
+wheezy aj jessie - do vášho
+<code class="filename">sources.list</code> a spustiť <span class="command"><strong>apt-get
+update</strong></span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="expected-removals"></a>4.5.2. Očakávané odstránenia</h3></div></div></div><p>
+Proces aktualizácie na jessie môže požadovať odstránenie balíkov zo
+systému. Presný zoznam balíkov bude závisieť na množine balíkov, ktorú máte
+nainštalovanú. Tieto poznámky k vydaniu poskytujú všeobecné rady o metóde,
+ktorú by ste mali zvoliť, ale ak máte pochybnosti, odporúčame aby ste
+preskúmali odstránenie ktorých balíkov je navrhnuté v každej z metód. Ďalšie
+informácie o balíkoch, ktoré boli v jessie označené ako zastarané
+nájdete v časti <a class="xref" href="ch-upgrading.sk.html#obsolete" title="4.10. Zastaralé balíky">Oddiel 4.10, “Zastaralé balíky”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="conflicts-loops"></a>4.5.3. Cykly Konfliktov alebo Predzávislostí</h3></div></div></div><p>
+Niekedy je potrebné zapnúť voľbu <code class="literal">APT::Force-LoopBreak</code>,
+aby ste mohli dočasne odstrániť nevyhnutný (essential) balík z dôvodu cyklu
+konfliktov alebo predzávislostí. <span class="command"><strong>apt-get</strong></span> vás na to
+upozorní a zruší aktualizáciu. Môžete to obísť zadaním voľby <code class="literal">-o
+APT::Force-LoopBreak=1</code> na príkazovom riadku
+<span class="command"><strong>apt-get</strong></span>.
+</p><p>
+Je možné, že štruktúra závislostí systému bude taká poškodená, že jej oprava
+bude vyžadovať manuálny zásah. To zvyčajne znamená použiť
+<span class="command"><strong>apt-get</strong></span> alebo
+</p><pre class="screen">
+# dpkg --remove <em class="replaceable"><code>názov_balíka</code></em>
+</pre><p>
+na odstránenie niektorých z konfliktných balíkov alebo
+</p><pre class="screen">
+# apt-get -f install
+# dpkg --configure --pending
+</pre><p>
+V extrémnych prípadoch budete musieť vynútiť reinštaláciu príkazom typu
+</p><pre class="screen">
+# dpkg --install <em class="replaceable"><code>/cesta/k/názov_balíka</code></em>
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="file-conflicts"></a>4.5.4. Konflikty súborov</h3></div></div></div><p>
+Konflikty súborov by sa nemali vyskytnúť ak aktualizujete z „čistého“
+systému wheezy, ale môžu sa vyskytnúť ak máte nainštalované
+neoficiálne spätné porty (backports). Konflikt súborov sa prejaví
+nasledovnou chybou:
+</p><pre class="screen">
+Rozbaľuje sa <em class="replaceable"><code>&lt;package-foo&gt;</code></em> (z <em class="replaceable"><code>&lt;package-foo-file&gt;</code></em>) ...
+dpkg: chyba pri spracovávaní <em class="replaceable"><code>&lt;package-foo&gt;</code></em> (--install):
+ pokus o prepísanie „<em class="replaceable"><code>&lt;some-file-name&gt;</code></em>“,
+ ktorý je tiež v balíku <em class="replaceable"><code>&lt;package-bar&gt;</code></em>
+dpkg-deb: podproces paste ukončený signálom (Prerušená rúra)
+ Počas spracovania sa vyskytli chyby::
+ <em class="replaceable"><code>&lt;package-foo&gt;</code></em>
+</pre><p>
+Môžete sa pokúsiť vyriešiť konflikt súborov tým, že nasilu odstránite balík
+uvedený na <span class="emphasis"><em>poslednom</em></span> riadku chybovej správy:
+</p><pre class="screen">
+# dpkg -r --force-depends <em class="replaceable"><code>názov_balíka</code></em>
+</pre><p>
+Po tejto náprave by ste mali byť schopní pokračovať v aktualizácii
+zopakovaním doteraz popísaných príkazov <span class="command"><strong>apt-get</strong></span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-changes"></a>4.5.5. Zmeny v konfigurácii</h3></div></div></div><p>
+Počas aktualizácie dostanete otázky týkajúce sa konfigurácie alebo
+rekonfigurácie niekoľkých balíkov. Po otázke, či nejaký súbor z adresára
+<code class="filename">/etc/init.d</code> alebo
+<code class="filename">/etc/manpath.config</code> má byť nahradený verziou od správcu
+balíka je zvyčajne potrebné odpovedať „áno“, aby ste zaistili konzistenciu
+systému. Kedykoľvek môžete vrátiť staršie verzie, pretože sa uložia s
+príponou <code class="literal">.dpkg-old</code>.
+</p><p>
+Ak si nie ste istý, čo máte robiť, zapíšte si meno balíka alebo súboru a
+veci vyriešte neskôr. Ak chcete skontrolovať informácie, ktoré boli na
+obrazovke počas aktualizácie, môžete hľadať v súbore záznamu relácie.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="console-change"></a>4.5.6. Zmena relácie na konzolu</h3></div></div></div><p>
+Ak spúšťate aktualizáciu pomocou lokálnej konzoly systému, v niektorom bode
+aktualizácie môžete zistiť, že sa konzola zmenila na iný terminál a stratili
+ste aktualizáciu z dohľadu. Môže sa to stať napríklad na systémoch s
+pracovným prostredím počas reštartu správcu displeja.
+</p><p>
+Na návrat na konzolu s bežiacou aktualizáciou budete musieť použiť <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span>
+(ak ste na grafickej štartovacej obrazovke) alebo <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span> (ak ste na
+lokálnej obrazovke v textovom režme), čo vás prepne späť na virtuálny
+terminál 1. Nahraďte F1 funkčným klávesom s číslom zodpovedajúcim
+virtuálnemu terminálu, na ktorom bežala aktualizácia. Tiež môžete použiť
+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>šípka
+vľavo</strong></span> alebo <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>šípka vpravo</strong></span>
+na prepínanie medzi susednými terminálmi v textovom režime.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-specific-issues"></a>4.5.7. Špeciálna starostlivosť o niektoré balíky</h3></div></div></div><p>
+Vo väčšine prípadov by mala prebehnúť aktualizácia balíkov medzi
+wheezy a jessie hladko. Je však malý počet prípadov, ktoré
+môžu vyžadovať zásahy buď pred alebo počas aktualizácie. Ich podrobnosti sú
+uvedené dolu pre každý balík zvlášť.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-systemd"></a>4.5.7.1. systemd</h4></div></div></div><p>
+    Aktualizácia Debianu z wheezy na jessie štandardne zmení
+váš init systém zo SysV na systemd.  V závislosti na vašom systéme a
+nastavení budete možno musieť vykonať niektoré zmeny manuálne. Známe
+problémy sme  popísali v <a class="xref" href="ch-information.sk.html#systemd-upgrade-default-init-system" title="5.6. Aktualizácia na Jessie nainštaluje nový predvolený init systém">Oddiel 5.6, “Aktualizácia na Jessie nainštaluje nový predvolený init systém”</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-lxc"></a>4.5.7.2. LXC</h4></div></div></div><p>
+    Ak máte nainštalované LXC, je možné, že budete musieť byť opatrní pri
+aktualizácii vášho systému system a vašich kontajnerov. Prosím, pozrite sa
+na známe problémy a ich riešenia v časti <a class="xref" href="ch-information.sk.html#lxc-upgrade-issues" title="5.8. Aktualizácia hostiteľov a kontajnerov LXC">Oddiel 5.8, “Aktualizácia hostiteľov a kontajnerov LXC”</a>.
+  </p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newkernel"></a>4.6. Aktualizácia jadra a súvisiacich balíkov</h2></div></div></div><p>
+Táto časť vysvetľuje ako aktualizovať vaše jadro a identifikuje možné
+problémy týkajúce sa tejto aktualizácie. Môžete buď nainštalovať jeden z
+balíkov <code class="systemitem">linux-image-*</code><a id="idp56395488" class="indexterm"></a>, ktoré
+poskytuje Debian alebo skompilovať prispôsobené jadro zo zdrojových súborov.
+</p><p>
+Pamätajte, že veľa informácií v tejto časti je založených na predpoklade, že
+budete používať jedno z modulárnych jadier v Debiane spolu s <code class="systemitem">initramfs-tools</code><a id="idp56398048" class="indexterm"></a> a <code class="systemitem">udev</code><a id="idp56399712" class="indexterm"></a>.  Ak sa rozhodnete použiť prispôsobené
+jadro, ktoré nevyžaduje initrd alebo použijete iný nástroj na tvorbu initrd,
+niektoré z týchto informácií sa vás nemusia týkať.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="kernel-metapackage"></a>4.6.1. Inštalácia metabalíka jadra</h3></div></div></div><p>
+Keď vykonáte dist-upgrade z wheezy na jessie, dôrazne sa
+odporúča, aby ste nainštalovali nový metabalík linux-image-2.6-* ak ste tak
+už neurobili. Tieto metabalíky počas aktualizácie automaticky
+prostredníctvom závislostí nainštalujú novšiu verziu jadra. Či je
+nainštalované môžete overiť príkazom:
+</p><pre class="screen">
+# dpkg -l "linux-image*" | grep ^ii | grep -i meta
+</pre><p>
+Ak nevidíte žiadny výstup, budete musieť nainštalovať nový balík linux-image
+ručne alebo nainštalovať niektorý z metabalíkov linux-image. Zoznam
+dostupných metabalíkov linux-image uvidíte po spustení:
+</p><pre class="screen">
+# apt-cache search linux-image- | grep -i meta | grep -v transition
+</pre><p>
+Ak si nie ste istý, ktorý z balíkov vybrať, spustite <code class="literal">uname
+-r</code> a hľadajte balík s podobným názvom. Napríklad ak vidíte
+<code class="literal">2.6.32-5-amd64</code>, odporúča sa nainštalovať <code class="systemitem">linux-image-amd64</code><a id="idp56408160" class="indexterm"></a>. Tiež si môžete pozrieť dlhý
+popis každého z balíkov príkazom <span class="command"><strong>apt-cache</strong></span> a zvoliť si
+ten najvyhovujúcejší. Napríklad:
+</p><pre class="screen">
+# apt-cache show linux-image-amd64
+</pre><p>
+Potom by ste ho mali nainštalovať pomocou <code class="literal">apt-get
+install</code>. Po nainštalovaní tohto nového jadra by ste mali pri
+najbližšej príležitosti reštartovať systém, čím získate výhody novej verzie
+jadra. Ale pred prvým reštartovaním po aktualizácii si prosím prečítajte
+<a class="xref" href="ch-upgrading.sk.html#nownownow" title="4.7. Čo urobiť pred reštartom sytému">Oddiel 4.7, “Čo urobiť pred reštartom sytému”</a>.
+</p><p>
+Pre dobrodružnejších existuje jednoduchý spôsob ako si skompilovať svoje
+vlastné prispôsobené jadro Debianu. Nainštalujte si zdrojové kódy jadra,
+ktoré sú poskytované v balíku <code class="systemitem">linux-source</code><a id="idp56414448" class="indexterm"></a>. Môžete využiť cieľ
+<code class="literal">deb-pkg</code> dostupný v súbore makefile zdrojových kódov na
+zostavenie binárneho balíka. Ďalšie informácie nájdete v <a class="ulink" href="http://kernel-handbook.alioth.debian.org/" target="_top">Debian Linux Kernel
+Handbook</a>, ktorú tiež nájdete v balíku <code class="systemitem">debian-kernel-handbook</code><a id="idp56417920" class="indexterm"></a>.
+</p><p>
+Ak je to možné, je pre vás výhodné aktualizovať balík jadra oddelene od
+samotného hlavného <code class="literal">dist-upgrade</code>, pretože to znižuje
+pravdepodobnosť stavu systému, ktorý dočasne nemožno spustiť. Pamätajte, že
+toto by ste mali robiť iba po vykonaní minimálnej aktualizácie, ako ju
+popisuje <a class="xref" href="ch-upgrading.sk.html#minimal-upgrade" title="4.4.4. Minimálna aktualizácia systému">Oddiel 4.4.4, “Minimálna aktualizácia systému”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="initramfs-tools-issues"></a>4.6.2. Zmeny pripájania a kontroly koreňového súborového systému a
+<code class="filename">/usr</code></h3></div></div></div><p>
+    <code class="systemitem">initramfs-tools</code><a id="idp56423936" class="indexterm"></a> teraz spúšťa aj
+<code class="literal">fsck</code> na koreňovom systéme pred jeho pripojením. Ak ako
+init systém používate <code class="literal">systemd</code> a existuje samostatný
+súborový systém <code class="filename">/usr</code>, spustí fsck aj na
+<code class="filename">/usr</code> a pripojí ho.
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	Ak je <code class="filename">/usr</code> samostatný súborový systém na zariadení RAID
+a nastavenie <code class="literal">INITRDSTART</code> v
+<code class="filename">/etc/default/mdadm</code> nie je „<code class="literal">all</code>“,
+budete ho musieť upraviť tak, aby obsahoval aj toto zariadenie.
+      </p></li><li class="listitem"><p>
+	Ak je <code class="filename">/usr</code> samostatný súborový systém na logickom
+zväzku LVM a riadok <code class="filename">/usr</code> v
+<code class="filename">/etc/fstab</code> špecifikuje zariadenie podľa
+<code class="literal">UUID</code> alebo menovky (<code class="literal">LABEL</code>), musíte
+tento riadok tak, aby zariadenie špecifikoval podľa zariadenia pomocou
+formátu
+<code class="filename">/dev/mapper/<em class="replaceable"><code>VG</code></em>-<em class="replaceable"><code>LV</code></em></code>
+alebo
+<code class="filename">/dev/<em class="replaceable"><code>VG</code></em>/<em class="replaceable"><code>LV</code></em></code>.
+      </p></li><li class="listitem"><p>
+	Už viac nie je možné pripojiť súborový systém <code class="filename">/usr</code>
+pomocou bind.
+      </p></li><li class="listitem"><p>
+	Ak je sú hodiny reálneho času (RTC) nastavené na miestny a miestny čas je
+popredu pred UTC, <code class="literal">e2fsck</code> vypíše upozornenie pri štarte
+posunutí času smerom dozadu (<a class="ulink" href="https://bugs.debian.org/767040" target="_top">bug
+#767040</a>). Môžete to vypnúť vložením nasledovných riadkov do
+<code class="filename">/etc/e2fsck.conf</code>:
+      </p><pre class="screen">
+[options]
+broken_system_clock=1
+</pre></li></ul></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="nownownow"></a>4.7. Čo urobiť pred reštartom sytému</h2></div></div></div><p>
+Po skončení <code class="literal">apt-get dist-upgrade</code> je aktualizácia
+„formálne“ dokončená, ale je niekoľko vecí, o ktoré by ste sa mali postarať
+<span class="emphasis"><em>pred</em></span> ďalším reštartom.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      Pri aktualizácii z Wheezy na Jessie, môže byť dobrý nápad
+na odstrániť (purge) staré balíky <span class="emphasis"><em>pred</em></span> prvým
+reštartom.  Najmä zastarané init skripty môžu spôsobiť problémy. Prečítajte
+si prosím podrobnosti o hľadaní a odstraňovaní balíkov v časti <a class="xref" href="ch-upgrading.sk.html#purge-removed-packages" title="4.8.1. Vyčistenie (purge) odstránených balíkov">Oddiel 4.8.1, “Vyčistenie (purge) odstránených balíkov”</a>.
+    </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="for-next"></a>4.8. Príprava na ďalšie vydanie</h2></div></div></div><p>
+Po aktualizácii môžete urobiť niekoľko vecí, ktorými sa pripravíte na ďalšie
+vydanie.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Odstráňte nadbytočné alebo zastaralé balíky ako popisuje <a class="xref" href="ch-upgrading.sk.html#sufficient-space" title="4.4.3. Uistite sa, že na aktualizáciu máte dosť miesta na disku">Oddiel 4.4.3, “Uistite sa, že na aktualizáciu máte dosť miesta na disku”</a> a <a class="xref" href="ch-upgrading.sk.html#obsolete" title="4.10. Zastaralé balíky">Oddiel 4.10, “Zastaralé balíky”</a>. Mali by ste
+skontrolovať, ktoré konfiguračné súbory používajú a zvážiť vyčistenie
+konfigurácie balíkov (purge), aby sa odstránili ich konfiguračné
+súbory. Pozri aj <a class="xref" href="ch-upgrading.sk.html#purge-removed-packages" title="4.8.1. Vyčistenie (purge) odstránených balíkov">Oddiel 4.8.1, “Vyčistenie (purge) odstránených balíkov”</a>.
+</p></li></ul></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="purge-removed-packages"></a>4.8.1. Vyčistenie (purge) odstránených balíkov</h3></div></div></div><p>
+    Vo všeobecnosti sa odporúča na vyčistenie odstránených balíkov. To platí
+najmä, ak boli balíky odstránené v predchádzajúcich aktualizáciách vydania
+(napr. počas aktualizácie na wheezy) alebo pochádzajú od tretích
+strán. Najmä o starých skriptoch init.d je známe, že spôsobujú problémy.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Výstraha]" src="images/caution.png" /></td><th align="left">Výstraha</th></tr><tr><td align="left" valign="top"><p>
+      Vyčistenie balíček vo všeobecnosti vymaže jeho súbory protokolu, preto si
+ich najskôr zálohujte.
+    </p></td></tr></table></div><p>
+    Nasledovný príkaz zobrazí zoznam všetkých odstránených balíkov, ktoré mohli
+zanechať v systéme konfiguračné súbory (ak ich používajú):
+  </p><pre class="screen">
+# dpkg -l | awk '/^rc/ { print $2 }'
+</pre><p>
+    Balíky môžu je možné odstrániť príkazom <span class="command"><strong>apt-get purge</strong></span>. Za
+predpokladu, že chcete vyčistiť všetky balíky naraz, môžete použiť
+nasledujúci príkaz:
+  </p><pre class="screen">
+# apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+</pre><p>
+    Ak používate <code class="systemitem">aptitude</code><a id="idp56463952" class="indexterm"></a>, môžete použiť
+aj nasledovnú alternatívu k vyššie uvedeným príkazom:
+  </p><pre class="screen">
+$ aptitude search '~c'
+$ aptitude purge '~c'
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="deprecated"></a>4.9. Zavrhované komponenty</h2></div></div></div><p>
+S ďalším vydaním Debianu 9 (s kódovým označením
+stretch) budú niektoré možnosti označené ako
+zavrhované. Používatelia budú musieť prejsť na iné alternatívy, aby si
+ušetrili problémy pri aktualizácii na 9.
+</p><p>
+Sem patria nasledovné možnosti:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Balík <code class="systemitem">hardening-wrapper</code><a id="idp56470000" class="indexterm"></a> je
+zavrhovaný a očakáva sa jeho odstránenie vo vydaní Stretch.
+		</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="obsolete"></a>4.10. Zastaralé balíky</h2></div></div></div><p>
+Okrem toho, že jessie prináša mnoho nových balíkov, tiež odstraňuje
+dosť veľa starých balíkov, ktoré obsahovalo vydanie
+wheezy. Neposkytuje pre tieto zastaralé balíky žiadnu aktualizačnú
+cestu. Hoci vám nič nebráni naďalej používať zastarané balíky, projekt
+Debian zvyčajne prestane poskytovať podporu bezpečnostných aktualizácií
+jeden rok po vydaní jessie<a href="#ftn.idp56473360" class="footnote" id="idp56473360"><sup class="footnote">[5]</sup></a> a
+medzitým zvyčajne neposkytuje inú podporu. Preto sa odporúča nahradiť ich
+alternatívami ak sú nejaké dostupné.
+</p><p>
+Existuje mnoho dôvodov, prečo môžu byť balíky z distribúcie odstránené: ich
+pôvodný autor ich už nespravuje; ich správa už nezaujíma vývojára Debianu;
+funkcionalitu, ktorú poskytujú nahradil iný softvér (alebo novšia verzia);
+alebo už sa nepovažujú za vhodné vo vydaní jessie z dôvodu chýb. V
+poslednom prípade môže distribúcia „unstable“ naďalej obsahovať tieto
+balíky.
+</p><p>
+Je jednoduché zistiť v aktualizovanom systéme, ktoré balíky sú „zastaralé“,
+pretože ich tak označia používateľské rozhrania systémov na správu
+balíkov. Ak používate <span class="command"><strong>aptitude</strong></span>, uvidíte zoznam týchto
+balíkov v časti „Zastarané a lokálne vytvorené balíky“.
+</p><p>
+<a class="ulink" href="https://bugs.debian.org/" target="_top">Systém sledovania chýb Debianu</a> často poskytne
+ďalšie informácie o tom, prečo bol balík odstránený. Mali by ste si prečítať
+archivované hlásenia chýb samotného balíka aj archivované hlásenia chýb
+<a class="ulink" href="https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org&amp;archive=yes" target="_top">pseudobalíka
+ftp.debian.org</a>.
+</p><p>
+  Medzi zastaralé balíky patria:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	<code class="systemitem">postgresql-9.1</code><a id="idp56481648" class="indexterm"></a>, nástupcom je
+<code class="systemitem">postgresql-9.4</code><a id="idp56483360" class="indexterm"></a>. Po dokončení
+aktualizácie operačného systému, by ste si mali naplánovať aj aktualizáciu
+vašich klastrov databázy PostgreSQL 9.1 na novú verziu PostgreSQL 9.4
+pomocou nástroja <span class="command"><strong>pg_upgradecluster</strong></span>. Pre užívateľov
+procedurálneho jazyka PL/perl jessie poskytuje aktualizovaný balík
+<code class="systemitem">postgresql-plperl-9.1</code><a id="idp56486304" class="indexterm"></a> zostavený voči
+novej verzii libperl v jessie s cieľom umožniť prechod na novú verziu perl v
+jessie, pričom staré databázové funkcie PL/perl zostanú zachované a
+použiteľné až do aktualizácie samotných databáz.
+      </p></li><li class="listitem"><p>
+        
+        
+<code class="systemitem">python3.2</code><a id="idp56493328" class="indexterm"></a>, nástupcom je <code class="systemitem">python3.4</code><a id="idp56495040" class="indexterm"></a>. (Verzia 2.7 je podporovaná v
+wheezy aj v jessie.)
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">ruby1.8</code><a id="idp56497600" class="indexterm"></a> a <code class="systemitem">ruby1.9.1</code><a id="idp56499264" class="indexterm"></a>;, nástupcom je <code class="systemitem">ruby2.1</code><a id="idp56500976" class="indexterm"></a>. Prosím, nainštalujte si balík
+<code class="systemitem">ruby</code><a id="idp56502720" class="indexterm"></a> a vždy automaticky dostanete
+aktuálnu verziu ruby.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">mplayer</code><a id="idp56505296" class="indexterm"></a>; alternatívy sú <code class="systemitem">mplayer2</code><a id="idp56507008" class="indexterm"></a> a <code class="systemitem">mpv</code><a id="idp56508640" class="indexterm"></a> (nové v jessie). Zatiaľ čo mplayer2
+je prevažne kompatibilný s mplayer čo sa týka argumentov príkazového riadka
+a konfigurácie (a pridáva aj niekoľko nových funkcií), mpv pridáva mnoho
+nových funkcií a vylepšení a aktívne ho spravuje upstream.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openoffice.org</code><a id="idp56511600" class="indexterm"></a>; prosím, použite
+<code class="systemitem">libreoffice</code><a id="idp56513328" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">squid</code><a id="idp56515792" class="indexterm"></a>, nástupcom je <code class="systemitem">squid3</code><a id="idp56517504" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">libjpeg-progs</code><a id="idp56519968" class="indexterm"></a>, nástupcom je
+<code class="systemitem">libjpeg-turbo-progs</code><a id="idp56521680" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openjdk-6-*</code><a id="idp56524144" class="indexterm"></a>, nástupcom je
+<code class="systemitem">openjdk-7-*</code><a id="idp56525856" class="indexterm"></a>.
+      </p></li></ul></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="dummy"></a>4.10.1. Fiktívne balíky</h3></div></div></div><p>
+Niektoré balíky z vydania wheezy boli v jessie rozdelené do
+niekoľkých balíkov, často preto, aby sa zlepšila spravovateľnosť
+systému. Aby sa zjednodušila aktualizačná cesta, jessie často
+poskytuje „fiktívne“ balíky: prázdne balíky s rovnakým názvom ako starý
+balík v wheezy so závislosťami, ktoré spôsobia nainštalovanie
+nového balíka. Tieto „fiktívne“ balíky sa po aktualizácii považujú za
+nadbytočné a je možné ich bezpečne odstrániť.
+</p><p>
+Väčšina (ale nie všetky) popisy fiktívnych balíkov označujú ich účel. Popisy
+fiktívnych balíkov však nie sú jednotné, takže môžete na ich nájdenie použiť
+aj <span class="command"><strong>deborphan</strong></span> s voľbami
+<code class="literal">--guess-<em class="replaceable"><code>*</code></em></code> (napr.
+<code class="literal">--guess-dummy</code>), aby ste ich na svojom systéme
+našli. Niektoré fiktívne balíky sa nemajú po aktualizácii odstraňovať, ale
+používajú sa na sledovanie aktuálne dostupnej verzie programu v čase.
+</p></div></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp56070288" class="footnote"><p><a href="#idp56070288" class="para"><sup class="para">[1] </sup></a>Ak je priorita debconf nastavená na veľmi vysokú úroveň, môžete predísť
+konfiguračným výzvam, ale služby, ktoré na vašom systéme vyžadujú iné ako
+predvolené odpovede, sa nespustia.</p></div><div id="ftn.idp56071888" class="footnote"><p><a href="#idp56071888" class="para"><sup class="para">[2] </sup></a>Napríklad: služby DNS alebo DHCP, obzvlášť ak bežia bez redundantného alebo
+záložného servera. V prípade DHCP sa môže stať, že budú používatelia
+odpojení od siete ak čas prenájmu ich IP adresy vyprší pred dokončením
+procesu aktualizácie.</p></div><div id="ftn.idp56087072" class="footnote"><p><a href="#idp56087072" class="para"><sup class="para">[3] </sup></a> Túto vlastnosť možno vypnúť pridaním <code class="literal">panic=0</code> medzi
+parametre pri zavádzaní systému.  </p></div><div id="ftn.idp56168624" class="footnote"><p><a href="#idp56168624" class="para"><sup class="para">[4] </sup></a> Systém správy balíkov Debianu za bežných okolností neumožňuje balíku
+nahradiť súbor, ktorý vlastní iný balík, iba ak daný balík nahrádza tento
+vlastniaci balík.  </p></div><div id="ftn.idp56473360" class="footnote"><p><a href="#idp56473360" class="para"><sup class="para">[5] </sup></a> Alebo ak dovtedy nenastane ďalšie vydanie. Zvyčajne sú zakaždým podporované
+súčasne iba dve stabilné vydania.  </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-installing.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-information.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 3. Inštalačný systém </td><td width="20%" align="center"><a accesskey="h" href="index.sk.html"><img src="images/home.png" alt="Domov" /></a></td><td width="40%" align="right" valign="top"> Kapitola 5. Problémy vyskytujúce sa v jessie</td></tr></table></div></body></html>

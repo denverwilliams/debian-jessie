@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapitre 5. Problèmes à connaître pour Jessie</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="up" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="prev" href="ch-upgrading.fr.html" title="Chapitre 4. Mises à niveau depuis Debian 7 (Wheezy)" /><link rel="next" href="ch-moreinfo.fr.html" title="Chapitre 6. Plus d'informations sur Debian" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapitre 5. Problèmes à connaître pour Jessie</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-upgrading.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-moreinfo.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr></table><hr /></div><div xml:lang="fr" class="chapter" lang="fr"><div class="titlepage"><div><div><h1 class="title"><a id="ch-information"></a>Chapitre 5. Problèmes à connaître pour Jessie</h1></div></div></div><div class="toc"><p><strong>Table des matières</strong></p><dl class="toc"><dt><span class="section"><a href="ch-information.fr.html#limited-security-support">5.1. Limitations de la prise en charge de sécurité</a></span></dt><dd><dl><dt><span class="section"><a href="ch-information.fr.html#browser-security">5.1.1. État de sécurité des navigateurs web</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#libv8">5.1.2. Manque de prise en charge de sécurité pour l'écosystème autour de libv8 et
+Node.js</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#mediawiki-security">5.1.3. Limitation précoce de la prise en charge de sécurité</a></span></dt></dl></dd><dt><span class="section"><a href="ch-information.fr.html#openssh">5.2. Le serveur OpenSSH est réglé par défaut sur « PermitRootLogin
+without-password »</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#puppet">5.3. Compatibilité de Puppet 2.7 et 3.7</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#php-incompat">5.4. La mise à niveau vers PHP 5.6 produit des modifications de son comportement</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#apache-httpd-incomat">5.5. Modifications incompatibles dans Apache HTTPD 2.4</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#systemd-upgrade-default-init-system">5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie</a></span></dt><dd><dl><dt><span class="section"><a href="ch-information.fr.html#systemd-auto-mounts-incompat">5.6.1. Gestion plus stricte des échecs de montage lors du démarrage sous systemd</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#idp60515104">5.6.2. Les scripts de démarrage obsolètes devraient être purgés</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#idp60519120">5.6.3. Les scripts de démarrage modifiés localement peuvent nécessiter d'être
+portés vers systemd</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#plymouth-required-for-boot-prompts">5.6.4. Plymouth nécessaire aux invites de commandes au démarrage pour les
+démarrages sous systemd</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#idp60541200">5.6.5. Interaction entre logind et acpid</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#systemd-cryptsetup-unsupported-features">5.6.6. Fonctionnalités de crypttab non prises en charge sous systemd (par exemple
+"keyscript=...")</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#systemd-sigkill-regression">5.6.7. systemd : envoie des SIGKILL trop tôt (corrigé dans 8.1)</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#systemd-halt-behavior">5.6.8. systemd : comportement de la commande 'halt'</a></span></dt></dl></dd><dt><span class="section"><a href="ch-information.fr.html#required-kernel-config-options">5.7. Options de noyau requises pour Jessie</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#lxc-upgrade-issues">5.8. Considérations au sujet de la mise à niveau des hôtes et conteneurs LXC</a></span></dt><dd><dl><dt><span class="section"><a href="ch-information.fr.html#issues-lxc-wheezy-host">5.8.1. Mettre à niveau des invités LXC tournant sur des hôtes sous Wheezy</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#issues-lxc-jessie-host">5.8.2. Mettre à niveau des invités LXC tournant sur des hôtes sous Jessie</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#issues-lxc-further-docu">5.8.3. Informations supplémentaires</a></span></dt></dl></dd><dt><span class="section"><a href="ch-information.fr.html#cryptsetup-luks-whirlpool">5.9. Migration manuelle de disques chiffrés avec LUKS whirlpool (configurations
+non standard)</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#gnome-3d">5.10. Le bureau GNOME nécessite des graphismes 3D de base</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#gnome-fglrx">5.11. Le bureau GNOME ne fonctionne pas avec le pilote AMD propriétaire FGLRX</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#gnome-shortcuts">5.12. Modifications des raccourcis clavier par défaut de GNOME</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#base-passwd-hardening">5.13. Modifications dans l'interpréteur de commande par défaut pour les
+utilisateurs système fourni par <code class="systemitem">base-passwd</code>.</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#kde-kontact">5.14. Migration vers le nouveau logiciel KDE de courriel, calendrier et contacts
+(Kontact)</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#missing-virtual-consoles">5.15. Consoles virtuelles (« getty ») manquantes avec plusieurs environnements de
+bureau</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#idp60656912">5.16. "Signal VGA hors de portée" / écran noir lors du démarrage avec grub-pc</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#idp60662416">5.17. Validation plus stricte des fichiers cron dans crontab</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#perl-module-load-permissions">5.18. Modification dans la gestion des chemins de modules illisibles <code class="systemitem">perl</code>.</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#ganeti-upgrade-issues">5.19. Considérations au sujet de la mise à niveau des grappes Ganeti</a></span></dt><dd><dl><dt><span class="section"><a href="ch-information.fr.html#ganeti-upgrade-DRBD-UUIDs">5.19.1. Problème lors de la mise à niveau de grappes Ganeti avec les instances
+basées sur DRBD (corrigé dans 8.1).</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#ganeti-upgrade-general">5.19.2. Notes générales à propos de la mise à niveau des grappes Ganeti</a></span></dt></dl></dd><dt><span class="section"><a href="ch-information.fr.html#idp60683024">5.20. Nouveaux prérequis pour l'exécution de fichier dans Samba4</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#cryptsetup-busybox">5.21. Cryptsetup peut casser le démarrage avec BUSYBOX=n</a></span></dt><dt><span class="section"><a href="ch-information.fr.html#squid-incompat">5.22. Modifications incompatibles dans le serveur mandataire Squid</a></span></dt></dl></div><p>
+Parfois, des changements ont des effets de bord que nous ne pouvons pas
+raisonnablement éviter sans nous exposer à des bogues à un autre
+endroit. Cette section documente les problèmes que nous
+connaissons. Veuillez également lire l'errata, la documentation des paquets
+concernés, les rapports de bogues et les autres sources d'informations
+mentionnées en <a class="xref" href="ch-moreinfo.fr.html#morereading" title="6.1. Lectures pour aller plus loin">Section 6.1, « Lectures pour aller plus loin »</a>.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="limited-security-support"></a>5.1. Limitations de la prise en charge de sécurité</h2></div></div></div><p>
+    Il y a certains paquets pour lesquels Debian ne peut pas garantir de
+rétroportages de base pour les problèmes de sécurité. Ceux-ci sont couverts
+dans les sous-sections suivantes.
+  </p><p>
+    Veuillez noter que le paquet <code class="systemitem">debian-security-support</code><a id="idp60415200" class="indexterm"></a>, introduit dans
+Jessie, aide à suivre le statut de la prise en charge du suivi de
+sécurité des paquets installés.
+  </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="browser-security"></a>5.1.1. État de sécurité des navigateurs web</h3></div></div></div><p>
+Debian 8 inclut plusieurs moteurs de navigateur web qui sont
+affectés par un flot continu de vulnérabilités de sécurité. Ce taux élevé de
+vulnérabilités ainsi que le manque partiel de prise en charge amont sous la
+forme de branches maintenues à long terme rendent difficiles les corrections
+de sécurité rétroportées. De plus, les interdépendances des bibliothèques
+rendent impossible la mise à niveau vers une nouvelle version. Par
+conséquent les navigateurs basés sur les moteurs webkit, qtwebkit et khtml
+sont inclus dans Jessie mais ne sont pas couverts par une prise en
+charge complète de la sécurité. Ces navigateurs ne devraient pas être
+utilisés sur des sites web non fiables.
+</p><p>
+Pour un usage général de navigation web, nous recommandons Iceweasel et
+Chromium.
+</p><p>
+Chromium − bien qu'il soit construit sur Webkit − est un paquet sans
+dépendance, qui sera maintenu à jour en reconstruisant les versions
+actuelles de Chromium pour stable. Iceweasel et Icedove seront également
+maintenus à jour en reconstruisant les versions ESR actuelles pour stable.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="libv8"></a>5.1.2. Manque de prise en charge de sécurité pour l'écosystème autour de libv8 et
+Node.js</h3></div></div></div><p>
+   La plate-forme Node.js est construite sur <code class="systemitem">libv8-3.14</code><a id="idp60422464" class="indexterm"></a> qui souffre d'un grand nombre de
+problèmes de sécurité, mais le projet et l'équipe de sécurité manquent de
+volontaires suffisamment intéressés et souhaitant investir beaucoup de temps
+pour corriger ces problèmes.
+</p><p>
+   Malheureusement, cela signifie que <code class="systemitem">libv8-3.14</code><a id="idp60425024" class="indexterm"></a>, <code class="systemitem">nodejs</code><a id="idp60426688" class="indexterm"></a> et l'écosystème de paquets node-* associé
+ne devraient pas être actuellement utilisés avec du contenu non sûr, par
+exemple des données non validées depuis Internet.
+</p><p>
+   De plus, ces paquets ne recevront aucune mise à jour de sécurité pendant la
+durée de vie de la distribution Jessie.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="mediawiki-security"></a>5.1.3. Limitation précoce de la prise en charge de sécurité</h3></div></div></div><p>
+  La prise en charge en amont de la sécurité pour la version 1.19 de
+<code class="systemitem">mediawiki</code><a id="idp60431088" class="indexterm"></a> prendra fin pendant le
+cycle de vie de Jessie. Le paquet <code class="systemitem">mediawiki</code><a id="idp60432832" class="indexterm"></a> est inclus dans Jessie afin de
+satisfaire les dépendances d'autres paquets.
+</p><p>
+  La prise en charge de la sécurité de <code class="systemitem">mediawiki</code>
+prendra fin en même temps que celle de Wheezy en avril 2016.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="openssh"></a>5.2. Le serveur OpenSSH est réglé par défaut sur « PermitRootLogin
+without-password »</h2></div></div></div><p>
+    Afin de renforcer la sécurité de l'installation par défaut, la configuration
+de <code class="systemitem">openssh-server</code><a id="idp60437920" class="indexterm"></a> est maintenant
+réglée avec « PermitRootLogin without-password » par défaut. Si vous
+utilisez l'authentification par mot de passe pour l'utilisateur
+<code class="literal">root</code>, vous pourriez être affecté par ce changement.
+  </p><p>
+    <code class="systemitem">openssh-server</code><a id="idp60441120" class="indexterm"></a> essaiera de détecter
+de tels cas et augmentera la priorité de son invite debconf.
+  </p><p>
+    Si vous souhaitez conserver l'authentification par mot de passe pour
+l'utilisateur <code class="literal">root</code>, vous pouvez également pré-répondre à
+cette question en utilisant :
+    </p><pre class="screen">
+# La valeur « false » est correcte même si elle prête à confusion.
+ $ echo 'openssh-server openssh-server/permit-root-login boolean false' | debconf-set-selections
+</pre><p>
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="puppet"></a>5.3. Compatibilité de Puppet 2.7 et 3.7</h2></div></div></div><p>
+  Si vous utilisez Puppet, soyez conscient que Puppet 3.7 n'est pas
+rétrocompatible avec Puppet 2.7. Entre autres choses, les règles de portée
+(« scoping ») ont changé et beaucoup de constructions dépréciées ont été
+supprimées. Veuillez consulter <a class="ulink" href="https://docs.puppetlabs.com/puppet/3/reference/release_notes.html#puppet-300" target="_top">les
+notes de publication de Puppet 3.x</a> pour quelques-unes des
+modifications, mais gardez à l'esprit qu'il y en a davantage dans la
+version 3.7.
+</p><p>
+  Vérifier les fichiers de journaux de votre puppetmaster actuel à la
+recherche d'avertissements de dépréciation et résoudre tous ces
+avertissements avant de procéder à la mise à niveau simplifiera grandement
+les choses. Autrement ou en complément, le test des manifestes avec un outil
+comme <a class="ulink" href="https://github.com/duritong/puppet_catalog_test" target="_top">le test
+de catalogue de Puppet</a> pourrait également trouver des problèmes
+potentiels avant la mise à niveau.
+</p><p>
+  Lors de la mise à niveau de Wheezy vers Jessie d'un système géré par Puppet,
+assurez-vous que le puppetmaster correspondant utilise au moins la
+version 3.7. Si le maître fonctionne avec le <code class="systemitem">puppetmaster</code><a id="idp60451184" class="indexterm"></a> de Wheezy, le système géré sous
+Jessie ne sera pas capable de s'y connecter.
+</p><p>
+  Pour davantage d'informations sur les changements d'incompatibilité,
+veuillez consulter <a class="ulink" href="https://projects.puppetlabs.com/projects/puppet/wiki/Telly_Upgrade_Issues" target="_top">les
+problèmes de mise à niveau Telly</a> et <a class="ulink" href="http://somethingsinistral.net/blog/the-angry-guide-to-puppet-3/" target="_top">« The
+Angry Guide to Puppet 3 »</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="php-incompat"></a>5.4. La mise à niveau vers PHP 5.6 produit des modifications de son comportement</h2></div></div></div><p>
+    La mise à niveau vers Jessie comprend une mise à niveau de PHP de la
+version 5.4 vers la version 5.6. Cela pourrait affecter tous les scripts PHP
+locaux et il vous est recommandé de vérifier ces scripts avant de mettre à
+niveau. Un sous-ensemble de ces problèmes est présenté ci-dessous :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+        Pour prévenir les attaques de type « homme du milieu » sur les transferts
+chiffrés, les flux clients vérifient dorénavant les certificats des pairs
+par défaut.
+      </p><p>
+        En résultat de ces changements, un code existant utilisant des enveloppes de
+flux ssl:// ou tls:// (par exemple file_get_contents(), fsockopen() et
+stream_socket_client()) pourrait ne plus réussir à se connecter sans
+désactiver manuellement la vérification des pairs grâce au réglage
+« verify_peer » du contexte de flux.
+      </p><p>
+        Pour davantage d'informations sur ces problèmes particuliers, veuillez lire
+<a class="ulink" href="https://wiki.php.net/rfc/tls-peer-verification" target="_top">ce
+document</a>
+      </p></li><li class="listitem"><p>
+        PHP modifie la gestion de l'insensibilité à la casse dans de nombreux cas :
+      </p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>
+            Toute gestion de l'insensibilité à la casse pour les noms de classes,
+fonctions et constantes se fait d'après les règles ASCII. Les réglages de la
+locale actuelle sont ignorés.
+          </p></li><li class="listitem"><p>
+            Les mots-clés « self », « parent » et « static » sont dorénavant toujours
+insensibles à la casse.
+          </p></li><li class="listitem"><p>
+            La fonction json_decode() n'accepte plus les variantes non minuscules des
+valeurs booléennes.
+          </p></li></ul></div></li><li class="listitem"><p>
+        Les fonctions de GUID logo (comme php_logo_guid()) ont été supprimées.
+      </p></li><li class="listitem"><p>
+        Il n'est plus possible d'écraser les clés dans les tableaux scalaires
+statiques. Veuillez consulter le <a class="ulink" href="https://bugs.php.net/bug.php?id=66015" target="_top">bogue 66015 de PHP</a> pour
+un exemple et plus d'informations sur ce problème.
+      </p></li><li class="listitem"><p>
+        Les fonctions mcrypt_encrypt(), mcrypt_decrypt() et mcrypt_{MODE}()
+n'acceptent plus les clés ou vecteurs d'initialisation de taille
+incorrecte. De plus, un vecteur d'initialisation est maintenant nécessaire
+si l'algorithme de bloc utilisé le nécessite.
+      </p></li><li class="listitem"><p>
+        Pour des raisons d'ordre légal, l'implémentation de JSON fournie avec PHP a
+été remplacée par la version fournie par le module PECL « jsonc ». Tout code
+faisant des suppositions au sujet de détails d'implémentation de
+l'interpréteur JSON de PHP devrait être revu.
+      </p></li><li class="listitem"><p>
+        Le réglage "short_open_tag" est maintenant désactivé par défaut. Il est
+prévu de supprimer les variantes ASP des tags courts ("&lt;?" et "?&gt;")
+dans PHP7.
+      </p></li></ul></div><p>
+    Pour plus d'informations ou la liste complète des problèmes potentiels,
+veuillez consulter la liste amont des modifications qui ne sont pas
+rétrocompatibles pour PHP pour les versions <a class="ulink" href="https://php.net/manual/en/migration55.incompatible.php" target="_top">5.5</a> et
+<a class="ulink" href="https://php.net/manual/en/migration56.incompatible.php" target="_top">5.6</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="apache-httpd-incomat"></a>5.5. Modifications incompatibles dans Apache HTTPD 2.4</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Cette section ne s'applique qu'aux systèmes sur lesquels un serveur HTTPD
+Apache est installé et configuré manuellement.
+    </p></td></tr></table></div><p>
+    De nombreux changements ont eu lieu dans la configuration du serveur HTTPD
+Apache dans sa version 2.4. Du côté amont, la syntaxe a changé. Notamment,
+les directives de contrôle d'accès ont considérablement changé et
+nécessiteront une migration manuelle vers les nouvelles directives.
+  </p><p>
+    Le module <code class="literal">mod_access_compat</code> est mentionné dans le guide
+amont de mise à niveau comme une alternative possible à la migration
+immédiate. Cependant, les rapports laissent penser que cela ne fonctionne
+pas toujours.
+  </p><p>
+    La gestion des fichiers de configuration a également changé dans le paquet
+Debian. En particulier, tous les fichiers de configuration et les sites
+doivent maintenant se terminer par « .conf » pour être interprétés par
+défaut. Cette modification remplace également l'usage actuel de
+<code class="filename">/etc/apache2/conf.d/</code>.
+  </p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Lors de la mise à niveau, vous pourriez également voir des avertissements
+concernant les fichiers de configuration placés dans
+<code class="filename">/etc/apache2/conf.d/</code> qui sont fournis par des paquets
+de Debian. Cet avertissement est inévitable mais sans danger car les paquets
+affectés déplaceront leur configuration quand leur mise à niveau sera
+terminée (ce qui se produit généralement après l'envoi de l'avertissement
+par le serveur HTTP Apache).
+    </p></td></tr></table></div><p>
+    Pour davantage d'informations et la liste complète des modifications,
+veuillez vous référer à :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="ulink" href="http://httpd.apache.org/docs/2.4/upgrading.html" target="_top">Upgrading to
+2.4 from 2.2</a> fourni par Apache pour la partie amont.
+      </p></li><li class="listitem"><p>
+        Le fichier <code class="filename">/usr/share/doc/apache2/NEWS.Debian.gz</code> fourni
+par le paquet <code class="systemitem">apache2</code><a id="idp60487264" class="indexterm"></a>.
+      </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="systemd-upgrade-default-init-system"></a>5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie</h2></div></div></div><p>
+    Jessie est livrée avec <code class="systemitem">systemd-sysv</code><a id="idp60490928" class="indexterm"></a>
+en tant que système d'initialisation par <span class="emphasis"><em>défaut</em></span>. Ce
+paquet est automatiquement installé lors d’une mise à niveau.
+  </p><p>
+    Si vous avez une préférence pour un autre système comme <code class="systemitem">sysvinit-core</code><a id="idp60493792" class="indexterm"></a> ou <code class="systemitem">upstart</code><a id="idp60495488" class="indexterm"></a>, il est recommandé de régler le pinning
+d'APT avant la mise à niveau. Cela peut également être nécessaire si vous
+mettez à niveau des conteneurs LXC avant leur hôte. Dans ce cas, veuillez
+vous référer à <a class="xref" href="ch-information.fr.html#issues-lxc-wheezy-host" title="5.8.1. Mettre à niveau des invités LXC tournant sur des hôtes sous Wheezy">Section 5.8.1, « Mettre à niveau des invités LXC tournant sur des hôtes sous Wheezy »</a>.
+  </p><p>Par exemple, pour empêcher <code class="systemitem">systemd-sysv</code><a id="idp60498624" class="indexterm"></a> d'être installé lors de la mise à
+niveau, vous pouvez créer un fichier nommé
+<code class="filename">/etc/apt/preferences.d/local-pin-init</code> ayant le contenu
+suivant :
+  </p><pre class="screen">
+Package: systemd-sysv
+Pin: release o=Debian
+Pin-Priority: -1
+</pre><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Attention]" src="images/caution.png" /></td><th align="left">Attention</th></tr><tr><td align="left" valign="top"><p>
+      Soyez averti que certains paquets pourraient avoir un comportement affecté
+ou pourraient ne pas avoir toutes leurs fonctionnalités sous un autre
+système d'initialisation que celui par défaut.
+    </p></td></tr></table></div><p>
+    Veuillez noter que la mise à niveau pourrait installer des paquets contenant
+« systemd » dans leur nom malgré le pinning APT. Ces paquets seuls ne
+peuvent <span class="emphasis"><em>pas</em></span> changer votre système
+d'initialisation. Pour utiliser systemd comme système d'initialisation, le
+paquet <code class="systemitem">systemd-sysv</code><a id="idp60504528" class="indexterm"></a> doit d'abord
+être installé.
+  </p><p>
+    Si APT ou aptitude a des difficultés à calculer un chemin de mise à niveau
+avec le pinning mis en place, vous pouvez l'aider en installant manuellement
+<code class="systemitem">sysvinit-core</code><a id="idp60506992" class="indexterm"></a> et <code class="systemitem">systemd-shim</code><a id="idp60508688" class="indexterm"></a>.
+  </p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd-auto-mounts-incompat"></a>5.6.1. Gestion plus stricte des échecs de montage lors du démarrage sous systemd</h3></div></div></div><p>
+    Le nouveau système d'initialisation par défaut, <code class="systemitem">systemd-sysv</code><a id="idp60511984" class="indexterm"></a>, gère les échecs de montages
+« auto » de façon plus stricte que ne le fait sysvinit. S'il échoue à monter
+un montage « auto » (sans l'option « nofail »), systemd lancera un shell
+d'urgence au lieu de poursuivre le démarrage.
+  </p><p>
+    Nous recommandons que tous les points de montage démontables ou optionnels
+(« optional ») listés dans <code class="filename">/etc/fstab</code>, tels que les
+disques réseau non critiques, aient l'option « noauto » ou « nofail ».
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp60515104"></a>5.6.2. Les scripts de démarrage obsolètes devraient être purgés</h3></div></div></div><p>
+    Si vous faites une mise à niveau depuis une distribution précédente, votre
+système peut contenir des scripts de démarrage fournis par des paquets
+(désormais) supprimés. Ces scripts pourraient avoir des métadonnées
+imprécises ou sans dépendance, ce qui peut mener à des cycles de dépendance
+dans votre configuration de démarrage.
+  </p><p>
+    Afin d'éviter cela, nous vous recommandons de regarder la liste des paquets
+se trouvant dans l'état « rc » (« supprimés, mais ayant encore des fichiers
+de configuration ») et de purger au moins ceux ayant des scripts de
+démarrage.
+  </p><p>
+    Veuillez consulter <a class="xref" href="ch-upgrading.fr.html#purge-removed-packages" title="4.8.1. Purger les paquets supprimés">Section 4.8.1, « Purger les paquets supprimés »</a> pour de plus
+amples détails sur la façon de trouver et purger les paquets supprimés.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp60519120"></a>5.6.3. Les scripts de démarrage modifiés localement peuvent nécessiter d'être
+portés vers systemd</h3></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Cette section ne concerne que les systèmes dans lesquels les scripts de
+démarrage fournis par Debian ont été modifiés localement.
+    </p></td></tr></table></div><p>
+    Si vous avez modifié certains de vos scripts de démarrage fournis par
+Debian, sachez que ceux-ci pourraient avoir été remplacés par un fichier
+unit de systemd ou par systemd lui-même. Si debsums est installé, vous
+pouvez vérifier les scripts de démarrage modifiés localement en utilisant la
+commande suivante :
+  </p><pre class="screen">
+debsums -c -e | grep ^/etc/init.d
+</pre><p>Autrement, la commande suivante peut-être utilisée en l'absence de debsums.
+  </p><pre class="screen">
+dpkg-query --show -f'${Conffiles}' | sed 's, /,\n/,g' | \
+  grep /etc/init.d | awk 'NF,OFS="  " {print $2, $1}' | \
+  md5sum --quiet -c
+</pre><p>
+    Si l'une de ces commandes désigne des fichiers et leurs paquets
+correspondants <span class="emphasis"><em>ou</em></span> que <code class="systemitem">systemd</code><a id="idp60525872" class="indexterm"></a> fournit désormais un fichier unit pour
+ce service, le fichier unit de systemd aura la priorité sur votre script de
+démarrage modifié localement. En fonction de la nature de la modification,
+il existe différentes manières d'effectuer la migration.
+  </p><p>
+    Au besoin, il est possible de passer outre le fichier unit de systemd pour
+le faire lancer le script de démarrage. Pour davantage d'informations sur
+les fichiers unit systemd, veuillez consulter les ressources suivantes :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+        <a class="ulink" href="http://0pointer.de/blog/projects/systemd-for-admins-3.html" target="_top">
+Comment convertir un script de démarrage SysV en un fichier de service
+systemd ? </a>
+      </p></li><li class="listitem"><p>
+        <a class="ulink" href="http://0pointer.de/public/systemd-man/systemd.special.html" target="_top">systemd.special
+— Special systemd units</a>
+      </p></li><li class="listitem"><p><a class="ulink" href="http://www.freedesktop.org/wiki/Software/systemd/MyServiceCantGetRealtime/" target="_top">Mon
+service ne peut pas être en temps réel !</a> (contient également une
+brève mention sur l'invocation des scripts de démarrage à partir de fichiers
+unit)</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="plymouth-required-for-boot-prompts"></a>5.6.4. Plymouth nécessaire aux invites de commandes au démarrage pour les
+démarrages sous systemd</h3></div></div></div><p>
+    Si votre démarrage est interactif (par exemple, nécessite un mot de passe
+pour un disque chiffré), veuillez vous assurer d'avoir installé <span class="emphasis"><em>et
+configuré</em></span> <code class="systemitem">plymouth</code><a id="idp60536640" class="indexterm"></a>. Veuillez consulter
+<code class="filename">/usr/share/doc/plymouth/README.Debian</code> pour des
+informations concernant l'installation de plymouth.
+  </p><p>
+    Sans <code class="systemitem">plymouth</code><a id="idp60539536" class="indexterm"></a>, il se pourrait que
+votre invite de commande au démarrage disparaisse. Les rapports suggèrent
+que l'invite de cryptsetup accepte toujours les entrées bien qu'elle ne soit
+pas visible. Si vous rencontriez ce problème, taper le bon mot de passe
+devrait toujours fonctionner.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp60541200"></a>5.6.5. Interaction entre logind et acpid</h3></div></div></div><p>
+    Les événements ACPI peuvent être gérés par logind ou acpid. Dans le cas où
+les deux services sont configurés pour gérer les événements de différentes
+manières, des résultats non désirés peuvent se produire.
+  </p><p>
+    Nous recommandons de migrer tout réglage n'étant pas par défaut vers logind
+et de désinstaller acpid. Autrement, il est également possible de configurer
+logind pour ignorer les événements ACPI en ajoutant :
+  </p><pre class="screen">
+HandlePowerKey=ignore
+HandleSuspendKey=ignore
+HandleHibernateKey=ignore
+HandleLidSwitch=ignore
+</pre><p>
+    au fichier <code class="filename">/etc/systemd/logind.conf</code>. Veuillez noter que
+cela pourrait modifier le comportement des environnements de bureau se
+basant sur logind.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd-cryptsetup-unsupported-features"></a>5.6.6. Fonctionnalités de crypttab non prises en charge sous systemd (par exemple
+"keyscript=...")</h3></div></div></div><p>
+    Certaines options de cryptsetup ne sont malheureusement pas prises en charge
+lorsque le système d'initialisation est systemd. Ces fonctionnalités sont :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>precheck</p></li><li class="listitem"><p>check</p></li><li class="listitem"><p>checkargs</p></li><li class="listitem"><p>noearly</p></li><li class="listitem"><p>loud</p></li><li class="listitem"><p>keyscript</p></li></ul></div><p>
+    Si votre système dépend d'une des ces options pour démarrer, vous devrez
+utiliser sysvinit (<code class="systemitem">sysvinit-core</code><a id="idp60554096" class="indexterm"></a>)
+comme système de démarrage. Veuillez consulter <a class="xref" href="ch-information.fr.html#systemd-upgrade-default-init-system" title="5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de Jessie">Section 5.6, « La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie »</a> pour savoir comment éviter
+un système de démarrage en particulier.
+  </p><p>
+    Vous pouvez vérifier si une de ces options est utilisée dans votre système
+en lançant la commande suivante :
+  </p><pre class="screen">
+grep -e precheck -e check -e checkargs -e noearly -e loud -e keyscript /etc/crypttab
+</pre><p>
+    Si rien ne s'affiche en sortie de cette commande, votre système n'utilise
+aucune des options concernées.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd-sigkill-regression"></a>5.6.7. systemd : envoie des SIGKILL trop tôt (corrigé dans 8.1)</h3></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Ce problème a été corrigé dans la version mineure 8.1 de Jessie.
+    </p></td></tr></table></div><p>
+    Une régression a été rapportée dans systemd après la distribution de
+Jessie. Le bogue se produit à l'extinction ou au redémarrage pendant
+lesquels systemd n'attend pas suffisamment longtemps avant d'envoyer des
+SIGKILL aux processus. Cela peut conduire à la perte de données dans les
+processus n'ayant pas sauvegardé toutes leurs données au moment du
+redémarrage (par exemple les bases de données).
+  </p><p>
+    Le problème est suivi dans le <a class="ulink" href="https://bugs.debian.org/783297" target="_top">bogue
+nº 784720</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd-halt-behavior"></a>5.6.8. systemd : comportement de la commande 'halt'</h3></div></div></div><p>
+    L'implémentation par <code class="systemitem">sysvinit</code><a id="idp60564576" class="indexterm"></a> de la
+commande <span class="command"><strong>halt</strong></span> éteignait la machine. L'implémentation par
+<code class="systemitem">systemd-sysv</code><a id="idp60567072" class="indexterm"></a> arrête le système mais
+n'éteint pas la machine. Pour couper le système et éteindre la machine, la
+commande <span class="command"><strong>poweroff</strong></span> doit être utilisée.
+  </p><p>
+    Veuillez également consulter le <a class="ulink" href="https://bugs.debian.org/783297" target="_top">bogue
+nº 760923</a>.
+  </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="required-kernel-config-options"></a>5.7. Options de noyau requises pour Jessie</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Cette section est dédiée aux personnes qui compilent leur propre noyau. Si
+vous utilisez les noyaux compilés par Debian, vous pouvez ignorer cette
+section.
+    </p></td></tr></table></div><p>
+    Les options suivantes de configuration du noyau sont maintenant requises ou
+recommandées pour Jessie (en plus des options déjà présentes dans les
+distributions antérieures) :
+  </p><pre class="screen">
+# Requis par udev
+CONFIG_DEVTMPFS=y
+# Requis par *certains* services systemd
+CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+# Requis par "bluez" (GNOME)
+CONFIG_BT=y
+# Requis par cups + systemd.
+CONFIG_PPDEV=y
+</pre><p>
+    Les services systemd nécessitant CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+contiennent généralement au moins une des directives suivantes :
+  </p><pre class="screen">
+PrivateTmp=yes
+PrivateDevices=yes
+PrivateNetwork=yes
+ProtectSystem=yes
+</pre><p>
+    Si vous n'utilisez pas systemd ou savez qu'aucun des services de systemd
+n'utilise les directives mentionnées, l'option de configuration peut ne pas
+être nécessaire à votre système.
+  </p><p>
+    Pour plus d'informations au sujet des prérequis, veuillez vous référer à la
+section "REQUIREMENTS" du fichier <a class="ulink" href="https://sources.debian.net/src/systemd/jessie/README/" target="_top">README</a>
+dans le paquet <code class="systemitem">systemd</code><a id="idp60578624" class="indexterm"></a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="lxc-upgrade-issues"></a>5.8. Considérations au sujet de la mise à niveau des hôtes et conteneurs LXC</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+    Cette section ne concerne que les systèmes ayant des conteneurs et hôtes
+LXC. Les utilisateurs normaux n'en ont normalement pas.
+  </p></td></tr></table></div><p>
+La mise à niveau de Wheezy vers Jessie fera migrer votre système vers le
+système de démarrage systemd par défaut (voir <a class="xref" href="ch-information.fr.html#systemd-upgrade-default-init-system" title="5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de Jessie">Section 5.6, « La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie »</a>).
+</p><p>
+Lors de la migration d'un conteneur ou une machine virtuelle LXC, celle-ci
+aura différentes conséquences selon que le <span class="emphasis"><em>système hôte</em></span>
+a déjà été mis à niveau vers Jessie ou non.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="issues-lxc-wheezy-host"></a>5.8.1. Mettre à niveau des invités LXC tournant sur des hôtes sous Wheezy</h3></div></div></div><p>
+  Si vous mettez à niveau un conteneur invité LXC tournant sur un système
+<span class="emphasis"><em>hôte sous Wheezy</em></span>, il vous faudra empêcher l'invité de
+migrer automatiquement vers systemd. Cela est faisable grâce au pinning,
+décrit dans <a class="xref" href="ch-information.fr.html#systemd-upgrade-default-init-system" title="5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de Jessie">Section 5.6, « La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie »</a>. 
+</p><p>
+  Ceci est nécessaire car l'hôte sous Wheezy n'a pas les fonctionnalités
+permettant de faire démarrer un systèmes utilisant systemd.
+</p><p>
+  Vous devriez être capable de passer à systemd dans un invité LXC après avoir
+mis à niveau le système <span class="emphasis"><em>hôte</em></span> vers Jessie. Veuillez lire
+le paragraphe suivant pour savoir ce qui doit être adapté sur les hôtes sous
+Jessie.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="issues-lxc-jessie-host"></a>5.8.2. Mettre à niveau des invités LXC tournant sur des hôtes sous Jessie</h3></div></div></div><p>
+  Afin de pouvoir démarrer des invités LXC avec systemd, vous devez adapter la
+configuration de votre conteneur LXC. La configuration du conteneur se
+trouve généralement dans
+<code class="filename">/var/lib/lxc/<em class="replaceable"><code>NOM_DU_CONTENEUR</code></em>/config</code>.
+Vous devez ajouter les réglages suivants à la configuration :
+</p><pre class="screen">
+lxc.autodev = 1
+lxc.kmsg = 0
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="issues-lxc-further-docu"></a>5.8.3. Informations supplémentaires</h3></div></div></div><p>
+  Vous pouvez trouver de plus amples informations sur LXC dans Debian dans le
+<a class="ulink" href="https://wiki.debian.org/LXC" target="_top">wiki Debian</a>.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="cryptsetup-luks-whirlpool"></a>5.9. Migration manuelle de disques chiffrés avec LUKS whirlpool (configurations
+non standard)</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Cette section est dédiée aux personnes ayant installé elles-mêmes des
+disques chiffrés avec LUKS en utilisant le hachage whirlpool. L'installateur
+Debian n'a <span class="emphasis"><em>jamais</em></span> géré la création de tels disques.
+    </p></td></tr></table></div><p>
+    Si vous avez configuré <span class="emphasis"><em>manuellement</em></span> un disque chiffré
+avec LUKS whirlpool, vous aurez besoin de le migrer manuellement vers un
+hachage plus fort. Vous pouvez vérifier si votre disque utilise whirlpool
+avec la commande suivante :
+  </p><pre class="screen">
+# /sbin/cryptsetup luksDump <em class="replaceable"><code>&lt;disk-device&gt;</code></em> | grep -i whirlpool
+</pre><p>
+    Pour davantage d'information sur la migration, veuillez consulter l'élément
+« 8.3 Gcrypt 1.6.x and later break Whirlpool » de la <a class="ulink" href="https://code.google.com/p/cryptsetup/wiki/FrequentlyAskedQuestions" target="_top">FAQ
+cryptsetup</a>.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Attention]" src="images/caution.png" /></td><th align="left">Attention</th></tr><tr><td align="left" valign="top"><p>
+      Si vous avez un tel disque, <code class="systemitem">cryptsetup</code><a id="idp60603680" class="indexterm"></a> refusera de le déchiffrer par
+défaut. Si votre disque racine ou d'autres disques système (par exemple
+/usr) sont chiffrés avec whirlpool, vous devriez les migrer avant le premier
+redémarrage suivant la mise à niveau de <code class="systemitem">cryptsetup</code><a id="idp60605808" class="indexterm"></a>.
+    </p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="gnome-3d"></a>5.10. Le bureau GNOME nécessite des graphismes 3D de base</h2></div></div></div><p>
+    Le bureau GNOME 3.14 de Jessie ne propose plus de prise en charge de secours
+pour les machines ne disposant pas de graphismes 3D de base. Pour
+fonctionner correctement, il nécessite soit un PC suffisamment récent (toute
+machine fabriquée ces 10 dernières années devrait avoir la prise en charge
+requise de SSE2) ou, pour les architectures autres qu'i386 et amd64, un
+adaptateur graphique 3D accéléré avec les pilotes EGL.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="gnome-fglrx"></a>5.11. Le bureau GNOME ne fonctionne pas avec le pilote AMD propriétaire FGLRX</h2></div></div></div><p>
+    Contrairement aux autres pilotes OpenGL, le pilote AMD FGLRX pour les
+adaptateurs Radeon ne prend pas en charge l'interface EGL. Ainsi, plusieurs
+applications GNOME, dont le cœur du bureau GNOME, ne démarreront pas du tout
+quand ce driver sera utilisé.
+  </p><p>
+    Il est recommandé d'utiliser à la place le pilote libre
+<code class="literal">radeon</code>, qui est le pilote par défaut de Jessie.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="gnome-shortcuts"></a>5.12. Modifications des raccourcis clavier par défaut de GNOME</h2></div></div></div><p>
+    Les raccourcis clavier par défaut du bureau GNOME ont changé afin de mieux
+correspondre à ceux utilisés sur d'autres systèmes d'exploitation.
+  </p><p>
+    Les réglages de raccourcis clavier précédemment modifiés par l'utilisateur
+seront préservés lors de la mise à niveau. Ces réglages peuvent encore être
+configurés depuis le centre de contrôle de GNOME, accessible dans le menu en
+haut à droite en cliquant sur l'icône « configuration ».
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="base-passwd-hardening"></a>5.13. Modifications dans l'interpréteur de commande par défaut pour les
+utilisateurs système fourni par <code class="systemitem">base-passwd</code><a id="idp60617456" class="indexterm"></a>.</h2></div></div></div><p>
+    La mise à niveau du paquet <code class="systemitem">base-passwd</code><a id="idp60619584" class="indexterm"></a> réinitialisera l'invite de commande
+de certains utilisateurs système à l'interpréteur de commande
+« nologin ». Sont concernés les utilisateurs suivants :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>daemon</p></li><li class="listitem"><p>bin</p></li><li class="listitem"><p>sys</p></li><li class="listitem"><p>sync</p></li><li class="listitem"><p>games</p></li><li class="listitem"><p>man</p></li><li class="listitem"><p>lp</p></li><li class="listitem"><p>mail</p></li><li class="listitem"><p>news</p></li><li class="listitem"><p>uucp</p></li><li class="listitem"><p>proxy</p></li><li class="listitem"><p>www-data</p></li><li class="listitem"><p>backup</p></li><li class="listitem"><p>list</p></li><li class="listitem"><p>irc</p></li><li class="listitem"><p>gnats</p></li><li class="listitem"><p>nobody</p></li></ul></div><p>
+    Si votre installation locale nécessite qu'un de ces utilisateurs ait un
+interpréteur de commande, vous devriez refuser la migration ou bien migrer
+puis changer l'interpréteur des utilisateurs correspondants. Des exemples
+notables incluent les sauvegardes locales faites avec l'utilisateur
+« backup » avec une authentification par « ssh-key ».
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Attention]" src="images/caution.png" /></td><th align="left">Attention</th></tr><tr><td align="left" valign="top"><p>
+      La migration se fera automatiquement si la priorité de votre question
+debconf est « high » ou plus.
+    </p></td></tr></table></div><p>
+      Si vous savez que vous souhaitez conserver l'interpréteur de commande d'un
+utilisateur donné, vous pouvez pré-répondre à cette question en utilisant :
+  </p><pre class="screen">
+echo 'base-passwd base-passwd/system/<em class="replaceable"><code>nom_utilisateur</code></em>/shell/<em class="replaceable"><code>shell-actuel-modifié</code></em>/_usr_sbin_nologin boolean false' | debconf-set-selections
+</pre><p>
+    Où <em class="replaceable"><code>nom_utilisateur</code></em> est le nom de l'utilisateur en
+question et <em class="replaceable"><code>shell_actuel_modifié</code></em> est le nom
+tronqué de l'interpréteur. La modification se fait en remplaçant tous les
+caractères qui ne sont pas alphanumériques, tiret ou underscore, par des
+underscores. Par exemple, /bin/bash devient _bin_bash.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="kde-kontact"></a>5.14. Migration vers le nouveau logiciel KDE de courriel, calendrier et contacts
+(Kontact)</h2></div></div></div><p>
+    Le système Kontact de gestion d'informations personnelles a subi une mise à
+niveau majeure. La nouvelle version utilise beaucoup plus l'indexation des
+métadonnées et les données de chaque utilisateur doivent être migrées vers
+ce nouvel index.
+  </p><p>
+    Courriels, événements du calendrier et contacts du carnet d'adresse sont
+automatiquement migrés lorsque l'utilisateur se connecte et que le composant
+associé est lancé. Certains réglages avancés tels que les filtres de
+courriel et les templates personnalisés nécessitent une intervention
+manuelle. De plus amples détails et des suggestions de solutions aux
+problèmes sont réunies dans le <a class="ulink" href="https://wiki.debian.org/KDE/Jessie/kontact" target="_top">wiki Debian</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="missing-virtual-consoles"></a>5.15. Consoles virtuelles (« getty ») manquantes avec plusieurs environnements de
+bureau</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Ce problème est marqué comme corrigé dans Jessie. Si vous êtes toujours
+capable de le reproduire, veuillez le rapporter dans le <a class="ulink" href="https://bugs.debian.org/766462" target="_top">bogue nº 766462</a>. Veuillez noter que vous
+pourriez avoir à désarchiver le problème d'abord (veuillez consulter la
+documentation du <a class="ulink" href="https://www.debian.org/Bugs/server-control" target="_top">serveur de contrôle BTS de
+Debian</a> sur la façon de désarchiver les bogues).
+    </p></td></tr></table></div><p>
+    Si vous avez installé plusieurs environnements de bureau, il se peut
+qu'aucune des « consoles virtuelles » ne montre une invite de connexion.
+  </p><p>
+    Ce problème semble se produire lorsque <code class="systemitem">plymouth</code><a id="idp60650992" class="indexterm"></a>, <code class="systemitem">systemd</code><a id="idp60652656" class="indexterm"></a> et GNOME sont tous installés. Ce
+problème est rapporté en tant que <a class="ulink" href="https://bugs.debian.org/766462" target="_top">Bogue Debian
+nº 766462</a>.
+  </p><p>
+     Il a été signalé que supprimer l'argument « splash » de la ligne de commande
+du noyau pourrait permettre de contourner le problème. Veuillez modifier
+<code class="filename">/etc/default/grub</code> et ne pas oublier de lancer
+<code class="literal">update-grub</code> après modification du fichier.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp60656912"></a>5.16. "Signal VGA hors de portée" / écran noir lors du démarrage avec grub-pc</h2></div></div></div><p>
+    Il existe un problème de compatibilité dans <code class="systemitem">grub-pc</code><a id="idp60658912" class="indexterm"></a> avec des cartes graphiques anciennes
+(par exemple la "ATI Rage 128 Pro Ultra TR") qui peut provoquer un écran
+noir lors du démarrage. L'écran peut afficher un message "Signal VGA hors de
+portée" (ou quelque chose de similaire).
+  </p><p>
+    Un contournement simple est de régler
+<code class="literal">GRUB_TERMINAL=console</code> dans
+<code class="filename">/etc/default/grub</code>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp60662416"></a>5.17. Validation plus stricte des fichiers cron dans crontab</h2></div></div></div><p>
+    Le programme <code class="literal">crontab</code> est maintenant plus strict et
+pourrait refuser de sauvegarder un fichier cron si celui-ci est invalide. Si
+vous rencontrez des problèmes avec <code class="literal">crontab -e</code>, veuillez
+vérifiez votre crontab.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="perl-module-load-permissions"></a>5.18. Modification dans la gestion des chemins de modules illisibles <code class="systemitem">perl</code><a id="idp60667152" class="indexterm"></a>.</h2></div></div></div><p>
+     À partir de la version 5.18 (et 5.20, celle incluse dans Jessie), Perl
+s'arrêtera avec une erreur fatale lorsqu'il rencontrera des chemins de
+modules illisibles dans <code class="literal">@INC</code>. Le comportement précédent
+était d'ignorer de telles entrées. Il est recommandé de vérifier le contenu
+de <code class="literal">@INC</code> de votre environnement à la recherche de
+répertoires n'étant pas lisibles par tout le monde et de prendre les mesures
+appropriées.
+  </p><p>
+    Vous pouvez voir le <code class="literal">@INC</code> par défaut de Perl en exécutant
+la commande <span class="command"><strong>perl -V</strong></span>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="ganeti-upgrade-issues"></a>5.19. Considérations au sujet de la mise à niveau des grappes Ganeti</h2></div></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ganeti-upgrade-DRBD-UUIDs"></a>5.19.1. Problème lors de la mise à niveau de grappes Ganeti avec les instances
+basées sur DRBD (corrigé dans 8.1).</h3></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+        Ce problème a été corrigé dans la version mineure 8.1 de Jessie.
+      </p></td></tr></table></div><p>
+       La version de <code class="systemitem">ganeti</code><a id="idp60677152" class="indexterm"></a> (2.12.0-3)
+livrée avec Jessie ne prend pas en charge les migrations depuis les
+installations exécutant la version 2.5 et les versions précédentes (dont
+celle de Wheezy) dans les cas où ce sont des instances ayant des disques
+DRBD. Ce problème devrait être corrigé dans une mise à jour de la
+distribution et il est déconseillé de mettre à niveau les grappes Ganeti
+affectées en attendant. Vous pouvez trouvez de plus amples informations à
+propos de ce problème dans le <a class="ulink" href="https://bugs.debian.org/783186" target="_top">rapport de bogue
+nº 783186</a>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="ganeti-upgrade-general"></a>5.19.2. Notes générales à propos de la mise à niveau des grappes Ganeti</h3></div></div></div><p>
+       La procédure de mise à niveau recommandée d'une grappe Ganeti de la version
+de Wheezy (2.5.2-1) vers celle de Jessie (2.12.0-3) est d'arrêter toutes les
+instances puis de mettre à niveau et redémarrer tous les nœuds en même
+temps. Cela garantira que toutes les instances utilisent la version de
+Jessie de l'hyperviseur et que tous les nœuds utilisent les même versions de
+Ganeti et DRBD.
+    </p><p>
+       Veuillez noter que faire fonctionner une grappe mélangeant des nœuds en
+versions 2.5 et 2.12 n'est pas pris en charge. Veuillez également noter
+qu'en fonction de l'hyperviseur, les migrations à chaud pourraient ne pas
+fonctionner entre les versions d'hyperviseur de Wheezy et Jessie.
+    </p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp60683024"></a>5.20. Nouveaux prérequis pour l'exécution de fichier dans Samba4</h2></div></div></div><p>
+    Si un client demande qu'un fichier soit « ouvert pour exécution », Samba4
+demandera que le bit d'exécution soit activé sur le fichier en plus des
+permissions de lecture habituelles. Cela a aussi pour effet que les scripts
+« netlogon » sont ignorés en silence s'ils n'ont pas ce bit activé.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="cryptsetup-busybox"></a>5.21. Cryptsetup peut casser le démarrage avec BUSYBOX=n</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Cette section ne s'applique qu'aux personnes ayant manuellement modifié leur
+fichier <code class="filename">/etc/initramfr-tools/initramfs.conf</code> pour ne pas
+utiliser busybox.
+    </p></td></tr></table></div><p>
+    Si vous avez <span class="emphasis"><em>à la fois</em></span> <code class="systemitem">busybox</code><a id="idp60689232" class="indexterm"></a> et <code class="systemitem">cryptsetup</code><a id="idp60690928" class="indexterm"></a> installés et configuré initramfs pour
+ne <span class="emphasis"><em>pas</em></span> utiliser busybox, alors votre système pourrait
+ne pas démarrer.
+  </p><p>
+    Veuillez vérifier la valeur de votre réglage de BUSYBOX dans
+<code class="filename">/etc/initramfs-tools/initramfs.conf</code> si ces deux paquets
+sont installés. Pour le moment, les contournements connus sont de
+désinstaller <code class="systemitem">busybox</code><a id="idp60694720" class="indexterm"></a> ou d'utiliser
+le réglage <code class="literal">BUSYBOX=y</code> dans
+<code class="filename">/etc/initramfs-tools/initramfs.conf</code>.
+  </p><div class="warning"><table border="0" summary="Warning"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Avertissement]" src="images/warning.png" /></td><th align="left">Avertissement</th></tr><tr><td align="left" valign="top"><p>
+      Si vous avez dû faire une modification, n'oubliez pas de lancer
+<code class="literal">update-initramfs -u</code> pour mettre à jour votre
+initramfs. Autrement, vous pourriez malgré tout finir avec un démarrage
+cassé.
+    </p></td></tr></table></div><p>
+    Veuillez consulter le <a class="ulink" href="https://bugs.debian.org/783297" target="_top">bogue nº 783297</a>
+pour de plus amples informations.
+  </p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="squid-incompat"></a>5.22. Modifications incompatibles dans le serveur mandataire Squid</h2></div></div></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>Cette section ne s'applique qu'aux systèmes sur lesquels un serveur
+mandataire squid est installé.
+    </p></td></tr></table></div><p>
+    La configuration de squid a été modifiée de manière incompatible avec la
+précédente. En particulier, certains « helpers » de squid ont changé de
+nom. Si votre configuration utilise d'anciennes fonctionnalités ou d'anciens
+noms de « helpers », votre service squid pourrait échouer au démarrage après
+la mise à niveau.
+  </p><p>
+    Veuillez consulter les notes de publications de l'amont pour plus
+d'informations. En anglais :
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><a class="ulink" href="http://www.squid-cache.org/Versions/v3/3.2/RELEASENOTES.html" target="_top">
+Release notes for Squid 3.2</a> (Les helpers renommés peuvent être
+trouvés au chapitre <a class="ulink" href="http://www.squid-cache.org/Versions/v3/3.2/RELEASENOTES.html#ss2.6" target="_top">2.6
+Helper Name Changes</a>)
+        </p></li><li class="listitem"><p><a class="ulink" href="http://www.squid-cache.org/Versions/v3/3.3/RELEASENOTES.html" target="_top">
+Release notes for Squid 3.3</a>
+        </p></li><li class="listitem"><p><a class="ulink" href="http://www.squid-cache.org/Versions/v3/3.4/RELEASENOTES.html" target="_top">
+Release notes for Squid 3.4</a>
+        </p></li></ul></div><p>
+  </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-upgrading.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-moreinfo.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 4. Mises à niveau depuis Debian 7 (Wheezy) </td><td width="20%" align="center"><a accesskey="h" href="index.fr.html"><img src="images/home.png" alt="Sommaire" /></a></td><td width="40%" align="right" valign="top"> Chapitre 6. Plus d'informations sur Debian</td></tr></table></div></body></html>

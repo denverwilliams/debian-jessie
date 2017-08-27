@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Capítulo 1. Introdução</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.pt-br.html" title="Notas de lançamento do Debian 8 (jessie), PC 64 bits" /><link rel="up" href="index.pt-br.html" title="Notas de lançamento do Debian 8 (jessie), PC 64 bits" /><link rel="prev" href="index.pt-br.html" title="Notas de lançamento do Debian 8 (jessie), PC 64 bits" /><link rel="next" href="ch-whats-new.pt-br.html" title="Capítulo 2. Quais as novidades no Debian 8" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Capítulo 1. Introdução</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.pt-br.html"><img src="images/prev.png" alt="Anterior" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-whats-new.pt-br.html"><img src="images/next.png" alt="Próxima" /></a></td></tr></table><hr /></div><div xml:lang="pt_BR" class="chapter" lang="pt_BR"><div class="titlepage"><div><div><h1 class="title"><a id="ch-about"></a>Capítulo 1. Introdução</h1></div></div></div><div class="toc"><p><strong>Índice</strong></p><dl class="toc"><dt><span class="section"><a href="ch-about.pt-br.html#bug-reports">1.1. Reportando bugs neste documento</a></span></dt><dt><span class="section"><a href="ch-about.pt-br.html#upgrade-reports">1.2. Contribuindo com relatórios de atualização</a></span></dt><dt><span class="section"><a href="ch-about.pt-br.html#sources">1.3. Código fonte deste documento</a></span></dt></dl></div><p>
+    Este documento dá aos usuários da distribuição Debian informações sobre
+grandes mudanças na versão 8 (codinome jessie).
+  </p><p>
+    As notas de lançamento fornecem informações sobre como atualizar de forma
+segura a partir da versão 7 (codinome wheezy) para a
+versão atual e dá aos usuários informações sobre potenciais problemas
+conhecidos que eles possam encontrar nesse processo.
+  </p><p>
+    Você pode obter a versão mais recente deste documento na <a class="ulink" href="https://www.debian.org/releases/jessie/releasenotes" target="_top">https://www.debian.org/releases/jessie/releasenotes</a>. Em caso de dúvida, verifique a data na
+primeira página do documento para ter certeza de que você está lendo uma
+versão atualizada.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Cuidado]" src="images/caution.png" /></td><th align="left">Cuidado</th></tr><tr><td align="left" valign="top"><p>
+      Note que é impossível listar todos os problemas conhecidos e portanto uma
+seleção foi feita baseada numa combinação da quantidade esperada e do
+impacto desses problemas.
+    </p></td></tr></table></div><p>
+Por favor, note que só damos suporte e documentamos a atualização a partir
+da versão anterior do Debian (nesse caso, a atualização a partir da versão
+wheezy). Caso você precise atualizar a partir de versões mais
+antigas, nós sugerimos que você leia as edições anteriores das notas de
+lançamento e atualize para a wheezy primeiro.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="bug-reports"></a>1.1. Reportando bugs neste documento</h2></div></div></div><p>
+Nós tentamos testar todos os diferentes passos de atualizações descritos
+neste documento bem como antecipar todos os possíveis problemas que nossos
+usuários possam encontrar.
+</p><p>
+Apesar disso, caso você acredite ter encontrado um bug (informação incorreta
+ou informação que está faltando) nesta documentação, por favor, registre um
+bug no <a class="ulink" href="https://bugs.debian.org/" target="_top">sistema de rastreamento de bugs</a> para o
+pacote <code class="systemitem">release-notes</code><a id="idp48977472" class="indexterm"></a>. É aconselhável
+que você reveja primeiro os <a class="ulink" href="https://bugs.debian.org/release-notes" target="_top"> relatórios de bugs
+existentes</a> caso a questão que você encontrou já tenha sido
+relatada. Sinta-se livre para acrescentar informações adicionais aos
+relatórios de bugs existentes, caso você possa contribuir com conteúdo para
+este documento.
+</p><p>
+Apreciamos, e encorajamos, relatórios fornecendo patches para o código fonte
+deste documento. Você encontrará mais informações sobre como obter o código
+fonte deste documento na <a class="xref" href="ch-about.pt-br.html#sources" title="1.3. Código fonte deste documento">Seção 1.3, “Código fonte deste documento”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-reports"></a>1.2. Contribuindo com relatórios de atualização</h2></div></div></div><p>
+Nós apreciamos quaisquer informações dos usuários relacionadas a
+atualizações da wheezy para a jessie. Caso você esteja
+interessado em compartilhar informação, por favor, registre um bug no <a class="ulink" href="https://bugs.debian.org/" target="_top">sistema de rastreamento de bugs</a> para o pacote
+<code class="systemitem">upgrade-reports</code><a id="idp48983072" class="indexterm"></a> com os seus
+resultados. Nós pedimos que você compacte quaisquer anexos que venha a
+incluir (usando o <span class="command"><strong>gzip</strong></span>).
+</p><p>
+Por favor, inclua as seguintes informações quando enviar seu relatório de
+atualização:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+
+O estado da sua base de dados de pacotes antes e depois da atualização: a
+base de dados de estados do <code class="systemitem">dpkg</code><a id="idp48986800" class="indexterm"></a>
+está disponível em <code class="filename">/var/lib/dpkg/status</code> e a informação
+do estado dos pacotes do <code class="systemitem">apt</code><a id="idp48988592" class="indexterm"></a> está
+disponível em <code class="filename">/var/lib/apt/extended_states</code>. Você deve
+ter feito backup antes da atualização conforme descrito na <a class="xref" href="ch-upgrading.pt-br.html#data-backup" title="4.1.1. Faça backup de quaisquer dados ou informações de configuração">Seção 4.1.1, “Faça backup de quaisquer dados ou informações de configuração”</a>, mas você também pode encontrar backups do
+<code class="filename">/var/lib/dpkg/status</code> em
+<code class="filename">/var/backups</code>.
+</p></li><li class="listitem"><p>
+Registros da sessão criados usando o comando <span class="command"><strong>script</strong></span>,
+conforme descrito na <a class="xref" href="ch-upgrading.pt-br.html#record-session" title="4.4.1. Gravando a sessão">Seção 4.4.1, “Gravando a sessão”</a>.
+</p></li><li class="listitem"><p>
+Seus logs do <code class="systemitem">apt</code><a id="idp48994944" class="indexterm"></a>, disponíveis em
+<code class="filename">/var/log/apt/term.log</code>, ou seus logs do
+<span class="command"><strong>aptitude</strong></span>, disponíveis em
+<code class="filename">/var/log/aptitude</code>.
+</p></li></ul></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Nota]" src="images/note.png" /></td><th align="left">Nota</th></tr><tr><td align="left" valign="top"><p>
+    Você deve usar algum tempo para revisar e remover qualquer informação
+sensível e/ou confidencial dos logs antes de incluí-los no relatório de bug,
+pois a informação será disponibilizada em um banco de dados público.
+  </p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="sources"></a>1.3. Código fonte deste documento</h2></div></div></div><p>
+    O código fonte deste documento está no formato DocBook
+XML<a id="idp49000704" class="indexterm"></a>. A versão HTML é
+gerada usando <code class="systemitem">docbook-xsl</code><a id="idp49002272" class="indexterm"></a> e
+<code class="systemitem">xsltproc</code><a id="idp49003776" class="indexterm"></a>. A versão PDF é gerada
+usando <code class="systemitem">dblatex</code><a id="idp49005360" class="indexterm"></a> ou <code class="systemitem">xmlroff</code><a id="idp49006864" class="indexterm"></a>. Os códigos fonte das notas de
+lançamento estão disponíveis no repositório SVN do <span class="emphasis"><em>Projeto de
+Documentação Debian</em></span>. Você pode usar a <a class="ulink" href="https://anonscm.debian.org/viewvc/ddp/manuals/trunk/release-notes/" target="_top">interface web</a> para acessar seus
+arquivos individualmente através da web e ver suas mudanças. Para mais
+informações sobre como acessar o SVN, por favor, consulte as <a class="ulink" href="https://www.debian.org/doc/cvs" target="_top">páginas de informação sobre o SVN do Projeto de
+Documentação Debian</a>.
+  </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.pt-br.html"><img src="images/prev.png" alt="Anterior" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-whats-new.pt-br.html"><img src="images/next.png" alt="Próxima" /></a></td></tr><tr><td width="40%" align="left" valign="top">Notas de lançamento do Debian 8 (jessie), <span class="phrase">PC 64 bits</span> </td><td width="20%" align="center"><a accesskey="h" href="index.pt-br.html"><img src="images/home.png" alt="Principal" /></a></td><td width="40%" align="right" valign="top"> Capítulo 2. Quais as novidades no Debian 8</td></tr></table></div></body></html>

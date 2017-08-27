@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitel 6. Mer information om Debian</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sv.html" title="Kommentarer till utgåvan Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sv.html" title="Kommentarer till utgåvan Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-information.sv.html" title="Kapitel 5. Problemområden att känna till för utgåvan jessie" /><link rel="next" href="ap-old-stuff.sv.html" title="Appendix A. Hantera ditt wheezy-system före uppgraderingen" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitel 6. Mer information om Debian</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-information.sv.html"><img src="images/prev.png" alt="Föregående" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ap-old-stuff.sv.html"><img src="images/next.png" alt="Nästa" /></a></td></tr></table><hr /></div><div xml:lang="sv" class="chapter" lang="sv"><div class="titlepage"><div><div><h1 class="title"><a id="ch-moreinfo"></a>Kapitel 6. Mer information om Debian</h1></div></div></div><div class="toc"><p><strong>Innehållsförteckning</strong></p><dl class="toc"><dt><span class="section"><a href="ch-moreinfo.sv.html#morereading">6.1. Ytterligare läsning</a></span></dt><dt><span class="section"><a href="ch-moreinfo.sv.html#gethelp">6.2. Få hjälp</a></span></dt><dd><dl><dt><span class="section"><a href="ch-moreinfo.sv.html#lists">6.2.1. Sändlistor</a></span></dt><dt><span class="section"><a href="ch-moreinfo.sv.html#irc">6.2.2. Internet Relay Chat</a></span></dt></dl></dd><dt><span class="section"><a href="ch-moreinfo.sv.html#bugs">6.3. Rapportera fel</a></span></dt><dt><span class="section"><a href="ch-moreinfo.sv.html#contributing">6.4. Att bidra till Debian</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="morereading"></a>6.1. Ytterligare läsning</h2></div></div></div><p>
+Beyond these release notes and the installation guide, further documentation
+on Debian is available from the Debian Documentation Project (DDP), whose
+goal is to create high-quality documentation for Debian users and
+developers.  Available documentation includes the Debian Reference, Debian
+New Maintainers Guide, the Debian FAQ, and many more.  For full details of
+the existing resources see the <a class="ulink" href="https://www.debian.org/doc/" target="_top">Debian Documentation
+website</a> and the <a class="ulink" href="https://wiki.debian.org/" target="_top">Debian Wiki website</a>.
+</p><p>
+Documentation for individual packages is installed into
+<code class="filename">/usr/share/doc/<em class="replaceable"><code>package</code></em></code>.
+This may include copyright information, Debian specific details, and any
+upstream documentation.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="gethelp"></a>6.2. Få hjälp</h2></div></div></div><p>
+There are many sources of help, advice, and support for Debian users, but
+these should only be considered if research into documentation of the issue
+has exhausted all sources.  This section provides a short introduction to
+these sources which may be helpful for new Debian users.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="lists"></a>6.2.1. Sändlistor</h3></div></div></div><p>
+De sändlistor som är mest intressanta för Debian-användarna är listan
+debian-user (engelsk) och andra
+debian-user-<em class="replaceable"><code>språk</code></em>-listor (för andra språk;
+<code class="literal">swedish</code> för svenska). För information om dessa listor och
+detaljer om hur man prenumererar, se <a class="ulink" href="https://lists.debian.org/" target="_top">https://lists.debian.org/</a>. Leta i arkiven efter svar på dina
+frågor innan du postar en ny fråga, så bryter du inte mot listetiketten.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="irc"></a>6.2.2. Internet Relay Chat</h3></div></div></div><p>
+Debian har en IRC-kanal vars ändamål är att ge stöd och hjälp till
+Debiananvändare. Kanalen finns på IRC-nätverket OFTC. För att komma åt
+kanalen, peka din favorit-IRC-klient till irc.debian.org och gå in i kanalen
+<code class="literal">#debian</code>.
+</p><p>
+Följ kanalens riktlinjer och respektera andra användare. Riktlinjerna finns
+tillgängliga på <a class="ulink" href="https://wiki.debian.org/DebianIRC" target="_top">Debians wiki</a>.
+</p><p>
+För mer information om OFTC, besök dess <a class="ulink" href="http://www.oftc.net/" target="_top">webbplats</a>.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="bugs"></a>6.3. Rapportera fel</h2></div></div></div><p>
+Vi strävar mot att göra Debian till ett högkvalitativt operativsystem. Det
+betyder dock inte att paketen som vi tillhandahåller är helt felfria. I
+enlighet med Debians filosofi om <span class="quote">”<span class="quote">öppen utveckling</span>”</span> och som en
+tjänst till våra användare, tillhandahåller vi all information om
+rapporterade fel i vårt eget felhanteringssystem (BTS). BTS är bläddringsbar
+på <a class="ulink" href="https://bugs.debian.org/" target="_top">https://bugs.debian.org/</a>.
+</p><p>
+If you find a bug in the distribution or in packaged software that is part
+of it, please report it so that it can be properly fixed for future
+releases.  Reporting bugs requires a valid e-mail address.  We ask for this
+so that we can trace bugs and developers can get in contact with submitters
+should additional information be needed.
+</p><p>
+You can submit a bug report using the program <span class="command"><strong>reportbug</strong></span>
+or manually using e-mail.  You can read more about the Bug Tracking System
+and how to use it by reading the reference documentation (available at
+<code class="filename">/usr/share/doc/debian</code> if you have <code class="systemitem">doc-debian</code><a id="idp58421216" class="indexterm"></a> installed) or online at the <a class="ulink" href="https://bugs.debian.org/" target="_top">Bug Tracking System</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="contributing"></a>6.4. Att bidra till Debian</h2></div></div></div><p>
+Du behöver inte vara en expert för att bidra till Debian. Genom att hjälpa
+användare med problem på de olika <a class="ulink" href="https://lists.debian.org/" target="_top">sändlistorna</a> för användarstöd
+bidrar du till gemenskapen. Identifiering (och lösning) av problem
+relaterade till utveckling av distributionen genom att delta i <a class="ulink" href="https://lists.debian.org/" target="_top">sändlistorna</a> för utveckling är
+också mycket uppskattat. För att underhålla Debians högkvalitativa
+distribution kan du <a class="ulink" href="https://bugs.debian.org/" target="_top">skicka in felrapporter</a>
+och hjälpa utvecklarna att spåra upp och rätta till felen. Verktyget
+<code class="systemitem">how-can-i-help</code><a id="idp58428192" class="indexterm"></a> pekar ut felrapporter
+som du kan arbeta på. Om du är bra på att sätta ihop ord kanske du vill
+bidra mer aktivt genom att hjälpa till att skriva <a class="ulink" href="https://www.debian.org/doc/cvs" target="_top">dokumentation</a> eller <a class="ulink" href="https://www.debian.org/international/" target="_top">översätta</a> befintlig dokumentation till ditt
+eget språk.
+</p><p>
+Om du kan avsätta mer tid, skulle du kunna ansvara för en del av den fria
+programvaran i Debian. Speciellt behjälpligt är det om personer adopterar
+eller ansvarar för saker som folk har frågat efter om att inkluderas i
+Debian. Databasen <a class="ulink" href="https://www.debian.org/devel/wnpp/" target="_top">Work Needing and Prospective
+Packages</a> har detaljer om detta. Om du har intresse av mer specifika
+grupper kan du finna glädje i att bidra till några av Debians <a class="ulink" href="https://www.debian.org/devel/#projects" target="_top">underprojekt</a> vilka inkluderar
+porteringar till specifika arkitekturer, <a class="ulink" href="https://wiki.debian.org/DebianPureBlends" target="_top">Debian Pure Blends</a> för specifika
+användargrupper bland många andra.
+</p><p>
+In any case, if you are working in the free software community in any way,
+as a user, programmer, writer, or translator you are already helping the
+free software effort.  Contributing is rewarding and fun, and as well as
+allowing you to meet new people it gives you that warm fuzzy feeling inside.
+</p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-information.sv.html"><img src="images/prev.png" alt="Föregående" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ap-old-stuff.sv.html"><img src="images/next.png" alt="Nästa" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitel 5. Problemområden att känna till för utgåvan jessie </td><td width="20%" align="center"><a accesskey="h" href="index.sv.html"><img src="images/home.png" alt="Hem" /></a></td><td width="40%" align="right" valign="top"> Appendix A. Hantera ditt wheezy-system före uppgraderingen</td></tr></table></div></body></html>

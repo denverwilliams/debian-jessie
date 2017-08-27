@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Capítulo 3. Sistema de instalación</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.es.html" title="Notas de publicación de Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.es.html" title="Notas de publicación de Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-whats-new.es.html" title="Capítulo 2. Las novedades de Debian 8" /><link rel="next" href="ch-upgrading.es.html" title="Capítulo 4. Actualizaciones desde Debian 7 (wheezy)" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Capítulo 3. Sistema de instalación</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-whats-new.es.html"><img src="images/prev.png" alt="Anterior" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-upgrading.es.html"><img src="images/next.png" alt="Siguiente" /></a></td></tr></table><hr /></div><div xml:lang="es" class="chapter" lang="es"><div class="titlepage"><div><div><h1 class="title"><a id="ch-installing"></a>Capítulo 3. Sistema de instalación</h1></div></div></div><div class="toc"><p><strong>Tabla de contenidos</strong></p><dl class="toc"><dt><span class="section"><a href="ch-installing.es.html#inst-new">3.1. Novedades del sistema de instalación</a></span></dt><dd><dl><dt><span class="section"><a href="ch-installing.es.html#inst-changes">3.1.1. Cambios importantes</a></span></dt><dt><span class="section"><a href="ch-installing.es.html#inst-auto">3.1.2. Instalación automatizada</a></span></dt></dl></dd></dl></div><p>
+El instalador de Debian («Debian Installer») es el sistema oficial de
+instalación de Debian. Éste ofrece varios métodos de instalación. Los
+métodos disponibles para la instalación dependerán de su arquitectura.
+</p><p>
+Puede encontrar las imágenes binarias del instalador de jessie junto
+con la «Guía de instalación» en la <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/" target="_top">página web
+de Debian</a>.
+</p><p>
+La «Guía de instalación» también se incluye en el primer CD o DVD de los
+conjuntos de CD y DVD oficiales de Debian, en:
+</p><pre class="screen">
+/doc/install/manual/<em class="replaceable"><code>idioma</code></em>/index.html
+</pre><p>
+Quizás también quiera consultar la página de <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/index#errata" target="_top">fallos</a> conocidos del instalador de
+Debian.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="inst-new"></a>3.1. Novedades del sistema de instalación</h2></div></div></div><p>
+Se ha realizado mucho desarrollo en el instalador de Debian desde su primera
+versión oficial en Debian 7 dando como resultado una mejora en
+el soporte de hardware y algunas funcionalidades nuevas muy interesantes.
+</p><p>
+En estas notas de publicación sólo se mencionan los cambios más importantes
+del instalador. Si está interesado en un resumen de los cambios detallados
+desde wheezy, consulte los anuncios de publicación de las
+versiones beta y RC de jessie disponibles en el <a class="ulink" href="https://www.debian.org/devel/debian-installer/News/" target="_top">histórico de noticias</a> del instalador de
+Debian.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-changes"></a>3.1.1. Cambios importantes</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+</span></dt><dd><p>
+
+
+</p></dd><dt><span class="term">Adaptaciones eliminadas</span></dt><dd><p>
+Se ha eliminado el soporte para las arquitecturas «ia64» y «sparc» del
+instalador puesto que se ha eliminado estas architecturas del archivo.
+</p></dd><dt><span class="term">Nuevas adaptaciones</span></dt><dd><p>
+Se ha añadido soporte para las arquitecturas «arm64» y «ppc64el» al
+instalador.
+</p></dd><dt><span class="term">Nuevo sistema «init» por omisión</span></dt><dd><p>
+El sistema de instalación ahora instala «systemd» como sistema init por
+omisión.
+</p></dd><dt><span class="term">Selección del escritorio</span></dt><dd><p>
+Ahora se puede seleccionar el escritorio desde «tasksel» durante la
+instalación. Tenga en cuenta que, aunque se pueden seleccionar distintos
+escritorios al mismo tiempo, algunas combinaciones de escritorio no son
+posibles puesto que algunos escritorios no pueden instalarse
+simultáneamente.</p></dd><dt><span class="term">Sustitución de "--" por "---" para los parámetros de arranque</span></dt><dd><p>
+Debido a un cambio en el funcionamiento del núcleo de Linux, ahora se
+utiliza el separador "---" en lugar de "--" para separar los parámetros del
+núcleo de los parámetros para el espacio de usuario.
+</p></dd><dt><span class="term">Nuevos idiomas</span></dt><dd><p>
+Gracias al gran esfuerzo de los traductores puede instalarse ahora Debian
+en 75 idiomas distintos, incluyendo el inglés. Esto es un idiomas más que en
+wheezy. La mayoría de los idiomas están disponibles tanto en la
+interfaz de usuario basado en texto de la instalación como en la interfaz
+gráfica, mientras que algunos sólo están disponibles en la interfaz gráfica
+de usuario. 
+</p><p>
+Idiomas añadidos en esta versión:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Se han añadido el idioma Tajik al instalador gráfico y de texto.
+</p></li></ul></div><p>
+Los idiomas que sólo se pueden seleccionar utilizando este instalador ya que
+sus conjuntos de caracteres no se puede utilizar en un entorno no gráfico
+son: amhárico, bengalí, dzongkha, guayaratí, hindi, georgiano, canarés,
+jémer (o camboyano), malayalam, maratí, nepalés, panyabí, tamil, telugú,
+tibetano y uigur.
+</p></dd><dt><span class="term">Arranque UEFI</span></dt><dd><p>
+      El instalador de Jessie mejora el soporte para gran cantidad de firmware
+UEFI y también soporte la instalación de un núcleo de 64 bits en firmware
+UEFI de 32 bits.
+    </p><p>
+      Tenga en cuenta que esto no incluye el soporte del Arranque Seguro UEFI
+(«UEFI Secure Boot», N. del T.)
+    </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-auto"></a>3.1.2. Instalación automatizada</h3></div></div></div><p>
+Algunos de los cambios mencionados en la sección anterior también implican
+cambios en la automatización del instalador utilizando archivos de
+preconfiguración. Esto significa que si tiene archivos de preconfiguración
+que funcionaban con el instalador de wheezy, no se puede asegurar
+que funcionen con el nuevo instalador sin que se modifiquen.
+</p><p>
+La <a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">«Guía de Instalación»</a> tiene un
+apéndice separado que incluye extensa documentación sobre cómo utilizar la
+preconfiguración.
+</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-whats-new.es.html"><img src="images/prev.png" alt="Anterior" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-upgrading.es.html"><img src="images/next.png" alt="Siguiente" /></a></td></tr><tr><td width="40%" align="left" valign="top">Capítulo 2. Las novedades de Debian 8 </td><td width="20%" align="center"><a accesskey="h" href="index.es.html"><img src="images/home.png" alt="Inicio" /></a></td><td width="40%" align="right" valign="top"> Capítulo 4. Actualizaciones desde Debian 7 (wheezy)</td></tr></table></div></body></html>
