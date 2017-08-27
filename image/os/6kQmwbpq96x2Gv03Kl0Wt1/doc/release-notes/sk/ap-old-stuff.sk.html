@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Dodatok A. Ako spravovať váš systém wheezy pred aktualizáciou</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-moreinfo.sk.html" title="Kapitola 6. Ďalšie informácie o Debiane" /><link rel="next" href="apb.sk.html" title="Dodatok B. Prispievatelia do Poznámok k vydaniu" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Dodatok A. Ako spravovať váš systém wheezy pred aktualizáciou</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-moreinfo.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apb.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr></table><hr /></div><div xml:lang="sk" class="appendix" lang="sk"><div class="titlepage"><div><div><h1 class="title"><a id="ap-old-stuff"></a>Dodatok A. Ako spravovať váš systém wheezy pred aktualizáciou</h1></div></div></div><div class="toc"><p><strong>Obsah</strong></p><dl class="toc"><dt><span class="section"><a href="ap-old-stuff.sk.html#old-upgrade">A.1. Ako aktualizovať váš systém wheezy</a></span></dt><dt><span class="section"><a href="ap-old-stuff.sk.html#old-sources">A.2. Ako skontrolovať váš zoznam zdrojov</a></span></dt><dt><span class="section"><a href="ap-old-stuff.sk.html#old-config">A.3. Odstránenie zastaralých konfiguračných súborov</a></span></dt><dt><span class="section"><a href="ap-old-stuff.sk.html#switch-utf8">A.4. Aktualizácia starých locales na UTF-8</a></span></dt></dl></div><p>
+Táto príloha obsahuje informácie o tom, ako sa môžete uistiť, že dokážete
+inštalovať a aktualizovať balíky wheezy pred aktualizáciou na
+jessie. Malo by to byť potrebné iba v určitých situáciách.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-upgrade"></a>A.1. Ako aktualizovať váš systém wheezy</h2></div></div></div><p>
+V podstate sa to nelíši od bežnej aktualizácie wheezy, akú ste
+vykonávali doteraz. Jediný rozdiel je v tom, že sa musíte uistiť, že váš
+zoznam balíkov ešte stále obsahuje odkazy na wheezy, ako
+vysvetľuje <a class="xref" href="ap-old-stuff.sk.html#old-sources" title="A.2. Ako skontrolovať váš zoznam zdrojov">Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”</a>.
+</p><p>
+Ak aktualizujete svoj systém pomocou zrkadla Debianu, bude automaticky
+aktualizovaný na najnovšiu aktualizáciu stabilnej vetvy (point release)
+wheezy.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-sources"></a>A.2. Ako skontrolovať váš zoznam zdrojov</h2></div></div></div><p>
+Ak ktorýkoľvek z riadkov vo vašom <code class="filename">/etc/apt/sources.list</code>
+odkazuje na „stable“, už vlastne <span class="quote">“<span class="quote">používate</span>”</span> jessie. To
+nemusí byť to, čo ste mali v úmysle, ak zatiaľ nie ste na aktualizáciu
+pripravený. Ak ste už spustili <code class="literal">apt-get update</code>, ešte stále
+sa môžete vrátiť späť bez problémov pomocou nasledovnej procedúry.
+</p><p>
+Ak ste už naviac nainštalovali balíky z jessie, už pravdepodobne nemá
+zmysel inštalovať  balíky z wheezy. V tom prípade sa budete musieť
+sami rozhodnúť či chcete pokračovať alebo nie. Je možné znížiť verziu
+balíkov, ale to tento dokument nepopisuje.
+</p><p>
+Otvorte súbor <code class="filename">/etc/apt/sources.list</code> vo svojom obľúbenom
+editore (ako <code class="literal">root</code>) a skontrolujte všetky riadky
+začínajúce <code class="literal">deb http:</code> alebo <code class="literal">deb ftp:</code> či
+obsahujú odkaz na „<code class="literal">stable</code>“. Ak nejaké nájdete, zmeňte ich
+zo <code class="literal">stable</code> na <code class="literal">wheezy</code>.
+</p><p>
+Ak máte nejaké riadky začínajúce <code class="literal">deb file:</code>, musíte sami
+skontrolovať, či miesto kam odkazujú obsahuje archív wheezy alebo
+archív jessie.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Dôležité]" src="images/important.png" /></td><th align="left">Dôležité</th></tr><tr><td align="left" valign="top"><p>
+    Nemeňte žiadne riadky začínajúce <code class="literal">deb cdrom:</code>. Tým by ste
+riadok zneplatnili a museli by ste znova spustiť
+<span class="command"><strong>apt-cdrom</strong></span>. Neznepokojujte sa ak riadok so zdrojom „cdrom“
+odkazuje na „<code class="literal">unstable</code>“.  Hoci to môže byť mätúce, je to v
+poriadku.
+  </p></td></tr></table></div><p>
+Ak ste vykonali nejaké zmeny, uložte súbor a spustite
+</p><pre class="screen">
+# apt-get update
+</pre><p>
+aby sa aktualizoval zoznam balíkov.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-config"></a>A.3. Odstránenie zastaralých konfiguračných súborov</h2></div></div></div><p>
+Pred aktualizáciou systému na jessie sa odporúča odstrániť zo systému
+staré konfiguračné súbory (napríklad súbory
+<code class="filename">*.dpkg-{new,old}</code> súbory v <code class="filename">/etc</code>).
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="switch-utf8"></a>A.4. Aktualizácia starých locales na UTF-8</h2></div></div></div><p>
+Ak je váš systém lokalizovaný a používa locale, ktoré nie je založené na
+UTF-8, mali by ste silne zvážiť zmenu locales vášho systému na UTF-8. V
+minulosti boli identifikované chyby<a href="#ftn.idp56878704" class="footnote" id="idp56878704"><sup class="footnote">[6]</sup></a>,
+ktoré sa prejavujú iba pri locale, ktoré nie sú založené na UTF-8. Na
+systéme s pracovným prostredím sú takéto staré locales podporované iba
+škaredými kľučkami vnútri knižníc a nedokážeme kvalitne podporovať
+používateľov, ktorí ich ešte používajú.
+</p><p>
+Locale svojho systému môžete nastaviť spustením <span class="command"><strong>dpkg-reconfigure
+locales</strong></span>. Uistite sa, že ste zvolili UTF-8 locale, pri výbere
+predvoleného locale systému. Okrem toho by ste mali skontrolovať nastavenia
+locale svojich používateľov a ubezpečiť sa, že vo svojej konfigurácii
+nepoužívajú staré locales.
+</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp56878704" class="footnote"><p><a href="#idp56878704" class="para"><sup class="para">[6] </sup></a>V šetriči obrazovky GNOME, ak nepoužívate UTF-8, používanie hesiel s
+ne-ASCII znakmi, podpora pam_ldap alebo dokonca schopnosť odomknúť obrazovku
+môžu byť nespoľahlivé. Čítačka obrazovky GNOME trpí chybou <a class="ulink" href="http://bugs.debian.org/599197" target="_top">#599197</a>. Správca súborov
+Nautilus (a všetky programy založené na glib, a pravdepodobne tiež všetky
+programy založené na Qt) predpokladajú, že názvy súborov sú v UTF-8,
+zatiaľčo shell predpokladá, že sú v kódovaní podľa aktuálne nastaveného
+locale. Ne-ASCII znaky v názvov sú tak na každodenné použitie v takomto
+prostredí prakticky nepoužiteľné. Navyše čítačka obrazovky gnome-orca (ktorá
+sprístupňuje zrakovo postihnutým používateľom prístup k pracovnému
+prostrediu GNOME) vyžaduje od vydania Squeeze locale UTF-8; pri použití
+staršej znakovej sady, nebude schopná prečítať informácie okien prvkov
+pracovnej plochy ako Nautilus/GNOME Panel alebo ponuku LeftAlt-F1.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-moreinfo.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="apb.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 6. Ďalšie informácie o Debiane </td><td width="20%" align="center"><a accesskey="h" href="index.sk.html"><img src="images/home.png" alt="Domov" /></a></td><td width="40%" align="right" valign="top"> Dodatok B. Prispievatelia do Poznámok k vydaniu</td></tr></table></div></body></html>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Capítulo 2. Las novedades de Debian 8</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.es.html" title="Notas de publicación de Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.es.html" title="Notas de publicación de Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-about.es.html" title="Capítulo 1. Introducción" /><link rel="next" href="ch-installing.es.html" title="Capítulo 3. Sistema de instalación" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Capítulo 2. Las novedades de Debian 8</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-about.es.html"><img src="images/prev.png" alt="Anterior" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-installing.es.html"><img src="images/next.png" alt="Siguiente" /></a></td></tr></table><hr /></div><div xml:lang="es" class="chapter" lang="es"><div class="titlepage"><div><div><h1 class="title"><a id="ch-whats-new"></a>Capítulo 2. Las novedades de Debian 8</h1></div></div></div><div class="toc"><p><strong>Tabla de contenidos</strong></p><dl class="toc"><dt><span class="section"><a href="ch-whats-new.es.html#idp41430736">2.1. Arquitecturas soportadas</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#newdistro">2.2. ¿Qué novedades hay en la distribución?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-whats-new.es.html#cd">2.2.1. CDs, DVDs y BDs</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#new-gnome314">2.2.2. Cambios en el entorno de escritorio de GNOME</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#systemd">2.2.3. Nuevo sistema de inicio por omisión («systemd»)</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#security">2.2.4. Seguridad</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#mariadb">2.2.5. MariaDB junto a MySQL</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#idp41592352">2.2.6. Aplicaciones PHP</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#debian-games">2.2.7. Mezcla Debian Juegos</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#debian-med">2.2.8. Noticias de la mezcla Debian Med</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#debian-science">2.2.9. Noticas de la mezcla Debian Ciencia</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#debian-gis">2.2.10. Noticias de la mezcla Debian Sistemas de Información Geográficos (SIG)</a></span></dt><dt><span class="section"><a href="ch-whats-new.es.html#debian-java">2.2.11. Noticias del grupo Debian Java</a></span></dt></dl></dd></dl></div><p>
+Hay más información disponible sobre este tema en el <a class="ulink" href="https://wiki.debian.org/NewInJessie" target="_top">Wiki</a>.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp41430736"></a>2.1. Arquitecturas soportadas</h2></div></div></div><p>
+  Debian 8 introduce dos nuevas arquitecturas:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      arm64, adaptación de 64 bits para sistemas ARM.
+    </p></li><li class="listitem"><p>
+      ppc64el, adaptación de 64 bits «little-endian» para sistemas POWER.
+    </p></li></ul></div><p>
+Las siguientes son las arquitecturas oficialmente soportadas en Debian
+8:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+PC de 32 bits («i386») y PC de 64 bits («amd64»)
+</p></li><li class="listitem"><p>
+ARM de 64 bits («arm64»)
+</p></li><li class="listitem"><p>
+ARM EABI («armel»)
+</p></li><li class="listitem"><p>
+ARMv7 (EABI hard-float ABI, «armhf»)
+</p></li><li class="listitem"><p>
+MIPS («mips» («big-endian») y «mipsel» («little-endian»))
+</p></li><li class="listitem"><p>
+PowerPC («powerpc»)
+</p></li><li class="listitem"><p>
+PowerPC «little-endian» de 64 bits ('ppc64el')
+</p></li><li class="listitem"><p>
+IBM System z («s390x»)
+</p></li></ul></div><p>
+Tres de las arquitecturas que se publicaron como parte de Debian
+7 no se publican en jessie.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Como se anunció cuando se publicó Debian 7, se ha descontinuado
+la adaptación de 32 bits <code class="systemitem">s390</code> y se
+sustituye por <code class="systemitem">s390x</code>.
+</p></li><li class="listitem"><p>
+Adicionalmente, la adaptación de IA-64 y Sparc se han eliminado de esta
+publicación debido a que no hay suficiente soporte por parte de los
+desarrolladores. Se ha dado soporte a la arquitectura Sparc en Debian desde
+la versión 2.1 (en 1999), mientras que la arquitectura <code class="systemitem">ia64</code> se introdujo en la versión 3.0 de Debian (en
+2002).
+</p></li></ul></div><div class="variablelist"><dl class="variablelist"></dl></div><p>
+Finally, the Debian ports to the FreeBSD kernel, <code class="systemitem">kfreebsd-amd64</code> and <code class="systemitem">kfreebsd-i386</code>, included as technology previews in
+Debian 6.0 and Debian 7, are not part of this release.
+</p><p>
+Puede leer más acerca del estado y la información específica de las
+adaptaciones para su arquitectura en la <a class="ulink" href="https://www.debian.org/ports/" target="_top">página web
+de las adaptaciones de Debian</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newdistro"></a>2.2. ¿Qué novedades hay en la distribución?</h2></div></div></div><p>
+Esta nueva versión de Debian trae de nuevo muchos más programas que su
+predecesora wheezy; la distribución incluye más de 12253
+paquetes nuevos, para un total de más de 43512 paquetes. La mayor
+parte de los programas que se distribuyen se han actualizado: más de
+24573 paquetes de programas(corresponde a un
+66% de los paquetes en wheezy). También se
+han eliminado por varios motivos un número significativo de paquetes (más de
+5441, 14% de los paquetes en
+wheezy). No verá ninguna actualización para estos paquetes y se
+marcarán como «obsoletos» en los programas de gestión de paquetes. Consulte
+la sección <a class="xref" href="ch-upgrading.es.html#obsolete" title="4.10. Paquetes obsoletos">Sección 4.10, “Paquetes obsoletos”</a>.
+</p><p>
+  Debian trae de nuevo con muchas aplicaciones de escritorio y
+entornos. Entre otros ahora incluye el entorno de escritorio
+GNOME<a id="idp41454832" class="indexterm"></a> 3.14,
+KDE<a id="idp41455584" class="indexterm"></a> 4.11,
+Xfce<a id="idp41456336" class="indexterm"></a> 4.10, y
+LXDE<a id="idp41457088" class="indexterm"></a>.
+</p><p>
+  También se han actualizado las aplicaciones de productividad, incluyendo las
+suites de oficina: 
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      LibreOffice<a id="idp41459344" class="indexterm"></a> se ha
+actualizado a la versión 4.3;
+    </p></li><li class="listitem"><p>
+      Calligra<a id="idp41460960" class="indexterm"></a> se ha actualizado
+a la versión 2.8;
+    </p></li><li class="listitem"><p>
+      GNUcash<a id="idp41462576" class="indexterm"></a> se ha actualizado a
+la versión 2.6;
+    </p></li><li class="listitem"><p>
+      GNUmeric<a id="idp41464192" class="indexterm"></a> se ha actualizado
+a la versión 1.12;
+    </p></li><li class="listitem"><p>
+      Abiword<a id="idp41465808" class="indexterm"></a> se ha actualizado a
+la versión 3.0.
+    </p></li></ul></div><p>
+  Las actualizaciones de otras aplicaciones de escritorio incluyen la
+actualización a Evolution<a id="idp41467504" class="indexterm"></a>
+3.12.
+</p><p>
+Esta versión, entre muchas otras cosas, incluye las siguientes
+actualizaciones:
+</p><div class="informaltable"><table width="100%" border="1"><colgroup><col align="justify" /><col align="justify" /><col align="justify" /></colgroup><thead><tr><th align="justify">Paquete</th><th align="justify">Versión en 7 (wheezy)</th><th align="justify">Versión en 8 (jessie)</th></tr></thead><tbody><tr><td align="justify"><a id="new-apache2"></a>Apache<a id="idp41474816" class="indexterm"></a></td><td align="justify">2.2.22</td><td align="justify">2.4.10</td></tr><tr><td align="justify"><a id="new-bind9"></a>BIND<a id="idp41477312" class="indexterm"></a> Servidor
+<acronym title="Domain Name System («Sistema de nombres de dominio», N. del T.)">DNS</acronym></td><td align="justify">9.8</td><td align="justify">9.9</td></tr><tr><td align="justify"><a id="new-courier"></a>Courier<a id="idp41480096" class="indexterm"></a>
+<acronym title="Mail Transport Agent («Agente de transporte de correo», N. del T.)">MTA</acronym></td><td align="justify">0.68</td><td align="justify">0.73</td></tr><tr><td align="justify"><a id="new-dia"></a>Dia<a id="idp41331120" class="indexterm"></a></td><td align="justify">0.97.2</td><td align="justify">0.97.3</td></tr><tr><td align="justify"><a id="new-exim4"></a>Exim<a id="idp41333520" class="indexterm"></a> servidor de correo
+predeterminado</td><td align="justify">4.80</td><td align="justify">4.84</td></tr><tr><td align="justify"><a id="new-gcc"></a>La colección de compilador <acronym title="GNU's Not Unix («GNU no es Unix», N. del T.)">GNU</acronym> como el compilador por
+omisión<a id="idp41509040" class="indexterm"></a></td><td align="justify">4.7 en PCs, 4.6 en otros sistemas</td><td align="justify">4.9</td></tr><tr><td align="justify"><a id="new-libc6"></a>La biblioteca de C de <acronym title="GNU's Not Unix («GNU no es Unix», N. del T.)">GNU</acronym></td><td align="justify">2.13</td><td align="justify">2.19</td></tr><tr><td align="justify"><a id="new-lighttpd"></a>lighttpd</td><td align="justify">1.4.31</td><td align="justify">1.4.35</td></tr><tr><td align="justify"><a id="new-linux-image"></a>imagen del núcleo de Linux</td><td align="justify">serie 3.2</td><td align="justify">serie 3.16</td></tr><tr><td align="justify"><a id="new-openldap"></a>OpenLDAP</td><td align="justify">2.4.31</td><td align="justify">2.4.40</td></tr><tr><td align="justify"><a id="new-openssh"></a>OpenSSH<a id="idp41518800" class="indexterm"></a></td><td align="justify">6.0p1</td><td align="justify">6.7p1</td></tr><tr><td align="justify"><a id="new-perl"></a>Perl<a id="idp41521200" class="indexterm"></a></td><td align="justify">5.14</td><td align="justify">5.20</td></tr><tr><td align="justify"><a id="new-php"></a>PHP<a id="idp41523600" class="indexterm"></a></td><td align="justify">5.4</td><td align="justify">5.6</td></tr><tr><td align="justify"><a id="new-postfix"></a>Postfix<a id="idp41526000" class="indexterm"></a>
+<acronym title="Mail Transport Agent («Agente de transporte de correo», N. del T.)">MTA</acronym></td><td align="justify">2.9</td><td align="justify">2.11</td></tr><tr><td align="justify"><a id="new-postgresql"></a>PostgreSQL<a id="idp41528784" class="indexterm"></a></td><td align="justify">9.1</td><td align="justify">9.4</td></tr><tr><td align="justify"><a id="new-python3"></a>Python 3</td><td align="justify">3.2</td><td align="justify">3.4</td></tr><tr><td align="justify"><a id="new-samba"></a>Samba</td><td align="justify">3.6</td><td align="justify">4.1</td></tr></tbody></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cd"></a>2.2.1. CDs, DVDs y BDs</h3></div></div></div><p>
+La distribución oficial de Debian se compone ahora de 9 a 10
+<acronym title="Digital Versatil Disc («Disco digital versátil», N. del T.)">DVD</acronym>s <a id="idp41536032" class="indexterm"></a>
+binarios o de 75 a 85 <acronym title="Disco compacto">CD</acronym>s
+<a id="idp41537168" class="indexterm"></a> binarios (dependiendo de la
+arquitectura) y de 10 <acronym title="Digital Versatil Disc («Disco digital versátil», N. del T.)">DVD</acronym>s o 59 <acronym title="Disco compacto">CD</acronym>s de
+fuentes. Adicionalmente existe un <acronym title="Digital Versatil Disc («Disco digital versátil», N. del T.)">DVD</acronym>
+<span class="emphasis"><em>multi-arch</em></span>, con un subconjunto de la distribución para
+las arquitecturas <code class="literal">amd64</code> y <code class="literal">i386</code>, así
+como su código fuente. Debian también se distribuye en imágenes Blu-ray
+<a id="idp41541024" class="indexterm"></a> (<acronym title="Disco Blu-ray">BD</acronym>,
+son 2 para cada una de las arquitecturas <code class="literal">amd64</code> y
+<code class="literal">i386</code>, o 2 para el código fuente. Por razones de espacio,
+algunos paquetes muy grandes se han omitido de los <acronym title="Disco compacto">CD</acronym>s
+generados. Estos paquetes encajan mejor en los <acronym title="Digital Versatil Disc («Disco digital versátil», N. del T.)">DVD</acronym>s y
+<acronym title="Disco Blu-ray">BD</acronym>s por lo que se incluyen allí.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="new-gnome314"></a>2.2.2. Cambios en el entorno de escritorio de GNOME</h3></div></div></div><p>
+    Tras actualizar a la versión 3.15, el nuevo escritorio de GNOME trae consigo
+muchas funcionalidades nuevas así como mejoras de usabilidad.
+  </p><p>
+    Se ha actualizado el diseño de la interfaz de GNOME. El panel de mensajes
+inferior ahora es más grande, más fácil de usar y no aparece de forma
+accidental. Se ha introducido una nueva área de estado en la esquina
+superior derecha que incluye todas los valores de configuración habituales
+en el mismo área.
+  </p><p>
+    Se ha reemplazado el salva-pantallas por una pantalla de bloqueo que
+proporciona unas mínimas funcionalidades cuando el usuario deja de utilizar
+el entorno. Por ejemplo, se puede pausar la música, recibir notificaciones
+de nuevos corrreos electrónicos o cambiar el brillo de la pantalla. Todo
+ello sin introducir la contraseña. Si se pulsa la tecla «Escape» o se
+comienza a escribir, se mostrará la solicitud de contraseña. El gestor de
+pantalla de GNOME utiliza el mismo diseño para ser consistente.
+  </p><p>
+    Se ha modficado el diseño de algunas aplicaciones para que sea más compacto,
+fusionando la barra de título de la ventana con la barra de
+herramientas. Esto incluye, entre otras, las siguientes aplicaciones: el
+gestor de archivos Nautilus, el editor de texto gedit, y el visor de
+documentos evince. Esto permite más espacio para mostrar los documentos con
+los que el usuario está trabajando. También se han realizado cambios
+similares a las ventanas estándar de diálogo.
+  </p><p>
+    Se ha integrado de forma completa el soporte para pantallas táctiles,
+introduciendo gestos intuitivos basados en el movimiento de múltiples
+dedos. GNOME también ofrece ahora soporte para pantallas de alta resolución
+(HiDPI), aprovechando al máximo el pixelado fino para hacer una presentación
+más clara.
+  </p><p>
+    GNOME ahora dispone de soporte de geo-localización, y se incluye una
+aplicación de navegación y de mapas.
+  </p><p>
+    La documentación de usuario es ahora mucho más completa, incluyendo
+tutoriales de vídeo para los nuevos usuarios.
+  </p><p>
+    Encontrará más información en las <a class="ulink" href="https://help.gnome.org/misc/release-notes/3.14/" target="_top">notas de publicación
+de GNOME 3.14</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd"></a>2.2.3. Nuevo sistema de inicio por omisión («systemd»)</h3></div></div></div><p>
+    La versión de Debian 7 introdujo <code class="systemitem">systemd</code><a id="idp41342144" class="indexterm"></a>. Ahora es el sistema de inicio
+predeterminado. Ofrece monitorización avanzada, registros y funcionalidades
+para gestionar los servicios.
+  </p><p>
+    
+Aunque se haya diseñado como un sistema que reemplaza <code class="systemitem">sysvinit</code><a id="idp41566336" class="indexterm"></a> de forma directa y, por tanto, utiliza
+los guiones de init de tipo SysV existentes, se puede instalar el paquete
+<code class="systemitem">systemd</code><a id="idp41567968" class="indexterm"></a> conjuntamente con
+<code class="systemitem">sysvinit</code><a id="idp41569472" class="indexterm"></a> sin que se produzcan
+problemas. Una vez instalado, se puede ejecutar con la opción del núcleo
+<code class="literal">init=/bin/systemd</code>. El paquete <code class="systemitem">systemd-sysv</code><a id="idp41571808" class="indexterm"></a> proporciona la sustitución de
+<code class="literal">/sbin/init</code>.
+
+  </p><p>
+    Puede consultar más información sobre este tema en el <a class="ulink" href="http://wiki.debian.org/systemd" target="_top">wiki</a> de Debian.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="security"></a>2.2.4. Seguridad</h3></div></div></div><p>En esta publicación se ha deshabilitado el soporte a versiones antiguas del
+protocolo «Secure Sockets Layer», en concreto SSLv3. Se han compliado o
+configurado muchas librerías criptográficas del sistema así como
+aplicaciones clientes y servidores de forma que el soporte a este protocolo
+ya no está disponible.</p><p>
+    El núcleo de Linux incluye un mecanismo de seguridad que hace inútiles
+muchos ataques de enlaces simbólicos. Este mecanismo está habilitado en el
+núcleo distribuido en Debian por omisión. Las erratas asociadas al mal uso
+de directorios temporales como /tmp y que dejan de ser aprovechables con
+este mecanismo dejarán de tratarse como vulnerabilidades de seguridad. Si
+está utilizando un núcleo de Linux adaptado debería activar esta
+funcionalidad con la siguiente opción de «sysctl»:
+    </p><pre class="screen">echo 1 &gt; /proc/sys/fs/protected_symlinks</pre><p>
+  </p><p>
+    En algunos casos raros es posible que se deje de dar soporte de seguridad a
+algún paquete que se distribuya en una publicación de Debia antes de que se
+deje de dar soporte a toda la distribución. En Jessie se incluye un nuevo
+paquete (<code class="systemitem">debian-security-support</code><a id="idp41579856" class="indexterm"></a>)
+que mostrará avisos en el caso de que se tenga que dejar de dar soporte de
+forma prematura a algún paquete. Ese paquete también documenta aquellos
+paquetes para los que el soporte de seguridad está limitado. Por ello, se
+recomienda que instale el paquete debian-security-support en todos los
+sistemas en los que la seguridad sea importante.
+  </p><p>Continuando con el camino marcado en Wheezy, se han compilado más
+paquetes con las opciones de compilación para securizar programas. Además de
+ésto, se ha cambiado la opción de «stack protector» a
+«stack-protector-strong» para mejorar el nivel de protección. Debe tener en
+cuenta que las opciones de compilación para la securización de programas no
+está activa por omisión en <code class="systemitem">gcc</code><a id="idp41583120" class="indexterm"></a>, por
+lo que no se utilizarán de forma automática cuando compile localmente un
+programa.
+  </p><p>En esta versión se incluye un nuevo package denominado <code class="systemitem">needrestart</code><a id="idp41585344" class="indexterm"></a> («necesita rearranque», N. del
+T.). Cuando se instala este paquete, se ofrecerá la posibilidad de reiniciar
+servicios si se detecta que es necesario reiniciar alguno de éstos tras una
+actualización si se detecta que se beneficiarán de cambios introducidos en
+otros paquetes. Las comprobaciones se llevarán a cabo tras cada sesión de
+actualización de APT. Se recomienda la instalación de <code class="systemitem">needrestart</code><a id="idp41587472" class="indexterm"></a> para garantizar que las
+actualizaciones de seguridad que se produzcan en librerías se propagan a los
+servicios que están ejecutándose en el sistema.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="mariadb"></a>2.2.5. MariaDB junto a MySQL</h3></div></div></div><p>Junto con la versión antigua de MySQL 5.5, Jessie proporciona la
+nueva versión 10.0 de MariaDB. Consulte la <a class="ulink" href="http://wiki.debian.org/Teams/MySQL" target="_top">página de wiki del grupo Debian
+MySQL</a> para más niformación. En la próxima versión de Debian
+9 probablemente sólo se incluya uno de ellos.
+  </p><p>
+    Tenga en cuenta que el soporte de los desarrolladores originales de MySQL
+5.5 terminará en diciembre de 2018 (tras lo que terminará el soporte de
+seguridad proporcionado en Debian). Por otro lado, MariaDB 10.0 seguirá
+disponiendo de soporte de seguridad por parte de sus desarrolladores hasta
+marzo de 2019.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp41592352"></a>2.2.6. Aplicaciones PHP</h3></div></div></div><p>La plataforma de aplicación de Horde está disponible en Jessie, a
+través del paquete <code class="systemitem">php-horde</code><a id="idp41594176" class="indexterm"></a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-games"></a>2.2.7. Mezcla Debian Juegos</h3></div></div></div><p>El grupo de Debian Juegos está orgulloso de presentar la <a class="ulink" href="http://blends.debian.org/blends/" target="_top">Mezcla</a> Debian Juegos que está
+formada por <a class="ulink" href="https://tracker.debian.org/pkg/debian-games" target="_top">33
+metapaquetes</a> que simplifican la instalación de los juegos por
+categoría. Esta selección incluye, entre otros, juegos de estategia, de
+simulación, de cartas, y de programación. Debian Juegos también ofrece a los
+desarrolladores una forma sencilla de instalar los programas recomendados
+para el desarrollo de juegos en los lenguajes de programación C++, Java,
+Perl, o Python 3. Los desarrolladores de contenido encontrarán herramientas
+útiles para crear arte para videojuegos en <code class="systemitem">games-content-dev</code><a id="idp41599216" class="indexterm"></a>.  La página principal del
+proyecto incluye capturas de pantallas y más información de esta variante, y
+también proporciona una visión general de todos los juegos disponibles
+incluyendo <a class="ulink" href="http://blends.debian.org/games/tasks/finest" target="_top">los
+juegos más destacados en Debian</a>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-med"></a>2.2.8. Noticias de la mezcla Debian Med</h3></div></div></div><p>El grupo de Debian Med ha incrementado considerablemente de nuevo no sólo el
+número de paquetes en los campos de la Biología y de la Medicina, sino
+también su calidad desde el punto de vista de pruebas (tanto en el momento
+de compilación como pruebas automáticas de los paquetes). Estas mejoras en
+la versión 2.0 de los metapaquetes de la mezcla Debian Med están basados en
+las solicitudes de científicos de disponer programas fiables para producir
+resultados reproducibles. Puede consultar en las <a class="ulink" href="http://blends.debian.org/med/tasks" target="_top">páginas de las tareas de Debian
+Med</a> la amplia variedad de progrmas médicos y biológicos que se
+ofrecen dentro de Debian.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-science"></a>2.2.9. Noticas de la mezcla Debian Ciencia</h3></div></div></div><p>Debido al trabajo continuado realizado por el grupo Debian Ciencia no sólo
+se han añadido nuevas aplicaciones científicas al conjunto de paquetes de
+Debian, también se cubren nuevas áreas científicas con ciertas
+aplicaciones. Consulte las <a class="ulink" href="http://blends.debian.org/science/tasks" target="_top">páginas de las tareas de Debian
+Ciencia</a>, donde podrá encontrar la amplia variedad de programas
+científicos disponibles en Debian.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-gis"></a>2.2.10. Noticias de la mezcla Debian Sistemas de Información Geográficos (SIG)</h3></div></div></div><p>Durante el ciclo de desarrollo de jessie muchos de los cambios introducidos
+en UbuntuSIG se han reincorporado a Debian SIG. Se ha mejorado la
+colaboración con los proyectos UbuntuSIG y OSGeo-Live, lo que ha resultado
+en nuevos paquetes y desarrolladores.  Visite <a class="ulink" href="http://blends.debian.org/gis/tasks" target="_top">la página de las tareas Debian
+SIG</a> para consultar todos los programas disponibles de SIG en Debian
+y la <a class="ulink" href="https://wiki.debian.org/DebianGis" target="_top">página principal de
+Debian SIG</a> para más información.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-java"></a>2.2.11. Noticias del grupo Debian Java</h3></div></div></div><p>Jessie se publica con 799 paquetes fuente (442 actualizados, más de 130
+desde Wheezy) matenidos por <a class="ulink" href="https://qa.debian.org/developer.php?login=pkg-java-maintainers@lists.alioth.debian.org" target="_top">el
+grupo Java</a>. Los cambios a destacar son los siguientes:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>OpenJDK 7 es el nuevo sistema de ejecución predeterminado para Java.</p></li><li class="listitem"><p>OpenJDK 8 estará disponible a través de «jessie-backports».</p></li><li class="listitem"><p>Tomcat 7 y Tomcat 8 están ahora soportados, y se ha eliminado Tomcat 6.</p></li><li class="listitem"><p>Se han incluído nuevas herramientas para desarrolladores incluyendo
+VisualVM, «Dynamic Code Evolution VM» (openjdk-7-jre-dcevm), Gradle,
+eclipse-wtp-webtools, closure-compiler y más.
+            </p></li><li class="listitem"><p>Inclusión de <a class="ulink" href="https://packages.debian.org/source/jessie/androidsdk-tools" target="_top">androidsdk-tools</a>
+            </p></li></ul></div><p>
+    </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-about.es.html"><img src="images/prev.png" alt="Anterior" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-installing.es.html"><img src="images/next.png" alt="Siguiente" /></a></td></tr><tr><td width="40%" align="left" valign="top">Capítulo 1. Introducción </td><td width="20%" align="center"><a accesskey="h" href="index.es.html"><img src="images/home.png" alt="Inicio" /></a></td><td width="40%" align="right" valign="top"> Capítulo 3. Sistema de instalación</td></tr></table></div></body></html>

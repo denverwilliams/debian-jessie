@@ -1,0 +1,1078 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitel 4. Upgrade von Debian 7 (Wheezy)</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.de.html" title="Hinweise zur Debian-Veröffentlichung Version 8 (Jessie) auf 64-Bit-PC" /><link rel="up" href="index.de.html" title="Hinweise zur Debian-Veröffentlichung Version 8 (Jessie) auf 64-Bit-PC" /><link rel="prev" href="ch-installing.de.html" title="Kapitel 3. Installationssystem" /><link rel="next" href="ch-information.de.html" title="Kapitel 5. Dinge, die Sie über Jessie wissen sollten" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitel 4. Upgrade von Debian 7 (Wheezy)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-installing.de.html"><img src="images/prev.png" alt="Zurück" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-information.de.html"><img src="images/next.png" alt="Weiter" /></a></td></tr></table><hr /></div><div xml:lang="de" class="chapter" lang="de"><div class="titlepage"><div><div><h1 class="title"><a id="ch-upgrading"></a>Kapitel 4. Upgrade von Debian 7 (Wheezy)</h1></div></div></div><div class="toc"><p><strong>Inhaltsverzeichnis</strong></p><dl class="toc"><dt><span class="section"><a href="ch-upgrading.de.html#backup">4.1. Vorbereiten des Upgrades</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#data-backup">4.1.1. Sichern aller Daten und Konfigurationsinformationen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#inform-users">4.1.2. Die Benutzer vorab informieren</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#services-downtime">4.1.3. Vorbereitung auf die Deaktivierung von Diensten</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#recovery">4.1.4. Vorbereitungen für eine Systemwiederherstellung</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#upgrade-preparations">4.1.5. Vorbereiten einer sicheren Umgebung für das Upgrade</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#system-status">4.2. Den Systemstatus überprüfen</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#review-actions">4.2.1. Noch ausstehende Aktionen im Paketmanager prüfen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#disable-apt-pinning">4.2.2. APT Pinning deaktivieren</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#package-status">4.2.3. Paketstatus überprüfen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#proposed-updates">4.2.4. Der Bereich für vorgeschlagene Aktualisierungen
+(<span class="quote">„<span class="quote">proposed-updates</span>“</span>)</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#unofficial-sources">4.2.5. Inoffizielle Quellen</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#upgrade-process">4.3. Die Quellen für APT vorbereiten</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#network">4.3.1. APT-Internet-Quellen hinzufügen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#localmirror">4.3.2. APT-Quellen für einen lokalen Spiegel hinzufügen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#cdroms">4.3.3. APT-Quellen für optische Medien hinzufügen</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#upgradingpackages">4.4. Upgrades von Paketen durchführen</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#record-session">4.4.1. Aufzeichnung der Sitzung</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#updating-lists">4.4.2. Aktualisieren der Paketliste</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#sufficient-space">4.4.3. Sicherstellen, dass genügend Speicherplatz für das Upgrade zur Verfügung
+steht</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#minimal-upgrade">4.4.4. Minimales System-Upgrade</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#upgrading-full">4.4.5. Upgrade des Systems</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#trouble">4.5. Mögliche Probleme während des Upgrades</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#immediate-configure">4.5.1. dist-upgrade schlägt fehl mit »Could not perform immediate configuration«</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#expected-removals">4.5.2. Zu erwartende Paketentfernungen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#conflicts-loops">4.5.3. Conflicts- oder Pre-Depends-Schleifen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#file-conflicts">4.5.4. Dateikonflikte</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#configuration-changes">4.5.5. Konfigurationsänderungen</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#console-change">4.5.6. Ändern der aktuellen Sitzung auf die Konsole</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#package-specific-issues">4.5.7. Besondere Sorgfalt bei speziellen Paketen</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#newkernel">4.6. Upgrade des Kernels und zugehöriger Pakete</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#kernel-metapackage">4.6.1. Ein Kernel-Metapaket installieren</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#initramfs-tools-issues">4.6.2. Änderungen beim Einbinden und Prüfen von root- und
+<code class="filename">/usr</code>-Dateisystemen</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#nownownow">4.7. Dinge, die vor dem Neustart erledigt werden sollten</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#for-next">4.8. Vorbereiten auf die nächste Veröffentlichung</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#purge-removed-packages">4.8.1. Vollständiges Löschen entfernter Pakete</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.de.html#deprecated">4.9. Missbilligte Komponenten</a></span></dt><dt><span class="section"><a href="ch-upgrading.de.html#obsolete">4.10. Veraltete Pakete</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.de.html#dummy">4.10.1. Dummy-Pakete</a></span></dt></dl></dd></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="backup"></a>4.1. Vorbereiten des Upgrades</h2></div></div></div><p>
+Wir empfehlen, dass Sie vor dem Upgrade auch die Informationen in <a class="xref" href="ch-information.de.html" title="Kapitel 5. Dinge, die Sie über Jessie wissen sollten">Kapitel 5, <em>Dinge, die Sie über Jessie wissen sollten</em></a> lesen. Das Kapitel behandelt mögliche Probleme,
+die mit dem Upgrade-Prozess nicht direkt zusammenhängen, aber dennoch vor
+dem Upgrade für Sie wichtig sein könnten.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="data-backup"></a>4.1.1. Sichern aller Daten und Konfigurationsinformationen</h3></div></div></div><p>
+Wir empfehlen Ihnen nachdrücklich, vor dem Upgrade Ihres Systems ein
+komplettes Backup durchzuführen oder zumindest alle Daten und
+Konfigurationsinformationen zu sichern, die Sie nicht verlieren möchten. Die
+Upgrade-Werkzeuge und der zugehörige Prozess sind recht zuverlässig, aber
+ein Versagen der Hardware während des Upgrades könnte zu einem schwer
+beschädigten System führen.
+</p><p>
+Am wichtigsten für das Backup sind die Inhalte von
+<code class="filename">/etc</code>, <code class="filename">/var/lib/dpkg</code>,
+<code class="filename">/var/lib/apt/extended_states</code> und die Ausgabe von
+<code class="literal">dpkg --get-selections "*"</code> (die Anführungszeichen sind
+wichtig). Falls Sie <span class="command"><strong>aptitude</strong></span> verwenden, um die Pakete auf
+Ihrem System zu verwalten, sollten Sie auch
+<code class="filename">/var/lib/aptitude/pkgstates</code> sichern.
+</p><p>
+Der Upgrade-Prozess ändert nichts im Verzeichnisbaum
+<code class="filename">/home</code>. Allerdings ist bekannt, dass einige Anwendungen
+(z.B. Teile der Mozilla-Suite und die GNOME- und KDE-Desktop-Umgebungen)
+existierende Benutzereinstellungen mit neuen Vorgaben überschreiben, wenn
+eine neue Version der Anwendung das erste Mal von einem Benutzer gestartet
+wird. Zur Vorsicht sollten Sie überlegen, die versteckten Dateien und
+Verzeichnisse (Dateien und Verzeichnisse, die mit einem Punkt beginnen, auch
+<span class="quote">„<span class="quote">dotfiles</span>“</span> genannt) in den Home-Verzeichnissen der Benutzer zu
+sichern. Dieses Backup könnte Ihnen dabei helfen, die alten Einstellungen
+wiederherzustellen. Auch sollten Sie die Benutzer des Systems darüber
+informieren.
+</p><p>
+Jede Paketinstallation muss mit den Rechten des Superusers ausgeführt
+werden, melden Sie sich daher als <code class="literal">root</code> an oder verwenden
+Sie <span class="command"><strong>su</strong></span> oder <span class="command"><strong>sudo</strong></span>, um die notwendigen
+Rechte zu erlangen.
+</p><p>
+Für das Upgrade gibt es ein paar Voraussetzungen; Sie sollten diese
+überprüfen, bevor Sie das Upgrade durchführen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inform-users"></a>4.1.2. Die Benutzer vorab informieren</h3></div></div></div><p>
+Es empfiehlt sich, alle Benutzer vor dem geplanten Upgrade zu informieren,
+auch wenn Benutzer, die über <span class="command"><strong>ssh</strong></span> auf Ihr System
+zugreifen, wenig von dem Upgrade mitbekommen sollten und es ihnen möglich
+sein sollte, weiterzuarbeiten. 
+</p><p>
+Falls Sie zusätzliche Vorsichtsmaßnahmen ergreifen möchten, sichern Sie die
+Partition <code class="filename">/home</code> vor dem Upgrade oder lösen Sie diese
+Einbindung mit <span class="command"><strong>umount</strong></span>.
+</p><p>
+Sie müssen beim Upgrade auf Jessie auch ein Kernel-Upgrade
+durchführen, daher wird ein Systemneustart notwendig sein. Typischerweise
+wird dieser stattfinden, nachdem das Upgrade abgeschlossen ist.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="services-downtime"></a>4.1.3. Vorbereitung auf die Deaktivierung von Diensten</h3></div></div></div><p>
+Es gibt möglicherweise vom System angebotene Dienste, die Paketen, für die
+ein Upgrade ansteht, zugeordnet sind. Falls das der Fall ist, beachten Sie
+bitte, dass diese Dienste während des Upgrades gestoppt werden, wenn die
+ihnen zugeordneten Pakete ersetzt und konfiguriert werden. Während dieser
+Zeit werden diese Dienste nicht verfügbar sein.
+</p><p>
+Die exakte Dauer, für die die Dienste abgeschaltet sind, variiert abhängig
+von der Anzahl der Pakete, die im System aktualisiert werden und enthält
+auch die Zeit, die der Systemadministrator benötigt, um Konfigurationsfragen
+von verschiedenen Paket-Upgrades zu beantworten. Beachten Sie, dass eine
+hohe Wahrscheinlichkeit für die Nichtverfügbarkeit von Diensten über eine
+erhebliche Zeitdauer besteht, wenn der Upgrade-Prozess unbeaufsichtigt läuft
+und das System eine Bedienereingabe während des Prozesses
+erfordert<a href="#ftn.idp62479392" class="footnote" id="idp62479392"><sup class="footnote">[1]</sup></a>.
+</p><p>
+Wenn das System, das aktualisiert wird, kritische Dienste für Ihre Nutzer
+oder für das Netzwerk bereitstellt<a href="#ftn.idp62481088" class="footnote" id="idp62481088"><sup class="footnote">[2]</sup></a>,
+können Sie die Zeit, während der der Dienst abgeschaltet ist, reduzieren,
+indem Sie ein minimales System-Upgrade durchführen (wie in <a class="xref" href="ch-upgrading.de.html#minimal-upgrade" title="4.4.4. Minimales System-Upgrade">Abschnitt 4.4.4, „Minimales System-Upgrade“</a> beschrieben), gefolgt von einem Kernel-Upgrade
+und einem Reboot und schließlich dem Upgrade der Pakete, denen Ihre
+kritischen Dienste zugeordnet sind. Aktualisieren Sie diese Pakete, bevor
+Sie das eigentliche vollständige Upgrade durchführen, das in <a class="xref" href="ch-upgrading.de.html#upgrading-full" title="4.4.5. Upgrade des Systems">Abschnitt 4.4.5, „Upgrade des Systems“</a> beschrieben ist. So stellen Sie sicher, dass die
+kritischen Dienste während des ganzen vollständigen Upgrades laufen und
+verfügbar sind, so dass der Zeitraum, während dem die Dienste abgeschaltet
+sind, insgesamt reduziert ist.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="recovery"></a>4.1.4. Vorbereitungen für eine Systemwiederherstellung</h3></div></div></div><p>
+Obwohl Debian versucht sicherzustellen, dass Ihr System immer startfähig
+bleibt, gibt es immer die Möglichkeit, dass Sie beim Neustart des Systems
+nach dem Upgrade Probleme feststellen. Bekannte mögliche Probleme sind in
+diesem und den nächsten Kapiteln dieser Veröffentlichungshinweise
+dokumentiert.
+</p><p>
+Aus diesem Grund ist es sinnvoll, sicherzustellen, dass Sie die Möglichkeit
+haben, Ihr System wieder zum Laufen zu bringen, falls der Start fehlschlagen
+sollte oder (bei fernverwalteten Systemen) der Aufbau der Netzwerkverbindung
+nicht erfolgreich sein sollte.
+</p><p>
+Falls Sie das Upgrade aus der Ferne über eine
+<span class="command"><strong>ssh</strong></span>-Verbindung durchführen, wird empfohlen, dass Sie die
+nötigen Vorkehrungen treffen, um den Server über eine serielle
+Terminalverbindung aus der Ferne erreichen zu können. Es besteht die
+Möglichkeit, dass Sie nach dem Kernel-Upgrade und anschließenden Neustart
+die Systemkonfiguration über eine lokale Konsole korrigieren müssen. Auch
+könnte es sein, dass Sie das System über eine lokale Konsole
+wiederherstellen müssen, wenn es in der Mitte des Upgrade-Prozesses
+versehentlich neu gebootet wird.
+</p><p>
+Normalerweise empfehlen wir die Verwendung vom
+<span class="emphasis"><em>Rettungsmodus</em></span> des Debian-Installers für
+Jessie. Der Vorteil der Verwendung des Installers besteht darin, dass
+Sie aus den vielen Methoden diejenige aussuchen können, die am besten für
+Sie passt. Für weitere Informationen lesen Sie bitte den Abschnitt
+<span class="quote">„<span class="quote">Ein kaputtes System reparieren</span>“</span> in Kapitel 8 der <a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">Installationsanleitung</a> und die <a class="ulink" href="https://wiki.debian.org/DebianInstaller/FAQ" target="_top">FAQ des Debian-Installers</a>.
+</p><p>
+Falls dies fehlschlägt, benötigen Sie eine alternative Möglichkeit, Ihr
+System zu starten und zu reparieren. Eine Möglichkeit ist, ein spezielles
+Rettungs-Image oder eine Linux-Live-CD zu verwenden. Nachdem Sie davon
+gebootet haben, sollten Sie die Wurzel Ihres Dateisystems
+(<code class="filename">/</code>) einbinden und ein <code class="literal">chroot</code> darauf
+ausführen, um das Problem zu untersuchen und zu beheben.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-initrd"></a>4.1.4.1. Shell zur Fehleranalyse während des Bootens mit Initrd</h4></div></div></div><p>
+Das <code class="systemitem">initramfs-tools</code><a id="idp62497648" class="indexterm"></a>-Paket integriert
+eine Shell zur Fehleranalyse<a href="#ftn.idp62498544" class="footnote" id="idp62498544"><sup class="footnote">[3]</sup></a> in die
+Initrds, die es erzeugt. Falls die Initrd beispielsweise nicht in der Lage
+ist, die Wurzel Ihres Dateisystems (<code class="filename">/</code>) einzubinden,
+wird Ihnen diese Debug-Shell präsentiert, in der die grundlegenden Befehle
+vorhanden sind, um das Problem zu ermitteln und möglicherweise zu beheben.
+</p><p>
+Folgende wesentliche Dinge sollten Sie prüfen: Vorhandensein der richtigen
+Gerätedateien in <code class="filename">/dev</code>, welche Module geladen sind
+(<code class="literal">cat /proc/modules</code>) und Fehler beim Laden von Treibern in
+der Ausgabe von <span class="command"><strong>dmesg</strong></span>. Die Ausgabe von
+<span class="command"><strong>dmesg</strong></span> wird Ihnen auch zeigen, welche Gerätedateien
+welchen Festplatten zugeordnet wurden; Sie sollten das mit der Ausgabe von
+<code class="literal">echo $ROOT</code> vergleichen, um sicherzustellen, dass die
+Wurzel des Dateisystems (<code class="filename">/</code>) auf dem erwarteten Gerät
+liegt.
+</p><p>
+Falls Sie das Problem beheben können, geben Sie <code class="literal">exit</code> ein,
+um die Debug-Shell zu beenden und mit dem Boot-Vorgang an der Fehlerstelle
+fortzufahren. Natürlich müssen Sie auch das zu Grunde liegende Problem
+beheben und die Initrd neu erzeugen, damit der Systemstart nicht beim
+nächsten Mal wieder fehlschlägt.
+</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-shell-systemd"></a>4.1.4.2. Shell zur Fehleranalyse während des Bootens mit systemd</h4></div></div></div><p>
+    Falls das Booten unter systemd fehlschlägt, ist es über eine Änderung der
+Kernel-Befehlszeile möglich, eine Root-Shell zur Fehlersuche
+aufzurufen. Wenn das Booten grundsätzlich funktioniert, aber einige Dienste
+nicht starten, könnte es nützlich sein,
+<code class="literal">systemd.unit=rescue.target</code> zu den Kernel-Parametern
+hinzuzufügen.
+  </p><p>
+    In anderen Fällen bringt Ihnen der Kernel-Parameter
+<code class="literal">systemd.unit=emergency.target</code> zum frühest möglichen
+Zeitpunkt eine Root-Shell. Allerdings muss dazu das root-Dateisystem mit
+Lese-/Schreibrechten eingebunden werden. Sie müssen dies händisch erledigen
+mittels:
+  </p><pre class="screen">
+mount -o remount,rw /
+</pre><p>
+    Sie finden weitere Informationen zur Fehlersuche bei fehlschlagenden
+Boot-Vorgängen unter systemd in dem <a class="ulink" href="http://freedesktop.org/wiki/Software/systemd/Debugging/" target="_top"> Diagnosing
+Boot Problems</a>-Artikel.
+  </p><p>
+    Sollte alles andere nicht funktionieren, können Sie möglicherweise mit dem
+alten sysvinit-System booten. Dazu ist es erforderlich, dass das <code class="systemitem">sysvinit</code><a id="idp62516352" class="indexterm"></a>-Paket noch installiert und die
+Binärdatei <code class="filename">/lib/sysvinit/init</code> in Ihrer initramfs
+enthalten ist. Sind diese Voraussetzungen gegeben, fügen Sie
+<code class="literal">init=/lib/sysvinit/init</code> zur Kernel-Befehlszeile hinzu und
+das System wird mit sysvinit starten.
+  </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrade-preparations"></a>4.1.5. Vorbereiten einer sicheren Umgebung für das Upgrade</h3></div></div></div><p>
+Das Distributions-Upgrade sollte entweder lokal von einer virtuellen Konsole
+im Textmodus (oder von einem direkt angebundenen seriellen Terminal) oder
+aus der Ferne über eine <span class="command"><strong>ssh</strong></span>-Verbindung erfolgen. 
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Wichtig]" src="images/important.png" /></td><th align="left">Wichtig</th></tr><tr><td align="left" valign="top"><p>
+  Wenn Sie VPN-Dienste (wie zum Beispiel <code class="systemitem">tinc</code><a id="idp62523216" class="indexterm"></a>) verwenden, könnten diese während des
+Upgrades unter Umständen eine Zeit lang nicht verfügbar sein. Bitte lesen
+Sie <a class="xref" href="ch-upgrading.de.html#services-downtime" title="4.1.3. Vorbereitung auf die Deaktivierung von Diensten">Abschnitt 4.1.3, „Vorbereitung auf die Deaktivierung von Diensten“</a>.
+  </p></td></tr></table></div><p>
+Für zusätzliche Sicherheit sollten Sie beim Upgrade aus der Ferne den
+Upgrade-Prozess in einer virtuellen Konsole des Programms
+<span class="command"><strong>screen</strong></span> durchführen, da damit bei möglichen
+Verbindungsabbrüchen die Verbindung wieder sicher hergestellt werden kann
+und der Upgrade-Prozess somit nicht fehlschlägt.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Wichtig]" src="images/important.png" /></td><th align="left">Wichtig</th></tr><tr><td align="left" valign="top"><p>
+    Sie sollten das Upgrade <span class="emphasis"><em>nicht</em></span> mit
+<span class="command"><strong>telnet</strong></span>, <span class="command"><strong>rlogin</strong></span>, <span class="command"><strong>rsh</strong></span>
+durchführen bzw. bei lokalen Upgrades nicht in einer X-Sitzung, die von
+<span class="command"><strong>xdm</strong></span>, <span class="command"><strong>gdm</strong></span>, <span class="command"><strong>kdm</strong></span>
+usw. verwaltet wird. Da diese Dienste während des Upgrades möglicherweise
+beendet werden, könnte dies dazu führen, dass auf das System <span class="emphasis"><em>kein
+Zugriff</em></span> mehr möglich ist und somit das Upgrade nicht
+fertiggestellt werden kann. Von der Nutzung der GNOME-Applikation
+<span class="command"><strong>update-manager</strong></span> für Upgrades auf neue Veröffentlichungen
+wird <span class="emphasis"><em>dringend abgeraten</em></span>, da dieses Programm darauf
+angewiesen ist, dass die Desktop-Sitzung währendddessen nicht abgebrochen
+wird.
+  </p></td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="system-status"></a>4.2. Den Systemstatus überprüfen</h2></div></div></div><p>
+Der in diesem Kapitel beschriebene Upgrade-Prozess geht davon aus, dass das
+zu aktualisierende System ein <span class="quote">„<span class="quote">reines</span>“</span> Wheezy-System
+ohne Softwarepakete Dritter ist. Um den Upgrade-Prozess möglichst
+zuverlässig zu gestalten, sollten Sie überlegen, eventuell installierte
+Softwarepakete Dritter vor Beginn des Upgrades von Ihrem System zu
+entfernen.
+</p><p>
+Direkte Upgrades von Debian-Veröffentlichungen vor Version 7
+(Wheezy) werden nicht unterstützt. Bitte befolgen Sie die
+Anweisungen in den <a class="ulink" href="https://www.debian.org/releases/wheezy/releasenotes" target="_top">Hinweisen
+zur Debian-Veröffentlichung Version 7</a>, um zunächst ein
+Upgrade auf 7 durchzuführen.
+</p><p>
+Diese Anleitung geht davon aus, dass Ihr System auf die neueste
+Zwischenveröffentlichung von Wheezy aktualisiert wurde. Falls dies
+nicht der Fall sein sollte oder Sie sich unsicher sind, folgen Sie den
+Anweisungen in <a class="xref" href="ap-old-stuff.de.html#old-upgrade" title="A.1. Upgrade Ihres Wheezy-Systems">Abschnitt A.1, „Upgrade Ihres Wheezy-Systems“</a>.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="review-actions"></a>4.2.1. Noch ausstehende Aktionen im Paketmanager prüfen</h3></div></div></div><p>
+Manchmal führt die Verwendung von <span class="command"><strong>apt-get</strong></span> statt
+<span class="command"><strong>aptitude</strong></span> für die Paketinstallation dazu, dass
+<span class="command"><strong>aptitude</strong></span> ein Paket für <span class="quote">„<span class="quote">unbenutzt</span>“</span> hält und
+es zur Entfernung einplant. Grundsätzlich sollten Sie sicherstellen, dass
+Ihr System vollständig aktuell und <span class="quote">„<span class="quote">sauber</span>“</span> ist, bevor Sie mit
+dem Upgrade fortfahren.
+</p><p>
+Deshalb sollten Sie kontrollieren, ob noch ausstehende Aktionen im
+Paketmanager <span class="command"><strong>aptitude</strong></span> vorhanden sind. Falls ein Paket im
+Paketmanager zum Entfernen oder Aktualisieren vorgemerkt ist, könnte dies
+den Upgrade-Prozess negativ beeinflussen. Beachten Sie, dass Sie eine solche
+Situation nur korrigieren können, falls Ihre
+<code class="filename">sources.list</code> noch auf
+<span class="emphasis"><em>wheezy</em></span> und nicht auf
+<span class="emphasis"><em>stable</em></span> oder <span class="emphasis"><em>jessie</em></span>
+verweist; siehe dazu <a class="xref" href="ap-old-stuff.de.html#old-sources" title="A.2. Überprüfen Ihrer Paketquellen">Abschnitt A.2, „Überprüfen Ihrer Paketquellen“</a>.
+</p><p>
+Dann sollten Sie <span class="command"><strong>aptitude</strong></span> im <span class="quote">„<span class="quote">visuellen
+Modus</span>“</span> starten und <span class="keycap"><strong>g</strong></span> drücken, um diese Begutachtung
+zu beginnen. Falls irgendwelche Aktionen angezeigt werden, sollten Sie diese
+kontrollieren und entweder rückgängig machen/beheben oder die empfohlenen
+Vorgänge ausführen. Sind keine Aktionen vorgesehen, wird folgende Nachricht
+angezeigt: <span class="quote">„<span class="quote">Es wurden keine Pakete zum Installieren, Entfernen oder
+Aktualisieren ausgewählt.</span>“</span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="disable-apt-pinning"></a>4.2.2. APT Pinning deaktivieren</h3></div></div></div><p>
+Falls Sie APT so konfiguriert haben, dass bestimmte Pakete aus einer anderen
+Debian-Suite als Stable (z.B. aus Testing) installiert werden, müssen Sie
+unter Umständen Ihre APT-Pinning-Konfiguration (in
+<code class="filename">/etc/apt/preferences</code> und
+<code class="filename">/etc/apt/preferences.d/</code> gespeichert) ändern, um das
+Upgrade der Pakete aus der neuen Stable-Veröffentlichung zu
+erlauben. Weitere Informationen zu APT Pinning finden Sie in <span class="citerefentry"><span class="refentrytitle">apt_preferences</span>(5)</span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-status"></a>4.2.3. Paketstatus überprüfen</h3></div></div></div><p>
+Unabhängig von der Upgrade-Methode wird empfohlen, dass Sie zuerst
+überprüfen, ob alle Pakete in einem Status sind, der zum Upgrade geeignet
+ist. Der folgende Befehl wird Ihnen alle Pakete anzeigen, die im Status
+halb-installiert oder Konfiguration-fehlgeschlagen sind, und solche mit
+Fehler-Status:
+</p><pre class="screen">
+# dpkg --audit
+</pre><p>
+Sie können auch den Status aller Pakete Ihres Systems mittels
+<span class="command"><strong>aptitude</strong></span> oder Befehlen der folgenden Form überprüfen:
+</p><pre class="screen">
+# dpkg -l | pager
+</pre><p>
+oder
+</p><pre class="screen">
+# dpkg --get-selections "*" &gt; ~/curr-pkgs.txt
+</pre><p>
+Es ist erstrebenswert, alle hold-Markierungen (<span class="quote">„<span class="quote">halten</span>“</span>;
+Markierung, dass ein Paket in dem Zustand belassen werden soll, in dem es
+ist; es würde nicht aktualisiert) vor dem Upgrade zu entfernen. Wenn
+irgendein Paket, das für das Upgrade unverzichtbar ist, auf hold steht,
+schlägt das Upgrade fehl.
+</p><p>
+Beachten Sie, dass <span class="command"><strong>aptitude</strong></span> verglichen mit
+<span class="command"><strong>apt-get</strong></span> oder <span class="command"><strong>dselect</strong></span> eine andere
+Methode verwendet, um Pakete als auf hold gesetzt zu registrieren. Sie
+können Pakete, für die die hold-Markierung gesetzt ist, mit
+<span class="command"><strong>aptitude</strong></span> identifizieren, indem Sie diesen Befehl
+verwenden:
+</p><pre class="screen">
+# aptitude search "~ahold" 
+</pre><p>
+Um Pakete, die für <span class="command"><strong>apt-get</strong></span> auf hold gesetzt worden waren,
+zu identifizieren, sollten Sie dies verwenden:
+</p><pre class="screen">
+# dpkg --get-selections | grep 'hold$'
+</pre><p>
+Falls Sie ein Paket lokal verändert und neu kompiliert haben, und ihm dabei
+weder einen anderen Namen gegeben noch eine Epoche in die Versionsnummer
+eingefügt haben, müssen Sie es auf hold setzen, um zu verhindern, dass ein
+Upgrade für dieses Paket durchgeführt und es damit überschrieben wird.
+</p><p>
+Der <span class="quote">„<span class="quote">hold</span>“</span>-Paketstatus für <span class="command"><strong>apt-get</strong></span> kann mit
+folgenden Befehlen geändert werden: <code class="literal">hold</code>-Status setzen:
+</p><pre class="screen">
+# echo <em class="replaceable"><code>package_name</code></em> hold | dpkg --set-selections
+</pre><p>
+hold-Status löschen: ersetzen Sie <code class="literal">hold</code> durch
+<code class="literal">install</code>.
+</p><p>
+Falls etwas korrigiert werden muss, sorgen Sie am besten dafür, dass
+<code class="filename">sources.list</code> noch auf wheezy verweist, wie
+dies in <a class="xref" href="ap-old-stuff.de.html#old-sources" title="A.2. Überprüfen Ihrer Paketquellen">Abschnitt A.2, „Überprüfen Ihrer Paketquellen“</a> erklärt ist.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="proposed-updates"></a>4.2.4. Der Bereich für vorgeschlagene Aktualisierungen
+(<span class="quote">„<span class="quote">proposed-updates</span>“</span>)</h3></div></div></div><p>
+    Wenn Sie <code class="literal">proposed-updates</code> in Ihrer
+<code class="filename">/etc/apt/sources.list</code>-Datei aufgeführt haben, sollten
+Sie das entfernen, bevor Sie versuchen, ein Upgrade Ihres Systems
+durchzuführen. Dies ist eine Vorsichtsmaßnahme, um die Zahl möglicher
+Konflikte zu reduzieren.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="unofficial-sources"></a>4.2.5. Inoffizielle Quellen</h3></div></div></div><p>
+Falls auf Ihrem System Debian-fremde Pakete installiert sind, sollten Sie
+wissen, dass diese während des Upgrades aufgrund von Konflikten in den
+Abhängigkeiten entfernt werden könnten. Falls diese Pakete installiert
+wurden, indem ein zusätzliches Paketarchiv in Ihrer
+<code class="filename">/etc/apt/sources.list</code> hinzugefügt wurde, sollten Sie
+überprüfen, ob das Archiv auch für Jessie übersetzte Pakete anbietet
+und die Quellzeile gleichzeitig mit der Quellzeile für die Debian-Pakete
+ändern.
+</p><p>
+Einige Benutzer haben möglicherweise <span class="emphasis"><em>inoffizielle</em></span>
+rückportierte <span class="quote">„<span class="quote">neuere</span>“</span> Versionen von Paketen, die <span class="emphasis"><em>in
+Debian enthalten sind</em></span>, auf ihrem Wheezy-System
+installiert. Diese Pakete werden wahrscheinlich während des Upgrades zu
+Problemen führen, da Dateikonflikte auftreten können<a href="#ftn.idp62588528" class="footnote" id="idp62588528"><sup class="footnote">[4]</sup></a>. <a class="xref" href="ch-upgrading.de.html#trouble" title="4.5. Mögliche Probleme während des Upgrades">Abschnitt 4.5, „Mögliche Probleme während des Upgrades“</a> enthält Informationen,
+wie Sie mit Dateikonflikten umgehen, falls diese auftreten.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-process"></a>4.3. Die Quellen für APT vorbereiten</h2></div></div></div><p>
+Bevor Sie das Upgrade beginnen, müssen Sie die <code class="systemitem">apt</code><a id="idp62592656" class="indexterm"></a>-Konfigurationsdatei für die Paketlisten
+<code class="filename">/etc/apt/sources.list</code> einrichten.
+</p><p>
+<code class="systemitem">apt</code><a id="idp62595456" class="indexterm"></a> wird alle Pakete
+berücksichtigen, die über eine <span class="quote">„<span class="quote"><code class="literal">deb</code></span>“</span>-Zeile
+gefunden werden können und das Paket mit der höchsten Versionsnummer
+installieren, wobei die Priorität auf die erste Zeile in der Datei gelegt
+wird (daher würden Sie bei der Existenz mehrerer Quellen typischerweise
+zuerst die Festplatte, dann <acronym title="Compact Disc Read Only Memory">CD-ROM</acronym>s und schließlich
+HTTP/FTP-Archivspiegel angeben).
+</p><p>
+Eine Veröffentlichung kann sowohl mit ihrem Codenamen
+(z.B. <code class="literal">wheezy</code>, <code class="literal">jessie</code>)
+als auch mit ihrem Statusnamen (d.h. <code class="literal">oldstable</code>,
+<code class="literal">stable</code>, <code class="literal">testing</code>,
+<code class="literal">unstable</code>) benannt werden. Die Verwendung des Codenamens
+hat den Vorteil, dass Sie nie von neueren Veröffentlichungen überrascht
+werden, und wird daher hier verwandt. Natürlich bedeutet dies, dass Sie
+selbst auf Veröffentlichungsankündigungen achten müssen. Falls Sie
+stattdessen den Statusnamen verwenden, werden Sie nur eine große Menge an
+Aktualisierungen für Pakete sehen, wenn eine Veröffentlichung stattgefunden
+hat.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="network"></a>4.3.1. APT-Internet-Quellen hinzufügen</h3></div></div></div><p>
+Die Konfiguration ist standardmäßig so eingerichtet, dass Sie von den
+Haupt-Internetservern von Debian installieren, aber Sie können
+<code class="filename">/etc/apt/sources.list</code> bearbeiten, um andere Spiegel zu
+verwenden, bevorzugt solche, die netztopologisch nahe bei Ihnen liegen.
+</p><p>
+Adressen von HTTP- und FTP-Spiegeln können Sie auf <a class="ulink" href="https://www.debian.org/distrib/ftplist" target="_top">https://www.debian.org/distrib/ftplist</a> finden (suchen Sie nach dem Abschnitt
+<span class="quote">„<span class="quote">Liste von Debian-Spiegeln</span>“</span>). HTTP-Spiegel sind im Allgemeinen
+schneller als FTP-Spiegel.
+</p><p>
+Im Beispiel nehmen wir an, dass der für Sie am nächsten liegende Spiegel
+<code class="literal">http://mirrors.kernel.org</code> sei. Wenn Sie sich den Spiegel mit
+einem Webbrowser oder einem FTP-Programm anschauen, werden Sie bemerken,
+dass die Hauptverzeichnisse wie folgt organisiert sind:
+</p><pre class="programlisting">
+http://mirrors.kernel.org/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Um diesen Spiegel mit <code class="systemitem">apt</code><a id="idp62612704" class="indexterm"></a> zu
+verwenden, müssen Sie die folgende Zeile zu Ihrer Datei
+<code class="filename">sources.list</code> hinzufügen:
+</p><pre class="programlisting">deb http://mirrors.kernel.org/debian jessie main contrib</pre><p>
+Beachten Sie, dass das <span class="quote">„<span class="quote"><code class="literal">dists</code></span>“</span> implizit
+hinzugefügt wird und dass Argumente nach dem Namen der Veröffentlichung
+verwendet werden, um den Pfad aufzufächern, so dass er in mehrere
+unterschiedliche Verzeichnisse verweist.
+</p><p>
+Nachdem Sie neue Quellen hinzugefügt haben, deaktivieren Sie die bisher
+existierenden <span class="quote">„<span class="quote"><code class="literal">deb</code></span>“</span>-Zeilen in der Datei
+<code class="filename">sources.list</code>, indem Sie eine Raute
+(<code class="literal">#</code>) am Zeilenanfang einfügen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="localmirror"></a>4.3.2. APT-Quellen für einen lokalen Spiegel hinzufügen</h3></div></div></div><p>
+Statt HTTP- oder FTP-Paketspiegel zu verwenden, können Sie auch Ihre
+<code class="filename">/etc/apt/sources.list</code> anpassen, um einen Spiegel auf
+einer lokalen Platte zu verwenden (die möglicherweise über
+<acronym title="Network File System">NFS</acronym> eingebunden ist).
+</p><p>
+Beispielsweise könnte Ihr Paketspiegel unter
+<code class="filename">/var/ftp/debian/</code> liegen und über die folgenden
+Hauptverzeichnisse verfügen:
+</p><pre class="programlisting">
+/var/ftp/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+/var/ftp/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Um diesen Spiegel mit <code class="systemitem">apt</code><a id="idp62627376" class="indexterm"></a> zu
+verwenden, fügen Sie die folgende Zeile zu Ihrer Datei
+<code class="filename">sources.list</code> hinzu:
+</p><pre class="programlisting">deb file:/var/ftp/debian jessie main contrib</pre><p>
+Beachten Sie, dass das <span class="quote">„<span class="quote"><code class="literal">dists</code></span>“</span> implizit
+hinzugefügt wird und dass Argumente nach dem Namen der Veröffentlichung
+verwendet werden, um den Pfad aufzufächern, so dass er in mehrere
+unterschiedliche Verzeichnisse verweist.
+</p><p>
+Nachdem Sie neue Quellen hinzugefügt haben, deaktivieren Sie die bisher
+existierenden <span class="quote">„<span class="quote"><code class="literal">deb</code></span>“</span>-Zeilen in der Datei
+<code class="filename">sources.list</code>, indem Sie eine Raute
+(<code class="literal">#</code>) am Zeilenanfang einfügen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cdroms"></a>4.3.3. APT-Quellen für optische Medien hinzufügen</h3></div></div></div><p>
+Falls Sie <span class="emphasis"><em>ausschließlich</em></span> die CDs/DVDs/Blu-ray-Disks
+verwenden möchten, kommentieren Sie die existierenden
+<span class="quote">„<span class="quote"><code class="literal">deb</code></span>“</span>-Zeilen in der
+<code class="filename">/etc/apt/sources.list</code> aus, indem Sie am Zeilenanfang
+eine Raute (<code class="literal">#</code>) anfügen.
+</p><p>
+Stellen Sie sicher, dass es eine Zeile in <code class="filename">/etc/fstab</code>
+gibt, die das Einbinden Ihres CD-ROM-Laufwerks unter
+<code class="filename">/media/cdrom</code> bewirkt. Falls Ihr CD-ROM-Laufwerk
+beispielsweise <code class="filename">/dev/sr0</code> ist, sollte
+<code class="filename">/etc/fstab</code> eine Zeile wie diese enthalten:
+</p><pre class="programlisting">
+/dev/sr0 /media/cdrom auto noauto,ro 0 0
+</pre><p>
+Beachten Sie, dass es <span class="emphasis"><em>keine Leerzeichen</em></span> zwischen den
+Wörtern <code class="literal">noauto,ro</code> im vierten Feld geben darf.
+</p><p>
+Um zu überprüfen, ob dies funktioniert, legen Sie eine CD/DVD ein und
+versuchen Sie, Folgendes auszuführen:
+</p><pre class="screen">
+# mount /media/cdrom    # dies wird die CD/DVD am Einbindungspunkt einbinden
+# ls -alF /media/cdrom  # dies sollte Ihnen das Wurzelverzeichnis der CD/DVD anzeigen
+# umount /media/cdrom   # dies wird die Einbindung der CD/DVD wieder aufheben
+</pre><p>
+Führen Sie als nächstes für jede Binär-CD/-DVD, die Sie von Debian haben,
+den Befehl 
+</p><pre class="screen">
+# apt-cdrom add
+</pre><p>
+aus, um die Daten der CD/DVD zu der APT-Datenbank hinzuzufügen.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgradingpackages"></a>4.4. Upgrades von Paketen durchführen</h2></div></div></div><p>
+Die empfohlene Art, ein Upgrade von vorherigen Debian-Veröffentlichungen
+durchzuführen, ist die Verwendung des Paketverwaltungswerkzeuges
+<span class="command"><strong>apt-get</strong></span>. In früheren Veröffentlichungen wurde
+<span class="command"><strong>aptitude</strong></span> für diesen Zweck empfohlen, jedoch bieten
+neueste Versionen von <span class="command"><strong>apt-get</strong></span> vergleichbare
+Funktionalitäten und haben zusätzlich gezeigt, dass sie die gewünschten
+Upgrade-Resultate mit höherer Beständigkeit erreichen.
+</p><p>
+Vergessen Sie nicht, alle benötigten Partitionen (insbesondere
+<code class="filename">/</code> und <code class="filename">/usr</code>) zum Schreiben
+einzubinden. Verwenden Sie hierzu einen Befehl der Art:
+</p><pre class="screen">
+# mount -o remount,rw /<em class="replaceable"><code>mountpoint</code></em>
+</pre><p>
+Als nächstes sollten Sie noch einmal überprüfen, dass die Quelleinträge für
+APT (in <code class="filename">/etc/apt/sources.list</code>) sich entweder auf
+<span class="quote">„<span class="quote"><code class="literal">jessie</code></span>“</span> oder auf
+<span class="quote">„<span class="quote"><code class="literal">stable</code></span>“</span> beziehen. Es sollte keine
+Quelleinträge geben, die auf
+<span class="quote">„<span class="quote"><code class="literal">wheezy</code></span>“</span> verweisen.
+</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Anmerkung]" src="images/note.png" /></td><th align="left">Anmerkung</th></tr><tr><td align="left" valign="top"><p>
+    Quellzeilen für eine CD-ROM könnten sich eventuell auf
+<span class="quote">„<span class="quote"><code class="literal">unstable</code></span>“</span> beziehen; dies mag zwar
+verwirrend erscheinen, Sie sollten dies jedoch <span class="emphasis"><em>nicht</em></span>
+ändern.
+  </p></td></tr></table></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="record-session"></a>4.4.1. Aufzeichnung der Sitzung</h3></div></div></div><p>
+Es wird nachdrücklich empfohlen, dass Sie das Programm
+<span class="command"><strong>/usr/bin/script</strong></span> verwenden, um einen Mitschnitt der
+Upgrade-Sitzung zu erstellen. Falls dann ein Problem auftritt, haben Sie ein
+exaktes Protokoll der Ereignisse und können - falls notwendig - genaue
+Informationen in einem Fehlerbericht angeben. Um die Aufzeichnung zu
+beginnen, geben Sie 
+</p><pre class="screen">
+# script -t 2&gt;~/upgrade-jessie<em class="replaceable"><code>step</code></em>.time -a ~/upgrade-jessie<em class="replaceable"><code>step</code></em>.script
+</pre><p>
+oder vergleichbares ein. Falls Sie das Script erneut starten müssen
+(z.B. aufgrund eines Systemneustarts), verwenden Sie einen anderen Wert für
+<em class="replaceable"><code>step</code></em>, um darzustellen, welchen Schritt des
+Upgrades Sie gerade aufzeichnen. Legen Sie die Mitschnittdatei nicht in
+einem temporären Verzeichnis wie <code class="filename">/tmp</code> oder
+<code class="filename">/var/tmp</code> ab (Dateien in diesen Verzeichnissen könnten
+während des Upgrades oder eines Systemstarts gelöscht werden).
+</p><p>
+Der Mitschnitt erlaubt es Ihnen auch, die Informationen durchzuschauen, die
+bereits aus dem Bildschirm herausgelaufen sind. Wenn Sie sich auf der
+System-Konsole befinden, schalten Sie auf VT2 um (mit <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F2</strong></span>) und
+verwenden Sie nach dem Anmelden <code class="literal">less -R
+~root/upgrade-jessie.script</code>, um die Datei durchzuschauen.
+</p><p>
+Nach Beendigung des Upgrades können Sie <span class="command"><strong>script</strong></span> beenden,
+indem Sie <code class="literal">exit</code> an der Eingabeaufforderung eingeben.
+</p><p>
+Falls Sie den Schalter <span class="emphasis"><em>-t</em></span> für <span class="command"><strong>script</strong></span>
+verwendet haben, können Sie das Programm <span class="command"><strong>scriptreplay</strong></span> zum
+Abspielen der gesamten Sitzung verwenden:
+</p><pre class="screen">
+# scriptreplay ~/upgrade-jessie.time ~/upgrade-jessie.script
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="updating-lists"></a>4.4.2. Aktualisieren der Paketliste</h3></div></div></div><p>
+Zuerst muss die Liste der verfügbaren Pakete für die neue Veröffentlichung
+abgerufen werden. Dies erledigen Sie mit dem folgenden Befehl:
+</p><pre class="screen">
+# apt-get update
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sufficient-space"></a>4.4.3. Sicherstellen, dass genügend Speicherplatz für das Upgrade zur Verfügung
+steht</h3></div></div></div><p>
+Sie müssen vor dem Upgrade sicherstellen, dass Sie genügend Platz auf Ihrer
+Festplatte verfügbar haben, wenn Sie wie in <a class="xref" href="ch-upgrading.de.html#upgrading-full" title="4.4.5. Upgrade des Systems">Abschnitt 4.4.5, „Upgrade des Systems“</a>
+beschrieben ein Upgrade des kompletten Systems starten. Als erstes wird
+jedes Paket, das zur Installation benötigt wird und über das Netz
+heruntergeladen werden muss, in <code class="filename">/var/cache/apt/archives</code>
+gespeichert (bzw. während des Downloads im Unterverzeichnis
+<code class="filename">partial/</code>). Sie müssen also sicherstellen, dass Sie auf
+der Partition, die <code class="filename">/var/</code> beinhaltet, genügend Platz
+haben, um temporär alle Pakete, die installiert werden sollen, herunterladen
+zu können. Nach dem Download benötigen Sie möglicherweise mehr Platz in
+anderen Partitionen, sowohl um die zu aktualisierenden Pakete zu
+installieren (diese könnten größere Binärdateien oder zusätzliche Daten
+enthalten) als auch um Pakete zu installieren, die neu hinzukommen. Falls
+Sie nicht genügend freien Speicherplatz bereithalten, bleibt vielleicht ein
+System mit einem unvollständigen Upgrade zurück, das unter Umständen nur
+schwer wiederbelebt werden kann.
+</p><p>
+<span class="command"><strong>apt-get</strong></span> kann Ihnen detaillierte Informationen über den
+Festplattenplatz anzeigen, der für die Installation benötigt wird. Bevor Sie
+das Upgrade ausführen, können Sie sich die ungefähren Werte durch folgenden
+Befehl anschauen:
+</p><pre class="screen">
+# apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+[ ... ]
+XXX aktualisiert, XXX neu installiert, XXX zu entfernen und XXX nicht aktualisiert.
+Es müssen xxx.x MB an Archiven heruntergeladen werden. 
+Nach dieser Operation werden xxx MB Plattenplatz zusätzlich benutzt.
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Anmerkung]" src="images/note.png" /></td><th align="left">Anmerkung</th></tr><tr><td align="left" valign="top"><p>
+Das Ausführen dieses Befehls zu Beginn des Upgrade-Prozesses könnte einen
+Fehler ausgeben (die Gründe sind in den folgenden Abschnitten
+beschrieben). In diesem Fall müssen Sie mit der Ausführung des Befehls
+warten, bis Sie das minimale System-Upgrade (wie in <a class="xref" href="ch-upgrading.de.html#minimal-upgrade" title="4.4.4. Minimales System-Upgrade">Abschnitt 4.4.4, „Minimales System-Upgrade“</a> beschrieben) durchgeführt haben, bevor Sie
+diesen Befehl ausführen können, um den Platzbedarf abzuschätzen.
+</p></td></tr></table></div><p>
+Falls Sie nicht genügend Platz für das Upgrade haben, wird
+<span class="command"><strong>apt-get</strong></span> Sie mit einer Meldung wie dieser warnen:
+</p><pre class="screen">
+F: Sie haben nicht genug Platz in /var/cache/apt/archives/.
+</pre><p>In dieser Situation müssen Sie vorher manuell Platz schaffen. Sie können:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Pakete löschen, die früher schon einmal für eine Installation
+heruntergeladen worden sind (in
+<code class="filename">/var/cache/apt/archives</code>). Durch das Leeren des
+Paket-Caches mit <span class="command"><strong>apt-get clean</strong></span> werden alle bereits
+heruntergeladenen Paketdateien gelöscht.
+</p></li><li class="listitem"><p>
+Vergessene Pakete entfernen. Wenn Sie <span class="command"><strong>aptitude</strong></span> oder
+<span class="command"><strong>apt-get</strong></span> verwendet haben, um Pakete in Wheezy
+manuell zu installieren, werden die Paketwerkzeuge dies registriert haben
+und können auch andere Pakete als unnötig markieren, die nur aufgrund von
+Abhängigkeiten installiert wurden und jetzt nicht mehr benötigt werden, weil
+ein Paket entfernt wurde. Sie werden keine Pakete zur Entfernung vormerken,
+die Sie manuell installiert haben. Um automatisch installierte und jetzt
+nicht mehr verwendete Pakete zu entfernen, führen Sie dies aus:
+</p><pre class="screen">
+# apt-get autoremove
+</pre><p>
+Sie können <span class="command"><strong>deborphan</strong></span>, <span class="command"><strong>debfoster</strong></span> oder
+<span class="command"><strong>cruft</strong></span> verwenden, um unnötige Pakete zu finden. Entfernen
+Sie nicht blind die Pakete, die von diesen Programmen ausgegeben werden,
+speziell wenn Sie Optionen mit aggressiven Nicht-Standard-Werten verwenden,
+die dafür bekannt sind, falsch-positive Meldungen zu erzeugen. Es wird
+dringend empfohlen, dass Sie die Pakete, die zum Entfernen vorgeschlagen
+werden, kontrollieren (bezüglich Inhalt, Größe und Beschreibung), bevor Sie
+sie entfernen.
+</p></li><li class="listitem"><p>
+Entfernen Sie Pakete, die viel Speicherplatz belegen und die aktuell nicht
+benötigt werden (Sie können sie nach dem Upgrade wieder installieren). Wenn
+Sie <code class="systemitem">popularity-contest</code><a id="idp62704624" class="indexterm"></a> installiert
+haben, können Sie <span class="command"><strong>popcon-largest-unused</strong></span> verwenden, um die
+Pakete aufzulisten, die derzeit nicht verwendet werden und den meisten Platz
+verbrauchen. Um die Pakete ausfindig zu machen, die schlicht den meisten
+Festplattenspeicher in Anspruch nehmen, verwenden Sie
+<span class="command"><strong>dpigs</strong></span> (aus dem <code class="systemitem">debian-goodies</code><a id="idp62708016" class="indexterm"></a>-Paket) oder
+<span class="command"><strong>wajig</strong></span> (führen Sie <code class="literal">wajig size</code>
+aus). Desweiteren können Sie diese Pakete auch mit <code class="systemitem">aptitude</code><a id="idp62711264" class="indexterm"></a> finden. Starten Sie dazu
+<span class="command"><strong>aptitude</strong></span> im <span class="emphasis"><em>visuellen Modus</em></span>, wählen
+Sie <span class="guimenu">Ansichten</span> → <span class="guimenuitem">Neue flache
+Paketansicht</span>, drücken Sie <span class="keycap"><strong>l</strong></span> und
+geben Sie <code class="literal">~i</code> ein, drücken Sie dann <span class="keycap"><strong>S</strong></span> und
+geben Sie <code class="literal">~installsize</code> ein. Nun wird Ihnen eine schöne
+Liste angezeigt, mit der Sie arbeiten können. 
+</p></li><li class="listitem"><p>
+  Entfernen von Übersetzungen und Standortanpassungsdateien aus dem System,
+falls diese nicht benötigt werden. Sie können das Paket <code class="systemitem">localepurge</code><a id="idp62719936" class="indexterm"></a> installieren und so konfigurieren,
+dass nur einige ausgewählte Standortdateien (<span class="quote">„<span class="quote">locales</span>“</span>) im
+System verbleiben. Dies wird den unter
+<code class="filename">/usr/share/locale</code> benötigten Plattenplatz reduzieren.
+</p></li><li class="listitem"><p>
+   System-Protokolldateien (die unter <code class="filename">/var/log/</code> liegen)
+vorübergehend auf ein anderes System verschieben oder dauerhaft löschen.
+</p></li><li class="listitem"><p>
+    Ein temporäres <code class="filename">/var/cache/apt/archives</code> verwenden: Sie
+können vorübergehend ein Cache-Verzeichnis auf einem anderen Dateisystem
+benutzen (<acronym title="Universal Serial Bus">USB</acronym>-Speicher, provisorisch angeschlossene
+Festplatte, ein bereits anderweitig benutztes Dateisystem ...)
+  </p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Anmerkung]" src="images/note.png" /></td><th align="left">Anmerkung</th></tr><tr><td align="left" valign="top"><p>
+      Benutzen Sie jedoch kein per <acronym title="Network File System">NFS</acronym> eingebundenes
+Netzlaufwerk, da die Netzwerkverbindung während des Upgrades unterbrochen
+werden könnte.
+    </p></td></tr></table></div><p>
+  Falls Sie zum Beispiel eine <acronym title="Universal Serial Bus">USB</acronym>-Festplatte haben, die in
+<code class="filename">/media/usbkey</code> eingebunden ist:
+  </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+	entfernen Sie die Pakete, die unter Umständen bereits früher für
+Installationen heruntergeladen worden sind:
+
+	</p><pre class="screen"># apt-get clean</pre><p>
+      </p></li><li class="listitem"><p>
+	kopieren Sie das Verzeichnis <code class="filename">/var/cache/apt/archives</code>
+auf die <acronym title="Universal Serial Bus">USB</acronym>-Festplatte:
+
+	</p><pre class="screen"># cp -ax /var/cache/apt/archives /media/usbkey/</pre><p>
+      </p></li><li class="listitem"><p>
+	binden Sie das temporäre Cache-Verzeichnis in dem vorhandenen ein:
+
+	</p><pre class="screen"># mount --bind /media/usbkey/archives /var/cache/apt/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	stellen Sie nach dem Upgrade das ursprüngliche
+<code class="filename">/var/cache/apt/archives</code>-Verzeichnis wieder her:
+
+	</p><pre class="screen"># umount /media/usbkey/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	entfernen Sie das verbleibende <code class="filename">/media/usbkey/archives</code>.
+      </p></li></ol></div><p>
+  Sie können das temporäre Cache-Verzeichnis auf jedem Dateisystem erstellen,
+das auf Ihrem System eingebunden ist.
+  </p></li><li class="listitem"><p>
+    Führen Sie ein minimales Upgrade (siehe <a class="xref" href="ch-upgrading.de.html#minimal-upgrade" title="4.4.4. Minimales System-Upgrade">Abschnitt 4.4.4, „Minimales System-Upgrade“</a>)
+oder andere Teil-Upgrades des Systems durch, gefolgt von einem vollständigen
+Upgrade. Dies schafft die Möglichkeit, das System stückweise zu
+aktualisieren und erlaubt es Ihnen, den Paket-Cache vor dem vollständigen
+Upgrade nochmals zu leeren.
+  </p></li></ul></div><p>
+Beachten Sie, dass es ratsam ist, die <code class="filename">sources.list</code>
+zurück auf wheezy zu ändern (wie in <a class="xref" href="ap-old-stuff.de.html#old-sources" title="A.2. Überprüfen Ihrer Paketquellen">Abschnitt A.2, „Überprüfen Ihrer Paketquellen“</a>
+beschrieben), um Pakete sicher entfernen zu können.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="minimal-upgrade"></a>4.4.4. Minimales System-Upgrade</h3></div></div></div><p>
+In einigen Fällen wird durch das direkte Ausführen des vollständigen
+Upgrades (wie unten beschrieben) eine große Anzahl von Paketen entfernt, die
+Sie eigentlich behalten möchten. Wir empfehlen deshalb einen zweiteiligen
+Upgrade-Prozess: als erstes ein minimales Upgrade, um diese Konflikte zu
+umgehen und anschließend ein vollständiges Upgrade wie in <a class="xref" href="ch-upgrading.de.html#upgrading-full" title="4.4.5. Upgrade des Systems">Abschnitt 4.4.5, „Upgrade des Systems“</a> beschrieben. 
+</p><p>
+Führen Sie dazu zuerst dies aus:
+</p><pre class="screen">
+# apt-get upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Anmerkung]" src="images/note.png" /></td><th align="left">Anmerkung</th></tr><tr><td align="left" valign="top"><p>
+      Für den Upgrade-Prozess einiger früherer Veröffentlichungen wurde die
+Verwendung von <span class="command"><strong>aptitude</strong></span> empfohlen. Dieses Werkzeug wird
+für Upgrades von Wheezy auf Jessie nicht empfohlen.
+    </p></td></tr></table></div><p>
+Dies hat den Effekt, dass für diejenigen Pakete ein Upgrade durchgeführt
+wird, für die dies möglich ist, ohne dass irgendwelche anderen Pakete
+entfernt oder installiert werden müssen.
+</p><p>
+Solch ein minimales System-Upgrade kann auch nützlich sein, wenn auf dem
+System freier Festplattenplatz knapp ist und aus diesem Grund ein komplettes
+Upgrade nicht durchgeführt werden kann.
+</p><p>
+  Falls das <code class="systemitem">apt-listchanges</code><a id="idp62753008" class="indexterm"></a>-Paket
+installiert ist, wird es (in seiner Standard-Konfiguration) alle wichtigen
+Informationen über aktualisierte Pakete in einem Pager anzeigen. Drücken Sie
+<span class="keycap"><strong>q</strong></span>, nachdem Sie alles gelesen haben, um den Pager zu beenden
+und das Upgrade fortzusetzen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrading-full"></a>4.4.5. Upgrade des Systems</h3></div></div></div><p>
+Wenn Sie die vorherigen Schritte hinter sich gebracht haben, Sie sind bereit
+für den eigentlichen Hauptteil des Upgrades. Führen Sie aus:
+</p><pre class="screen">
+# apt-get dist-upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Anmerkung]" src="images/note.png" /></td><th align="left">Anmerkung</th></tr><tr><td align="left" valign="top"><p>
+      Für den Upgrade-Prozess einiger früherer Veröffentlichungen wurde die
+Verwendung von <span class="command"><strong>aptitude</strong></span> empfohlen. Dieses Werkzeug wird
+für Upgrades von Wheezy auf Jessie nicht empfohlen.
+    </p></td></tr></table></div><p>
+Dadurch wird ein vollständiges Upgrade des Systems durchgeführt, also die
+Installation der neuesten verfügbaren Versionen aller Pakete und die
+Auflösung aller möglichen Änderungen bei den Abhängigkeiten zwischen Paketen
+der verschiedenen Veröffentlichungen. Falls nötig werden einige neue Pakete
+installiert (üblicherweise neue Bibliotheksversionen oder umbenannte Pakete)
+sowie veraltete Pakete entfernt, die Konflikte verursachen.
+</p><p>
+Falls Sie ein Upgrade von einem Satz CD-ROMs (oder DVDs) durchführen, werden
+Sie an verschiedenen Stellen des Upgrade-Prozesses aufgefordert, bestimmte
+CDs einzulegen. Sie müssen eventuell ein und dieselbe CD mehrmals einlegen;
+dies liegt daran, dass einige Pakete mit gegenseitiger Wechselbeziehung
+zueinander über verschiedene CDs verteilt sind.
+</p><p>
+Neue Versionen von bereits installierten Paketen, die nicht aktualisiert
+werden können, ohne den Installationsstatus eines anderen Pakets zu ändern,
+werden in ihrer derzeitigen Version belassen (sie werden als
+<span class="quote">„<span class="quote">zurückgehalten</span>“</span> angezeigt). Dies kann aufgelöst werden, indem
+Sie entweder <span class="command"><strong>aptitude</strong></span> verwenden, um diese Pakete zur
+Installation vorzumerken, oder indem Sie <code class="literal">apt-get install
+<em class="replaceable"><code>paketname</code></em></code> versuchen.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="trouble"></a>4.5. Mögliche Probleme während des Upgrades</h2></div></div></div><p>
+Die folgenden Abschnitte beschreiben bekannte Probleme, die während des
+Upgrades auf Jessie auftreten können.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="immediate-configure"></a>4.5.1. dist-upgrade schlägt fehl mit »Could not perform immediate configuration«</h3></div></div></div><p>
+In einigen Fällen kann der Schritt <span class="command"><strong>apt-get dist-upgrade</strong></span>
+nach dem Heruntergeladen der Pakete fehlschlagen mit der Meldung:
+</p><pre class="screen">
+E: Could not perform immediate configuration on '<em class="replaceable"><code>package</code></em>'.  Please see man 5 apt.conf under APT::Immediate-Configure for details.
+</pre><p>
+</p><p>
+Falls dies passiert, sollte es möglich sein, mit <span class="command"><strong>apt-get
+dist-upgrade -o APT::Immediate-Configure=0</strong></span> das Upgrade
+fortzusetzen.
+</p><p>
+Eine andere Möglichkeit dies zu umgehen ist, vorübergehend sowohl
+wheezy- wie auch jessie-Quellen in
+<code class="filename">sources.list</code> anzugeben und danach <span class="command"><strong>apt-get
+update</strong></span> auszuführen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="expected-removals"></a>4.5.2. Zu erwartende Paketentfernungen</h3></div></div></div><p>
+Der Upgrade-Prozess auf Jessie könnte auch das Entfernen von Paketen
+im System bedeuten. Die exakte Liste der zu entfernenden Pakete varriert in
+Abhängigkeit von den Paketen, die Sie installiert haben. Diese
+Veröffentlichungshinweise geben grundsätzliche Hinweise über diese
+Paketentfernungen, falls Sie aber Zweifel haben, wird empfohlen, dass Sie
+die Liste zu entfernender Pakete, die von den einzelnen Upgrade-Methoden
+vorgeschlagen werden, kontrollieren, bevor Sie fortfahren. Weitere
+Informationen über veraltete Pakete in Jessie finden Sie in <a class="xref" href="ch-upgrading.de.html#obsolete" title="4.10. Veraltete Pakete">Abschnitt 4.10, „Veraltete Pakete“</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="conflicts-loops"></a>4.5.3. Conflicts- oder Pre-Depends-Schleifen</h3></div></div></div><p>
+Manchmal ist es nötig, die Option <code class="literal">APT::Force-LoopBreak</code> in
+APT zu aktivieren, um die Möglichkeit zu haben, ein zwingend nötiges Paket
+vorübergehend entfernen zu können, falls das Problem einer
+Conflicts-/Pre-Depends-Schleife besteht. <span class="command"><strong>apt-get</strong></span> wird Sie
+über solch eine Problematik informieren und das Upgrade abbrechen. Sie
+setzen diese Option, indem Sie <code class="literal">-o APT::Force-LoopBreak=1</code>
+in den <span class="command"><strong>apt-get</strong></span>-Befehl einfügen.
+</p><p>
+Es ist möglich, dass die Abhängigkeitsstruktur eines Systems so beschädigt
+ist, dass ein manuelles Eingreifen nötig ist. Dies erfordert üblicherweise
+die Verwendung von <span class="command"><strong>apt-get</strong></span> oder
+</p><pre class="screen">
+# dpkg --remove <em class="replaceable"><code>paketname</code></em>
+</pre><p>
+um einige der beschädigten Pakete zu eliminieren, oder
+</p><pre class="screen">
+# apt-get -f install
+# dpkg --configure --pending
+</pre><p>
+In extremen Fällen müssen Sie eventuell die Neuinstallation eines Pakets
+erzwingen; verwenden Sie dazu einen Befehl wie
+</p><pre class="screen">
+# dpkg --install <em class="replaceable"><code>/pfad/zu/paketname.deb</code></em>
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="file-conflicts"></a>4.5.4. Dateikonflikte</h3></div></div></div><p>
+Dateikonflikte sollten nicht auftauchen, wenn Sie ein Upgrade auf einem
+<span class="quote">„<span class="quote">reinen</span>“</span> Wheezy-System durchführen, können aber
+vorkommen, wenn Sie inoffizielle Backports installiert haben. Ein
+Dateikonflikt resultiert in einem Fehler wie:
+</p><pre class="screen">
+Entpacken von <em class="replaceable"><code>&lt;irgendein-paket1&gt;</code></em> (aus <em class="replaceable"><code>&lt;irgendein-paket1-dateiname&gt;</code></em>) ...
+dpkg: Fehler beim Bearbeiten von <em class="replaceable"><code>&lt;irgendein-paket1&gt;</code></em> (--install):
+ Versuch, »<em class="replaceable"><code>&lt;name-irgendeiner-datei&gt;</code></em>« zu überschreiben,
+ welches auch in Paket <em class="replaceable"><code>&lt;irgendein-paket2&gt;</code></em> ist
+dpkg-deb: Unterprozess paste mit Signal (Broken pipe) getötet
+ Fehler traten auf beim Bearbeiten von:
+ <em class="replaceable"><code>&lt;irgendein-paket1&gt;</code></em>
+</pre><p>
+Sie können versuchen, einen Dateikonflikt zu lösen, indem Sie zwangsweise
+das Paket entfernen, das in der <span class="emphasis"><em>letzten</em></span> Zeile der
+Fehlermeldung genannt wird:
+</p><pre class="screen">
+# dpkg -r --force-depends <em class="replaceable"><code>paketname</code></em>
+</pre><p>
+Nachdem Sie die Probleme behoben haben, sollte es möglich sein, das Upgrade
+fortzusetzen, indem Sie die oben beschriebenen
+<span class="command"><strong>apt-get</strong></span>-Befehle nochmals ausführen.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-changes"></a>4.5.5. Konfigurationsänderungen</h3></div></div></div><p>
+Während des Upgrades werden Ihnen Fragen gestellt, die die Konfiguration
+oder Neukonfiguration von verschiedenen Paketen betreffen. Wenn Sie gefragt
+werden, ob Dateien in den Verzeichnissen <code class="filename">/etc/init.d</code>
+oder die Datei <code class="filename">/etc/manpath.config</code> durch die Version
+des Paketbetreuers ersetzt werden sollen, ist es für gewöhnlich nötig, mit
+<span class="quote">„<span class="quote">yes</span>“</span> (ja) zu antworten, um die Konsistenz des Systems
+sicherzustellen. Sie können jederzeit zu den alten Versionen der
+Konfigurationsdateien zurückkehren, da diese mit der Erweiterung
+<code class="literal">.dpkg-old</code> gesichert werden.
+</p><p>
+Falls Sie sich nicht sicher sind, was Sie tun sollen, schreiben Sie den
+Namen des Pakets oder der Datei auf und kümmern Sie sich später darum. Sie
+können die Mitschnittdatei durchsuchen, um die Informationen erneut zu
+betrachten, die zum Zeitpunkt des Upgrades auf dem Bildschirm angezeigt
+wurden.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="console-change"></a>4.5.6. Ändern der aktuellen Sitzung auf die Konsole</h3></div></div></div><p>
+Wenn Sie das Upgrade von der lokalen Systemkonsole aus durchführen, werden
+Sie vielleicht feststellen, dass in einigen Situationen die Konsole auf eine
+andere Ansicht umgeschaltet wird, so dass Sie den Status des
+Upgrade-Prozesses nicht mehr beobachten können. Zum Beispiel könnte dies auf
+Arbeitsplatz-Systemen passieren, wenn der Displaymanager neu gestartet wird.
+</p><p>
+Um die Konsole wiederherzustellen, auf der der Upgrade-Prozess läuft, müssen
+Sie <span class="keycap"><strong>Strg</strong></span>+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span>
+betätigen (wenn Sie vom grafischen Startbildschirm zur 1. virtuellen Konsole
+wechseln möchten) oder <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span> (wenn Sie
+sich auf einer virtuellen Text-Konsole befinden). Ersetzen Sie dabei F1
+durch die Funktionstaste, die der Konsole zugeordnet ist, auf der der
+Upgrade-Prozess läuft. Sie können auch <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>Pfeiltaste-Links</strong></span>
+oder <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>Pfeiltaste-Rechts</strong></span>
+verwenden, um zwischen den verschiedenen Textmodus-Konsolen hin- und
+herzuschalten.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-specific-issues"></a>4.5.7. Besondere Sorgfalt bei speziellen Paketen</h3></div></div></div><p>
+In den meisten Fällen sollte ein Paket-Upgrade von Wheezy auf
+Jessie reibungslos ablaufen. Es gibt jedoch eine geringe Anzahl von
+Fällen, in denen ein separater Benutzereingriff erforderlich sein könnte,
+entweder vor oder nach dem Upgrade. Diese sind hier nach Paketen getrennt
+aufgeführt.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-systemd"></a>4.5.7.1. systemd</h4></div></div></div><p>
+    Das Debian-Upgrade von Wheezy auf Jessie wird Ihr
+init-System standardmäßig von SysV auf systemd migrieren. Abhängig von Ihrem
+System und dessen Einstellung müssen Sie eventuell einige manuelle
+Änderungen durchführen. Bekannte Probleme haben wir in <a class="xref" href="ch-information.de.html#systemd-upgrade-default-init-system" title="5.6. Durch ein Upgrade wird das neue Standard-Init-System für Jessie installiert">Abschnitt 5.6, „Durch ein Upgrade wird das neue Standard-Init-System für Jessie installiert“</a> aufgeführt.
+  </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-lxc"></a>4.5.7.2. LXC</h4></div></div></div><p>
+    Wenn Sie LXC installiert haben, müssen Sie bei der Aktualisierung Ihres
+Systems und Ihrer Container besondere Sorgfalt walten lassen. In <a class="xref" href="ch-information.de.html#lxc-upgrade-issues" title="5.8. Relevante Gesichtspunkte für ein Upgrade von LXC-Hosts und -Containern">Abschnitt 5.8, „Relevante Gesichtspunkte für ein Upgrade von LXC-Hosts und -Containern“</a> finden Sie Informationen über bekannte
+Probleme und deren Lösungen.
+  </p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newkernel"></a>4.6. Upgrade des Kernels und zugehöriger Pakete</h2></div></div></div><p>
+Dieser Abschnitt beschreibt, wie Sie ein Upgrade des Kernels durchführen und
+weist auf potenzielle Probleme hin, die diesen Vorgang betreffen. Sie können
+entweder eines der von Debian angebotenen <code class="systemitem">linux-image-*</code><a id="idp62824288" class="indexterm"></a>-Pakete installieren oder einen
+eigenen Kernel aus den Quellen selbst kompilieren.
+</p><p>
+Beachten Sie, dass viele der Informationen in diesem Abschnitt auf der
+Annahme basieren, dass Sie einen der modularen Debian-Kernel zusammen mit
+<code class="systemitem">initramfs-tools</code><a id="idp62826592" class="indexterm"></a> und <code class="systemitem">udev</code><a id="idp62828288" class="indexterm"></a> verwenden. Falls Sie sich entscheiden,
+einen eigenen selbst erstellten Kernel zu benutzen, der keine Initrd
+benötigt, oder wenn Sie einen anderen Initrd-Generator verwenden, könnten
+einige der Informationen für Sie nicht relevant sein.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="kernel-metapackage"></a>4.6.1. Ein Kernel-Metapaket installieren</h3></div></div></div><p>
+Wenn Sie ein Distributions-Upgrade von Wheezy auf Jessie
+durchführen, wird dringend empfohlen, ein linux-image-*-Metapaket zu
+installieren, falls noch nicht geschehen. Diese Metapakete werden während
+des Upgrade-Prozesses automatisch eine neue Kernel-Version installieren. Ob
+Sie eins installiert haben, können Sie verifizieren mit:
+</p><pre class="screen">
+# dpkg -l "linux-image*" | grep ^ii | grep -i meta
+</pre><p>
+Falls nichts angezeigt wird, müssen Sie entweder ein neues linux-image-Paket
+von Hand installieren oder Sie installieren ein linux-image-Metapaket. Eine
+Liste verfügbarer linux-image-Metapakete bekommen Sie mit:
+</p><pre class="screen">
+# apt-cache search linux-image- | grep -i meta | grep -v transition
+</pre><p>
+Falls Sie bei der Entscheidung, welches Paket Sie wählen sollen, unsicher
+sind, führen Sie <code class="literal">uname -r</code> aus und suchen Sie nach einem
+Paket mit einem ähnlichen Namen. Falls die Anzeige zum Beispiel
+<code class="literal">2.6.32-5-amd64</code> ist, wird empfohlen, dass Sie <code class="systemitem">linux-image-amd64</code><a id="idp62836992" class="indexterm"></a> installieren. Sie können auch
+<span class="command"><strong>apt-cache</strong></span> benutzen, um eine ausführliche Beschreibung
+jedes Pakets zu bekommen, was Ihnen bei der Auswahl des besten Paketes
+helfen kann. Zum Beispiel:
+</p><pre class="screen">
+# apt-cache show linux-image-amd64
+</pre><p>
+Sie sollten dann <code class="literal">apt-get install</code> verwenden, um es zu
+installieren. Sobald dieser neue Kernel installiert ist, sollten Sie sobald
+wie möglich einen Neustart durchführen, um von der neuen Kernel-Version zu
+profitieren. Lesen Sie aber <a class="xref" href="ch-upgrading.de.html#nownownow" title="4.7. Dinge, die vor dem Neustart erledigt werden sollten">Abschnitt 4.7, „Dinge, die vor dem Neustart erledigt werden sollten“</a>, bevor Sie nach dem
+Upgrade den ersten Reboot durchführen.
+</p><p>
+Für alle Experimentierfreudigen gibt es einen einfachen Weg, einen eigenen
+angepassten Kernel unter Debian zu kompilieren. Installieren Sie die
+Kernel-Quellen aus dem <code class="systemitem">linux-source</code><a id="idp62843360" class="indexterm"></a>-Paket. Sie können dann das Target
+<code class="literal">dep-pkg</code> zur Erstellung eines Binär-Pakets
+verwenden. Weitere Informationen finden Sie im <a class="ulink" href="http://kernel-handbook.alioth.debian.org/" target="_top">Debian
+Linux-Kernel-Handbuch</a>, das es auch als <code class="systemitem">debian-kernel-handbook</code><a id="idp62846752" class="indexterm"></a>-Paket gibt.
+</p><p>
+Falls möglich, wäre es ein Vorteil, wenn Sie das Kernel-Paket separat vom
+Rest des Systems aktualisieren, um die Wahrscheinlichkeit eines
+nicht-bootfähigen Systems zu reduzieren. Beachten Sie, dass Sie dies nur
+nach dem minimalen System-Upgrade (siehe <a class="xref" href="ch-upgrading.de.html#minimal-upgrade" title="4.4.4. Minimales System-Upgrade">Abschnitt 4.4.4, „Minimales System-Upgrade“</a>)
+durchführen sollten.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="initramfs-tools-issues"></a>4.6.2. Änderungen beim Einbinden und Prüfen von root- und
+<code class="filename">/usr</code>-Dateisystemen</h3></div></div></div><p>
+    <code class="systemitem">initramfs-tools</code><a id="idp62852160" class="indexterm"></a> führt jetzt auch
+<code class="literal">fsck</code> auf das root-Dateisystem aus, bevor es dies
+einbindet. Falls <code class="literal">systemd</code> als init-System läuft und eine
+separates <code class="filename">/usr</code>-Dateisystem existiert, wird auch
+<code class="filename">/usr</code> überprüft und dann eingebunden.
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	Ist <code class="filename">/usr</code> ein separates Dateisystem auf einem RAID-Gerät
+und die Einstellung <code class="literal">INITRDSTART</code> in
+<code class="filename">/etc/default/mdadm</code> ist nicht auf
+'<code class="literal">all</code>' gesetzt, müssen Sie die Einstellung so setzen, dass
+das RAID-Gerät darin enthalten ist.
+      </p></li><li class="listitem"><p>
+	Falls <code class="filename">/usr</code> ein separates Dateisystem auf einem
+logischen LVM-Volume ist und die Zeile für <code class="filename">/usr</code> in
+<code class="filename">/etc/fstab</code> definiert das Gerät über die
+<code class="literal">UUID</code> oder das <code class="literal">LABEL</code> (die
+Klartext-Bezeichnung, die für dieses Volume gesetzt wurde), müssen Sie diese
+Zeile ändern, so dass das Gerät in der Form
+<code class="filename">/dev/mapper/<em class="replaceable"><code>VG</code></em>-<em class="replaceable"><code>LV</code></em></code>
+oder
+<code class="filename">/dev/<em class="replaceable"><code>VG</code></em>/<em class="replaceable"><code>LV</code></em></code>
+angegeben wird.
+      </p></li><li class="listitem"><p>
+	Es ist nicht mehr möglich, das <code class="filename">/usr</code>-Dateisytem über
+bind-mount einzubinden.
+      </p></li><li class="listitem"><p>
+	Falls die RTC (Echtzeituhr) auf lokale Zeit gesetzt ist und die lokale Zeit
+eilt der UTC-Zeit voraus, wird <code class="literal">e2fsck</code> während des Bootens
+eine Warnung ausgeben, dass die Zeit zurückgestellt wurde (<a class="ulink" href="https://bugs.debian.org/767040" target="_top">Fehlerbericht #767040</a>). Sie
+können dies vermeiden, indem Sie folgende Zeilen in
+<code class="filename">/etc/e2fsck.conf</code> einfügen:
+      </p><pre class="screen">
+[options]
+broken_system_clock=1
+</pre></li></ul></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="nownownow"></a>4.7. Dinge, die vor dem Neustart erledigt werden sollten</h2></div></div></div><p>
+Wenn <code class="literal">apt-get dist-upgrade</code> beendet ist, sollte das
+<span class="quote">„<span class="quote">formale</span>“</span> Upgrade abgeschlossen sein, aber es gibt ein paar
+andere Dinge, um die Sie sich <span class="emphasis"><em>vor</em></span> dem nächsten Neustart
+kümmern sollten.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      Wenn Sie von Wheezy auf Jessie aktualisieren, könnte es
+eine gute Idee sein, bei alten Paketen die Konfigurationsdateien zu
+entfernen, <span class="emphasis"><em>bevor</em></span> Sie nach dem Upgrade den ersten
+Neustart durchführen. Speziell veraltete Init-Skripte könnten Probleme
+verursachen. Lesen Sie bitte <a class="xref" href="ch-upgrading.de.html#purge-removed-packages" title="4.8.1. Vollständiges Löschen entfernter Pakete">Abschnitt 4.8.1, „Vollständiges Löschen entfernter Pakete“</a>,
+bezüglich näherer Informationen, wie Sie entfernte Pakete finden und deren
+Konfigurationsdateien löschen.
+    </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="for-next"></a>4.8. Vorbereiten auf die nächste Veröffentlichung</h2></div></div></div><p>
+Nach dem Upgrade gibt es einige Dinge, die Sie tun können, um für die
+nächste Veröffentlichung vorbereitet zu sein.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Entfernen Sie nicht mehr benötigte und veraltete Pakete wie in <a class="xref" href="ch-upgrading.de.html#sufficient-space" title="4.4.3. Sicherstellen, dass genügend Speicherplatz für das Upgrade zur Verfügung steht">Abschnitt 4.4.3, „Sicherstellen, dass genügend Speicherplatz für das Upgrade zur Verfügung
+steht“</a> und <a class="xref" href="ch-upgrading.de.html#obsolete" title="4.10. Veraltete Pakete">Abschnitt 4.10, „Veraltete Pakete“</a> beschrieben. Sie
+sollten kontrollieren, welche Konfigurationsdateien diese Pakete benutzen
+und in Betracht ziehen, die Pakete vollständig zu entfernen, um die
+Konfigurationsdateien loszuwerden. Lesen Sie auch <a class="xref" href="ch-upgrading.de.html#purge-removed-packages" title="4.8.1. Vollständiges Löschen entfernter Pakete">Abschnitt 4.8.1, „Vollständiges Löschen entfernter Pakete“</a>.
+</p></li></ul></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="purge-removed-packages"></a>4.8.1. Vollständiges Löschen entfernter Pakete</h3></div></div></div><p>
+    Es ist grundsätzlich empfehlenswert, entfernte Pakete vollständig (inkl. der
+Konfigurationsdateien) zu löschen. Dies ist besonders relevant, wenn sie im
+Rahmen eines früheren Upgrades entfernt wurden (z.B. bei dem Upgrade auf
+Wheezy) oder bei Paketen von Drittanbietern. Speziell alte
+init.d-Skripte sind dafür bekannt, Probleme zu verursachen.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Achtung]" src="images/caution.png" /></td><th align="left">Achtung</th></tr><tr><td align="left" valign="top"><p>
+      Das vollständige Löschen eines Pakets wird grundsätzlich auch dessen
+Logdateien vom System entfernen, daher sollten Sie sie eventuell vorher
+sichern.
+    </p></td></tr></table></div><p>
+    Folgender Befehl zeigt eine Liste aller entfernten Pakete an, deren
+Konfigurationsdateien noch auf dem System vorhanden sind (falls zutreffend):
+  </p><pre class="screen">
+# dpkg -l | awk '/^rc/ { print $2 }'
+</pre><p>
+    Die Pakete können mittels <span class="command"><strong>apt-get purge</strong></span> vollständig
+gelöscht werden. Wenn wir davon ausgehen, dass Sie alle in einem Rutsch
+löschen möchten, können Sie folgenden Befehl verwenden:
+  </p><pre class="screen">
+# apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+</pre><p>
+    Wenn Sie <code class="systemitem">aptitude</code><a id="idp62893008" class="indexterm"></a> verwenden, können
+Sie alternativ zu obigen Befehlen auch folgendes nutzen:
+  </p><pre class="screen">
+$ aptitude search '~c'
+$ aptitude purge '~c'
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="deprecated"></a>4.9. Missbilligte Komponenten</h2></div></div></div><p>
+Ab der nächsten Veröffentlichung von Debian (9, Codename
+Stretch) werden einige Funktionalitäten als veraltet
+gelten. Benutzer werden auf andere Alternativen umschwenken müssen, um
+Probleme beim Upgrade auf 9 zu vermeiden.
+</p><p>
+Dazu gehören die folgenden Funktionalitäten:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Das Paket <code class="systemitem">hardening-wrapper</code><a id="idp62899072" class="indexterm"></a> ist
+veraltet und wird erwartungsgemäß in Stretch entfernt.
+		</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="obsolete"></a>4.10. Veraltete Pakete</h2></div></div></div><p>
+Mit Jessie werden viele neue Pakete eingeführt, jedoch werden auch
+einige alte Pakete, die in Wheezy noch existierten, ausgelassen
+oder wegfallen. Es wird keine Möglichkeit eines Upgrades für diese
+veralteten Pakete geben. Selbst wenn nichts Sie davon abhalten kann, ein
+veraltetes Paket weiter zu benutzen, falls Sie dies wünschen, wird das
+Debian-Projekt bei diesen Paketen üblicherweise die Unterstützung für
+Sicherheitsaktualisierungen ein Jahr nach der Veröffentlichung von
+Jessie einstellen<a href="#ftn.idp62902464" class="footnote" id="idp62902464"><sup class="footnote">[5]</sup></a> und auch sonst
+in der Zwischenzeit keine Unterstützung dafür anbieten. Es wird empfohlen,
+die Pakete gegen die empfohlenen Alternativen (falls verfügbar)
+auszutauschen.
+</p><p>
+Es gibt viele Gründe, warum Pakete aus der Distribution entfernt worden sein
+könnten: sie wurden von den Originalautoren nicht mehr betreut; es ist kein
+Debian-Entwickler mehr daran interessiert, sie zu betreuen; die
+Funktionalität, die sie bieten, ist durch andere Software (oder eine neuere
+Version) ersetzt worden, oder sie wurden (aufgrund von Fehlern darin) als
+nicht mehr passend für Jessie angesehen. Im letzten Fall könnten sie
+trotzdem noch in der <span class="quote">„<span class="quote">unstable</span>“</span>-Distribution vorhanden sein.
+</p><p>
+Zu erkennen, welche Pakete in einem aktualisierten System
+<span class="quote">„<span class="quote">veraltet</span>“</span> (obsolete) sind, ist einfach, da die
+Paketmanagement-Programme sie entsprechend markieren. Wenn Sie
+<span class="command"><strong>aptitude</strong></span> verwenden, werden Sie eine Liste dieser Pakete
+im Abschnitt <span class="quote">„<span class="quote">Veraltete und selbst erstellte Pakete</span>“</span> finden.
+</p><p>
+Die <a class="ulink" href="https://bugs.debian.org/" target="_top">Debian-Fehlerdatenbank</a> bietet oft
+zusätzliche Informationen, warum ein Paket entfernt wurde. Sie sollten
+sowohl die archivierten Fehlerberichte für das Paket selbst als auch für das
+<a class="ulink" href="https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org&amp;archive=yes" target="_top">Pseudo-Paket
+ftp.debian.org</a> kontrollieren.
+</p><p>
+  Die Liste der veralteten Pakete enthält:
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	<code class="systemitem">postgresql-9.1</code><a id="idp62911952" class="indexterm"></a>, Nachfolger ist
+<code class="systemitem">postgresql-9.4</code><a id="idp62913648" class="indexterm"></a>. Sobald das Upgrade
+des Betriebssytems abgeschlossen ist, sollten Sie einen Plan erstellen, auch
+Ihre PostgreSQL-9.1 Datenbank-Cluster auf die neue PostgreSQL-Version 9.4
+hochzurüsten; nutzen Sie dazu das
+<span class="command"><strong>pg_upgradecluster</strong></span>-Werkzeug. Für Nutzer der
+verfahrensorientierten PL/perl-Sprache bietet Jessie ein aktualisiertes
+<code class="systemitem">postgresql-plperl-9.1</code><a id="idp62916640" class="indexterm"></a>-Paket, das
+gegen Jessie's Version von libperl gelinkt ist. Dies soll eine
+Aktualisierung auf die neue perl-Version in Jessie ermöglichen und
+gleichzeitig die alten Datenbankfunktionen von PL/perl nutzbar halten, bis
+auch die Datenbank hochgerüstet wurde.
+      </p></li><li class="listitem"><p>
+        
+        
+<code class="systemitem">python3.2</code><a id="idp62923680" class="indexterm"></a>, Nachfolger ist
+<code class="systemitem">python3.4</code><a id="idp62925376" class="indexterm"></a> (Version 2.7 wird sowohl
+in Wheezy wie auch in Jessie unterstützt).
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">ruby1.8</code><a id="idp62927984" class="indexterm"></a> und <code class="systemitem">ruby1.9.1</code><a id="idp62929680" class="indexterm"></a>; Nachfolger ist <code class="systemitem">ruby2.1</code><a id="idp62931376" class="indexterm"></a>. Bitte installieren Sie das Paket
+<code class="systemitem">ruby</code><a id="idp62933088" class="indexterm"></a>, um automatisch die aktuellste
+ruby-Version zu erhalten.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">mplayer</code><a id="idp62935600" class="indexterm"></a>; Alternativen sind
+<code class="systemitem">mplayer2</code><a id="idp62937296" class="indexterm"></a> und <code class="systemitem">mpv</code><a id="idp62939008" class="indexterm"></a> (neu in Jessie). Während mplayer2
+bezüglich Befehlszeilenargumenten und Konfiguration überwiegend kompatibel
+ist mit mplayer (außerdem fügt er auch ein paar neue Funktionen hinzu), sind
+in mpv viele neue Funktionalitäten und Verbesserungen enthalten, außerdem
+wird er aktiv von den Upstream-Autoren betreut.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openoffice.org</code><a id="idp62942064" class="indexterm"></a>; bitte verwenden Sie
+<code class="systemitem">libreoffice</code><a id="idp62943760" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">squid</code><a id="idp62946224" class="indexterm"></a>, Nachfolger ist <code class="systemitem">squid3</code><a id="idp62947920" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">libjpeg-progs</code><a id="idp62950384" class="indexterm"></a>, Nachfolger ist
+<code class="systemitem">libjpeg-turbo-progs</code><a id="idp62952080" class="indexterm"></a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openjdk-6-*</code><a id="idp62954544" class="indexterm"></a>, Nachfolger ist
+<code class="systemitem">openjdk-7-*</code><a id="idp62956240" class="indexterm"></a>.
+      </p></li></ul></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="dummy"></a>4.10.1. Dummy-Pakete</h3></div></div></div><p>
+Einige Pakete aus Wheezy sind für Jessie in mehrere Pakete
+aufgeteilt worden, oft um die System-Wartungsfähigkeit zu erhöhen. Um in
+solchen Fällen den Upgrade-Prozess zu erleichtern, bietet Jessie oft
+sogenannte <span class="quote">„<span class="quote">Dummy</span>“</span>-Pakete an: leere Pakete, die den gleichen
+Namen haben wie das alte Paket in Wheezy und mit entsprechenden
+Abhängigkeiten, die dazu führen, dass die neuen Pakete installiert
+werden. Diese <span class="quote">„<span class="quote">Dummy</span>“</span>-Pakete werden nach dem Upgrade-Prozess
+als nicht mehr benötigt angesehen und können problemlos entfernt werden.
+</p><p>
+Die Paketbeschreibungen der meisten (aber nicht aller) Dummy-Pakete
+enthalten einen Hinweis auf ihren Zweck. Die Paketbeschreibungen für
+Dummy-Pakete sind jedoch nicht standardisiert, daher ist vielleicht
+<span class="command"><strong>deborphan</strong></span> mit einer der
+<code class="literal">--guess-<em class="replaceable"><code>*</code></em></code>-Optionen
+(z.B. <code class="literal">--guess-dummy</code>) für Sie sinnvoll, um diese Pakete
+auf Ihrem System zu finden. Beachten Sie, dass einige Dummy-Pakete nicht
+dazu gedacht sind, nach einem Upgrade entfernt zu werden, sondern
+stattdessen dazu dienen, die gerade verfügbare Version eines Programms über
+längere Zeit zu verfolgen.
+</p></div></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp62479392" class="footnote"><p><a href="#idp62479392" class="para"><sup class="para">[1] </sup></a>Wenn die debconf-Priorität auf einen sehr hohen Wert gesetzt ist, können Sie
+so eventuell Konfigurationsfragen vermeiden, aber Dienste, die auf
+Standardantworten angewiesen sind, welche jedoch auf Ihrem System nicht
+zutreffend sind, werden nicht erfolgreich starten.</p></div><div id="ftn.idp62481088" class="footnote"><p><a href="#idp62481088" class="para"><sup class="para">[2] </sup></a>Zum Beispiel: DNS- oder DHCP-Dienste, besonders wenn keine Redundanz- oder
+Ersatzsysteme für den Fall eines Ausfalls vorhanden sind. Im Fall von
+DHCP-Diensten werden die Endbenutzer unter Umständen vom Netzwerk getrennt,
+wenn die Lease-Zeit niedriger ist als die, die für den Abschluß des
+Upgrade-Prozesses benötigt wird.</p></div><div id="ftn.idp62498544" class="footnote"><p><a href="#idp62498544" class="para"><sup class="para">[3] </sup></a> Diese Funktionalität kann deaktiviert werden, indem der Parameter
+<code class="literal">panic=0</code> zu den Boot-Parametern hinzugefügt wird.  </p></div><div id="ftn.idp62588528" class="footnote"><p><a href="#idp62588528" class="para"><sup class="para">[4] </sup></a> Das Paketverwaltungssystem von Debian erlaubt es normalerweise nicht, dass
+ein Paket Dateien anderer Pakete entfernt oder ersetzt, es sei denn, es
+wurde definiert, dass es das andere Paket ersetzt.  </p></div><div id="ftn.idp62902464" class="footnote"><p><a href="#idp62902464" class="para"><sup class="para">[5] </sup></a> So lange es keine andere Veröffentlichung in diesem Zeitraum
+gibt. Typischerweise werden zu jeder Zeit nur zwei stabile
+Veröffentlichungen mit Sicherheitsaktualisierungen unterstützt.  </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-installing.de.html"><img src="images/prev.png" alt="Zurück" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-information.de.html"><img src="images/next.png" alt="Weiter" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitel 3. Installationssystem </td><td width="20%" align="center"><a accesskey="h" href="index.de.html"><img src="images/home.png" alt="Zum Anfang" /></a></td><td width="40%" align="right" valign="top"> Kapitel 5. Dinge, die Sie über Jessie wissen sollten</td></tr></table></div></body></html>

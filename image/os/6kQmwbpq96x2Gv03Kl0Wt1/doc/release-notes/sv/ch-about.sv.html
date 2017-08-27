@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitel 1. Introduktion</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sv.html" title="Kommentarer till utgåvan Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sv.html" title="Kommentarer till utgåvan Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="index.sv.html" title="Kommentarer till utgåvan Debian 8 (jessie), 64-bit PC" /><link rel="next" href="ch-whats-new.sv.html" title="Kapitel 2. Vad är nytt i Debian 8" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitel 1. Introduktion</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.sv.html"><img src="images/prev.png" alt="Föregående" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-whats-new.sv.html"><img src="images/next.png" alt="Nästa" /></a></td></tr></table><hr /></div><div xml:lang="sv" class="chapter" lang="sv"><div class="titlepage"><div><div><h1 class="title"><a id="ch-about"></a>Kapitel 1. Introduktion</h1></div></div></div><div class="toc"><p><strong>Innehållsförteckning</strong></p><dl class="toc"><dt><span class="section"><a href="ch-about.sv.html#bug-reports">1.1. Rapportera fel i det här dokumentet</a></span></dt><dt><span class="section"><a href="ch-about.sv.html#upgrade-reports">1.2. Bidra med uppgraderingsrapporter</a></span></dt><dt><span class="section"><a href="ch-about.sv.html#sources">1.3. Källor för det här dokumentet</a></span></dt></dl></div><p>
+    Detta dokument upplyser användarna av Debian-distributionen om större
+förändringar i version 8 (kodnamn jessie).
+  </p><p>
+    Dokumentet kommer att förklara hur man på ett säkert sätt uppgraderar från
+utgåvan 7 (kodnamn wheezy) till den aktuella utgåvan
+och informerar om kända potentiella problem som kan uppstå i den processen.
+  </p><p>
+    Du kan få tag på senaste versionen av detta dokument på <a class="ulink" href="https://www.debian.org/releases/jessie/releasenotes" target="_top">https://www.debian.org/releases/jessie/releasenotes</a>. Du kan säkerställa att du läser den
+senaste versionen av dokumentet genom att jämföra datumen på första sidan.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Observera]" src="images/caution.png" /></td><th align="left">Observera</th></tr><tr><td align="left" valign="top"><p>
+      Observera att det är omöjligt att lista alla kända problem och därför har
+ett urval gjorts baserat på en kombination av den allmänna förekomsten och
+problemets inverkan.
+    </p></td></tr></table></div><p>
+Observera att vi endast ger stöd för och dokumenterar uppgraderingen från
+den tidigare utgåvan av Debian (i det här fallet, uppgradering från
+wheezy). Om du behöver uppgradera från äldre utgåvor föreslår vi
+att du läser tidigare versioner av kommentarerna för utgåvan och uppgraderar
+till wheezy först.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="bug-reports"></a>1.1. Rapportera fel i det här dokumentet</h2></div></div></div><p>
+Vi har försökt att testa alla steg i uppgraderingen som beskrivs i det här
+dokumentet. Vi har också försökt förutse alla möjliga problem som kan
+inträffa för våra användare.
+</p><p>
+Hur som helst, om du tror att du hittat ett fel (information som inte är
+rätt eller information som saknas) i detta dokument, vänligen lämna en
+felrapport i <a class="ulink" href="https://bugs.debian.org/" target="_top">felrapporteringssystemet</a> mot
+paketet <code class="systemitem">release-notes</code><a id="idp57403280" class="indexterm"></a>. Du bör först
+kontrollera de <a class="ulink" href="https://bugs.debian.org/release-notes" target="_top">existerande felrapporterna</a>
+för att säkerställa att felet inte redan har hittats och blivit
+rapporterat. Kan du bidra med ytterligare information för dokumentet i en
+felrapport är du välkommen att göra så.
+</p><p>
+Vi uppskattar, och uppmuntrar, rapporter med rättelser till dokumentets
+källor. Du kan hitta mer information som beskriver hur du får tillgång till
+källan för detta dokument på <a class="xref" href="ch-about.sv.html#sources" title="1.3. Källor för det här dokumentet">Avsnitt 1.3, ”Källor för det här dokumentet”</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-reports"></a>1.2. Bidra med uppgraderingsrapporter</h2></div></div></div><p>
+Vi välkomnar all information från användare som relaterar till
+uppgraderingar från wheezy till jessie. Om du vill ge oss
+information kan du skicka in den genom en felrapport via <a class="ulink" href="https://bugs.debian.org/" target="_top">felrapporteringssystemet</a> mot paketet <code class="systemitem">upgrade-reports</code><a id="idp57408784" class="indexterm"></a> med dina erfarenheter. Vi önskar
+att du komprimerar eventuella bilagor som inkluderats (med gzip).
+</p><p>
+Inkludera följande information när du skickar in din uppgraderingsrapport:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+
+Statusen för paketdatabasen före och efter uppgraderingen:
+<span class="command"><strong>dpkg</strong></span>s statusdatabas finns tillgänglig i
+<code class="filename">/var/lib/dpkg/status</code> och <code class="systemitem">apt</code><a id="idp57412912" class="indexterm"></a>s statusinformation för paket finns i
+<code class="filename">/var/lib/apt/extended_states</code>. Du bör ha gjort en
+säkerhetskopia före uppgraderingen, vilket beskrivs på <a class="xref" href="ch-upgrading.sv.html#data-backup" title="4.1.1. Säkerhetskopiera all data och konfigurationsinformation">Avsnitt 4.1.1, ”Säkerhetskopiera all data och konfigurationsinformation”</a>, men du kan också hitta säkerhetskopior av
+<code class="filename">/var/lib/dpkg/status</code> i
+<code class="filename">/var/backups</code>.
+</p></li><li class="listitem"><p>
+Sessionsloggar från <span class="command"><strong>script</strong></span>. Läs mer om detta i <a class="xref" href="ch-upgrading.sv.html#record-session" title="4.4.1. Spela in sessionen">Avsnitt 4.4.1, ”Spela in sessionen”</a>.
+</p></li><li class="listitem"><p>
+Dina <code class="systemitem">apt</code><a id="idp57418832" class="indexterm"></a>-loggar, tillgängliga i
+<code class="filename">/var/log/apt/term.log</code> eller dina
+<span class="command"><strong>aptitude</strong></span>-loggar, tillgängliga i
+<code class="filename">/var/log/aptitude</code>.
+</p></li></ul></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Notera]" src="images/note.png" /></td><th align="left">Notera</th></tr><tr><td align="left" valign="top"><p>
+    Du bör ta dig tid att granska och ta bort eventuellt känslig och/eller
+konfidentiell information från loggfilerna innan de inkluderas i en
+felrapport eftersom informationen kommer att publiceras i en publik databas.
+  </p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="sources"></a>1.3. Källor för det här dokumentet</h2></div></div></div><p>
+    Källan till detta dokument är formaterad med DocBook
+XML<a id="idp57424704" class="indexterm"></a>. HTML-versionen
+skapas med <code class="systemitem">docbook-xsl</code><a id="idp57426240" class="indexterm"></a> och
+<code class="systemitem">xsltproc</code><a id="idp57427744" class="indexterm"></a>. PDF-versionen skapas med
+<code class="systemitem">dblatex</code><a id="idp57429296" class="indexterm"></a> eller <code class="systemitem">xmlroff</code><a id="idp57430800" class="indexterm"></a>. Källor för Kommentarer till utgåvan
+finns tillgängliga i SVN-förrådet för <span class="emphasis"><em>Debian Documentation
+Project</em></span>. Du kan använda <a class="ulink" href="https://anonscm.debian.org/viewvc/ddp/manuals/trunk/release-notes/" target="_top">webbgränssnittet</a> för att komma åt dess
+filer individuellt via webben och se ändringar i dem. För mer information om
+hur man kommer åt SVN-förrådet, läs <a class="ulink" href="https://www.debian.org/doc/cvs" target="_top">SVN-sidorna för Debian Documentation
+Project</a>.
+  </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.sv.html"><img src="images/prev.png" alt="Föregående" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-whats-new.sv.html"><img src="images/next.png" alt="Nästa" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kommentarer till utgåvan Debian 8 (jessie), <span class="phrase">64-bit PC</span> </td><td width="20%" align="center"><a accesskey="h" href="index.sv.html"><img src="images/home.png" alt="Hem" /></a></td><td width="40%" align="right" valign="top"> Kapitel 2. Vad är nytt i Debian 8</td></tr></table></div></body></html>

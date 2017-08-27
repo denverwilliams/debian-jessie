@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Cap. 3. Sistemul de instalare</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ro.html" title="Note de lansare pentru Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.ro.html" title="Note de lansare pentru Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-whats-new.ro.html" title="Cap. 2. Noutăți în Debian 8" /><link rel="next" href="ch-upgrading.ro.html" title="Cap. 4. Actualizarea de la Debian 7 (wheezy)" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Cap. 3. Sistemul de instalare</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-whats-new.ro.html"><img src="images/prev.png" alt="Înapoi" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-upgrading.ro.html"><img src="images/next.png" alt="Înainte" /></a></td></tr></table><hr /></div><div xml:lang="ro" class="chapter" lang="ro"><div class="titlepage"><div><div><h1 class="title"><a id="ch-installing"></a>Cap. 3. Sistemul de instalare</h1></div></div></div><div class="toc"><p><strong>Cuprins</strong></p><dl class="toc"><dt><span class="section"><a href="ch-installing.ro.html#inst-new">3.1. Ce este nou în sistemul de instalare?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-installing.ro.html#inst-changes">3.1.1. Schimbări majore</a></span></dt><dt><span class="section"><a href="ch-installing.ro.html#inst-auto">3.1.2. Instalarea automată</a></span></dt></dl></dd></dl></div><p>
+Programul de instalare Debian este sistemul de instalare oficial pentru
+Debian. Acesta oferă o varietate de metode de instalare. Metodele
+disponibile pentru instalarea sistemului depind de arhitectura sistemului
+dumneavoastră.
+</p><p>
+Imaginile programului de instalare pentru jessie pot fi găsite
+împreună cu Ghidul de instalare pe <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/" target="_top">situl
+Debian</a>.
+</p><p>
+Ghidul de instalare mai este inclus și pe primul CD/DVD din oricare din
+seturile oficiale de CD-uri/DVD-uri Debian la:
+</p><pre class="screen">
+/doc/install/manual/<em class="replaceable"><code>limbă</code></em>/index.html
+</pre><p>
+Ar fi bine să verificați și <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/index#errata" target="_top">erata</a> Programului de instalare
+Debian pentru o listă a problemelor cunoscute.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="inst-new"></a>3.1. Ce este nou în sistemul de instalare?</h2></div></div></div><p>
+Programul de instalare Debian a avut parte de multe schimbări de la
+versiunea precedentă lansată oficial odată cu Debian 7,
+rezultând atât în suport mai bun pentru hardware cât și capabilități noi,
+interesante.
+</p><p>
+În Notele de lansare vom menționa doar modificările majore din programul de
+instalare. Dacă vă interesează o vedere de ansamblu a modificărilor
+detaliate începând cu wheezy vă rugăm să vedeți anunțurile de
+lansare ale Programului de instalare Debian pentru versiunile jessie
+beta și RC, disponibile la <a class="ulink" href="https://www.debian.org/devel/debian-installer/News/" target="_top">istoricul
+știrilor</a>.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-changes"></a>3.1.1. Schimbări majore</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+</span></dt><dd><p>
+
+
+</p></dd><dt><span class="term">Removed ports</span></dt><dd><p>
+Support for the 'ia64' and 'sparc' architectures has been dropped from the
+installer since they have been removed from the archive.
+</p></dd><dt><span class="term">Portări noi</span></dt><dd><p>
+Support for the 'arm64' and 'ppc64el' architectures has been added to the
+installer.
+</p></dd><dt><span class="term">New default init system</span></dt><dd><p>
+The installation system now installs systemd as the default init system.
+</p></dd><dt><span class="term">Desktop selection</span></dt><dd><p>
+The desktop can now be chosen within tasksel during installation. Note that
+several desktops can be selected at the same time, but some combinations of
+desktops may not be co-installable.</p></dd><dt><span class="term">Replacing "--" by "---" for boot parameters</span></dt><dd><p>
+Due to a change on the Linux kernel side, the "---" separator is now used
+instead of the historical "--" to separate kernel parameters from userland
+parameters.
+</p></dd><dt><span class="term">Limbi noi</span></dt><dd><p>
+Thanks to the huge efforts of translators, Debian can now be installed in
+75 languages, including English.  This is one more language than in
+wheezy.  Most languages are available in both the text-based
+installation user interface and the graphical user interface, while some are
+only available in the graphical user interface. 
+</p><p>
+Languages added in this release:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Tajik has been added to the graphical and text-based installer.
+</p></li></ul></div><p>
+Limbile care pot fi selectate doar folosind modul de instalare grafic,
+deoarece caracterele lor specifice nu pot fi prezentate într-un mediu
+non-grafic, sunt: amharic, bengali, dzongkha, gujarati, hindusă, georgiană,
+khannadă, khmeră, malayalam, marathi, nepaleză, punjabi, tamilă, telugu,
+tibetană și uyghur.
+</p></dd><dt><span class="term">Inițializare UEFI</span></dt><dd><p>
+      The Jessie installer improves support for a lot of UEFI firmware and also
+supports installing on 32-bit UEFI firmware with a 64-bit kernel.
+    </p><p>
+      Totuși nu este inclus suport pentru UEFI Secure Boot.
+    </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-auto"></a>3.1.2. Instalarea automată</h3></div></div></div><p>
+Unele din modificările menționate în secțiunea precedentă implică și
+modificări în suportul pentru instalări automate folosind fișiere de
+preconfigurare. Acest lucru înseamnă că dacă aveți fișiere de preconfigurare
+care au funcționat cu programul de instalare din wheezy nu vă
+așteptați ca acestea să funcționeze fără modificări cu noul program de
+instalare.
+</p><p>
+<a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">Ghidul de instalare</a> conține acum o
+anexă separată și actualizată cu documentație extinsă despre folosirea
+preconfigurărilor.
+</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-whats-new.ro.html"><img src="images/prev.png" alt="Înapoi" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-upgrading.ro.html"><img src="images/next.png" alt="Înainte" /></a></td></tr><tr><td width="40%" align="left" valign="top">Cap. 2. Noutăți în Debian 8 </td><td width="20%" align="center"><a accesskey="h" href="index.ro.html"><img src="images/home.png" alt="Acasă" /></a></td><td width="40%" align="right" valign="top"> Cap. 4. Actualizarea de la Debian  7 (wheezy)</td></tr></table></div></body></html>

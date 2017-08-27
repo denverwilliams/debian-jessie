@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Kapitola 2. Čo je nové v Debian 8</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="up" href="index.sk.html" title="Poznámky k vydaniu Debian 8 (jessie), 64-bit PC" /><link rel="prev" href="ch-about.sk.html" title="Kapitola 1. Úvod" /><link rel="next" href="ch-installing.sk.html" title="Kapitola 3. Inštalačný systém" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Kapitola 2. Čo je nové v Debian 8</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-about.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-installing.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr></table><hr /></div><div xml:lang="sk" class="chapter" lang="sk"><div class="titlepage"><div><div><h1 class="title"><a id="ch-whats-new"></a>Kapitola 2. Čo je nové v Debian 8</h1></div></div></div><div class="toc"><p><strong>Obsah</strong></p><dl class="toc"><dt><span class="section"><a href="ch-whats-new.sk.html#idp55828080">2.1. Podporované architektúry</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#newdistro">2.2. Čo je nové v distribúcii?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-whats-new.sk.html#cd">2.2.1. Disky CD, DVD a BD</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#new-gnome314">2.2.2. Zmeny v pracovnom prostredí GNOME</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#systemd">2.2.3. Nový predvolený init systém (systemd)</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#security">2.2.4. Bezpečnosť</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#mariadb">2.2.5. MariaDB vedľa MySQL</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#idp55979216">2.2.6. Aplikácie PHP</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#debian-games">2.2.7. Debian Games Blend</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#debian-med">2.2.8. Novinky od Debian Med Blend</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#debian-science">2.2.9. Novinky od Debian Science Blend</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#debian-gis">2.2.10. Novinky od Debian Geographical Information Systems (GIS) Blend</a></span></dt><dt><span class="section"><a href="ch-whats-new.sk.html#debian-java">2.2.11. Novinky od Java tímu Debianu</a></span></dt></dl></dd></dl></div><p>
+<a class="ulink" href="https://wiki.debian.org/NewInJessie" target="_top">Wiki</a> obsahuje ďalšie informácie
+na túto tému.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp55828080"></a>2.1. Podporované architektúry</h2></div></div></div><p>
+  Debianu 8 predstavuje dve nové architektúry:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      arm64, 64-bitový port pre počítače ARM.
+    </p></li><li class="listitem"><p>
+      ppc64el, 64-bitový little-endian port pre počítače POWER.
+    </p></li></ul></div><p>
+Debian jessie oficiálne podporuje nasledovné architektúry:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+32-bitové PC („i386“) a 64-bitové PC („amd64“)
+</p></li><li class="listitem"><p>
+64-bitový ARM („arm64“)
+</p></li><li class="listitem"><p>
+ARM EABI („armel“)
+</p></li><li class="listitem"><p>
+ARMv7 (EABI hard-float ABI, „armhf“)
+</p></li><li class="listitem"><p>
+MIPS („mips“ (big-endian) a „mipsel“ (little-endian))
+</p></li><li class="listitem"><p>
+PowerPC („powerpc“)
+</p></li><li class="listitem"><p>
+64-bitový little-endian PowerPC („ppc64el“)
+</p></li><li class="listitem"><p>
+IBM System z („s390x“)
+</p></li></ul></div><p>
+Tri architektúry, ktoré boli súčasťou systému Debian 7 neboli
+vydané v jessie.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Ako bolo oznámené počas vydania Debianu 7, 32-bitový port
+<code class="systemitem">s390</code> je ukončený a nahradil ho
+<code class="systemitem">s390x</code>.
+</p></li><li class="listitem"><p>
+Okrem toho porty IA-64 a Sparc museli byť odstránené z tohto vydania z
+dôvodu nedostatočnej podpory od vývojárov. Sparc bola podporovaná
+architektúra v Debiane od 2.1 (1999), zatiaľ čo <code class="systemitem">ia64</code> bola predstavená v Debian 3.0 (2002).
+</p></li></ul></div><div class="variablelist"><dl class="variablelist"></dl></div><p>
+Finally, the Debian ports to the FreeBSD kernel, <code class="systemitem">kfreebsd-amd64</code> and <code class="systemitem">kfreebsd-i386</code>, included as technology previews in
+Debian 6.0 and Debian 7, are not part of this release.
+</p><p>
+Ďalšie informácie o stave portov a informácie špecifické pre vašu
+architektúru sa dočítate na <a class="ulink" href="https://www.debian.org/ports/" target="_top">stránkach portov
+Debianu</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newdistro"></a>2.2. Čo je nové v distribúcii?</h2></div></div></div><p>
+Toto nové vydanie Debianu opäť prináša omnoho viac softvéru ako jeho
+predchodca  wheezy; distribúcia obsahuje viac ako 12253
+nových balíkov, čo je celkovo viac ako 43512 balíkov.  Väčšina
+softvéru v distribúcii bola aktualizovaná: viac ako 24573
+softvérových balíkov (to predstavuje 66 % všetkých
+balíkov v  wheezy). Rovnako bolo z rôznych dôvodov z distribúcie
+odstránené významné množstvo balíkov (viac ako 5441,
+14 % balíkov v  wheezy). Neuvidíte žiadne
+aktualizácie týchto balíkov a v systémoch na správu balíkov budú označené
+ako „zastaralé“; pozri <a class="xref" href="ch-upgrading.sk.html#obsolete" title="4.10. Zastaralé balíky">Oddiel 4.10, “Zastaralé balíky”</a>.
+</p><p>
+  Debian sa znova dodáva s niekoľkými pracovnými prostrediami a
+aplikáciami. Okrem iných teraz obsahuje pracovné prostredia
+GNOME<a id="idp55852320" class="indexterm"></a> 3.14,
+KDE<a id="idp55853072" class="indexterm"></a> 4.11,
+Xfce<a id="idp55853824" class="indexterm"></a> 4.10 a
+LXDE<a id="idp55854576" class="indexterm"></a>.
+</p><p>
+  Kancelárske aplikácie tiež boli aktualizované, vrátane kancelárskych
+balíkov: 
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      LibreOffice<a id="idp55856800" class="indexterm"></a> je
+aktualizovaný na 4.3;
+    </p></li><li class="listitem"><p>
+      Calligra<a id="idp55858400" class="indexterm"></a> je aktualizovaná
+na 2.8.
+    </p></li><li class="listitem"><p>
+      GNUcash<a id="idp55860000" class="indexterm"></a> je aktualizovaný na
+2.6;
+    </p></li><li class="listitem"><p>
+      GNUmeric<a id="idp55861600" class="indexterm"></a> je aktualizovaný
+na 1.12;
+    </p></li><li class="listitem"><p>
+      Abiword<a id="idp55863200" class="indexterm"></a> je aktualizovaný na
+3.0.
+    </p></li></ul></div><p>
+  Medzi ďalšie aktualizované kancelárske aplikácie patrí
+Evolution<a id="idp55864832" class="indexterm"></a> 3.12.
+</p><p>
+Okrem množstva ďalších obsahuje toto vydanie aj nasledovné aktualizácie
+softvéru:
+</p><div class="informaltable"><table width="100%" border="1"><colgroup><col align="justify" /><col align="justify" /><col align="justify" /></colgroup><thead><tr><th align="justify">Balík</th><th align="justify">Verzia v 7 (wheezy)</th><th align="justify">Verzia v 8 (jessie)</th></tr></thead><tbody><tr><td align="justify"><a id="new-apache2"></a>Apache<a id="idp55872032" class="indexterm"></a></td><td align="justify">2.2.22</td><td align="justify">2.4.10</td></tr><tr><td align="justify"><a id="new-bind9"></a><acronym title="Domain Name System">DNS</acronym> server
+BIND<a id="idp55874784" class="indexterm"></a></td><td align="justify">9.8</td><td align="justify">9.9</td></tr><tr><td align="justify"><a id="new-courier"></a><acronym title="Mail Transport Agent">MTA</acronym>
+Courier<a id="idp55877536" class="indexterm"></a></td><td align="justify">0.68</td><td align="justify">0.73</td></tr><tr><td align="justify"><a id="new-dia"></a>Dia<a id="idp55728560" class="indexterm"></a></td><td align="justify">0.97.2</td><td align="justify">0.97.3</td></tr><tr><td align="justify"><a id="new-exim4"></a>Predvolený emailový server
+Exim<a id="idp55731040" class="indexterm"></a></td><td align="justify">4.80</td><td align="justify">4.84</td></tr><tr><td align="justify"><a id="new-gcc"></a><acronym title="GNU's Not Unix">GNU</acronym> Compiler Collection ako štandardný
+kompilátor<a id="idp55905808" class="indexterm"></a></td><td align="justify">4.7 na PC, 4.6 inde</td><td align="justify">4.9</td></tr><tr><td align="justify"><a id="new-libc6"></a>knižnica <acronym title="GNU's Not Unix">GNU</acronym> C</td><td align="justify">2.13</td><td align="justify">2.19</td></tr><tr><td align="justify"><a id="new-lighttpd"></a>lighttpd</td><td align="justify">1.4.31</td><td align="justify">1.4.35</td></tr><tr><td align="justify"><a id="new-linux-image"></a>Obraz linuxového jadra</td><td align="justify">séria 3.2</td><td align="justify">séria 3.16</td></tr><tr><td align="justify"><a id="new-openldap"></a>OpenLDAP</td><td align="justify">2.4.31</td><td align="justify">2.4.40</td></tr><tr><td align="justify"><a id="new-openssh"></a>OpenSSH<a id="idp55915696" class="indexterm"></a></td><td align="justify">6.0p1</td><td align="justify">6.7p1</td></tr><tr><td align="justify"><a id="new-perl"></a>Perl<a id="idp55918096" class="indexterm"></a></td><td align="justify">5.14</td><td align="justify">5.20</td></tr><tr><td align="justify"><a id="new-php"></a>PHP<a id="idp55920496" class="indexterm"></a></td><td align="justify">5.4</td><td align="justify">5.6</td></tr><tr><td align="justify"><a id="new-postfix"></a><acronym title="Mail Transport Agent">MTA</acronym>
+Postfix<a id="idp55923152" class="indexterm"></a></td><td align="justify">2.9</td><td align="justify">2.11</td></tr><tr><td align="justify"><a id="new-postgresql"></a>PostgreSQL<a id="idp55925552" class="indexterm"></a></td><td align="justify">9.1</td><td align="justify">9.4</td></tr><tr><td align="justify"><a id="new-python3"></a>Python 3</td><td align="justify">3.2</td><td align="justify">3.4</td></tr><tr><td align="justify"><a id="new-samba"></a>Samba</td><td align="justify">3.6</td><td align="justify">4.1</td></tr></tbody></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cd"></a>2.2.1. Disky CD, DVD a BD</h3></div></div></div><p>
+Oficálna distribúcia Debian sa teraz dodáva na 8 až 9 binárnych
+<acronym title="Digital Versatile Disc">DVD</acronym> <a id="idp55932816" class="indexterm"></a> alebo
+75 až 85 binárnych <acronym title="Compact Disc">CD</acronym>
+<a id="idp55934032" class="indexterm"></a> (v závislosti od architektúry)
+a 10 zdrojových <acronym title="Digital Versatile Disc">DVD</acronym> alebo 59 zdrojových
+<acronym title="Compact Disc">CD</acronym>. Naviac je k dispozícii
+<span class="emphasis"><em>multi-arch</em></span> <acronym title="Digital Versatile Disc">DVD</acronym> s podmnožinou vydania
+pre architektúry <code class="literal">amd64</code> a <code class="literal">i386</code> so
+zdrojovým kódom. Debian je tiež vydaný na obrazoch Blu-ray
+<a id="idp55937920" class="indexterm"></a>, po 2 pre architektúry
+<code class="literal">amd64</code> a <code class="literal">i386</code> alebo jedno so zdrojovým
+kódom. Z dôvodov veľkosti boli zo zostavení na <acronym title="Compact Disc">CD</acronym>
+vynechané niektoré veľmi veľké balíky; tieto balíky sa viac hodia na
+zostavenia <acronym title="Digital Versatile Disc">DVD</acronym> a <acronym title="Blu-ray Disc">BD</acronym>, takže tie ich
+stále obsahujú.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="new-gnome314"></a>2.2.2. Zmeny v pracovnom prostredí GNOME</h3></div></div></div><p>
+    Nové pracovné prostredie GNOME vo verzii 3.14 prináša mnoho nových funkcií a
+vylepšení použiteľnosti.
+  </p><p>
+    Dizajn GNOME shell bol aktualizovaný. Oznamovacia oblasť dolu je väčšia,
+jednoduchšie sa používa a má menšiu tendenciu objaviť sa omylom. Nový systém
+stavovej oblasti v pravom hornom rohu dáva prístup k všetkým užitočným
+nastaveniam z jedného miesta.
+  </p><p>
+    Šetrič obrazovky bol nahradený „Zamykacou obrazovkou“, ktorá poskytuje zopár
+funkcií, aj keď je používateľ preč. Napríklad môžete pozastaviť hudbu,
+zmeniť jas obrazovky a dostávate informácie o nových emailoch - to všetko
+bez zadania hesla. Stlačením klávesu ESC alebo tým, že začnete písať heslo,
+opäť vyvoláte prihlasovaciu obrazovku. Správca obrazovky GNOME používa
+presne rovnaký dizajn z dôvodu zachovania konzistentnosti.
+  </p><p>
+    Dizajn niekoľkých aplikácií, medzi ktoré patrí správca súborov Nautilus,
+textový editor gedit a prehliadač dokumentov evince, je teraz oveľa
+kompaktnejší, pričom bolo zlúčené záhlavie okna s panelmi nástrojov. To
+ponecháva viac miesta pre dokumenty, s ktorými používateľ
+pracuje. Štandardné dialógové okná prešli podobnými zmenami.
+  </p><p>
+    Podpora dotykových obrazoviek bola plne integrovaná, vrátane intuitívnych
+gest na základe pohybu viacerých prstov. GNOME teraz podporuje aj obrazovky
+s vysokým rozlíšením (HiDPI) a dosahuje najčistejšieho vykresľovania plným
+využitím drobných pixelov.
+  </p><p>
+    GNOME podporuje geolokalizáciu a obsahuje aplikáciu máp a navigácie.
+  </p><p>
+    Používateľská dokumentácia je omnoho úplnejšia a obsahuje videonávody pre
+nových používateľov.
+  </p><p>
+    Ďalšie informácie nájdete v <a class="ulink" href="https://help.gnome.org/misc/release-notes/3.14/" target="_top">Poznámkach k vydaniu
+GNOME 3.14</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd"></a>2.2.3. Nový predvolený init systém (systemd)</h3></div></div></div><p>
+    <code class="systemitem">systemd</code><a id="idp55951872" class="indexterm"></a>, pridaný v Debian
+7, je teraz predvoleným init systémom. Zabezpečuje pokročilé
+monitorovanie, protokolovanie a schopnosť správy služieb.
+  </p><p>
+    
+Hoci je určený ako náhrada <code class="systemitem">sysvinit</code><a id="idp55954176" class="indexterm"></a>
+a ako taký používa existujúce SysV init skripty, balík <code class="systemitem">systemd</code><a id="idp55955824" class="indexterm"></a> môžete bezpečne nainštalovať popri
+<code class="systemitem">sysvinit</code><a id="idp55957424" class="indexterm"></a> a spustiť pomocou voľby
+jadra <code class="literal">init=/bin/systemd</code>. Balík <code class="systemitem">systemd-sysv</code><a id="idp55959632" class="indexterm"></a> poskytuje náhradu
+<code class="literal">/sbin/init</code>.
+
+  </p><p>
+    Ďalšie informácie o tejto téme nájdete na Debian <a class="ulink" href="http://wiki.debian.org/systemd" target="_top">wiki</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="security"></a>2.2.4. Bezpečnosť</h3></div></div></div><p>Zastaralý protokol SSLv3 bol v tejto verzii deaktivovaný. Mnohé systémové
+kryptografické knižnice, ako aj servery a klientske aplikácie boli zostavené
+alebo nakonfigurované bez podpory tohto protokolu.</p><p>
+    Linuxové jadro obsahuje bezpečnostný mechanizmus, ktorý zabraňuje mnohým
+útokom prostredníctvom symbolických odkazov. V linuxovom jadre Debianu je
+štandardne zapnutý. Chyby súvisiace s /tmp, ktoré vďaka tomuto mechanizmu
+nie je možné zneužiť, sa nepovažujú chyby zabezpečenia. Ak používate vlastné
+linuxové jadro, mali by ste ho povoliť pomocou voľby sysctl:
+    </p><pre class="screen">echo 1 &gt; /proc/sys/fs/protected_symlinks</pre><p>
+  </p><p>
+    V niektorých zriedkavých prípadoch je nutné ukončiť bezpečnostnú podpora
+balíka dodávaného vo vydaní Debianu pred koncom podpora celej
+distribúcie. Jessie poskytuje nový balík (<code class="systemitem">debian-security-support</code><a id="idp55967344" class="indexterm"></a>), ktorý v predstihu
+upozorní na ukončenie podpory balíka. Tiež dokumentuje balíky s obmedzenou
+bezpečnostnou podporou. Vo všeobecnosti sa odporúča nainštalovať balík
+debian-security-support na všetky systémy, kde záleží na bezpečnosti.
+  </p><p>Pokračujúc v tom, s čím začal už Wheezy, ďalšie balíky boli
+zostavené s prísnejšími príznakmi kompilátora. Príznak ochrany zásobníka bol
+zmenený na silnejšiu ochranu príznakom stack-protector-strong. Všimnite si,
+že prísnejšie príznaky nie sú predvolené v <code class="systemitem">gcc</code><a id="idp55970352" class="indexterm"></a>, preto sa pri lokálnom zostavovaní softvéru
+nepoužijú automaticky.
+  </p><p>Nový v tomto vydaní je balík <code class="systemitem">needrestart</code><a id="idp55972480" class="indexterm"></a>. Aj je nainštalovaný, vykoná
+kontrolu po každej aktualizácii pomocou APT. Ak niektoré zo služieb
+bežiacich v systéme vyžadujú reštart, aby sa prejavili zmeny v
+aktualizovaných balíkoch, <code class="systemitem">needrestart</code><a id="idp55974400" class="indexterm"></a> ponúkne možnosť
+reštartovania. Odporúča sa nainštalovať ho, aby ste sa sa uistili, že
+bezpečnostné aktualizácie knižníc sa prejavia v bežiacich službách.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="mariadb"></a>2.2.5. MariaDB vedľa MySQL</h3></div></div></div><p>Spolu so starším MySQL 5.5, Jessie dodáva novú MariaDB 10.0. Ďalšie
+informácie nájdete na <a class="ulink" href="http://wiki.debian.org/Teams/MySQL" target="_top">wiki
+stránke tímu MySQL Debianu</a>. Debian 9 bude
+pravdepodobne obsahovať len jeden z nich.
+  </p><p>
+    Všimnite si, že podpora MySQL 5.5 od jeho vývojárov skončí v decembri 2018
+(a bezpečnostná podpora v Debiane sa tým bude musieť riadiť), zatiaľ čo
+MariaDB 10.0 bude mať bezpečnostnú podporu svojich vývojárov až do marca
+2019.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp55979216"></a>2.2.6. Aplikácie PHP</h3></div></div></div><p>Horde Application Framework je k dispozícii v Jessie prostredníctvom
+balíka <code class="systemitem">php-horde</code><a id="idp55981024" class="indexterm"></a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-games"></a>2.2.7. Debian Games Blend</h3></div></div></div><p>Tím Hier Debianu s hrdosťou predstavuje Debianu Games <a class="ulink" href="http://blends.debian.org/blends/" target="_top">Blend</a>, ktorá sa skladá z
+<a class="ulink" href="https://tracker.debian.org/pkg/debian-games" target="_top">33
+metabalíkov</a>, ktoré zjednodušujú proces inštalácie hier v rámci
+kategórie. Okrem mnohých iných je na výber zo stratégií, simulácií,
+kartových a programovacích hier. Debian Games tiež ponúka vývojárom rýchly
+spôsob ako si nainštalovať odporúčaný softvér na vývoj hier v programovacích
+jazykoch C++, Java, Perl alebo Python 3. Tvorcovia obsahu nájdu užitočné
+nástroje na tvorbu výtvarných prvkov hier v balíku <code class="systemitem">games-content-dev</code><a id="idp55986048" class="indexterm"></a>. Domovská stránka projektu
+obsahuje snímky obrazovky a ďalšie informácie a ponúka celkový prehľad o
+všetkých hrách vrátane <a class="ulink" href="http://blends.debian.org/games/tasks/finest" target="_top">najlepších hier
+Debianu</a>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-med"></a>2.2.8. Novinky od Debian Med Blend</h3></div></div></div><p>Tím Debian Med opäť výrazne zvýšil nielen počet balíkov v oblasti biológie a
+medicíny, ale aj ich kvalitu čo sa týka testovania (čas zostavenia balíkov a
+tiež autopkgtest). Tieto vylepšenia v metabalíkoch Debian Med Blend 2.0
+reflektujú dopyt vedcov po spoľahlivom softvéri, aby mohli poskytovať
+reprodukovateľné výsledky. Na <a class="ulink" href="http://blends.debian.org/med/tasks" target="_top">stránkach úloh Debian Med</a>
+môžete vidieť celú škálu softvéru z oblasti biológie a lekárskeho softvéru z
+Debianu.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-science"></a>2.2.9. Novinky od Debian Science Blend</h3></div></div></div><p>Vďaka neustálej práci tímu Debian Science boli pridané do archívu balíkov
+Debianu nielen nové vedecké aplikácie, ale aj aplikácie pokrývajúce nové
+oblasti vedy. Na <a class="ulink" href="http://blends.debian.org/science/tasks" target="_top">stránkach úloh Debian
+Science</a> si môžete pozrieť celú škálu vedeckého softvéru v Debiane.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-gis"></a>2.2.10. Novinky od Debian Geographical Information Systems (GIS) Blend</h3></div></div></div><p>Počas vývojového cyklu jessie sa späť do Debianu GIS dostali mnohé zmeny z
+UbuntuGIS. Vylepšila sa spolupráca s projektami UbuntuGIS a OSGeo-Live, čoho
+výsledkom sú nové balíky a prispievatelia. Na <a class="ulink" href="http://blends.debian.org/gis/tasks" target="_top">stránkach úloh Debian GIS</a>
+uvidíte celú škálu rozsah GIS softvéru v Debiane a ďalšie informácie na
+<a class="ulink" href="https://wiki.debian.org/DebianGis" target="_top">domovskej stránke Debian
+GIS</a>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-java"></a>2.2.11. Novinky od Java tímu Debianu</h3></div></div></div><p>Jessie sa dodáva so 799 zdrojovými balíkmi (442 aktualizovaných, +130 nových
+od Wheezy), ktoré bude udržiavať <a class="ulink" href="https://qa.debian.org/developer.php?login=pkg-java-maintainers@lists.alioth.debian.org" target="_top">tím
+Java</a>. Významné zmeny:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>OpenJDK 7 je nové predvolený podporované dynamické prostredie Java.</p></li><li class="listitem"><p>OpenJDK 8 bude k dispozícii z jessie-backports.</p></li><li class="listitem"><p>Tomcat 7 a Tomcat 8 sú podporované a Tomcat 6 bol odstránený.</p></li><li class="listitem"><p>Nové vývojárske nástroje vrátane VisualVM, Dynamic Code Evolution VM
+(openjdk-7-jre-dcevm), Gradle, eclipse-wtp-webtools, closure-compiler a
+ďalšie.
+            </p></li><li class="listitem"><p>Prítomnosť <a class="ulink" href="https://packages.debian.org/source/jessie/androidsdk-tools" target="_top">androidsdk-tools</a>
+            </p></li></ul></div><p>
+    </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-about.sk.html"><img src="images/prev.png" alt="Predchádzajúci" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-installing.sk.html"><img src="images/next.png" alt="Nasledujúci" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitola 1. Úvod </td><td width="20%" align="center"><a accesskey="h" href="index.sk.html"><img src="images/home.png" alt="Domov" /></a></td><td width="40%" align="right" valign="top"> Kapitola 3. Inštalačný systém</td></tr></table></div></body></html>

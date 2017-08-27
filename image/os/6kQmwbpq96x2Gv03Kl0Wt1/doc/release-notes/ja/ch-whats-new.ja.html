@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>第2章 Debian 8 の最新情報</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="up" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="prev" href="ch-about.ja.html" title="第1章 はじめに" /><link rel="next" href="ch-installing.ja.html" title="第3章 インストールシステム" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第2章 Debian 8 の最新情報</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-about.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-installing.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr></table><hr /></div><div xml:lang="ja" class="chapter" lang="ja"><div class="titlepage"><div><div><h1 class="title"><a id="ch-whats-new"></a>第2章 Debian 8 の最新情報</h1></div></div></div><div class="toc"><p><strong>目次</strong></p><dl class="toc"><dt><span class="section"><a href="ch-whats-new.ja.html#idp64836096">2.1. サポートするアーキテクチャ</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#newdistro">2.2. ディストリビューションの最新情報</a></span></dt><dd><dl><dt><span class="section"><a href="ch-whats-new.ja.html#cd">2.2.1. CD、DVD、Blu-ray ディスク</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#new-gnome314">2.2.2. GNOME デスクトップでの変更点</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#systemd">2.2.3. 新しい標準 init システム (systemd)</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#security">2.2.4. セキュリティ</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#mariadb">2.2.5. MariaDB が MySQL を引き継ぎます</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#idp64974288">2.2.6. PHP アプリケーション</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#debian-games">2.2.7. Debian Games Blend</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#debian-med">2.2.8. Debian Med Blend からのニュース</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#debian-science">2.2.9. Debian Science Blend からのニュース</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#debian-gis">2.2.10. Debian Geographical Information Systems (GIS) Blend からのニュース</a></span></dt><dt><span class="section"><a href="ch-whats-new.ja.html#debian-java">2.2.11. Debian Java チームからのニュース</a></span></dt></dl></dd></dl></div><p>
+このトピックに関するより詳しい情報が <a class="ulink" href="https://wiki.debian.org/NewInJessie" target="_top">Wiki</a> に載っています。
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp64836096"></a>2.1. サポートするアーキテクチャ</h2></div></div></div><p>
+  Debian 8 では 2 つの新しいアーキテクチャを導入します:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      arm64, ARM 64 ビット移植版
+    </p></li><li class="listitem"><p>
+      ppc64el, POWER 64 ビットリトルエンディアン移植版
+    </p></li></ul></div><p>
+Debian jessie で公式にサポートされているアーキテクチャは以下のとおりです。
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+32 ビット PC ('i386') および 64 ビット PC ('amd64')
+</p></li><li class="listitem"><p>
+64 ビット ARM ('arm64')
+</p></li><li class="listitem"><p>
+ARM EABI ('armel')
+</p></li><li class="listitem"><p>
+ARMv7 (EABI 浮動小数点ハードウェア ABI, 'armhf')
+</p></li><li class="listitem"><p>
+MIPS ('mips' (ビッグエンディアン) および 'mipsel' (リトルエンディアン))
+</p></li><li class="listitem"><p>
+PowerPC ('powerpc')
+</p></li><li class="listitem"><p>
+64 ビットリトルエンディアン PowerPC ('ppc64el')
+</p></li><li class="listitem"><p>
+IBM System z ('s390x')
+</p></li></ul></div><p>
+Debian 7 に含まれていた 3 つのアーキテクチャは jessie　ではリリースされません。
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Debian 7 がリリースされた時点でアナウンスされたように、32 ビット <code class="systemitem">s390</code> 移植版は終了して <code class="systemitem">s390x</code> に置き換えられました。
+</p></li><li class="listitem"><p>
+加えて、IA-64 および Sparc 移植版が開発者のサポートが不十分なため、このリリースから削除されました。Sparc は 2.1 (1999)
+から Debian でサポートされていたアーキテクチャであり、一方の <code class="systemitem">ia64</code> は Debian 3.0 (2002) で導入されたものです。
+</p></li></ul></div><div class="variablelist"><dl class="variablelist"></dl></div><p>
+最後に、Debian 6.0 ならびに 7 にてテクノロジープレビューとして含められていた FreeBSD カーネルへの Debian
+移植版である、<code class="systemitem">kfreebsd-amd64</code> および <code class="systemitem">kfreebsd-i386</code> はこのリリースの一部には含められていません。
+</p><p>
+移植状況の詳細や、お使いの移植版に特有の情報については、<a class="ulink" href="https://www.debian.org/ports/" target="_top">Debian
+の移植版に関するウェブページ</a>で読むことができます。
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newdistro"></a>2.2. ディストリビューションの最新情報</h2></div></div></div><p>
+Debian のこの新しいリリースには、一つ前のリリースである wheezy
+に含まれていたよりさらに多くのソフトウェアが含まれています。このディストリビューションには、12253
+以上の新しいパッケージが含まれており、全体のパッケージ数は 43512
+以上になりました。ディストリビューション中のほとんどのソフトウェア、すなわち約 24573 ものソフトウェアパッケージ
+(これは wheezy のパッケージ全体の 66% にあたります)
+が更新されました。また、かなりの数のパッケージ (wheezy のパッケージの
+14% にあたる 5441 以上)
+が、様々な理由でディストリビューションから取り除かれました。これらのパッケージは更新されることはなく、パッケージ管理用のフロントエンドでは
+'obsolete' というマークが付けられます。これについては <a class="xref" href="ch-upgrading.ja.html#obsolete" title="4.10. 利用されなくなったパッケージ">「利用されなくなったパッケージ」</a> を参照してください。
+</p><p>
+  Debian で今回も複数のデスクトップアプリケーションとデスクトップ環境をサポートしています。中でも
+GNOME<a id="idp64862496" class="indexterm"></a> 3.14、そして
+KDE<a id="idp64863312" class="indexterm"></a>
+4.11、Xfce<a id="idp64864112" class="indexterm"></a>
+4.10、LXDE<a id="idp64864912" class="indexterm"></a> というデスクトップ環境を含んでいます。
+</p><p>
+  事務用アプリケーションもオフィス製品を含めてアップグレードされています: 
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      LibreOffice<a id="idp64867312" class="indexterm"></a> が 4.3
+へアップグレードされました;
+    </p></li><li class="listitem"><p>
+      Calligra<a id="idp64868960" class="indexterm"></a> が 2.8
+へアップグレードされました;
+    </p></li><li class="listitem"><p>
+      GNUcash<a id="idp64870608" class="indexterm"></a> が 2.6
+へアップグレードされました;
+    </p></li><li class="listitem"><p>
+      GNUmeric<a id="idp64872256" class="indexterm"></a> が 1.12
+へアップグレードされました;
+    </p></li><li class="listitem"><p>
+      Abiword<a id="idp64873904" class="indexterm"></a> が 3.0
+へアップグレードされました。
+    </p></li></ul></div><p>
+  他のデスクトップアプリケーションの更新としては、Evolution<a id="idp64875616" class="indexterm"></a>
+3.12　へのアップグレードが含まれます。
+</p><p>
+またこのリリースには、特に挙げるなら、以下のソフトウェアの更新も含まれています:
+</p><div class="informaltable"><table width="100%" border="1"><colgroup><col align="justify" /><col align="justify" /><col align="justify" /></colgroup><thead><tr><th align="justify">パッケージ</th><th align="justify">7 (wheezy) でのバージョン</th><th align="justify">8 (jessie) でのバージョン</th></tr></thead><tbody><tr><td align="justify"><a id="new-apache2"></a>Apache<a id="idp64883168" class="indexterm"></a></td><td align="justify">2.2.22</td><td align="justify">2.4.10</td></tr><tr><td align="justify"><a id="new-bind9"></a>BIND<a id="idp64885664" class="indexterm"></a> <acronym title="ドメインネームシステム">DNS</acronym>
+サーバ</td><td align="justify">9.8</td><td align="justify">9.9</td></tr><tr><td align="justify"><a id="new-courier"></a>Courier<a id="idp64888624" class="indexterm"></a>
+<acronym title="メール転送エージェント (Mail Transport Agent)">MTA</acronym></td><td align="justify">0.68</td><td align="justify">0.73</td></tr><tr><td align="justify"><a id="new-dia"></a>Dia<a id="idp64891504" class="indexterm"></a></td><td align="justify">0.97.2</td><td align="justify">0.97.3</td></tr><tr><td align="justify"><a id="new-exim4"></a>Exim<a id="idp64893904" class="indexterm"></a> 標準の電子メールサーバ</td><td align="justify">4.80</td><td align="justify">4.84</td></tr><tr><td align="justify"><a id="new-gcc"></a><acronym title="GNU は Unix ではない (GNU's Not Unix)">GNU</acronym> Compiler Collection
+(デフォルトのコンパイラ)<a id="idp64896896" class="indexterm"></a></td><td align="justify">PC 版は 4.7、その他は 4.6</td><td align="justify">4.9</td></tr><tr><td align="justify"><a id="new-libc6"></a><acronym title="GNU は Unix ではない (GNU's Not Unix)">GNU</acronym> C ライブラリ</td><td align="justify">2.13</td><td align="justify">2.19</td></tr><tr><td align="justify"><a id="new-lighttpd"></a>lighttpd</td><td align="justify">1.4.31</td><td align="justify">1.4.35</td></tr><tr><td align="justify"><a id="new-linux-image"></a>Linux カーネルイメージ</td><td align="justify">3.2 シリーズ</td><td align="justify">3.16 シリーズ</td></tr><tr><td align="justify"><a id="new-openldap"></a>OpenLDAP</td><td align="justify">2.4.31</td><td align="justify">2.4.40</td></tr><tr><td align="justify"><a id="new-openssh"></a>OpenSSH<a id="idp64907104" class="indexterm"></a></td><td align="justify">6.0p1</td><td align="justify">6.7p1</td></tr><tr><td align="justify"><a id="new-perl"></a>Perl<a id="idp64909504" class="indexterm"></a></td><td align="justify">5.14</td><td align="justify">5.20</td></tr><tr><td align="justify"><a id="new-php"></a>PHP<a id="idp64911904" class="indexterm"></a></td><td align="justify">5.4</td><td align="justify">5.6</td></tr><tr><td align="justify"><a id="new-postfix"></a>Postfix<a id="idp64914352" class="indexterm"></a>
+<acronym title="メール転送エージェント (Mail Transport Agent)">MTA</acronym></td><td align="justify">2.9</td><td align="justify">2.11</td></tr><tr><td align="justify"><a id="new-postgresql"></a>PostgreSQL<a id="idp64917136" class="indexterm"></a></td><td align="justify">9.1</td><td align="justify">9.4</td></tr><tr><td align="justify"><a id="new-python3"></a>Python 3</td><td align="justify">3.2</td><td align="justify">3.4</td></tr><tr><td align="justify"><a id="new-samba"></a>Samba</td><td align="justify">3.6</td><td align="justify">4.1</td></tr></tbody></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cd"></a>2.2.1. CD、DVD、Blu-ray ディスク</h3></div></div></div><p>
+公式の Debian ディストリビューションは、現在は 9-10 枚のバイナリ
+<acronym title="デジタルバーサタイルディスク">DVD</acronym><a id="idp64924624" class="indexterm"></a> または
+75-85 枚のバイナリ
+<acronym title="コンパクトディスク">CD</acronym><a id="idp64925728" class="indexterm"></a>
+(アーキテクチャによる) および 10 枚のソース <acronym title="デジタルバーサタイルディスク">DVD</acronym> または 59 枚のソース
+<acronym title="コンパクトディスク">CD</acronym> の形で提供されています。加えて、<code class="literal">amd64</code> および
+<code class="literal">i386</code> アーキテクチャのリリースのサブセットおよびそのソースコードを収録した
+<span class="emphasis"><em>multi-arch</em></span> <acronym title="デジタルバーサタイルディスク">DVD</acronym> もあります。Debian は 2
+枚ずつの Blu-ray <a id="idp64929952" class="indexterm"></a>
+(<acronym title="Blu-ray ディスク">BD</acronym>) イメージの形でもリリースしされています。それぞれ <code class="literal">amd64</code>
+そして <code class="literal">i386</code> アーキテクチャで、もう 2
+枚にはソースコードが収録されています。サイズ上の理由から、とても巨大なパッケージは <acronym title="コンパクトディスク">CD</acronym>
+のビルドからは外されています。これらのパッケージは <acronym title="デジタルバーサタイルディスク">DVD</acronym> や <acronym title="Blu-ray ディスク">BD</acronym>
+のビルドにはより適しているので、こちらには含まれています。
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="new-gnome314"></a>2.2.2. GNOME デスクトップでの変更点</h3></div></div></div><p>
+    バージョン 3.14 へのアップグレードによって、新しい GNOME デスクトップにはたくさんの新しい機能と使い勝手の向上がもたらされています。
+  </p><p>
+    GNOME
+シェルのデザインが更新されています。画面下のメッセージトレイが大きくなり、使いやすくかつ誤って表示されにくくなりました。右上隅の新しいシステムステータス領域では、すべての有用な設定が同じ場所に収められるようになりました。
+  </p><p>
+    スクリーンセーバーは "lock screen"
+によって置き換えられており、ユーザーが離席していても最小限の機能が使えるようになっています。例えば、音楽の一時停止、新しいメールの通知、画面輝度の変更がすべてパスワードの入力無しで可能になっています。Esc
+キーの入力あるいはパスワードの入力を開始するとログイン画面に戻ります。GNOME ディスプレイマネージャーは一貫して全く同じデザインを利用しています。
+  </p><p>
+    Nautilus ファイルマネージャー・gedit テキストエディタ・evince
+ドキュメントビューワーなどを含む複数のアプリケーションは、よりコンパクトに見えるように、ウィンドウのタイトルバーとツールバーを統合したデザインに作られています。これによって、ユーザーが作業しているドキュメントに対して、より多くの作業領域が与えられます。標準のダイアログボックスについても同様の変更が進められています。
+  </p><p>
+    複数の指での動作をベースとした直感的なゼスチュアを含む、タッチスクリーンサポートが完全に統合されました。GNOME は高解像度スクリーン (HiDPI)
+もサポートするようになっており、微細なピクセル表示を最大限に活用して最も精細な画面表示を行います。
+  </p><p>
+    GNOME は地理情報をサポートしており、滑らかに動作する地図表示・ナビアプリケーションを含んでいます。
+  </p><p>
+    ユーザードキュメントはより完全なものとなり、新規ユーザー向けにビデオチュートリアルが含められました。
+  </p><p>
+    より詳細な情報については、<a class="ulink" href="https://help.gnome.org/misc/release-notes/3.14/" target="_top">GNOME 3.14
+リリースノート</a>で確認できます。
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd"></a>2.2.3. 新しい標準 init システム (systemd)</h3></div></div></div><p>
+    Debian 7 で導入された  <code class="systemitem">systemd</code><a id="idp64945472" class="indexterm"></a>　が標準の init
+システムになりました。これによって、サービス監視・ログの取得・サービス管理機能が拡張されることになります。
+  </p><p>
+    
+これは <code class="systemitem">sysvinit</code><a id="idp64947600" class="indexterm"></a>
+をそのまま置き換えるように設計されており、既存の SysV 用の init スクリプトを使うようになっていますが、<code class="systemitem">systemd</code><a id="idp64949424" class="indexterm"></a> パッケージは <code class="systemitem">sysvinit</code><a id="idp64950992" class="indexterm"></a>
+と平行して安全にインストールし、<code class="literal">init=/bin/systemd</code>
+カーネルオプション経由で開始できます。<code class="systemitem">systemd-sysv</code><a id="idp64953360" class="indexterm"></a>
+パッケージが<code class="literal">/sbin/init</code> の代替を提供します。
+
+  </p><p>
+    詳細については Debian <a class="ulink" href="http://wiki.debian.org/systemd" target="_top">wiki</a>
+を参照してください。
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="security"></a>2.2.4. セキュリティ</h3></div></div></div><p>このリリースでは、レガシーな SSL プロトコル SSLv3
+が無効にされています。多くのシステム暗号化ライブラリは、サーバーやクライアントアプリケーション同様にこのプロトコルのサポートをしないようにコンパイルあるいは設定されています。</p><p>
+    Linux カーネルは、多重 symlink による攻撃を無効化するセキュリティ機構を導入しています。これは Debian の Linux
+カーネルでは標準で有効にされています。この機構によって攻撃できないようにされている /tmp
+に関連したバグは、セキュリティ脆弱性としては扱われません。カスタムされた Linux カーネルを利用している場合は sysctl
+設定を使って有効にする必要があります:
+    </p><pre class="screen">echo 1 &gt; /proc/sys/fs/protected_symlinks</pre><p>
+  </p><p>
+    稀な例ですが、Debian
+リリース時に含まれているパッケージに対するセキュリティサポートがディストリビューション全体のサポート終了よりも前に終了せねばならない場合があります。Jessie
+は、パッケージに対するサポートが先んじて終了される必要がある場合に警告を飛ばす新しいパッケージ (<code class="systemitem">debian-security-support</code><a id="idp64961760" class="indexterm"></a>)
+を提供しています。また、セキュリティサポートの範囲が限られているパッケージについてはドキュメントに記載するようにしています。従って、セキュリティを気にする必要があるシステムにはすべて
+debian-security-support パッケージをインストールすることを推奨します。
+  </p><p>Wheezy
+によって設定された既定路線に従って、より多くのパッケージが強化ビルドフラグを有効にしてビルドされています。また、stack protector
+はさらに強化を行うために stack-protector-strong に変更されています。強化ビルドフラグは、<code class="systemitem">gcc</code><a id="idp64964960" class="indexterm"></a>
+ではデフォルトでは有効にされていないので、ローカルでビルドしたソフトウェアには自動的に使われないことに注意してください。
+  </p><p>このリリースでの新規事項は <code class="systemitem">needrestart</code><a id="idp64967296" class="indexterm"></a>
+です。これはインストールされると、毎回の
+APT　アップグレードセッション後にチェックを実行します。システム上で動作しているサービスが、パッケージアップグレード時点での変更の恩恵を受けるために再起動する必要がある場合、これらを再起動してくれます。ライブラリのセキュリティ更新が動作しているサービスに確実に反映されるのを保証するため、<code class="systemitem">needrestart</code><a id="idp64969424" class="indexterm"></a> をインストールすることをお勧めします。
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="mariadb"></a>2.2.5. MariaDB が MySQL を引き継ぎます</h3></div></div></div><p>古い MySQL 5.5 と並行して、Jessie では新たに MariaDB 10.0 を提供します。詳細については、<a class="ulink" href="http://wiki.debian.org/Teams/MySQL" target="_top">Debian MySQL チームの wiki ページ</a>
+を参照してください。これらのうち、1 つだけが Debian 9 には含まれることになるでしょう。
+  </p><p>
+    MySQL 5.5 への開発元 (upstream) のサポートは 2018 年 12 月に終了し (そして Debian
+でのセキュリティサポートはこれに従う必要があります)、一方で MariaDB 10.0 は 2019 年 3 月まで開発元 (upstream)
+からのセキュリティサポートを受ける点に注意してください。
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp64974288"></a>2.2.6. PHP アプリケーション</h3></div></div></div><p>Horde アプリケーションフレームワークは、Jessie では <code class="systemitem">php-horde</code><a id="idp64976160" class="indexterm"></a> パッケージで利用可能です。
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-games"></a>2.2.7. Debian Games Blend</h3></div></div></div><p>Debian Games チームは、ゲームに分類されるソフトウェアのインストールをシンプルにする、<a class="ulink" href="https://tracker.debian.org/pkg/debian-games" target="_top">33 メタパッケージ</a> から成る
+Debian Games <a class="ulink" href="http://blends.debian.org/blends/" target="_top">Blend</a>
+を提供できることを誇りに思います。多くの中から選ばれたゲームには、戦略ゲーム、シミュレーションゲーム、カードゲーム、プログラミングゲームなどがあります。Debian
+Games では、デベロッパーに対してプログラム言語として C++ / Java / Perl / Python 3
+で開発を行う際のお勧めソフトウェアを手早くインストールする方法を提供しています。コンテンツデベロッパーは、<code class="systemitem">games-content-dev</code><a id="idp64981520" class="indexterm"></a>
+パッケージ内でゲームアート作成に役立つツールが見つかることでしょう。プロジェクトのホームページでは、スクリーンショットとさらなる情報、そして
+<a class="ulink" href="http://blends.debian.org/games/tasks/finest" target="_top">Debian's finest
+games</a> を含むすべてのゲームについての簡略化した概要を提供しています。
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-med"></a>2.2.8. Debian Med Blend からのニュース</h3></div></div></div><p>Debian Med チームは、生物学ならびに医薬分野のパッケージについて、再度その数をかなり増やしました。またそれだけではなく、テスト版
+(testing) の期間中で (パッケージビルド時に autopkgtest も利用して) 品質も相当に向上させています。Debian Med
+Blend メタパッケージバージョン 2.0
+におけるこれらの拡張は、再試可能な結果を提供してくれる信頼できるソフトウェアを望む科学者らからの要望を反映したものです。<a class="ulink" href="http://blends.debian.org/med/tasks" target="_top">Debian Med tasks pages</a> を訪れて
+Debian におけるバイオ・医学関連ソフトウェアの全容を確認してみてください。
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-science"></a>2.2.9. Debian Science Blend からのニュース</h3></div></div></div><p>Debian Science チームのたゆまぬ作業により、Debian
+のパッケージプールに新たな科学系アプリケーションが追加されたされただけではなく、いくつかのアプリケーション群によって、新たな科学分野についてもカバーされるようになっています。Debian
+に含まれている科学系ソフトウェアの全容を確認するには <a class="ulink" href="http://blends.debian.org/science/tasks" target="_top">Debian Science tasks
+pages</a> を訪れてください。
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-gis"></a>2.2.10. Debian Geographical Information Systems (GIS) Blend からのニュース</h3></div></div></div><p>Jessie の開発サイクルの間で UbuntuGIS から Debian GIS へ多くの変更がマージされました。UbuntuGIS および
+OSGeo-Live プロジェクトとの連携が改善され、その結果新しいパッケージと貢献者が加わりました。Debian に含まれている GIS
+ソフトウェアの全容を確認するには <a class="ulink" href="http://blends.debian.org/gis/tasks" target="_top">Debian GIS
+tasks pages</a> を訪れてください。より詳細については <a class="ulink" href="https://wiki.debian.org/DebianGis" target="_top">Debian GIS のホームページ</a>
+を参照してください。
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-java"></a>2.2.11. Debian Java チームからのニュース</h3></div></div></div><p>Jessie は 799 のソースパッケージ (442 パッケージが更新され、Wheezy から 130 以上の新規パッケージを含む) が <a class="ulink" href="https://qa.debian.org/developer.php?login=pkg-java-maintainers@lists.alioth.debian.org" target="_top">
+Java チーム</a>によってメンテナンスされることになります。注目すべき変更点は以下です:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>OpenJDK 7 がデフォルトの Java ランタイムとしてサポートされます。</p></li><li class="listitem"><p>OpenJDK 8 は jessie-backports から利用可能になります。</p></li><li class="listitem"><p>Tomcat 7 と Tomcat 8 がサポートされ、Tomcat 6 は削除されました。</p></li><li class="listitem"><p> VisualVM, Dynamic Code Evolution VM (openjdk-7-jre-dcevm), Gradle,
+eclipse-wtp-webtools, closure-compiler その他の新たな開発者用ツールが含まれています。
+            </p></li><li class="listitem"><p><a class="ulink" href="https://packages.debian.org/source/jessie/androidsdk-tools" target="_top">
+androidsdk-tools</a> が含まれるようになりました。
+            </p></li></ul></div><p>
+    </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-about.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-installing.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr><tr><td width="40%" align="left" valign="top">第1章 はじめに </td><td width="20%" align="center"><a accesskey="h" href="index.ja.html"><img src="images/home.png" alt="ホーム" /></a></td><td width="40%" align="right" valign="top"> 第3章 インストールシステム</td></tr></table></div></body></html>
