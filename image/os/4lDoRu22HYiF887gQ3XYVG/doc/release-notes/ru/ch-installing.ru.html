@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Глава 3. Система установки</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ru.html" title="Информация о выпуске Debian 8 (jessie) для архитектуры 64-bit PC" /><link rel="up" href="index.ru.html" title="Информация о выпуске Debian 8 (jessie) для архитектуры 64-bit PC" /><link rel="prev" href="ch-whats-new.ru.html" title="Глава 2. Что нового в Debian 8" /><link rel="next" href="ch-upgrading.ru.html" title="Глава 4. Обновление с Debian 7 (wheezy)" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Глава 3. Система установки</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-whats-new.ru.html"><img src="images/prev.png" alt="Пред." /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-upgrading.ru.html"><img src="images/next.png" alt="След." /></a></td></tr></table><hr /></div><div xml:lang="ru" class="chapter" lang="ru"><div class="titlepage"><div><div><h1 class="title"><a id="ch-installing"></a>Глава 3. Система установки</h1></div></div></div><div class="toc"><p><strong>Содержание</strong></p><dl class="toc"><dt><span class="section"><a href="ch-installing.ru.html#inst-new">3.1. Что нового в системе установки?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-installing.ru.html#inst-changes">3.1.1. Основные изменения</a></span></dt><dt><span class="section"><a href="ch-installing.ru.html#inst-auto">3.1.2. Автоматизированная установка</a></span></dt></dl></dd></dl></div><p>
+Debian Installer (программа установки) является официальной системой
+установки Debian. Она предлагает широкий выбор методов установки. Список
+доступных методов зависит от архитектуры компьютера.
+</p><p>
+Образы программы установки для jessie и руководство по установке
+можно найти на <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/" target="_top">веб-сайте Debian</a>.
+</p><p>
+Руководство по установке также включено на первый CD/DVD из официального
+набора Debian CD/DVD. Его можно найти в:
+</p><pre class="screen">
+/doc/install/manual/<em class="replaceable"><code>ru</code></em>/index.html
+</pre><p>
+Также следует ознакомиться со списком <a class="ulink" href="https://www.debian.org/releases/jessie/debian-installer/index#errata" target="_top">известных ошибок</a> программы
+установки.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="inst-new"></a>3.1. Что нового в системе установки?</h2></div></div></div><p>
+Всё время с последнего официального выпуска Debian 7 велась
+активная разработка программы установки Debian. В результате улучшилась
+работа с аппаратным обеспечением и были добавлены новые захватывающие
+возможности.
+</p><p>
+В информации о выпуске мы опишем только основные изменения в программе
+установки. Если вы хотите узнать что именно изменилось по сравнению с
+wheezy, обратитесь к анонсам выпуска jessie beta и RC,
+доступным из <a class="ulink" href="https://www.debian.org/devel/debian-installer/News/" target="_top">старых новостей</a> о
+программе установки Debian.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-changes"></a>3.1.1. Основные изменения</h3></div></div></div><div class="variablelist"><dl class="variablelist"><dt><span class="term">
+</span></dt><dd><p>
+
+
+</p></dd><dt><span class="term">Удалённые переносы</span></dt><dd><p>
+Поддержка архитектур 'ia64' и 'sparc' была удалена из программы установки,
+поскольку эти архитектуры были удалены из архива.
+</p></dd><dt><span class="term">Новые переносы</span></dt><dd><p>
+В программу установки была добавлена поддержка архитектур 'arm64' и
+'ppc64el'.
+</p></dd><dt><span class="term">Новая система инициализации</span></dt><dd><p>
+Система установки теперь устанавливает systemd в качестве системы
+инициализации по умолчанию.
+</p></dd><dt><span class="term">Выбор окружения рабочего стола</span></dt><dd><p>
+Окружение рабочего стола может быть выбрано в tasksel во время
+установки. Заметьте, что одновременно можно выбрать несколько окружений
+рабочего стола, но окружения не могут быть установлены вместе.</p></dd><dt><span class="term">Замена "--" на "---" в параметрах загрузки</span></dt><dd><p>
+В связи с изменением на стороне ядра Linux, теперь для отделения параметров
+ядра от параметров пользовательского пространства вместо разделителя "--"
+используется "---".
+</p></dd><dt><span class="term">Новые языки интерфейса</span></dt><dd><p>
+Благодаря огромным усилиям переводчиков, теперь Debian может быть
+установлен на 75 языках (включая английский). Это на один язык больше, чем в
+wheezy. Большинство языков доступны как в текстовом интерфейсе
+установки, так и в графическом интерфейсе, однако некоторые доступны только
+в графическом интерфейсе. 
+</p><p>
+Языки добавленные в этом выпуске:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Таджикский язык был добавлен в графический и текстовый интерфейсы установки.
+</p></li></ul></div><p>
+Языки, которые можно выбрать только в графическом интерфейсе программы
+установки, так как их наборы символов нельзя отобразить в не графическом
+окружении: амхарский, бенгальский, дзонг-кэ, гуджарати, хинди, грузинский,
+каннада, кхмерский, малаялам, маратхи, непальский, пунджаби, тамильский,
+телугу, тибетский и уйгурский.
+</p></dd><dt><span class="term">Загрузка UEFI</span></dt><dd><p>
+      Программа установки Jessie включает улучшенную поддержку микропрограмм UEFI,
+а также поддерживает установку на 32-битные микропрограммы UEFI 64-битных
+ядер.
+    </p><p>
+      Заметим, что UEFI Secure Boot не поддерживается.
+    </p></dd></dl></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inst-auto"></a>3.1.2. Автоматизированная установка</h3></div></div></div><p>
+Множество изменений, упомянутых в предыдущем разделе, также затронули и
+автоматизированную установку с помощью файла ответов. Это означает, что если
+у вас уже есть файлы ответов, которые работали с программой установки
+wheezy, не ждите, что они будут работать с новой программой
+установки без изменений.
+</p><p>
+В <a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">руководстве по установке</a> теперь
+есть отдельное приложение, в котором подробно описывается использование
+автоматизированной настройки.
+</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-whats-new.ru.html"><img src="images/prev.png" alt="Пред." /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-upgrading.ru.html"><img src="images/next.png" alt="След." /></a></td></tr><tr><td width="40%" align="left" valign="top">Глава 2. Что нового в Debian 8 </td><td width="20%" align="center"><a accesskey="h" href="index.ru.html"><img src="images/home.png" alt="Начало" /></a></td><td width="40%" align="right" valign="top"> Глава 4. Обновление с Debian 7 (wheezy)</td></tr></table></div></body></html>

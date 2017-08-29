@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>第1章 はじめに</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="up" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="prev" href="index.ja.html" title="Debian 8 (jessie) リリースノート (64 ビット PC 用)" /><link rel="next" href="ch-whats-new.ja.html" title="第2章 Debian 8 の最新情報" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">第1章 はじめに</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-whats-new.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr></table><hr /></div><div xml:lang="ja" class="chapter" lang="ja"><div class="titlepage"><div><div><h1 class="title"><a id="ch-about"></a>第1章 はじめに</h1></div></div></div><div class="toc"><p><strong>目次</strong></p><dl class="toc"><dt><span class="section"><a href="ch-about.ja.html#bug-reports">1.1. この文書に関するバグを報告する</a></span></dt><dt><span class="section"><a href="ch-about.ja.html#upgrade-reports">1.2. アップグレードについての報告をする</a></span></dt><dt><span class="section"><a href="ch-about.ja.html#sources">1.3. この文書のソース</a></span></dt></dl></div><p>
+    この文書は Debian ディストリビューションのユーザに、バージョン 8 (コードネーム jessie)
+での大きな変更点を知らせるものです。
+  </p><p>
+    このリリースノートでは、リリース 7 (コードネーム wheezy)
+から今回のリリースへの安全なアップグレード方法や、その際ユーザが遭遇する可能性がある既知の問題点についての情報をユーザに提供しています。
+  </p><p>
+    この文書の最新版は、<a class="ulink" href="https://www.debian.org/releases/jessie/releasenotes" target="_top">https://www.debian.org/releases/jessie/releasenotes</a>
+から取得できます。疑わしい場合は、最初のページにある文書の日付をチェックし、最新版を読んでいるかを確認してください。
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[注意]" src="images/caution.png" /></td><th align="left">注意</th></tr><tr><td align="left" valign="top"><p>
+      既知の問題点をすべてリストアップすることは不可能なので、問題点の予想される広がり具合と影響の大きさの両方に基づいて取捨選択していることに注意してください。
+    </p></td></tr></table></div><p>
+Debian の 1 つ前のリリースからのアップグレード (この場合、wheezy からのアップグレード)
+のみがサポート・記述されていることに注意してください。さらに古いリリースからのアップグレードが必要な場合は、過去のリリースノートを読み、まず
+wheezy へとアップグレードすることをお勧めします。
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="bug-reports"></a>1.1. この文書に関するバグを報告する</h2></div></div></div><p>
+私たちは、この文書で説明されているすべての異なるアップグレード手順を試し、また、ユーザが直面する可能性のある、すべての問題を予想しました。
+</p><p>
+それにもかかわらず、この文書にバグ (不正確な情報や抜け落ちている情報) を見つけたと思う場合には、<code class="systemitem">release-notes</code><a id="idp64791296" class="indexterm"></a> パッケージに対するバグ報告として、<a class="ulink" href="https://bugs.debian.org/" target="_top">バグ追跡システム</a>に提出してください。あなたが発見した問題が既に報告されている場合に備え、まずは<a class="ulink" href="https://bugs.debian.org/release-notes" target="_top">既存のバグ報告</a>を確認してみると良いでしょう。もしこの文書にさらに内容を付加できるのであれば、どうぞ遠慮なく既存のバグ報告へ情報を追加して下さい.
+</p><p>
+私たちは、この文書のソースへのパッチを含めた報告を歓迎・推奨します。このドキュメントのソースの取得方法の記述については <a class="xref" href="ch-about.ja.html#sources" title="1.3. この文書のソース">「この文書のソース」</a> で、より詳細な情報を見つけることができるでしょう。
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-reports"></a>1.2. アップグレードについての報告をする</h2></div></div></div><p>
+wheezy から jessie
+へのアップグレードに関連するユーザからの情報はどんなものでも歓迎します。情報を共有するのを厭わない場合は、<code class="systemitem">upgrade-reports</code><a id="idp64797040" class="indexterm"></a>
+パッケージに対するバグ報告として、アップグレードの結果を含めて<a class="ulink" href="https://bugs.debian.org/" target="_top">バグ追跡システム</a>に提出してください。報告に添付ファイルを含める場合は、(<span class="command"><strong>gzip</strong></span>
+を使用して) 圧縮するようお願いします。
+</p><p>
+アップグレードについての報告を提出する際には、以下の情報を含めてください。
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+
+アップグレード前後のパッケージデータベースの状態。<code class="filename">/var/lib/dpkg/status</code> にある
+<code class="systemitem">dpkg</code><a id="idp64801888" class="indexterm"></a>
+の状態データベースと、<code class="filename">/var/lib/apt/extended_states</code> にある <code class="systemitem">apt</code><a id="idp64803680" class="indexterm"></a> のパッケージ状態情報です。<a class="xref" href="ch-upgrading.ja.html#data-backup" title="4.1.1. あらゆるデータや設定情報をバックアップする">「あらゆるデータや設定情報をバックアップする」</a>
+で説明するように、アップグレードを実行する前にバックアップをとっておくべきですが、<code class="filename">/var/lib/dpkg/status</code>
+のバックアップは <code class="filename">/var/backups</code> にもあります。
+</p></li><li class="listitem"><p>
+<span class="command"><strong>script</strong></span> を使用して作成したセッションのログ。<a class="xref" href="ch-upgrading.ja.html#record-session" title="4.4.1. セッションの記録">「セッションの記録」</a>
+で説明します。
+</p></li><li class="listitem"><p>
+<code class="filename">/var/log/apt/term.log</code> にある <code class="systemitem">apt</code><a id="idp64810112" class="indexterm"></a> のログか、<code class="filename">/var/log/aptitude</code>
+にある <span class="command"><strong>aptitude</strong></span> のログ。
+</p></li></ul></div><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[注記]" src="images/note.png" /></td><th align="left">注記</th></tr><tr><td align="left" valign="top"><p>
+    バグ報告に情報を含める前に、慎重に扱うべき情報や機密情報がログに含まれていないかある程度時間をかけて検査し、ログから削除してください。なぜなら、バグ報告に含まれる情報は公開データベースで公表されるからです。
+  </p></td></tr></table></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="sources"></a>1.3. この文書のソース</h2></div></div></div><p>
+    この文書のソースは DocBook XML<a id="idp64730608" class="indexterm"></a>
+形式です。HTML 版は、<code class="systemitem">docbook-xsl</code><a id="idp64732176" class="indexterm"></a> と
+<code class="systemitem">xsltproc</code><a id="idp64733680" class="indexterm"></a> を使用して生成しています。PDF
+版は、<code class="systemitem">dblatex</code><a id="idp64735312" class="indexterm"></a> や <code class="systemitem">xmlroff</code><a id="idp64736816" class="indexterm"></a> を使用して生成しています。リリースノートのソースは
+<span class="emphasis"><em>Debian ドキュメンテーションプロジェクト (Debian Documentation Project)</em></span>
+の SVN リポジトリにあります。ウェブから<a class="ulink" href="https://anonscm.debian.org/viewvc/ddp/manuals/trunk/release-notes/" target="_top">ウェブインターフェース</a>を使って個々のファイルにアクセスでき、変更を参照できます。SVN
+へのアクセス方法に関してさらに詳しく知りたい場合は、<a class="ulink" href="https://www.debian.org/doc/cvs" target="_top">Debian
+ドキュメンテーションプロジェクトの SVN 情報ページ</a>を参照してください。
+  </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.ja.html"><img src="images/prev.png" alt="戻る" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-whats-new.ja.html"><img src="images/next.png" alt="次へ" /></a></td></tr><tr><td width="40%" align="left" valign="top">Debian 8 (jessie) リリースノート (<span class="phrase">64 ビット PC</span> 用) </td><td width="20%" align="center"><a accesskey="h" href="index.ja.html"><img src="images/home.png" alt="ホーム" /></a></td><td width="40%" align="right" valign="top"> 第2章 Debian 8 の最新情報</td></tr></table></div></body></html>
