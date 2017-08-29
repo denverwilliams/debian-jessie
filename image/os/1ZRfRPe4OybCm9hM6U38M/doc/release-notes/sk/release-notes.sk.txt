@@ -1,0 +1,3113 @@
+
+           Poznámky k vydaniu Debian 8 (jessie), 64-bit PC
+
+
+---------------------------------------------------------------------
+
+Dokumentačný projekt Debianu (http://www.debian.org/doc/)
+
+    Tento dokument je slobodný softvér; môžete ho šíriť a/alebo meniť
+    za podmienok licencie GNU General Public License verzie 2 ako ju
+    publikovala Free Software Foundation.
+
+    Tento program je šírený vo viere, že bude užitočný, ale BEZ
+    AKEJKOĽVEK ZÁRUKY; dokonca aj bez implicitnej záruky
+    OBCHODOVATEĽNOSTI či VHODNOSTI NA URČITÝ ÚČEL. Podrobnosti
+    nájdete v GNU General Public License.
+
+    Spolu s týmto programom by ste mali dostať kópiu GNU General
+    Public License; ak nie, napíšte na adresu Free Software
+    Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+    02110-1301 USA.
+
+    Text licencie tiež môžete nájsť na http://www.gnu.org/licenses/
+    gpl-2.0.html (http://www.gnu.org/licenses/gpl-2.0.html) a v
+    súbore /usr/share/common-licenses/GPL-2 v Debiane.
+
+---------------------------------------------------------------------
+
+Obsah
+
+1. Úvod
+
+    1.1. Ako oznamovať chyby v tomto dokumente
+    1.2. Ako posielať správy o aktualizácii
+    1.3. Zdroje tohto dokumentu
+
+2. Čo je nové v Debian 8
+
+    2.1. Podporované architektúry
+    2.2. Čo je nové v distribúcii?
+
+        2.2.1. Disky CD, DVD a BD
+        2.2.2. Zmeny v pracovnom prostredí GNOME
+        2.2.3. Nový predvolený init systém (systemd)
+        2.2.4. Bezpečnosť
+        2.2.5. MariaDB vedľa MySQL
+        2.2.6. Aplikácie PHP
+        2.2.7. Debian Games Blend
+        2.2.8. Novinky od Debian Med Blend
+        2.2.9. Novinky od Debian Science Blend
+        2.2.10. Novinky od Debian Geographical Information Systems
+            (GIS) Blend
+        2.2.11. Novinky od Java tímu Debianu
+
+3. Inštalačný systém
+
+    3.1. Čo je nové v inštalačnom systéme?
+
+        3.1.1. Hlavné zmeny
+        3.1.2. Automatizovaná inštalácia
+
+4. Aktualizácie z Debian 7 (wheezy)
+
+    4.1. Príprava na aktualizáciu
+
+        4.1.1. Zálohujte všetky dáta a konfiguračné údaje
+        4.1.2. Vopred informujte používateľov
+        4.1.3. Pripravte sa na odstávku služieb
+        4.1.4. Pripravte sa na obnovu
+        4.1.5. Pripravte bezpečné prostredie na aktualizáciu
+
+    4.2. Kontrola stavu systému
+
+        4.2.1. Skontrolujte operácie čakajúce na vykonanie v
+            správcovi balíkov
+        4.2.2. Vypnite pripevňovanie balíkov APT (APT pinning)
+        4.2.3. Skontrolujte stav balíkov
+        4.2.4. Sekcia proposed-updates
+        4.2.5. Neoficiálne zdroje
+
+    4.3. Príprava zdrojov APT
+
+        4.3.1. Pridávanie internetových zdrojov APT
+        4.3.2. Pridanie zdrojov APT lokálneho zrkadla
+        4.3.3. Pridanie zdrojov APT z optických médií
+
+    4.4. Aktualizácia balíkov
+
+        4.4.1. Nahranie relácie príkazového riadka
+        4.4.2. Aktualizácia zoznamu balíkov
+        4.4.3. Uistite sa, že na aktualizáciu máte dosť miesta na
+            disku
+        4.4.4. Minimálna aktualizácia systému
+        4.4.5. Aktualizácia systému
+
+    4.5. Možné problémy počas aktualizácie
+
+        4.5.1. Dist-upgrade zlyhá s chybou „Nebolo možné vykonať
+            okamžitú konfiguráciu“
+        4.5.2. Očakávané odstránenia
+        4.5.3. Cykly Konfliktov alebo Predzávislostí
+        4.5.4. Konflikty súborov
+        4.5.5. Zmeny v konfigurácii
+        4.5.6. Zmena relácie na konzolu
+        4.5.7. Špeciálna starostlivosť o niektoré balíky
+
+    4.6. Aktualizácia jadra a súvisiacich balíkov
+
+        4.6.1. Inštalácia metabalíka jadra
+        4.6.2. Zmeny pripájania a kontroly koreňového súborového
+            systému a /usr
+
+    4.7. Čo urobiť pred reštartom sytému
+    4.8. Príprava na ďalšie vydanie
+
+        4.8.1. Vyčistenie (purge) odstránených balíkov
+
+    4.9. Zavrhované komponenty
+    4.10. Zastaralé balíky
+
+        4.10.1. Fiktívne balíky
+
+5. Problémy vyskytujúce sa v jessie
+
+    5.1. Obmedzenia bezpečnostnej podpory
+
+        5.1.1. Bezpečnostný status webových prehliadačov
+        5.1.2. Chýbajúca bezpečnostná podpora ekosystému okolo libv8
+            a Node.js
+        5.1.3. Predčasné ukončenie bezpečnostnej podpory MediaWiki
+
+    5.2. Server OpenSSH má štandardne nastavenú voľbu
+        „PermitRootLogin without-password“
+    5.3. Kompatibilita Puppet 2.7 / 3.7
+    5.4. Aktualizácia PHP 5.6 sa prejaví zmenami v správaní
+    5.5. Nekompatibilné zmeny v Apache HTTPD 2.4
+    5.6. Aktualizácia na Jessie nainštaluje nový predvolený init
+        systém
+
+        5.6.1. Prísnejší prístup k súborovým systémom, ktoré sa
+            nepodarilo pripojiť počas štartu pod systemd
+        5.6.2. Zastaralé init skripty by ste mali odstrániť (purge)
+        5.6.3. Locally modified init-scripts may need to be ported to
+            systemd
+        5.6.4. Výzvy počas zavádzania systému so systemd vyžadujú
+            Plymouth
+        5.6.5. Interakcia medzi logind a acpid
+        5.6.6. Nepodporované funkcie crypttab pod systemd (napríklad
+            „keyscript=...“)
+        5.6.7. systemd: issues SIGKILL too early [fixed in 8.1]
+        5.6.8. systemd: behavior of 'halt' command
+
+    5.7. Požadované konfiguračné voľby jadra pre Jessie
+    5.8. Aktualizácia hostiteľov a kontajnerov LXC
+
+        5.8.1. Aktualizácia hosťov LXC bežiacich na hostiteľoch
+            Wheezy
+        5.8.2. Aktualizácia hosťov LXC bežiacich na hostiteľoch
+            Jessie
+        5.8.3. Ďalšie informácie
+
+    5.9. Manual migration of disks encrypted with LUKS whirlpool
+        (non-standard setups)
+    5.10. Pracovné prostredie GNOME vyžaduje základnú 3D grafiku
+    5.11. Pracovné prostredie GNOME nefunguje s proprietárnym
+        ovládačom FGLRX od AMD
+    5.12. Zmeny predvolených klávesových skratiek v GNOME
+    5.13. Changes to default shell of system users provided by
+        base-passwd
+    5.14. Migration to new KDE E-mail, Calendar, and Contacts
+        (Kontact)
+    5.15. Missing virtual consoles ("getty"s) with multiple desktop
+        environments
+    5.16. "VGA signal out of range" / blank screen during boot with
+        grub-pc
+    5.17. Stricter validation of cron files in crontab
+    5.18. Change in handling of unreadable module paths by perl
+    5.19. Upgrade considerations for Ganeti clusters
+
+        5.19.1. Problem upgrading Ganeti clusters with DRBD-backed
+            instances [fixed in 8.1]
+        5.19.2. General notes on upgrading Ganeti clusters
+
+    5.20. New requirements for file execution in Samba4
+    5.21. Cryptsetup can break boot with BUSYBOX=n
+    5.22. Backwards incompatible changes in the Squid webproxy
+
+6. Ďalšie informácie o Debiane
+
+    6.1. Ďalšie čítanie
+    6.2. Ako získať pomoc
+
+        6.2.1. Konferencie
+        6.2.2. Internet Relay Chat
+
+    6.3. Oznamovanie chýb
+    6.4. Ako prispievať do Debianu
+
+A. Ako spravovať váš systém wheezy pred aktualizáciou
+
+    A.1. Ako aktualizovať váš systém wheezy
+    A.2. Ako skontrolovať váš zoznam zdrojov
+    A.3. Odstránenie zastaralých konfiguračných súborov
+    A.4. Aktualizácia starých locales na UTF-8
+
+B. Prispievatelia do Poznámok k vydaniu
+Zoznam
+Slovník
+
+Kapitola 1. Úvod
+
+    Tento dokument informuje používateľov distribúcie Debian o
+    hlavných zmenách vo verzii 8 (kódové označenie „jessie“).
+
+    Poznámky k vydaniu poskytujú informácie o tom ako bezpečne
+    aktualizovať systém z predošlého vydania 7 (kódové označenie
+    wheezy) na aktuálne vydanie a informujú používateľov o známych
+    potenciálnych problémoch, s ktorými by sa mohli stretnúť počas
+    aktualizácie.
+
+    Najnovšia verzia tohto dokumentu je vždy dostupná na https://
+    www.debian.org/releases/jessie/releasenotes (https://
+    www.debian.org/releases/jessie/releasenotes) . Ak si nie ste istý
+    či čítate aktuálnu verziu, skontrolujte dátum na prvej stránke a
+    uistite sa, že čítate aktuálnu verziu.
+
+    Výstraha
+
+    Majte na pamäti, že nie je možné uviesť každý známy problém a
+    preto boli tu uvedené problémy vybrané na základe očakávanej
+    frekvencie výskytu a závažnosti.
+
+    Prosím, majte na pamäti, že aktualizácia je podporovaná a
+    zdokumentovaná iba z predošlého vydania Debianu (v tomto prípade
+    z vydania wheezy). Ak potrebujete vykonať aktualizáciu zo
+    staršieho vydania, mali by ste si prečítať Poznámky k vydaniu
+    predošlého vydania a najprv aktualizovať na wheezy.
+
+1.1. Ako oznamovať chyby v tomto dokumente
+
+    Pokúsili sme sa otestovať všetky rozličné kroky aktualizácie
+    popísané v tomto dokumente a tiež sme sa pokúsili predvídať
+    všetky možné problémy, s ktorými sa naši používatelia môžu
+    stretnúť.
+
+    Ak si napriek tomu myslíte, že ste našli akúkoľvek chybu
+    (nesprávne alebo chýbajúce informácie) v tejto dokumentácii,
+    prosím oznámte chybu do systému sledovania chýb (https://
+    bugs.debian.org/) voči balíku release-notes. Najskôr si však
+    pozrite existujúce hlásenia o chybách (https://bugs.debian.org/
+    release-notes) , pre prípad, že je chyba, ktorú oznamujete, už
+    nahlásená. Pokojne pridajte ďalšie informácie k existujúcim
+    hláseniam chýb ak si myslíte, že môžete poskytnúť obsah do tohto
+    dokumentu.
+
+    Oceňujeme a posmeľujeme zadávanie hlásení so záplatami zdrojových
+    súbrov tohto dokumentu. Ďalšie informácie o tom ako získať
+    zdrojové súbory tohto dokumentu popisuje Oddiel 1.3, “Zdroje
+    tohto dokumentu”.
+
+1.2. Ako posielať správy o aktualizácii
+
+    Vítané sú všetky informácie od používateľov, ktoré sa týkajú
+    aktualizácie z wheezy na jessie. Ak ste ochotný podeliť sa o
+    tieto informácie, nahláste prosím chybu s vašimi výsledkami do
+    systému sledovania chýb (https://bugs.debian.org/) voči balíku
+    upgrade-reports. Žiadame, aby ste všetky prípadné prílohy
+    skomprimovali (pomocou gzip).
+
+    Prosím, uveďte pri posielaní správ o aktualizácii nasledovné
+    údaje:
+
+      * Stav vašej databázy balíkov pred a po aktualizácii: stavová
+        databáza dpkg je dostupná v /var/lib/dpkg/status a stavová
+        databáza apt je dostupná v /var/lib/apt/extended_states. Pred
+        aktualizáciou by ste mali vykonať zálohovanie ako popisuje
+        Oddiel 4.1.1, “Zálohujte všetky dáta a konfiguračné údaje”,
+        ale zálohy /var/lib/dpkg/status môžete tiež nájsť vo /var/
+        backups.
+
+      * Záznamy relácie pomocou príkazu script popisuje Oddiel 4.4.1,
+        “Nahranie relácie príkazového riadka” .
+
+      * Vaše záznamy apt dostupné v /var/log/apt/term.log alebo vaše
+        záznamy aptitude dostupné v /var/log/aptitude.
+
+    Poznámka
+
+    Pozn.: Mali by ste venovať nejaký čas tomu, aby ste
+    skontrolovali, či spolu so záznamami neodosielate akékoľvek
+    citlivé alebo dôverné informácie a odstrániť ich zo správy,
+    pretože tieto informácie budú verejne prístupné.
+
+1.3. Zdroje tohto dokumentu
+
+    Tento dokument je vo formáte DocBook XML. HTML verzia sa generuje
+    pomocou docbook-xsl a xsltproc. PDF verzia sa generuje pomocou
+    dblatex alebo xmlroff. Zdrojové súbory Poznámok k vydaniu sú
+    dostupné v SVN úložisku Dokumentačného Projektu Debian. Na
+    prístup k jednotlivým súborom a prezeranie ich zmien môžete
+    použiť webové rozhranie (https://anonscm.debian.org/viewvc/ddp/
+    manuals/trunk/release-notes/) . Ďalšie informácie o prístupe k
+    SVN nájdete na stránkach o SVN Dokumentačného Projektu Debian
+    (https://www.debian.org/doc/cvs) .
+
+Kapitola 2. Čo je nové v Debian 8
+
+    Wiki (https://wiki.debian.org/NewInJessie) obsahuje ďalšie
+    informácie na túto tému.
+
+2.1. Podporované architektúry
+
+    Debianu 8 predstavuje dve nové architektúry:
+
+      * arm64, 64-bitový port pre počítače ARM.
+   
+      * ppc64el, 64-bitový little-endian port pre počítače POWER.
+
+    Debian jessie oficiálne podporuje nasledovné architektúry:
+
+      * 32-bitové PC („i386“) a 64-bitové PC („amd64“)
+
+      * 64-bitový ARM („arm64“)
+
+      * ARM EABI („armel“)
+
+      * ARMv7 (EABI hard-float ABI, „armhf“)
+   
+      * MIPS („mips“ (big-endian) a „mipsel“ (little-endian))
+
+      * PowerPC („powerpc“)
+
+      * 64-bitový little-endian PowerPC („ppc64el“)
+
+      * IBM System z („s390x“)
+
+    Tri architektúry, ktoré boli súčasťou systému Debian 7 neboli
+    vydané v jessie.
+
+      * Ako bolo oznámené počas vydania Debianu 7, 32-bitový port
+        s390 je ukončený a nahradil ho s390x.
+
+      * Okrem toho porty IA-64 a Sparc museli byť odstránené z tohto
+        vydania z dôvodu nedostatočnej podpory od vývojárov. Sparc
+        bola podporovaná architektúra v Debiane od 2.1 (1999), zatiaľ
+        čo ia64 bola predstavená v Debian 3.0 (2002).
+
+   
+
+    Finally, the Debian ports to the FreeBSD kernel, kfreebsd-amd64
+    and kfreebsd-i386, included as technology previews in Debian 6.0
+    and Debian 7, are not part of this release.
+
+    Ďalšie informácie o stave portov a informácie špecifické pre vašu
+    architektúru sa dočítate na stránkach portov Debianu (https://
+    www.debian.org/ports/) .
+
+2.2. Čo je nové v distribúcii?
+
+    Toto nové vydanie Debianu opäť prináša omnoho viac softvéru ako
+    jeho predchodca wheezy; distribúcia obsahuje viac ako 12253
+    nových balíkov, čo je celkovo viac ako 43512 balíkov. Väčšina
+    softvéru v distribúcii bola aktualizovaná: viac ako 24573
+    softvérových balíkov (to predstavuje 66 % všetkých balíkov v
+    wheezy). Rovnako bolo z rôznych dôvodov z distribúcie odstránené
+    významné množstvo balíkov (viac ako 5441, 14 % balíkov v wheezy).
+    Neuvidíte žiadne aktualizácie týchto balíkov a v systémoch na
+    správu balíkov budú označené ako „zastaralé“; pozri Oddiel 4.10,
+    “Zastaralé balíky”.
+
+    Debian sa znova dodáva s niekoľkými pracovnými prostrediami a
+    aplikáciami. Okrem iných teraz obsahuje pracovné prostredia GNOME
+    3.14, KDE 4.11, Xfce 4.10 a LXDE.
+
+    Kancelárske aplikácie tiež boli aktualizované, vrátane
+    kancelárskych balíkov:
+
+      * LibreOffice je aktualizovaný na 4.3;
+
+      * Calligra je aktualizovaná na 2.8.
+
+      * GNUcash je aktualizovaný na 2.6;
+
+      * GNUmeric je aktualizovaný na 1.12;
+
+      * Abiword je aktualizovaný na 3.0.
+
+    Medzi ďalšie aktualizované kancelárske aplikácie patrí Evolution
+    3.12.
+
+    Okrem množstva ďalších obsahuje toto vydanie aj nasledovné
+    aktualizácie softvéru:
+
+    +---------------------------------------------------------------+
+    |               Balík               | Verzia v 7  | Verzia v 8  |
+    |                                   |  (wheezy)   |  (jessie)   |
+    |-----------------------------------+-------------+-------------|
+    |Apache                             |2.2.22       |2.4.10       |
+    |-----------------------------------+-------------+-------------|
+    |DNS server BIND                    |9.8          |9.9          |
+    |-----------------------------------+-------------+-------------|
+    |MTA Courier                        |0.68         |0.73         |
+    |-----------------------------------+-------------+-------------|
+    |Dia                                |0.97.2       |0.97.3       |
+    |-----------------------------------+-------------+-------------|
+    |Predvolený emailový server Exim    |4.80         |4.84         |
+    |-----------------------------------+-------------+-------------|
+    |GNU Compiler Collection ako        |4.7 na PC,   |4.9          |
+    |štandardný kompilátor              |4.6 inde     |             |
+    |-----------------------------------+-------------+-------------|
+    |knižnica GNU C                     |2.13         |2.19         |
+    |-----------------------------------+-------------+-------------|
+    |lighttpd                           |1.4.31       |1.4.35       |
+    |-----------------------------------+-------------+-------------|
+    |Obraz linuxového jadra             |séria 3.2    |séria 3.16   |
+    |-----------------------------------+-------------+-------------|
+    |OpenLDAP                           |2.4.31       |2.4.40       |
+    |-----------------------------------+-------------+-------------|
+    |OpenSSH                            |6.0p1        |6.7p1        |
+    |-----------------------------------+-------------+-------------|
+    |Perl                               |5.14         |5.20         |
+    |-----------------------------------+-------------+-------------|
+    |PHP                                |5.4          |5.6          |
+    |-----------------------------------+-------------+-------------|
+    |MTA Postfix                        |2.9          |2.11         |
+    |-----------------------------------+-------------+-------------|
+    |PostgreSQL                         |9.1          |9.4          |
+    |-----------------------------------+-------------+-------------|
+    |Python 3                           |3.2          |3.4          |
+    |-----------------------------------+-------------+-------------|
+    |Samba                              |3.6          |4.1          |
+    +---------------------------------------------------------------+
+
+2.2.1. Disky CD, DVD a BD
+
+    Oficálna distribúcia Debian sa teraz dodáva na 8 až 9 binárnych 
+    DVD alebo 75 až 85 binárnych CD (v závislosti od architektúry) a
+    10 zdrojových DVD alebo 59 zdrojových CD. Naviac je k dispozícii 
+    multi-arch DVD s podmnožinou vydania pre architektúry amd64 a
+    i386 so zdrojovým kódom. Debian je tiež vydaný na obrazoch
+    Blu-ray , po 2 pre architektúry amd64 a i386 alebo jedno so
+    zdrojovým kódom. Z dôvodov veľkosti boli zo zostavení na CD
+    vynechané niektoré veľmi veľké balíky; tieto balíky sa viac hodia
+    na zostavenia DVD a BD, takže tie ich stále obsahujú.
+
+2.2.2. Zmeny v pracovnom prostredí GNOME
+
+    Nové pracovné prostredie GNOME vo verzii 3.14 prináša mnoho
+    nových funkcií a vylepšení použiteľnosti.
+
+    Dizajn GNOME shell bol aktualizovaný. Oznamovacia oblasť dolu je
+    väčšia, jednoduchšie sa používa a má menšiu tendenciu objaviť sa
+    omylom. Nový systém stavovej oblasti v pravom hornom rohu dáva
+    prístup k všetkým užitočným nastaveniam z jedného miesta.
+
+    Šetrič obrazovky bol nahradený „Zamykacou obrazovkou“, ktorá
+    poskytuje zopár funkcií, aj keď je používateľ preč. Napríklad
+    môžete pozastaviť hudbu, zmeniť jas obrazovky a dostávate
+    informácie o nových emailoch - to všetko bez zadania hesla.
+    Stlačením klávesu ESC alebo tým, že začnete písať heslo, opäť
+    vyvoláte prihlasovaciu obrazovku. Správca obrazovky GNOME používa
+    presne rovnaký dizajn z dôvodu zachovania konzistentnosti.
+
+    Dizajn niekoľkých aplikácií, medzi ktoré patrí správca súborov
+    Nautilus, textový editor gedit a prehliadač dokumentov evince, je
+    teraz oveľa kompaktnejší, pričom bolo zlúčené záhlavie okna s
+    panelmi nástrojov. To ponecháva viac miesta pre dokumenty, s
+    ktorými používateľ pracuje. Štandardné dialógové okná prešli
+    podobnými zmenami.
+
+    Podpora dotykových obrazoviek bola plne integrovaná, vrátane
+    intuitívnych gest na základe pohybu viacerých prstov. GNOME teraz
+    podporuje aj obrazovky s vysokým rozlíšením (HiDPI) a dosahuje
+    najčistejšieho vykresľovania plným využitím drobných pixelov.
+
+    GNOME podporuje geolokalizáciu a obsahuje aplikáciu máp a
+    navigácie.
+
+    Používateľská dokumentácia je omnoho úplnejšia a obsahuje
+    videonávody pre nových používateľov.
+
+    Ďalšie informácie nájdete v Poznámkach k vydaniu GNOME 3.14
+    (https://help.gnome.org/misc/release-notes/3.14/) .
+
+2.2.3. Nový predvolený init systém (systemd)
+
+    systemd, pridaný v Debian 7, je teraz predvoleným init systémom.
+    Zabezpečuje pokročilé monitorovanie, protokolovanie a schopnosť
+    správy služieb.
+
+    Hoci je určený ako náhrada sysvinit a ako taký používa existujúce
+    SysV init skripty, balík systemd môžete bezpečne nainštalovať
+    popri sysvinit a spustiť pomocou voľby jadra init=/bin/systemd.
+    Balík systemd-sysv poskytuje náhradu /sbin/init.
+
+    Ďalšie informácie o tejto téme nájdete na Debian wiki (http://
+    wiki.debian.org/systemd) .
+
+2.2.4. Bezpečnosť
+
+    Zastaralý protokol SSLv3 bol v tejto verzii deaktivovaný. Mnohé
+    systémové kryptografické knižnice, ako aj servery a klientske
+    aplikácie boli zostavené alebo nakonfigurované bez podpory tohto
+    protokolu.
+
+    Linuxové jadro obsahuje bezpečnostný mechanizmus, ktorý zabraňuje
+    mnohým útokom prostredníctvom symbolických odkazov. V linuxovom
+    jadre Debianu je štandardne zapnutý. Chyby súvisiace s /tmp,
+    ktoré vďaka tomuto mechanizmu nie je možné zneužiť, sa nepovažujú
+    chyby zabezpečenia. Ak používate vlastné linuxové jadro, mali by
+    ste ho povoliť pomocou voľby sysctl:
+
+    echo 1 > /proc/sys/fs/protected_symlinks
+
+    V niektorých zriedkavých prípadoch je nutné ukončiť bezpečnostnú
+    podpora balíka dodávaného vo vydaní Debianu pred koncom podpora
+    celej distribúcie. Jessie poskytuje nový balík
+    (debian-security-support), ktorý v predstihu upozorní na
+    ukončenie podpory balíka. Tiež dokumentuje balíky s obmedzenou
+    bezpečnostnou podporou. Vo všeobecnosti sa odporúča nainštalovať
+    balík debian-security-support na všetky systémy, kde záleží na
+    bezpečnosti.
+
+    Pokračujúc v tom, s čím začal už Wheezy, ďalšie balíky boli
+    zostavené s prísnejšími príznakmi kompilátora. Príznak ochrany
+    zásobníka bol zmenený na silnejšiu ochranu príznakom
+    stack-protector-strong. Všimnite si, že prísnejšie príznaky nie
+    sú predvolené v gcc, preto sa pri lokálnom zostavovaní softvéru
+    nepoužijú automaticky.
+
+    Nový v tomto vydaní je balík needrestart. Aj je nainštalovaný,
+    vykoná kontrolu po každej aktualizácii pomocou APT. Ak niektoré
+    zo služieb bežiacich v systéme vyžadujú reštart, aby sa prejavili
+    zmeny v aktualizovaných balíkoch, needrestart ponúkne možnosť
+    reštartovania. Odporúča sa nainštalovať ho, aby ste sa sa
+    uistili, že bezpečnostné aktualizácie knižníc sa prejavia v
+    bežiacich službách.
+
+2.2.5. MariaDB vedľa MySQL
+
+    Spolu so starším MySQL 5.5, Jessie dodáva novú MariaDB 10.0.
+    Ďalšie informácie nájdete na wiki stránke tímu MySQL Debianu
+    (http://wiki.debian.org/Teams/MySQL) . Debian 9 bude
+    pravdepodobne obsahovať len jeden z nich.
+
+    Všimnite si, že podpora MySQL 5.5 od jeho vývojárov skončí v
+    decembri 2018 (a bezpečnostná podpora v Debiane sa tým bude
+    musieť riadiť), zatiaľ čo MariaDB 10.0 bude mať bezpečnostnú
+    podporu svojich vývojárov až do marca 2019.
+
+2.2.6. Aplikácie PHP
+
+    Horde Application Framework je k dispozícii v Jessie
+    prostredníctvom balíka php-horde.
+
+2.2.7. Debian Games Blend
+
+    Tím Hier Debianu s hrdosťou predstavuje Debianu Games Blend
+    (http://blends.debian.org/blends/) , ktorá sa skladá z 33
+    metabalíkov (https://tracker.debian.org/pkg/debian-games) , ktoré
+    zjednodušujú proces inštalácie hier v rámci kategórie. Okrem
+    mnohých iných je na výber zo stratégií, simulácií, kartových a
+    programovacích hier. Debian Games tiež ponúka vývojárom rýchly
+    spôsob ako si nainštalovať odporúčaný softvér na vývoj hier v
+    programovacích jazykoch C++, Java, Perl alebo Python 3. Tvorcovia
+    obsahu nájdu užitočné nástroje na tvorbu výtvarných prvkov hier v
+    balíku games-content-dev. Domovská stránka projektu obsahuje
+    snímky obrazovky a ďalšie informácie a ponúka celkový prehľad o
+    všetkých hrách vrátane najlepších hier Debianu (http://
+    blends.debian.org/games/tasks/finest) .
+
+2.2.8. Novinky od Debian Med Blend
+
+    Tím Debian Med opäť výrazne zvýšil nielen počet balíkov v oblasti
+    biológie a medicíny, ale aj ich kvalitu čo sa týka testovania
+    (čas zostavenia balíkov a tiež autopkgtest). Tieto vylepšenia v
+    metabalíkoch Debian Med Blend 2.0 reflektujú dopyt vedcov po
+    spoľahlivom softvéri, aby mohli poskytovať reprodukovateľné
+    výsledky. Na stránkach úloh Debian Med (http://blends.debian.org/
+    med/tasks) môžete vidieť celú škálu softvéru z oblasti biológie a
+    lekárskeho softvéru z Debianu.
+
+2.2.9. Novinky od Debian Science Blend
+
+    Vďaka neustálej práci tímu Debian Science boli pridané do archívu
+    balíkov Debianu nielen nové vedecké aplikácie, ale aj aplikácie
+    pokrývajúce nové oblasti vedy. Na stránkach úloh Debian Science
+    (http://blends.debian.org/science/tasks) si môžete pozrieť celú
+    škálu vedeckého softvéru v Debiane.
+
+2.2.10. Novinky od Debian Geographical Information Systems (GIS)
+Blend
+
+    Počas vývojového cyklu jessie sa späť do Debianu GIS dostali
+    mnohé zmeny z UbuntuGIS. Vylepšila sa spolupráca s projektami
+    UbuntuGIS a OSGeo-Live, čoho výsledkom sú nové balíky a
+    prispievatelia. Na stránkach úloh Debian GIS (http://
+    blends.debian.org/gis/tasks) uvidíte celú škálu rozsah GIS
+    softvéru v Debiane a ďalšie informácie na domovskej stránke
+    Debian GIS (https://wiki.debian.org/DebianGis) .
+
+2.2.11. Novinky od Java tímu Debianu
+
+    Jessie sa dodáva so 799 zdrojovými balíkmi (442 aktualizovaných,
+    +130 nových od Wheezy), ktoré bude udržiavať tím Java (https://
+    qa.debian.org/developer.php?login=
+    pkg-java-maintainers@lists.alioth.debian.org) . Významné zmeny:
+
+      * OpenJDK 7 je nové predvolený podporované dynamické prostredie
+        Java.
+
+      * OpenJDK 8 bude k dispozícii z jessie-backports.
+
+      * Tomcat 7 a Tomcat 8 sú podporované a Tomcat 6 bol odstránený.
+
+      * Nové vývojárske nástroje vrátane VisualVM, Dynamic Code
+        Evolution VM (openjdk-7-jre-dcevm), Gradle,
+        eclipse-wtp-webtools, closure-compiler a ďalšie.
+
+      * Prítomnosť androidsdk-tools (https://packages.debian.org/
+        source/jessie/androidsdk-tools)
+
+Kapitola 3. Inštalačný systém
+
+    Inštalátor Debianu (Debian Installer) je oficiálny inštalačný
+    systém Debianu. Ponúka rôzne spôsoby inštalácie. Metódy
+    inštalácie dostupné pre váš systém závisia na architektúre, ktorú
+    používate.
+
+    Obrazy inštalátora pre jessie nájdete spolu s Inštalačnou
+    príručkou na webe Debianu (https://www.debian.org/releases/jessie
+    /debian-installer/) .
+
+    Inštalačná príručka sa tiež nachádza na prvom CD/DVD oficiálnej
+    sady CD/DVD Debianu na adrese:
+
+    /doc/install/manual/jazyk/index.html
+
+    Tiež si môžete pozrieť zoznam známych problémov s
+    debian-installer - errata (https://www.debian.org/releases/jessie
+    /debian-installer/index#errata) .
+
+3.1. Čo je nové v inštalačnom systéme?
+
+    Inštalátor Debianu prešiel množstvom vývoja od svojho prvého
+    oficiálneho vydania v Debian 7, čo prinieslo zlepšenú podporu
+    hardvéru aj niektoré vzrušujúce nové vlastnosti.
+
+    V týchto Poznámkach k vydaniu uvedieme iba hlavné zmeny
+    inštalátora. Ak vás zaujíma podrobný prehľad zmien od wheezy,
+    pozrite si prosím oznámenia o vydaní jessie beta a RC dostupné z
+    histórie noviniek (https://www.debian.org/devel/debian-installer/
+    News/) Inštalátora Debianu.
+
+3.1.1. Hlavné zmeny
+
+    Odstránené porty
+
+        Podpora architektúr „ia64“ a „sparc“ bola odstránená z
+        inštalátora, pretože boli odstránené z archívu.
+
+    Nové porty
+
+        Do inštalátora bola pridaná podpora architektúr „arm64“ a
+        „ppc64el“.
+
+    Nový predvolený init systém
+
+        Inštalačný systém teraz nainštaluje systemd ako predvolený
+        init systém:
+
+    Výber pracovného prostredia
+
+        Pracovné prostredie je teraz možné zvoliť pomocou tasksel
+        počas inštalácie. Všimnite si, že síce je možné zvoliť
+        niekoľko pracovných prostredí naraz, ale niektoré kombinácie
+        pracovných prostredí nemožno nainštalovať naraz.
+
+    Nahradenie „--“ v parametroch zavádzača systému za „---“
+
+        Kvôli zmene na strane linuxového jadra sa teraz na oddelenie
+        parametrov jadra od parametrov používateľského priestoru
+        teraz používa oddeľovač „---“ namiesto historického „--“.
+   
+    Nové jazyky
+
+        Vďaka obrovskej snahe prekladateľov je možné Debian
+        nainštalovať v 75 jazykoch vrátane slovenčiny. To je ešte
+        viac jazykov ako v wheezy. Väčšina jazykov je dostupná ako v
+        textovom inštalátore, tak aj v jeho grafickom rozhraní, ale
+        niektoré sú dostupné iba v grafickom rozhraní.
+
+        Jazyky pridané v tomto vydaní:
+
+          + Tadžičtina boli pridané do grafického a textového
+            inštalátora.
+
+        Jazyky, ktoré je možné vybrať iba pomocou grafického
+        inštalátora, pretože ich znakové sady nie je možné vykresliť
+        v negrafickom prostredí, sú: amharčina, bengálčina, dzongkä,
+        gudžarátčina, hindčina, gruzínčina, kannadčina, khmérčina,
+        malajálamčina, maráthčina, nepálčina, pandžábčina, tamilčina,
+        telugčina, tibetčina a ujgurčina.
+
+    Zavádzanie prostredníctvom UEFI
+
+        Inštalátor Jessie vylepšuje podporu množstva firmvéru UEFI a
+        tiež podporuje inštaláciu 32-bitového firmvéru UEFI s
+        64-bitovým jadrom.
+
+        Prosím, pamätajte, že toto nezahŕňa podporu UEFI Secure Boot.
+
+3.1.2. Automatizovaná inštalácia
+
+    Niektoré zmeny spomenuté v predošlej sekcii tiež majú vplyv na
+    podporu automatickej inštalácie na základe vopred zostavených
+    konfiguračných súborov. To znamená, že ak máte existujúce vopred
+    zostavené konfiguračné súbory, ktoré fungovali v inštalátore
+    wheezy, nemôžete očakávať, že budú bezo zmien fungovať v novom
+    inštalátore.
+
+    Inštalačná príručka (https://www.debian.org/releases/jessie/
+    installmanual) obsahuje samostatnú aktualizovanú prílohu s
+    rozsiahlou dokumentáciou týkajúcu sa vopred zostavenej
+    konfigurácie.
+
+Kapitola 4. Aktualizácie z Debian 7 (wheezy)
+
+4.1. Príprava na aktualizáciu
+
+    Odporúčame, aby ste si pred aktualizáciou prečítali aj informácie
+    v časti Kapitola 5, Problémy vyskytujúce sa v jessie, ktorá
+    pokrýva možné problémy nie priamo sa týkajúce procesu
+    aktualizácie, ale o ktorých je dôležité vedieť predtým, než
+    začnete.
+
+4.1.1. Zálohujte všetky dáta a konfiguračné údaje
+
+    Dôrazne odporúčame, aby ste pred aktualizáciou systému vykonali
+    úplnú zálohu alebo aspoň zálohovali všetky dáta a konfiguračné
+    údaje, ktoré si nemôžete dovoliť stratiť. Aktualizačné nástroje a
+    proces aktualizácie sú dosť spoľahlivé, ale chyba hardvéru
+    uprostred aktualizácie môže spôsobiť ťažké poškodenie systému.
+
+    Hlavné veci, ktoré budete chcieť zálohovať sú obsah /etc, /var/
+    lib/dpkg, /var/lib/aptitude/pkgstates a výstup dpkg
+    --get-selections "*" (úvodzovky sú dôležité). Ak používate na
+    správu balíkov vášho systému aptitude, budete si tiež chcieť
+    zálohovať /var/lib/aptitude/pkgstates.
+
+    Samotný proces aktualizácie nemení nič v adresári /home. Ale
+    niektoré aplikácie (napr. časti balíka Mozilla a pracovné
+    prostredia GNOME a KDE) prepisujú existujúce nastavenia
+    používateľa novými štandardnými hodnotami, keď používateľ
+    prvýkrát spustí novú verziu aplikácie. Preventívne si môžete
+    urobiť zálohu skrytých súborov a adresárov (súbory začínajúce
+    bodkou) v domovských adresároch používateľov. Táto záloha môže
+    pomôcť v obnovení alebo opätovnom vytvorení pôvodných nastavení.
+    Tiež o tom možno budete chcieť informovať používateľov.
+
+    Všetky operácie inštalácie balíkov musíte spúšťať s oprávnením
+    superpoužívateľa, takže sa buď prihláste ako root alebo použite
+    príkaz su alebo sudo na získanie potrebných oprávnení.
+
+    Aktualizácia má niekoľko predpokladov. Pred jej vykonaním by ste
+    mali skontrolovať, či sú splnené.
+
+4.1.2. Vopred informujte používateľov
+
+    Je rozumné informovať všetkých používateľov o plánovaných
+    aktualizáciách, hoci používatelia pristupujúci k systému pomocou 
+    ssh pripojenia by si toho počas aktualizácie nemuseli mnoho
+    všimnúť a mali by byť schopní pokračovať v práci.
+
+    Ak si želáte vykonať ďalšie opatrenia, pred aktualizáciou
+    zálohujte alebo odpojte /home.
+
+    Pri aktualizácii na jessie budete musieť vykonať aktualizáciu
+    jadra, takže bude potrebné reštartovať systém. Spravidla sa to
+    robí po dokončení aktualizácie.
+
+4.1.3. Pripravte sa na odstávku služieb
+
+    Výš systém môže ponúkať služby poskytované balíkmi, ktoré sa budú
+    aktualizovať. V tom prípade, prosím, pamätajte, že počas
+    aktualizácie budú služby zastavené, pokým sa príslušné balíky
+    nenahradia a nenakonfigurujú. V tejto dobe tieto službu nebudú
+    dostupné.
+
+    Presná odstávka týchto služieb bude závisieť na počte balíkov
+    systému, ktoré sa aktualizujú a predĺži sa tiež o čas, ktorý bude
+    správca potrebovať na to, aby odpovedal na konfiguračné otázky od
+    rôznych aktualizovaných balíkov (ak sa vyskytnú). Pamätajte, že
+    ak necháte bežať proces aktualizácie bez dozoru a systém bude
+    počas aktualizácie požadovať vstup, je veľká pravdepodobnosť
+    nedostupnosti služieb^[1] po nezanedbateľnú dobu.
+
+    Ak systém, ktorý aktualizujete, poskytuje nevyhnutné služby pre
+    vašich používateľov alebo sieť^[2], môžete čas odstávky znížiť
+    vykonaním minimálnej aktualizácie systému ako popisuje
+    Oddiel 4.4.4, “Minimálna aktualizácia systému”, následne
+    aktualizáciou jadra a reštartom, a potom aktualizovať balíky
+    súvisiace s vašimi nevyhnutnými službami. Aktualizáciu týchto
+    balíkov pred vykonaním úplnej aktualizácie popisuje Oddiel 4.4.5,
+    “Aktualizácia systému”. Takto môžete zabezpečiť, že tieto
+    nevyhnutné služby pobežia a budú dostupné počas úplnej
+    aktualizácie a tak sa zníži doba ich nedostupnosti.
+
+4.1.4. Pripravte sa na obnovu
+
+    Hoci Debian sa snaží zabezpečiť, aby váš systém zostal po celú
+    dobu v spustiteľnom stave, vždy existuje riziko, že po
+    reštartovaní systému po aktualizácii môžete naraziť na problémy.
+    Známe potenciálne problémy sú zdokumentované v tejto a ďalšej
+    kapitole týchto Poznámok k vydaniu.
+
+    Z toho dôvodu sa uistite, že budete schopní obnoviť systém v
+    prípade, že sa mu nepodarí znova naštartovať alebo, v prípade
+    systémov spravovaných na diaľku, ak sa nepodarí aktivovať sieťové
+    pripojenie.
+
+    Ak vykonávate vzdialenú aktualizáciu prostredníctvom spojenia ssh
+    , odporúčame, aby ste vykonali nutné opatrenia, aby ste mali
+    prístup k serveru prostredníctvom vzdialeného sériového
+    terminálu. Existuje totiž možnosť, že po aktualizácii jadra a
+    reštartovaní budete musieť opraviť konfiguráciu systému z
+    lokálnej konzoly. Tiež v prípade, že sa systém náhodou uprostred
+    aktualizácie reštartuje, existuje možnosť, že budete musieť
+    opraviť konfiguráciu systému z lokálnej konzoly.
+
+    Vo všeobecnosti odporúčame použitie záchranného režimu
+    inštalátora Debianu jessie. Výhodou použitia inštalátora je, že
+    si môžete vybrať medzi jeho mnohými spôsobmi inštalácie taký,
+    ktorý sa najviac hodí vašej situácii. Viac informácií nájdete v
+    kapitole 8 Inštalačnej príručky (https://www.debian.org/releases/
+    jessie/installmanual) „Obnova pokazeného systému“ a v Debian
+    Installer FAQ (https://wiki.debian.org/DebianInstaller/FAQ) .
+
+    Ak sa to nepodarí, budete potrebovať iný spôsob ako naštartovať
+    váš systém, aby ste k nemu získali prístup a mohli ho opraviť.
+    Jednou z volieb je použiť špeciálny záchranný obraz alebo
+    linuxové live CD. Po naštartovaní systému z neho by ste mali byť
+    schopní pripojiť svoj koreňový súborový systém, vykonať doňho
+    chroot a opraviť problém.
+
+4.1.4.1. Ladiaci shell počas štartu pomocou initrd
+
+    Balík initramfs-tools obsahuje ladiaci shell^[3] v obrazoch
+    initrd, ktoré generuje. Ak napríklad initrd nie je schopný
+    pripojiť váš koreňový súborový systém, dostanete sa do tohto
+    ladiaceho shellu, ktorý má základné príkazy na to, aby vám
+    pomohol vystopovať problém a prípadne ho opraviť.
+
+    Základné veci, ktoré by ste mali skontrolovať: prítomnosť
+    správnych súborov zariadení v /dev; aké moduly sú načítané (cat /
+    proc/modules); chyby pri načítaní ovládačov vo výstupe dmesg.
+    Výstup príkazu dmesg vám tiež ukáže ktoré súbory zariadení boli
+    pridelené ktorým diskom; mali by ste si to overiť porovnaním s
+    výstupom echo $ROOT, aby ste sa uistili, že koreňový systém je na
+    zariadení, na ktorom ho očakávate.
+
+    Ak sa vám podarí opraviť problém, napísaním exit opustíte ladiaci
+    shell a proces zavádzania bude pokračovať od bodu, kde bol
+    prerušený. Samozrejme budete tiež musieť opraviť podstatu
+    problému a znova vytvoriť initrd, aby nasledujúci štart už
+    nezlyhal.
+
+4.1.4.2. Ladiaci shell počas štartu pomocou systemd
+
+    Ak zavedenie systému pod systemd zlyhá, je root shell na ladenie
+    získate zmenou príkazového riadka jadra. Ak zavedenie systému ako
+    také uspeje, ale nepodarí sa spustiť niektoré služby, môže byť
+    užitočné pridať k parametrom jadra systemd.unit=rescue.target.
+
+    V opačnom vám prípade parameter jadra systemd.unit=
+    emergency.target poskytne root shell v najbližšom možnom momente.
+    Toto sa však deje pred pripojením koreňového súborového systému s
+    povoleniami na čítanie aj zápis. To budete musieť urobiť ručne
+    pomocou:
+
+    mount -o remount,rw /
+
+    Ďalšie informácie o ladení pokazeného zavádzania systému
+    používajúceho systemd nájdete v článku Diagnostikovanie problémov
+    pri štarte (http://freedesktop.org/wiki/Software/systemd/
+    Debugging/) .
+
+    Ak všetko ostatné zlyhá, je možné, že sa vám podarí zaviesť
+    systém pomocou starého init systému sysvinit. To vyžaduje, aby
+    bol ešte nainštalovaný balík sysvinit a aby bol binárny súbor /
+    lib/sysvinit/init súčasťou vášho initramfs. Ak sú splnené tieto
+    požiadavky, pridajte init=/lib/sysvinit/init medzi parametre
+    príkazového riadka jadra a zavedenie systému prebehne pomocou
+    binárneho súboru sysvinit.
+
+4.1.5. Pripravte bezpečné prostredie na aktualizáciu
+
+    Aktualizáciu distribúcie by ste mali vykonávať buď lokálne z
+    textovej virtuálnej konzoly (alebo z priamo pripojeného sériového
+    terminálu) alebo vzdialene pomocou ssh spojenia.
+
+    Dôležité
+
+    Ak používate nejaké služby VPN (ako tinc), nemusia byť počas
+    aktualizácie dostupné. Prosím, pozri Oddiel 4.1.3, “Pripravte sa
+    na odstávku služieb”.
+
+    Ako ďalšiu bezpečnostnú poistku pri vzdialenej aktualizácii
+    odporúčame, aby ste spúšťali proces aktualizácie vo virtuálnej
+    konzole programu screen, ktorý vám umožní bezpečné
+    znovupripojenie a zabezpečí, že sa proces aktualizácie nepreruší
+    ani v prípade zlyhania vzdialeného spojenia.
+
+    Dôležité
+
+    Nemali by ste vykonávať aktualizáciu pomocou príkazov telnet, 
+    rlogin, rsh ani z relácie X, ktorú spravuje xdm, gdm či kdm atď
+    na stroji, ktorý aktualizujete. To je z dôvodu, že každá z týchto
+    služieb môže byť počas aktualizácie prerušená, čo môže mať za
+    následok neprístupný systém, ktorý je iba spolovice
+    aktualizovaný. Dôrazne sa neodporúča použitie aplikácie 
+    update-manager na aktualizáciu na nové vydania, pretože tento
+    nástroj závisí na tom, že pracovné prostredie zostane bežať.
+
+4.2. Kontrola stavu systému
+
+    Proces aktualizácie popísaný v tejto kapitole bol navrhnutý na
+    aktualizácie z „čistého“ systému wheezy bez balíkov tretích
+    strán. Ak chcete dosiahnuť čo najväčšiu spoľahlivosť procesu
+    aktualizácie, budete zrejme chcieť odstrániť zo svojho systému
+    pred začatím aktualizácie balíky tretích strán.
+
+    Priame aktualizácie z vydaní Debianu starších ako 7 (wheezy) nie
+    sú podporované. Prosím, najskôr vykonajte aktualizáciu na 7 a
+    riaďte sa pri tom inštrukciami v Poznámkach k vydaniu Debian 7
+    (https://www.debian.org/releases/wheezy/releasenotes) .
+
+    Tento postup tiež predpokladá, že váš systém bol aktualizovaný na
+    najnovšie vydanie stabilnej vetvy (point release) wheezy. Ak ste
+    tak nespravili alebo si nie ste istý, riaďte sa inštrukciami v
+    časti Oddiel A.1, “Ako aktualizovať váš systém wheezy”.
+
+4.2.1. Skontrolujte operácie čakajúce na vykonanie v správcovi
+balíkov
+
+    V niektorých prípadoch môže použitie apt-get na inštaláciu
+    balíkov namiesto aptitude spôsobiť, že aptitude bude považovať
+    balík za „nepoužitý“ a naplánuje jeho odstránenie. Vo
+    všeobecnosti by ste sa mali uistiť, že systém je celkom
+    aktualizovaný a „čistý“ predtým, než budete pokračovať v
+    aktualizácii.
+
+    Z tohto dôvodu by ste mali skontrolovať, či sa nečaká na nejaké
+    operácie v správcovi balíkov aptitude. Ak je naplánované
+    odstránenie alebo aktualizácia balíka v správcovi balíkov, môže
+    to mať negatívny vplyv na aktualizáciu. Náprava tohto problému je
+    možná iba v prípade, že váš sources.list ešte stále obsahuje 
+    wheezy; a nie stable či jessie; pozri Oddiel A.2, “Ako
+    skontrolovať váš zoznam zdrojov”.
+
+    Aby ste mohli vykonať túto kontrolu, budete musieť spustiť 
+    aptitude vo „vizuálnom režime“ a stlačiť tlačidlo g („Go“). Ak sa
+    zobrazia nejaké operácie, mali by ste ich skontrolovať a napraviť
+    ich alebo vykonať navrhované operácie. Ak nie sú navrhované
+    žiadne operácie, zobrazí sa vám správa „Žiadne balíky nie sú
+    označené na inštaláciu, aktualizáciu alebo odstránenie“.
+
+4.2.2. Vypnite pripevňovanie balíkov APT (APT pinning)
+
+    Ak ste nastavili APT, aby pripevňoval určité balíky z distribúcie
+    inej ako stable (napr. z testing), je možné, že budete musieť
+    zmeniť svoje nastavenie pripevňovania APT (ukladá sa v /etc/apt/
+    preferences), aby umožnilo aktualizáciu balíkov na verzie z
+    nového stabilného vydania. Ďalšie informácie o pripevňovaní APT
+    nájdete v apt_preferences(5).
+
+4.2.3. Skontrolujte stav balíkov
+
+    Bez ohľadu na použitú metódu aktualizácie sa odporúča, aby ste
+    najskôr skontrolovali stav všetkých balíkov a overili, že sú v
+    stave, aby sa dali aktualizovať. Nasledovný príkaz zobrazí všetky
+    balíky, ktoré sú v stave „napoly inštalovaný“ alebo „konfigurácia
+    zlyhala“ a všetky ostatné s chybovým stavom.
+
+    # dpkg --audit
+
+    Môžete tiež skontrolovať stav všetkých balíkov na vašom systéme
+    pomocou aptitude alebo pomocou príkazov ako
+
+    # dpkg -l | pager
+
+    alebo
+
+    # dpkg --get-selections "*" > ~/curr-pkgs.txt
+
+    Je žiaduce odstrániť pred aktualizáciou podržania. Ak je podržaný
+    niektorý z dôležitých balíkov, ktoré sa majú aktualizovať,
+    aktualizácia zlyhá.
+
+    Pamätajte, že aptitude používa odlišný spôsob registrácie
+    balíkov, ktoré sú podržané ako apt-get a dselect. Podržané balíky
+    aptitude zistíte pomocou
+
+    # aptitude search "~ahold"
+
+    Ak chcete skontrolovať, ktoré balíky ste mali podržané pomocou 
+    apt-get, mali by ste použiť
+
+    # dpkg --get-selections | grep 'hold$'
+
+    Ak ste zmenili alebo prekompilovali balík lokálne a nepremenovali
+    ste ho alebo ste dali do verzie epochu, musíte ho podržať, aby sa
+    neaktualizoval.
+
+    Stav balíka „podržať“ v apt-get je možné zmeniť pomocou:
+
+    # echo package_name hold | dpkg --set-selections
+
+    Stav balíka „podržať“ zrušíte nahradením príkazu hold príkazom
+    install.
+
+    Ak je niečo, čo potrebujete opraviť, je najlepšie sa ubezpečiť,
+    že váš sources.list stále odkazuje na wheezy ako vysvetľuje
+    Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”.
+
+4.2.4. Sekcia proposed-updates
+
+    Ak ste vo svojom súbore /etc/apt/sources.list uviedli sekciu
+    proposed-updates, mali by ste ju z neho odstrániť predtým, než sa
+    pokúsite o aktualizáciu, aby ste predišli možným konfliktom.
+
+4.2.5. Neoficiálne zdroje
+
+    Ak váš systém obsahuje nejaké balíky, ktoré nie sú súčasťou
+    Debianu, mali by ste si byť vedomí, že môžu byť počas
+    aktualizácie odstránené z dôvodu konfliktných závislostí. Ak boli
+    takéto balíky nainštalované z ďalšieho archívu balíkov pridaného
+    do vášho /etc/apt/sources.list, mali by ste tiež skontrolovať, či
+    daný archív neobsahuje aj balíky skompilované pre jessie a zmeniť
+    podľa toho príslušný riadok vtedy, keď budete meniť riadky
+    archívov Debianu.
+
+    Niektorí používatelia môžu používať neoficiálne spätne portované
+    „novšie“ verzie balíkov, ktoré sú v Debiane nainštalované na ich
+    systéme wheezy. Také balíky pravdepodobne spôsobia problémy počas
+    aktualizácie, pretože môžu mať konfliktné súbory^[4]. Oddiel 4.5,
+    “Možné problémy počas aktualizácie” obsahuje informácie o tom,
+    ako sa vyrovnať s konfliktami ak nastanú.
+
+4.3. Príprava zdrojov APT
+
+    Pred začatím aktualizácie musíte nastaviť konfiguračný súbor apt
+    so zoznamom zdrojov softvéru, /etc/apt/sources.list.
+
+    apt vezme do úvahy všetky balíky, ktoré nájde prostredníctvom
+    riadka „deb“ a nainštaluje balík s najvyšším číslom verzie,
+    pričom uprednostní prvé z uvedených riadkov (preto v prípade
+    viacerých zrkadiel zvyčajne najprv uvediete lokálny pevný disk,
+    potom CD-ROM a potom HTTP/FTP zrkadlá).
+
+    Na vydanie je často možné odkazovať jednak prostredníctvom jeho
+    kódového označenia (napr. wheezy, jessie) a jednak jeho stavom
+    (i.e. oldstable, stable, testing, unstable). Ak odkazujete na
+    vydanie jeho kódovým označením má to tú výhodu, že vás nikdy
+    neprekvapí nové vydanie a preto je to tu popísaný postup. To
+    samozrejme tiež znamená, že budete musieť sledovať oznámenia o
+    novom vydaní sami. Ak použijete namiesto kódového označenia stav,
+    po vydaní uvidíte iba veľké množstvo aktualizácií balíkov.
+
+4.3.1. Pridávanie internetových zdrojov APT
+
+    Štandardné nastavenie je inštalovať z hlavných internetových
+    serverov Debianu, ale možno to budete chcieť zmeniť v súbore /etc
+    /apt/sources.list, aby sa použili iné zrkadlá, prednostne tie,
+    ktoré sú k vám najbližšie (z hľadiska siete).
+
+    Adresy HTTP a FTP zrkadiel Debianu nájdete na https://
+    www.debian.org/distrib/ftplist (https://www.debian.org/distrib/
+    ftplist) (pozri časť „Zoznam zrkadiel Debianu“). HTTP zrkadlá sú
+    vo všeobecnosti rýchlejšie ako FTP zrkadlá.
+
+    Napríkad predpokladajme, že vaše najbližšie zrkadlo Debianu je
+    http://mirrors.kernel.org. Keď sa na toto zrkadlo pozriete svojim
+    webovým prehliadačom, všimnete si, že adresáre sú organizované
+    nasledovne:
+
+    http://mirrors.kernel.org/debian/dists/jessie/main/binary-amd64/...
+    http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-amd64/...
+
+    Ak chcete toto zrkadlo použiť v systéme apt, pridáte do
+    sources.list nasledovný riadok:
+
+    deb http://mirrors.kernel.org/debian jessie main contrib
+
+    Všimnite si, že „dists“ sa pridáva implicitne a argumenty za
+    názvom vydania sa použijú na doplnenie cesty o viaceré adresáre.
+
+    Po pridaní vašich nových zdrojov zrušte pôvodné riadky „deb“ v
+    sources.list tým, že pred ne pridáte znak mriežky (#).
+
+4.3.2. Pridanie zdrojov APT lokálneho zrkadla
+
+    Namiesto použitia HTTP či FTP zrkadiel balíkov môžete nastaviť v
+    /etc/apt/sources.list, aby sa používalo zrkadlo na lokálnom
+    pevnom disku (prípadne pripojené prostredníctvom NFS).
+
+    Napríklad, ak máte zrkadlo balíkov vo /var/ftp/debian/ a
+    adresárová štruktúra je nasledovná:
+
+    /var/ftp/debian/dists/jessie/main/binary-amd64/...
+    /var/ftp/debian/dists/jessie/contrib/binary-amd64/...
+
+    Pridaním nasledovného riadka do súboru sources.list ho môžete
+    použiť v systéme apt:
+
+    deb file:/var/ftp/debian jessie main contrib
+
+    Všimnite si, že „dists“ sa pridáva implicitne a argumenty za
+    názvom vydania sa použijú na doplnenie cesty o viaceré adresáre.
+
+    Po pridaní vašich nových zdrojov zrušte pôvodné riadky „deb“ v
+    sources.list tým, že pred ne pridáte znak mriežky (#).
+
+4.3.3. Pridanie zdrojov APT z optických médií
+
+    Ak chcete použiť výlučne CD (alebo DVD alebo Blu-ray),
+    zakomentujte existujúce „deb“ riadky v súbore /etc/apt/
+    sources.list tak, že pred ne napíšete znak mriežky (#).
+
+    Uistite sa, že sa v súbore /etc/fstab nachádza riadok, ktorý
+    umožňuje pripojiť vašu mechaniku CD-ROM na prípojný bod /media/
+    cdrom. Napríklad, ak je vaša mechanika CD-ROM /dev/sr0, /etc/
+    fstab by mal obsahovať takýto riadok:
+
+    /dev/sr0 /media/cdrom auto noauto,ro 0 0
+
+    Pamätajte, že medzi slovami noauto,ro v štvrtom poli nesmú byť 
+    žiadne medzery.
+
+    Overte, že to funguje tak, že vložíte CD a skúsite spustiť
+
+    # mount /media/cdrom    # pripojiť CD na prípojný bod
+    # ls -alF /media/cdrom  # toto by malo zobraziť obsah koreňového adresára CD
+    # umount /media/cdrom   # odpojiť CD
+
+    Potom spustite:
+
+    # apt-cdrom add
+
+    pre každé binárne CD Debianu, ktoré máte, čím sa pridajú údaje o
+    každom CD do databázy APT.
+
+4.4. Aktualizácia balíkov
+
+    Odporúčaný spôsob aktualizácie z predošlých vydaní Debianu je
+    použiť nástroj na správu balíkov apt-get. V predošlých vydaniach
+    bol na tento účel odporúčaný aptitude, ale posledné verzie 
+    apt-get podkytujú ekvivalentnú funkcionalitu a tiež
+    konzistentnejšie dosahujú požadované výsledky počas aktualizácie.
+
+    Nezabudnite pripojiť všetky potrebné diskové oblasti
+    (predovšetkým koreňovú oblasť a oblasť obsahujúcu /usr) na zápis
+    pomocou príkazu ako:
+
+    # mount -o remount,rw /bod_pripojenia
+
+    Potom by ste mali dvakrát skontrolovať, že všetky riadky APT (v
+    súbore /etc/apt/sources.list) odkazujú buď na „jessie“ alebo na
+    „stable“. Nemali by zostať žiadne riadky odkazujúce na wheezy.
+
+    +--------------------------------------------------+
+    |Poznámka                                          |
+    |                                                  |
+    |Riadky zdrojov softvéru týkajúce sa CD-ROM môžu   |
+    |niekedy odkazovať na „unstable“; a hoci to môže   |
+    |byť mätúce, nemali by ste to meniť.               |
+    +--------------------------------------------------+
+
+4.4.1. Nahranie relácie príkazového riadka
+
+    Dôrazne sa odporúča použiť program /usr/bin/script na
+    zaznamenanie priebehu relácie aktualizácie. Ak sa potom vyskytne
+    problém, budete mať záznam toho, čo sa stalo a ak to bude
+    potrebné, budete schopní poskytnúť presné informácie pri hlásení
+    chyby. Zaznamenávanie spustíte príkazom:
+
+    # script -t 2>~/aktualizácia-jessiekrok.čas -a ~/aktualizácia-jessiekrok.script
+
+    alebo podobným. Ak budete musieť znova spustiť záznam (napr. ak
+    musíte reštartovať systém), použite inú hodnotu krok na
+    rozlíšenie, ktorý krok aktualizácie zaznamenávate. Neukladajte
+    súbor so záznamom do odkladacieho adresára ako /tmp či /var/tmp
+    (súbory v týchto adresároch môžu byť počas aktualizácie alebo
+    akéhokoľvek reštartu zmazané).
+
+    Záznam vám tiež umožní skontrolovať informácie, ktoré sa posunuli
+    mimo obrazovky. Ak ste na konzole systému, stačí prepnúť na druhý
+    virtuálny terminál (pomocou Alt+F2) a po prihlásení použiť na
+    zobrazenie súboru less -R ~root/upgrade-jessie.script.
+
+    Po dokončení aktualizácie môžete zastaviť script napísaním exit
+    na príkazovom riadku.
+
+    Ak ste použili voľbu -t príkazu script, môžete použiť program 
+    scriptreplay na opätovné prehranie celej relácie:
+
+    # scriptreplay ~/upgrade-jessie.time ~/upgrade-jessie.script
+
+4.4.2. Aktualizácia zoznamu balíkov
+
+    Najprv je potrebné stiahnuť zoznam dostupných balíkov nového
+    vydania. To spravíte príkazom:
+
+    # apt-get update
+
+4.4.3. Uistite sa, že na aktualizáciu máte dosť miesta na disku
+
+    Pred aktualizáciou systému sa musíte uistiť, že máte dostatok
+    miesta na disku než začnete úplnú aktualizáciu systému ako ju
+    popisuje Oddiel 4.4.5, “Aktualizácia systému”. Všetky balíky
+    potrebné na inštaláciu sa najprv stiahnu zo siete a uložia do
+    adresára /var/cache/apt/archives (a počas sťahovania do
+    podadresára partial/), takže sa musíte uistiť, že máte na
+    oblasti, ktorá obsahuje /var/ dostatok miesta na stiahnutie
+    balíkov, ktoré sa budú inštalovať. Po stiahnutí pravdepodobne
+    bude potrebné ďalšie miesto na disku v iných oblastiach na
+    inštaláciu aktualizovaných balíkov (ktoré môžu obsahovať väčšie
+    binárne súbory alebo viac dát) ako aj nových balíkov, ktoré sa
+    stiahnu počas aktualizácie. Ak váš systém nebude mať dostatočné
+    miesto na disku, môžete skončiť s neúplnou aktualizáciou, z čoho
+    je ťažké systém zotaviť.
+
+    apt-get vám dokáže zobraziť podrobné informácie o mieste na disku
+    potrebnom na inštaláciu. Pred vykonaním aktualizácie môžete tento
+    odhad zobraziť príkazom:
+
+    # apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+    [ ... ]
+    XXX aktualizovaných, XXX nových nainštalovaných, XXX na odstránenie a XXX neaktualizovaných.
+    Je potrebné stiahnuť xx.xMB/yyyMB archívov.
+    Po tejto operácii sa na disku použije ďalších AAAMB.
+
+    Poznámka
+
+    Spustenie tohto príkazu na začiatku aktualizácie môže zobraziť
+    chybovú správu z dôvodov popísaných v ďalších častiach. V takom
+    prípade budete musieť počkať, kým sa vykoná minimálna
+    aktualizácia systému podľa Oddiel 4.4.4, “Minimálna aktualizácia
+    systému” a aktualizovať jadro pred spustením tohto príkazu na
+    odhad miesta na disku.
+
+    Ak nemáte na aktualizáciu dostatok miesta na disku, apt-get vás
+    upozorní takouto správou:
+
+    E: Na /var/cache/apt/archives/ nemáte dostatok voľného miesta.
+
+    V takejto situácii vopred uvoľnite miesto na disku. Môžete:
+
+      * Odstrániť balíky, ktoré boli doteraz stiahnuté na inštaláciu (v
+        adresári /var/cache/apt/archives). Vyčistenie vyrovnávacej pamäte
+        balíkov príkazom apt-get clean odstráni doteraz stiahnuté súbory
+        balíkov.
+
+      * Odstráňte zabudnuté balíky. Ak ste použili aptitude na ručnú
+        inštaláciu balíkov v wheezy, bude si pamätať tieto ručne
+        nainštalované balíky a dokáže ich označiť ako nadbytočné balíky
+        nainštalovné iba ako závislosti, ktoré už nie sú potrebné, ak bol
+        balík odstránený. Neoznačia na odstránenie balíky, ktoré ste
+        nainštalovali ručne. Ak chcete odstrániť automaticky
+        nainštalované balíky, ktoré sa už nepoužívajú, spustite:
+
+        # apt-get autoremove
+
+        Na nájdenie zastaralých balíkov môžete tiež použiť debfoster
+        alebo cruft. Nemali by ste balíky, ktoré vám tieto nástroje nájdu
+        iba slepo odstraňovať, obzvlášť ak používate agresívne
+        neštandardné voľby, ktoré často označia aj používané balíky.
+        Dôrazne sa odporúča, aby ste manuálne skontrolovali balíky
+        navrhnuté na odstránenie (t.j. ich obsah, veľkosť a popis) než
+        ich necháte odstrániť.
+
+      * Odstránte balíky, ktoré zaberajú príliš mnoho miesta a momentálne
+        nie sú potrebné (po aktualizácii ich môžete vždy nainštalovať).
+        Ak máte nainštalovaný popularity-contest, môžete použiť príkaz 
+        popcon-largest-unused na vypísanie zoznamu balíkov, ktoré
+        nepoužívate a ktoré zaberajú najviac miesta. Balíky, ktoré len
+        zaberajú najviac miesta na disku nájdete pomocou dpigs (dostupné
+        v balíku debian-goodies) alebo wajig (príkazom wajig size). Tiež
+        sa dajú nájsť pomocou aptitude. Spustite aptitude vo „vizuálnom
+        režime“, vyberte Pohľady → Nový Plochý Zoznam Balíkov, stlačte l
+        a zadajte ~i, potom stlačte S a zadajte ~installsize. To vám dá
+        šikovný zoznam, s ktorým môžete ďalej pracovať.
+
+      * Odstrániť preklady a lokalizačné súbory zo systému, ak nie sú
+        potrebné. Možete nainštalovať balík localepurge a nastaviť ho,
+        aby ponechal na systéme iba niekoľko vybraných locales. Tým sa
+        zníži využité miesto na disku, ktoré zaberá /usr/share/locale.
+
+      * Dočasne presunúť na iný systém alebo natrvalo odstrániť systémové
+        záznamy nachádzajúce sa vo /var/log/.
+   
+      * Použiť dočasný adresár /var/cache/apt/archives: Môžete použiť
+        dočasný adresár pre vyrovnávaciu pamäť na inom súborovom systéme
+        (USB pamäť, dočasný pevný disk, už používaný súborový systém,
+        ...)
+
+        +-----------------------------------------------------+
+        |Poznámka                                             |
+        |                                                     |
+        |Nepoužívajte prípojný bod NFS, pretože sieťové       |
+        |pripojenie sa môže počas aktualizácie prerušiť.      |
+        +-----------------------------------------------------+
+
+        Napríklad, ak máte USB pamäť pripojenú na /media/usbkey:
+
+         1. odstráňte balíky, ktoré boli doteraz stiahnuté na inštaláciu:
+
+            # apt-get clean
+
+         2. skopírujte adresár /var/cache/apt/archives na USB pamäť:
+
+            # cp -ax /var/cache/apt/archives /media/usbkey/
+
+         3. pripojte dočasný adresár vyrovnávacej pamäte balíkov na
+            aktuálny:
+
+            # mount --bind /media/usbkey/archives /var/cache/apt/archives
+
+         4. po aktualizácii obnovte pôvodný adresár /var/cache/apt/
+            archives:
+
+            # umount /media/usbkey/archives
+
+         5. odstráňte zostávajúce /media/usbkey/archives.
+
+        Dočasný adresár vyrovnávacej pamäte balíkov môžete vytvoriť na
+        ľubovoľnom pripojenom súborovom systéme.
+
+      * Vykonať minimálnu aktualizáciu systému (pozri Oddiel 4.4.4,
+        “Minimálna aktualizácia systému”) alebo čiastočné aktualizácie
+        systému nasledované úplnou aktualizáciou. To umožní aktualizovať
+        systém po častiach a umožní vám vyčistiť vyrovnávaciu pamäť
+        balíkov pred úplnou aktualizáciou.
+
+    Pamätajte, že aby ste mohli bezpečne odstrániť balíky, mali by
+    ste svoj sources.list upraviť späť na wheezy ako popisuje
+    Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”.
+
+4.4.4. Minimálna aktualizácia systému
+
+    V niektorých prípadoch môže priame spustenie úplnej aktualizácie
+    odstrániť veľké množstvo balíkov, ktoré si chcete ponechať. Preto
+    odporúčame dvojfázový proces aktualizácie. V prvej fáze minimálnu
+    aktualizáciu, aby sa vyriešili tieto konflikty a následne úplnú
+    aktualizáciu ako popisuje Oddiel 4.4.5, “Aktualizácia systému”.
+
+    Najprv spustite:
+
+    # apt-get upgrade
+
+    Poznámka
+
+    Proces aktualizácie niektorých starších vydaní odporúčal použiť
+    na aktualizáciu aptitude. Tento nástroj neodporúčame na
+    aktualizáciu z vydania wheezy na jessie.
+
+    Toto aktualizuje tie balíky, ktoré je možné aktualizovať bez
+    nutnosti odstránenia alebo inštalácie iných balíkov.
+
+    Minimálna aktualizácia systému tiež môže byť užitočná v prípade,
+    keď má systém málo miesta a úplnú aktualizáciu nemožno spustiť z
+    dôvodu obmedzeného miesta.
+
+    Ak je nainštalovaný balík apt-listchanges, (vo svojej predvolenej
+    konfigurácii) ukáže dôležité informácie o aktualizovaných balíkov
+    v stránkovači. Stlačením tlačidla q po prečítaní stránkovač
+    ukončíte a budete môcť pokračovať v aktualizácii.
+
+4.4.5. Aktualizácia systému
+
+    Po dokončení týchto krokov budete pripravený pokračovať v hlavnej
+    časti aktualizácie. Spustite:
+
+    # apt-get dist-upgrade
+
+    Poznámka
+
+    Proces aktualizácie niektorých starších vydaní odporúčal použiť
+    na aktualizáciu aptitude. Tento nástroj neodporúčame na
+    aktualizáciu z vydania wheezy na jessie.
+
+    Tým sa vykoná kompletná aktualizácia systému, nainštalujú sa
+    najnovšie dostupné verzie všetkých balíkov a vyriešia sa všetky
+    možné zmeny závislostí medzi balíkmi v rôznych vydaniach. Ak je
+    to potrebné, nainštalujú sa niektoré nové balíky (zvyčajne nové
+    verzie knižníc a premenované balíky) a odstránia sa všetky
+    konfliktné zastaralé balíky.
+
+    Pri aktualizácii z diskov CD-ROM (alebo DVD) vás sytém požiada o
+    vloženie niektorých konkrétnych CD niekoľkokrát počas
+    aktualizácie. Je možné, že budete musieť vložiť rovnaké CD viac
+    než raz; to je z dôvodu navzájom závisiacich balíkov, ktoré sa
+    nachádzajú na rôznych CD.
+
+    Nové verzie momentálne nainštalovaných balíkov, ktoré nie je
+    možné aktualizovať bez zmeny stavu inštalácie iného balíka budú
+    ponechané v aktuálnej verzii (zobrazia sa ako „podržané“). To je
+    možné vyriešiť buď pomocou aptitude tak, že zvolíte tieto balíky
+    na inštaláciu alebo tak, že skúsite spustiť apt-get install balík
+    .
+
+4.5. Možné problémy počas aktualizácie
+
+    Nasledovné oddiely popisujú známe problémy, ktoré sa môžu
+    vyskytnúť pri aktualizácii na jessie.
+
+4.5.1. Dist-upgrade zlyhá s chybou „Nebolo možné vykonať okamžitú
+konfiguráciu“
+
+    V niektorých prípadoch môže krok apt-get dist-upgrade zlyhať po
+    stiahnutí balíčkov s chybou:
+
+    E: Nebolo možné vykonať okamžitú konfiguráciu už rozbaleného „%s“. Pozri prosím podrobnosti v man 5 apt.conf pod APT::Immediate-Configure.
+
+    Ak sa tak stane, spustenie apt-get dist-upgrade -o
+    APT::Immediate-Configure=0 namiesto tohto kroku by malo umožniť
+    aktualizácii pokračovať.
+
+    Iné možné obídenie tohto problému je dočasne pridať oba zdroje -
+    wheezy aj jessie - do vášho sources.list a spustiť apt-get update
+    .
+
+4.5.2. Očakávané odstránenia
+
+    Proces aktualizácie na jessie môže požadovať odstránenie balíkov
+    zo systému. Presný zoznam balíkov bude závisieť na množine
+    balíkov, ktorú máte nainštalovanú. Tieto poznámky k vydaniu
+    poskytujú všeobecné rady o metóde, ktorú by ste mali zvoliť, ale
+    ak máte pochybnosti, odporúčame aby ste preskúmali odstránenie
+    ktorých balíkov je navrhnuté v každej z metód. Ďalšie informácie
+    o balíkoch, ktoré boli v jessie označené ako zastarané nájdete v
+    časti Oddiel 4.10, “Zastaralé balíky”.
+
+4.5.3. Cykly Konfliktov alebo Predzávislostí
+
+    Niekedy je potrebné zapnúť voľbu APT::Force-LoopBreak, aby ste
+    mohli dočasne odstrániť nevyhnutný (essential) balík z dôvodu
+    cyklu konfliktov alebo predzávislostí. apt-get vás na to upozorní
+    a zruší aktualizáciu. Môžete to obísť zadaním voľby -o
+    APT::Force-LoopBreak=1 na príkazovom riadku apt-get.
+
+    Je možné, že štruktúra závislostí systému bude taká poškodená, že
+    jej oprava bude vyžadovať manuálny zásah. To zvyčajne znamená
+    použiť apt-get alebo
+
+    # dpkg --remove názov_balíka
+
+    na odstránenie niektorých z konfliktných balíkov alebo
+
+    # apt-get -f install
+    # dpkg --configure --pending
+
+    V extrémnych prípadoch budete musieť vynútiť reinštaláciu
+    príkazom typu
+
+    # dpkg --install /cesta/k/názov_balíka
+
+4.5.4. Konflikty súborov
+
+    Konflikty súborov by sa nemali vyskytnúť ak aktualizujete z
+    „čistého“ systému wheezy, ale môžu sa vyskytnúť ak máte
+    nainštalované neoficiálne spätné porty (backports). Konflikt
+    súborov sa prejaví nasledovnou chybou:
+
+    Rozbaľuje sa <package-foo> (z <package-foo-file>) ...
+    dpkg: chyba pri spracovávaní <package-foo> (--install):
+     pokus o prepísanie „<some-file-name>“,
+     ktorý je tiež v balíku <package-bar>
+    dpkg-deb: podproces paste ukončený signálom (Prerušená rúra)
+     Počas spracovania sa vyskytli chyby::
+     <package-foo>
+
+    Môžete sa pokúsiť vyriešiť konflikt súborov tým, že nasilu
+    odstránite balík uvedený na poslednom riadku chybovej správy:
+
+    # dpkg -r --force-depends názov_balíka
+
+    Po tejto náprave by ste mali byť schopní pokračovať v
+    aktualizácii zopakovaním doteraz popísaných príkazov apt-get.
+
+4.5.5. Zmeny v konfigurácii
+
+    Počas aktualizácie dostanete otázky týkajúce sa konfigurácie
+    alebo rekonfigurácie niekoľkých balíkov. Po otázke, či nejaký
+    súbor z adresára /etc/init.d alebo /etc/manpath.config má byť
+    nahradený verziou od správcu balíka je zvyčajne potrebné
+    odpovedať „áno“, aby ste zaistili konzistenciu systému.
+    Kedykoľvek môžete vrátiť staršie verzie, pretože sa uložia s
+    príponou .dpkg-old.
+
+    Ak si nie ste istý, čo máte robiť, zapíšte si meno balíka alebo
+    súboru a veci vyriešte neskôr. Ak chcete skontrolovať informácie,
+    ktoré boli na obrazovke počas aktualizácie, môžete hľadať v
+    súbore záznamu relácie.
+
+4.5.6. Zmena relácie na konzolu
+
+    Ak spúšťate aktualizáciu pomocou lokálnej konzoly systému, v
+    niektorom bode aktualizácie môžete zistiť, že sa konzola zmenila
+    na iný terminál a stratili ste aktualizáciu z dohľadu. Môže sa to
+    stať napríklad na systémoch s pracovným prostredím počas reštartu
+    správcu displeja.
+
+    Na návrat na konzolu s bežiacou aktualizáciou budete musieť
+    použiť Ctrl+Alt+F1 (ak ste na grafickej štartovacej obrazovke)
+    alebo Alt+F1 (ak ste na lokálnej obrazovke v textovom režme), čo
+    vás prepne späť na virtuálny terminál 1. Nahraďte F1 funkčným
+    klávesom s číslom zodpovedajúcim virtuálnemu terminálu, na ktorom
+    bežala aktualizácia. Tiež môžete použiť Alt+šípka vľavo alebo Alt
+    +šípka vpravo na prepínanie medzi susednými terminálmi v textovom
+    režime.
+
+4.5.7. Špeciálna starostlivosť o niektoré balíky
+
+    Vo väčšine prípadov by mala prebehnúť aktualizácia balíkov medzi
+    wheezy a jessie hladko. Je však malý počet prípadov, ktoré môžu
+    vyžadovať zásahy buď pred alebo počas aktualizácie. Ich
+    podrobnosti sú uvedené dolu pre každý balík zvlášť.
+
+4.5.7.1. systemd
+
+    Aktualizácia Debianu z wheezy na jessie štandardne zmení váš init
+    systém zo SysV na systemd. V závislosti na vašom systéme a
+    nastavení budete možno musieť vykonať niektoré zmeny manuálne.
+    Známe problémy sme popísali v Oddiel 5.6, “Aktualizácia na Jessie
+    nainštaluje nový predvolený init systém”.
+
+4.5.7.2. LXC
+
+    Ak máte nainštalované LXC, je možné, že budete musieť byť opatrní
+    pri aktualizácii vášho systému system a vašich kontajnerov.
+    Prosím, pozrite sa na známe problémy a ich riešenia v časti
+    Oddiel 5.8, “Aktualizácia hostiteľov a kontajnerov LXC”.
+
+4.6. Aktualizácia jadra a súvisiacich balíkov
+
+    Táto časť vysvetľuje ako aktualizovať vaše jadro a identifikuje
+    možné problémy týkajúce sa tejto aktualizácie. Môžete buď
+    nainštalovať jeden z balíkov linux-image-*, ktoré poskytuje
+    Debian alebo skompilovať prispôsobené jadro zo zdrojových
+    súborov.
+
+    Pamätajte, že veľa informácií v tejto časti je založených na
+    predpoklade, že budete používať jedno z modulárnych jadier v
+    Debiane spolu s initramfs-tools a udev. Ak sa rozhodnete použiť
+    prispôsobené jadro, ktoré nevyžaduje initrd alebo použijete iný
+    nástroj na tvorbu initrd, niektoré z týchto informácií sa vás
+    nemusia týkať.
+
+4.6.1. Inštalácia metabalíka jadra
+
+    Keď vykonáte dist-upgrade z wheezy na jessie, dôrazne sa
+    odporúča, aby ste nainštalovali nový metabalík linux-image-2.6-*
+    ak ste tak už neurobili. Tieto metabalíky počas aktualizácie
+    automaticky prostredníctvom závislostí nainštalujú novšiu verziu
+    jadra. Či je nainštalované môžete overiť príkazom:
+
+    # dpkg -l "linux-image*" | grep ^ii | grep -i meta
+
+    Ak nevidíte žiadny výstup, budete musieť nainštalovať nový balík
+    linux-image ručne alebo nainštalovať niektorý z metabalíkov
+    linux-image. Zoznam dostupných metabalíkov linux-image uvidíte po
+    spustení:
+
+    # apt-cache search linux-image- | grep -i meta | grep -v transition
+
+    Ak si nie ste istý, ktorý z balíkov vybrať, spustite uname -r a
+    hľadajte balík s podobným názvom. Napríklad ak vidíte
+    2.6.32-5-amd64, odporúča sa nainštalovať linux-image-amd64. Tiež
+    si môžete pozrieť dlhý popis každého z balíkov príkazom apt-cache
+    a zvoliť si ten najvyhovujúcejší. Napríklad:
+
+    # apt-cache show linux-image-amd64
+
+    Potom by ste ho mali nainštalovať pomocou apt-get install. Po
+    nainštalovaní tohto nového jadra by ste mali pri najbližšej
+    príležitosti reštartovať systém, čím získate výhody novej verzie
+    jadra. Ale pred prvým reštartovaním po aktualizácii si prosím
+    prečítajte Oddiel 4.7, “Čo urobiť pred reštartom sytému”.
+
+    Pre dobrodružnejších existuje jednoduchý spôsob ako si
+    skompilovať svoje vlastné prispôsobené jadro Debianu.
+    Nainštalujte si zdrojové kódy jadra, ktoré sú poskytované v
+    balíku linux-source. Môžete využiť cieľ deb-pkg dostupný v súbore
+    makefile zdrojových kódov na zostavenie binárneho balíka. Ďalšie
+    informácie nájdete v Debian Linux Kernel Handbook (http://
+    kernel-handbook.alioth.debian.org/) , ktorú tiež nájdete v balíku
+    debian-kernel-handbook.
+
+    Ak je to možné, je pre vás výhodné aktualizovať balík jadra
+    oddelene od samotného hlavného dist-upgrade, pretože to znižuje
+    pravdepodobnosť stavu systému, ktorý dočasne nemožno spustiť.
+    Pamätajte, že toto by ste mali robiť iba po vykonaní minimálnej
+    aktualizácie, ako ju popisuje Oddiel 4.4.4, “Minimálna
+    aktualizácia systému”.
+
+4.6.2. Zmeny pripájania a kontroly koreňového súborového systému a /
+usr
+
+    initramfs-tools teraz spúšťa aj fsck na koreňovom systéme pred
+    jeho pripojením. Ak ako init systém používate systemd a existuje
+    samostatný súborový systém /usr, spustí fsck aj na /usr a pripojí
+    ho.
+
+      * Ak je /usr samostatný súborový systém na zariadení RAID a
+        nastavenie INITRDSTART v /etc/default/mdadm nie je „all“,
+        budete ho musieť upraviť tak, aby obsahoval aj toto
+        zariadenie.
+
+      * Ak je /usr samostatný súborový systém na logickom zväzku LVM
+        a riadok /usr v /etc/fstab špecifikuje zariadenie podľa UUID
+        alebo menovky (LABEL), musíte tento riadok tak, aby
+        zariadenie špecifikoval podľa zariadenia pomocou formátu /dev
+        /mapper/VG-LV alebo /dev/VG/LV.
+   
+      * Už viac nie je možné pripojiť súborový systém /usr pomocou
+        bind.
+
+      * Ak je sú hodiny reálneho času (RTC) nastavené na miestny a
+        miestny čas je popredu pred UTC, e2fsck vypíše upozornenie
+        pri štarte posunutí času smerom dozadu (bug #767040 (https://
+        bugs.debian.org/767040) ). Môžete to vypnúť vložením
+        nasledovných riadkov do /etc/e2fsck.conf:
+
+        [options]
+        broken_system_clock=1
+
+4.7. Čo urobiť pred reštartom sytému
+
+    Po skončení apt-get dist-upgrade je aktualizácia „formálne“
+    dokončená, ale je niekoľko vecí, o ktoré by ste sa mali postarať 
+    pred ďalším reštartom.
+
+      * Pri aktualizácii z Wheezy na Jessie, môže byť dobrý nápad na
+        odstrániť (purge) staré balíky pred prvým reštartom. Najmä
+        zastarané init skripty môžu spôsobiť problémy. Prečítajte si
+        prosím podrobnosti o hľadaní a odstraňovaní balíkov v časti
+        Oddiel 4.8.1, “Vyčistenie (purge) odstránených balíkov”.
+
+4.8. Príprava na ďalšie vydanie
+
+    Po aktualizácii môžete urobiť niekoľko vecí, ktorými sa
+    pripravíte na ďalšie vydanie.
+
+      * Odstráňte nadbytočné alebo zastaralé balíky ako popisuje
+        Oddiel 4.4.3, “Uistite sa, že na aktualizáciu máte dosť
+        miesta na disku” a Oddiel 4.10, “Zastaralé balíky”. Mali by
+        ste skontrolovať, ktoré konfiguračné súbory používajú a
+        zvážiť vyčistenie konfigurácie balíkov (purge), aby sa
+        odstránili ich konfiguračné súbory. Pozri aj Oddiel 4.8.1,
+        “Vyčistenie (purge) odstránených balíkov”.
+
+4.8.1. Vyčistenie (purge) odstránených balíkov
+
+    Vo všeobecnosti sa odporúča na vyčistenie odstránených balíkov.
+    To platí najmä, ak boli balíky odstránené v predchádzajúcich
+    aktualizáciách vydania (napr. počas aktualizácie na wheezy) alebo
+    pochádzajú od tretích strán. Najmä o starých skriptoch init.d je
+    známe, že spôsobujú problémy.
+
+    Výstraha
+   
+    Vyčistenie balíček vo všeobecnosti vymaže jeho súbory protokolu,
+    preto si ich najskôr zálohujte.
+
+    Nasledovný príkaz zobrazí zoznam všetkých odstránených balíkov,
+    ktoré mohli zanechať v systéme konfiguračné súbory (ak ich
+    používajú):
+
+    # dpkg -l | awk '/^rc/ { print $2 }'
+
+    Balíky môžu je možné odstrániť príkazom apt-get purge. Za
+    predpokladu, že chcete vyčistiť všetky balíky naraz, môžete
+    použiť nasledujúci príkaz:
+
+    # apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+
+    Ak používate aptitude, môžete použiť aj nasledovnú alternatívu k
+    vyššie uvedeným príkazom:
+
+    $ aptitude search '~c'
+    $ aptitude purge '~c'
+
+4.9. Zavrhované komponenty
+
+    S ďalším vydaním Debianu 9 (s kódovým označením stretch) budú
+    niektoré možnosti označené ako zavrhované. Používatelia budú
+    musieť prejsť na iné alternatívy, aby si ušetrili problémy pri
+    aktualizácii na 9.
+
+    Sem patria nasledovné možnosti:
+
+      * Balík hardening-wrapper je zavrhovaný a očakáva sa jeho
+        odstránenie vo vydaní Stretch.
+
+4.10. Zastaralé balíky
+
+    Okrem toho, že jessie prináša mnoho nových balíkov, tiež
+    odstraňuje dosť veľa starých balíkov, ktoré obsahovalo vydanie
+    wheezy. Neposkytuje pre tieto zastaralé balíky žiadnu
+    aktualizačnú cestu. Hoci vám nič nebráni naďalej používať
+    zastarané balíky, projekt Debian zvyčajne prestane poskytovať
+    podporu bezpečnostných aktualizácií jeden rok po vydaní jessie^
+    [5] a medzitým zvyčajne neposkytuje inú podporu. Preto sa
+    odporúča nahradiť ich alternatívami ak sú nejaké dostupné.
+
+    Existuje mnoho dôvodov, prečo môžu byť balíky z distribúcie
+    odstránené: ich pôvodný autor ich už nespravuje; ich správa už
+    nezaujíma vývojára Debianu; funkcionalitu, ktorú poskytujú
+    nahradil iný softvér (alebo novšia verzia); alebo už sa
+    nepovažujú za vhodné vo vydaní jessie z dôvodu chýb. V poslednom
+    prípade môže distribúcia „unstable“ naďalej obsahovať tieto
+    balíky.
+
+    Je jednoduché zistiť v aktualizovanom systéme, ktoré balíky sú
+    „zastaralé“, pretože ich tak označia používateľské rozhrania
+    systémov na správu balíkov. Ak používate aptitude, uvidíte zoznam
+    týchto balíkov v časti „Zastarané a lokálne vytvorené balíky“.
+
+    Systém sledovania chýb Debianu (https://bugs.debian.org/) často
+    poskytne ďalšie informácie o tom, prečo bol balík odstránený.
+    Mali by ste si prečítať archivované hlásenia chýb samotného
+    balíka aj archivované hlásenia chýb pseudobalíka ftp.debian.org
+    (https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org
+    &archive=yes) .
+
+    Medzi zastaralé balíky patria:
+
+      * postgresql-9.1, nástupcom je postgresql-9.4. Po dokončení
+        aktualizácie operačného systému, by ste si mali naplánovať aj
+        aktualizáciu vašich klastrov databázy PostgreSQL 9.1 na novú
+        verziu PostgreSQL 9.4 pomocou nástroja pg_upgradecluster. Pre
+        užívateľov procedurálneho jazyka PL/perl jessie poskytuje
+        aktualizovaný balík postgresql-plperl-9.1 zostavený voči
+        novej verzii libperl v jessie s cieľom umožniť prechod na
+        novú verziu perl v jessie, pričom staré databázové funkcie PL
+        /perl zostanú zachované a použiteľné až do aktualizácie
+        samotných databáz.
+
+      * python3.2, nástupcom je python3.4. (Verzia 2.7 je podporovaná
+        v wheezy aj v jessie.)
+
+      * ruby1.8 a ruby1.9.1;, nástupcom je ruby2.1. Prosím,
+        nainštalujte si balík ruby a vždy automaticky dostanete
+        aktuálnu verziu ruby.
+
+      * mplayer; alternatívy sú mplayer2 a mpv (nové v jessie).
+        Zatiaľ čo mplayer2 je prevažne kompatibilný s mplayer čo sa
+        týka argumentov príkazového riadka a konfigurácie (a pridáva
+        aj niekoľko nových funkcií), mpv pridáva mnoho nových funkcií
+        a vylepšení a aktívne ho spravuje upstream.
+
+      * openoffice.org; prosím, použite libreoffice.
+
+      * squid, nástupcom je squid3.
+
+      * libjpeg-progs, nástupcom je libjpeg-turbo-progs.
+
+      * openjdk-6-*, nástupcom je openjdk-7-*.
+
+4.10.1. Fiktívne balíky
+
+    Niektoré balíky z vydania wheezy boli v jessie rozdelené do
+    niekoľkých balíkov, často preto, aby sa zlepšila spravovateľnosť
+    systému. Aby sa zjednodušila aktualizačná cesta, jessie často
+    poskytuje „fiktívne“ balíky: prázdne balíky s rovnakým názvom ako
+    starý balík v wheezy so závislosťami, ktoré spôsobia
+    nainštalovanie nového balíka. Tieto „fiktívne“ balíky sa po
+    aktualizácii považujú za nadbytočné a je možné ich bezpečne
+    odstrániť.
+
+    Väčšina (ale nie všetky) popisy fiktívnych balíkov označujú ich
+    účel. Popisy fiktívnych balíkov však nie sú jednotné, takže
+    môžete na ich nájdenie použiť aj deborphan s voľbami --guess-*
+    (napr. --guess-dummy), aby ste ich na svojom systéme našli.
+    Niektoré fiktívne balíky sa nemajú po aktualizácii odstraňovať,
+    ale používajú sa na sledovanie aktuálne dostupnej verzie programu
+    v čase.
+
+
+---------------------------------------------------------------------
+
+    ^[1] Ak je priorita debconf nastavená na veľmi vysokú úroveň,
+    môžete predísť konfiguračným výzvam, ale služby, ktoré na vašom
+    systéme vyžadujú iné ako predvolené odpovede, sa nespustia.
+
+    ^[2] Napríklad: služby DNS alebo DHCP, obzvlášť ak bežia bez
+    redundantného alebo záložného servera. V prípade DHCP sa môže
+    stať, že budú používatelia odpojení od siete ak čas prenájmu ich
+    IP adresy vyprší pred dokončením procesu aktualizácie.
+
+    ^[3] Túto vlastnosť možno vypnúť pridaním panic=0 medzi parametre
+    pri zavádzaní systému.
+
+    ^[4] Systém správy balíkov Debianu za bežných okolností
+    neumožňuje balíku nahradiť súbor, ktorý vlastní iný balík, iba ak
+    daný balík nahrádza tento vlastniaci balík.
+
+    ^[5] Alebo ak dovtedy nenastane ďalšie vydanie. Zvyčajne sú
+    zakaždým podporované súčasne iba dve stabilné vydania.
+
+Kapitola 5. Problémy vyskytujúce sa v jessie
+
+    Niekedy majú zmeny zavedené v novom vydaní vedľajšie účinky,
+    ktorým sa nedokážeme rozumne vyhnúť alebo by spôsobili objavenie
+    chýb inde. Tu dokumentujeme problémy, ktorých sme si vedomí. Tiež
+    si prosím prečítajte errata, dokumentáciu relevantných balíkov,
+    hlásenia o chybách a ďalšie informácie, ktoré spomína Oddiel 6.1,
+    “Ďalšie čítanie”.
+
+5.1. Obmedzenia bezpečnostnej podpory
+
+    Existujú niektoré balíky, pre ktoré Debian nemôže sľúbiť
+    poskytovanie minimálných spätných portov v prípade bezpečnostných
+    problémov. Tieto sú popísané v nasledovných častiach.
+
+    Balík debian-security-support pridaný vo vydaní Jessie pomáha
+    sledovať stav bezpečnostnej podpory nainštalovaných balíkov.
+
+5.1.1. Bezpečnostný status webových prehliadačov
+
+    Debian 8 obsahuje niekoľko nových jadier prehliadačov, ktoré
+    postihuje neustály tok nových bezpečnostných zraniteľností.
+    Vysoký tok zraniteľností a čiastočný nedostatok podpory vo forme
+    vetiev s dlhodobou podporou znamená, že je pre nás veľmi ťažké
+    podporovať tieto prehliadače spätne portovanými bezpečnostnými
+    opravami. Naviac, závislosti na knižniciach znemožňujú
+    aktualizáciu na novšie vydania od dodávateľa. Preto sú
+    prehliadače založené na jadrách webkit, qtwebkit a khtml súčasťou
+    Jessie, ale nevzťahuje sa na ne bezpečnostná podpora. Tieto
+    prehliadače by ste nemali používať na prístup k nedôveryhodným
+    stránkam.
+
+    Ako všeobecný prehliadač odporúčame prehliadače Iceweasel alebo
+    Chromium.
+
+    Chromium - hoci je postavený na kóde Webkit - je to tzv. listový
+    balík, ktorý bude priebežne aktualizovaný opätovným zostavením
+    aktuálnej verzie Chrome v prostredí stabilného vydania. Iceweasel
+    a Icedove budú tiež udržiavané aktuálne opätovným zostavením
+    aktuálnej ESR verzie v prostredí stabilného vydania.
+
+5.1.2. Chýbajúca bezpečnostná podpora ekosystému okolo libv8 a
+Node.js
+
+    Platforma Node.js je postavená na libv8-3.14, ktoré postihuje
+    veľké množstvo bezpečnostných problémov, ale momentálne projekt
+    nemá žiadnych dobrovoľníkov ani bezpečnostný tím s dostatočným
+    záujmom, ochotných stráviť veľké množstvo času riešením tohto
+    typu problémov.
+
+    Unfortunately, this means that libv8-3.14, nodejs, and the
+    associated node-* package ecosystem should not currently be used
+    with untrusted content, such as unsanitized data from the
+    Internet.
+
+    Okrem toho tieto balíky nebudú dostávať žiadne bezpečnostné
+    aktualizácie počas životného cyklu vydania Jessie.
+
+5.1.3. Predčasné ukončenie bezpečnostnej podpory MediaWiki
+
+    Upstream security support for the 1.19 series of mediawiki ends
+    during the expected lifecycle of Jessie. The mediawiki package is
+    included in Jessie to satisfy dependencies in other packages.
+
+    Security support for mediawiki will end in conjunction with
+    support for Wheezy in April 2016.
+
+5.2. Server OpenSSH má štandardne nastavenú voľbu „PermitRootLogin
+without-password“
+
+    V snahe viac zabezpečiť predvolenú konfiguráciu bude mať odteraz
+    balík openssh-server štandardne nastavenú voľbu „PermitRootLogin
+    without-password“. Ak potrebujete používať účet používateľa root
+    v spojení s prihlasovaním pomocou hesla, táto zmena na vás môže
+    mať vplyv.
+
+    openssh-server sa pokúsi takéto prípady detegovať a zvýši
+    prioritu výzvy debconf.
+
+    Ak chcete zachovať prihlasovanie pomocou hesla pre používateľa root,
+    môžete tiež preseed na zodpovedanie tejto otázky vopred pomocou:
+   
+    # The "false" value is in fact correct despite being confusing.
+    $ echo 'openssh-server openssh-server/permit-root-login boolean false' | debconf-set-selections
+
+5.3. Kompatibilita Puppet 2.7 / 3.7
+
+    If you are using Puppet, please be aware that Puppet 3.7 is not
+    backwards compatible with Puppet 2.7. Among other things, the
+    scoping rules have changed and many deprecated constructs have
+    been removed. See the Puppet 3.x release notes (https://
+    docs.puppetlabs.com/puppet/3/reference/release_notes.html#
+    puppet-300) for some of the changes, although be aware that there
+    are further changes in 3.7.
+
+    Checking the log files of your current puppetmaster for
+    deprecation warnings and resolving all of those warnings before
+    proceeding with the upgrade will make it much easier to complete
+    the upgrade. Alternatively, or additionally, testing the
+    manifests with a tool like Puppet catalog test (https://
+    github.com/duritong/puppet_catalog_test) may also find potential
+    issues prior to the upgrade.
+
+    When upgrading a Puppet managed system from Wheezy to Jessie, you
+    must ensure that the corresponding puppetmaster runs at least
+    Puppet version 3.7. If the master is running Wheezy's
+    puppetmaster, the managed Jessie system will not be able to
+    connect to it.
+
+    For more information on incompatability changes, please have a
+    look at Telly upgrade issues (https://projects.puppetlabs.com/
+    projects/puppet/wiki/Telly_Upgrade_Issues) and "The Angry Guide
+    to Puppet 3" (http://somethingsinistral.net/blog/
+    the-angry-guide-to-puppet-3/) .
+
+5.4. Aktualizácia PHP 5.6 sa prejaví zmenami v správaní
+
+    Aktualizácia na Jessie obsahuje aktualizáciu PHP z 5.4 na 5.6. To
+    môže maž vplyv na akékoľvek miestne skripty PHP a odporúčame vám
+    skontrolovať tieto skripty pred vykonaním aktualizácie. Nižšie je
+    vybraná podmnožina týchto problémov:
+
+      * To prevent man-in-the-middle attacks against encrypted
+        transfers, client streams now verify peer certificates by
+        default.
+
+        As a result of this change, existing code using ssl:// or
+        tls:// stream wrappers (e.g. file_get_contents(), fsockopen
+        (), stream_socket_client()) may no longer connect
+        successfully without manually disabling peer verification via
+        the stream context's "verify_peer" setting.
+
+        For more information about this particular issue, please read
+        this document (https://wiki.php.net/rfc/
+        tls-peer-verification) .
+
+      * PHP v mnohých prípadoch mení rozlišovanie veľkosti písmen:
+
+          + All internal case insensitivity handling for class,
+            function, and constant names is done according to ASCII
+            rules. Current locale settings are ignored.
+
+          + The keywords "self", "parent", and "static" are now
+            always case insensitive.
+
+          + The json_decode() function no longer accepts
+            non-lowercase variants of "boolean" values.
+
+      * The logo GUID functions (e.g. php_logo_guid()) have been
+        removed.
+
+      * It is no longer possible to overwrite keys in static scalar
+        arrays. Please see PHP bug 66015 (https://bugs.php.net/
+        bug.php?id=66015) for an example and more information about
+        this particular issue.
+
+      * The mcrypt_encrypt(), mcrypt_decrypt() and mcrypt_{MODE}()
+        functions no longer accept keys or IVs with incorrect sizes.
+        Furthermore an IV is now required if the used block cipher
+        mode requires it.
+
+      * For legal reasons, the JSON implementation bundled with PHP
+        has been replaced with the version provided by the "jsonc"
+        PECL module. Code that makes assumptions about the finer
+        implementation details of the PHP JSON parser may need to be
+        reviewed.
+
+      * The "short_open_tag" setting is now disabled by default. The
+        ASP variant of the short tags ("<%" and "%>") are scheduled
+        for removal in PHP7.
+
+    For more information or the full list of potential issues, please
+    have a look at upstream's list of backwards incompatible changes
+    for PHP 5.5 (https://php.net/manual/en/
+    migration55.incompatible.php) and 5.6 (https://php.net/manual/en/
+    migration56.incompatible.php) .
+
+5.5. Nekompatibilné zmeny v Apache HTTPD 2.4
+
+    Poznámka
+   
+    This section only applies to systems which have installed an
+    Apache HTTPD server and configured it manually.
+
+    There have been a number of changes to the configuration of the
+    Apache HTTPD server in version 2.4. On the upstream side, the
+    syntax has changed. Notably, the access control directives have
+    changed considerably and will need manual migration to the new
+    directives.
+
+    The mod_access_compat module is mentioned in the upstream upgrade
+    guide as a possible alternative to immediate migration. However,
+    the reports suggest it may not always work.
+
+    The managing of configuration files has also been changed in the
+    Debian packaging. In particular, all configuration files and
+    sites must now end with ".conf" to be parsed by default. This
+    change also replaces the existing use of /etc/apache2/conf.d/.
+
+    Poznámka
+
+    During the upgrade, you may also see warnings about configuration
+    files placed in /etc/apache2/conf.d/, which are provided by
+    packages from Debian. This warning is unavoidable but harmless as
+    the affected packages will move their configuration once their
+    upgrade completes (which will generally happen after the Apache
+    HTTPD emits its warning).
+
+    Ďalšie informácie a úplný zoznam zmien nájdete v:
+
+      * Upgrading to 2.4 from 2.2 (http://httpd.apache.org/docs/2.4/
+        upgrading.html) document provided by Apache for the upstream
+        side.
+
+      * The /usr/share/doc/apache2/NEWS.Debian.gz file provided by
+        the apache2 package.
+
+5.6. Aktualizácia na Jessie nainštaluje nový predvolený init systém
+
+    Jessie sa dodáva s predvoleným init systémom systemd-sysv. Tento
+    balík sa nainštaluje automaticky počas aktualizácie.
+
+    Ak preferujete iný init systém ako sysvinit-core alebo upstart,
+    odporúča sa nastaviť APT pinning pred aktualizáciou. To môže byť
+    nutné aj v prípade, že aktualizujete kontajnery LXC pred
+    aktualizáciou hostiteľa. V takom prípade si prosím prečítajte
+    Oddiel 5.8.1, “Aktualizácia hosťov LXC bežiacich na hostiteľoch
+    Wheezy”.
+
+    Napríklad, aby ste zabránili inštalácii systemd-sysv počas
+    aktualizácie, môžete vytvoriť súbor s názvom /etc/apt/
+    preferences.d/local-pin-init s nasledovným obsahom:
+
+    Package: systemd-sysv
+    Pin: release o=Debian
+    Pin-Priority: -1
+
+    Výstraha
+   
+    Pamätajte, že niektoré balíky sa nemusia chovať úplne správne pod
+    neštandardným init systémom.
+
+    Please note that the upgrade may install packages containing
+    "systemd" in their name even with APT pinning. These alone do not
+    change your init system. To use systemd as your init system, the
+    systemd-sysv package must be installed first.
+
+    If APT or aptitude has issues computing an upgrade path with the
+    pin in place, you may be able to help it by manually installing
+    both sysvinit-core and systemd-shim.
+
+5.6.1. Prísnejší prístup k súborovým systémom, ktoré sa nepodarilo
+pripojiť počas štartu pod systemd
+
+    The new default init system, systemd-sysv, has a stricter
+    handling of failing "auto" mounts during boot compared to
+    sysvinit. If it fails to mount an "auto" mount (without the
+    "nofail" option), systemd will drop to an emergency shell rather
+    than continuing the boot.
+
+    We recommend that all removable or "optional" mount points (e.g.
+    non-critical network drives) listed in /etc/fstab either have the
+    "noauto" or the "nofail" option.
+
+5.6.2. Zastaralé init skripty by ste mali odstrániť (purge)
+
+    If you are upgrading from previous releases, your system may
+    contain obsolete init-scripts provided by (now) removed packages.
+    These scripts may have inaccurate or no dependency metadata,
+    which can lead to dependency cycles in your init configuration.
+
+    To avoid this, we recommend that you go and review the list of
+    packages that are in the "rc" ("Removed, but Config-files
+    remain") state, and purge at least all those containing
+    init-scripts.
+
+    Please see Oddiel 4.8.1, “Vyčistenie (purge) odstránených
+    balíkov” for details on finding and purging removed packages.
+
+5.6.3. Locally modified init-scripts may need to be ported to systemd
+
+    Poznámka
+   
+    This section only applies to systems where Debian-provided init
+    scripts have been modified locally.
+
+    If you have modified some of the init scripts provided by Debian,
+    please be aware that these may now have been superseded by a
+    systemd unit file or by systemd itself. If you have debsums
+    installed, you can check for locally modified init scripts by
+    using the following shell command.
+
+    debsums -c -e | grep ^/etc/init.d
+
+    Alternatively, the following can be used in the absence of
+    debsums.
+
+    dpkg-query --show -f'${Conffiles}' | sed 's, /,\n/,g' | \
+      grep /etc/init.d | awk 'NF,OFS="  " {print $2, $1}' | \
+      md5sum --quiet -c
+
+    If either command flags any files and their corresponding
+    packages or the systemd now provides an systemd unit file for
+    that service, the systemd unit file will take precedence to your
+    locally modified init script. Depending on the nature of the
+    change, there are different way to perform the migration.
+
+    If necessary, it is possible to override the systemd unit file to
+    have it start the sysvinit script. For more information on
+    systemd unit files, please have a look at the following
+    resources.
+
+      * How Do I Convert A SysV Init Script Into A systemd Service
+        File? (http://0pointer.de/blog/projects/
+        systemd-for-admins-3.html)
+
+      * systemd.special — Special systemd units (http://0pointer.de/
+        public/systemd-man/systemd.special.html)
+
+      * My Service Can't Get Realtime! (http://www.freedesktop.org/
+        wiki/Software/systemd/MyServiceCantGetRealtime/) (also
+        contains a very short mention on invoking init scripts from
+        unit files)
+
+5.6.4. Výzvy počas zavádzania systému so systemd vyžadujú Plymouth
+
+    Ak zavádzanie vášho systému prebieha interaktívne (napríklad
+    vyžaduje zadanie hesla k šifrovanému disku), uistite sa, že máte
+    nainštalovaný a nakonfigurovaný plymouth. Informácie o
+    konfigurovaní plymouth nájdete na /usr/share/doc/plymouth/
+    README.Debian.
+
+    Ak nemáte plymouth, môže sa stať, že sa výzva počas zavádzania
+    systému nezobrazí. Hlásenia naznačujú, že cryptsetup síce prijíma
+    vstup, no ten sa nezobrazuje. Ak narazíte na tento problém, po
+    napísaní správneho hesla by vám malo byť umožnené normálne
+    pokračovať ďalej.
+
+5.6.5. Interakcia medzi logind a acpid
+
+    Udalosti ACPI môže spracovávať buď logind alebo acpid. V prípade,
+    že sú obe služby nakonfigurované, aby spracovávali udalosti
+    rôznymi spôsobmi, môže to viesť k nežiaducim výsledkom.
+
+    Odporúčame previesť akékoľvek neštandardné nastavenia do logind a
+    odinštalovať acpid. Alternatívou je nastaviť logind, aby
+    ignoroval udalosti ACPI, pridaním:
+
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+    HandleLidSwitch=ignore
+
+    do /etc/systemd/logind.conf. Všimnite si, že to môže zmeniť
+    správanie pracovných prostredí, ktoré závisia na logind.
+
+5.6.6. Nepodporované funkcie crypttab pod systemd (napríklad
+„keyscript=...“)
+
+    Niektoré funkcie cryptsetup bohužiaľ nie sú podporované, ak
+    používate systemd ako init systém. Sú to:
+
+      * precheck
+
+      * check
+
+      * checkargs
+   
+      * noearly
+
+      * loud
+
+      * keyscript
+
+    Ak úspešné zavedenie vášho systému spolieha na niektorú z týchto
+    funkcií, budete musieť ako init systém použiť sysvinit
+    (sysvinit-core). Informácie o tom, ako sa vyhnúť konkrétnemu init
+    systému nájdete v časti Oddiel 5.6, “Aktualizácia na Jessie
+    nainštaluje nový predvolený init systém”.
+
+    Ak chcete skontrolovať, či váš systém používa niektorú z týchto
+    funkcií, spustite nasledovný príkaz:
+
+    grep -e precheck -e check -e checkargs -e noearly -e loud -e keyscript /etc/crypttab
+
+    Ak vyššie uvedený príkaz nič nevypíše, váš systém nepoužíva
+    žiadnu z uvedených funkcií.
+
+5.6.7. systemd: issues SIGKILL too early [fixed in 8.1]
+
+    Poznámka
+   
+    This issue was fixed in the 8.1 Jessie point release.
+
+    A regression was reported in systemd after the Jessie release.
+    The bug occurs during shutdown or reboot, where systemd does not
+    give any reasonable delay before issuing SIGKILL to processes.
+    This can lead to data loss in processes that have not saved all
+    data at the time of the reboot (e.g. running databases).
+
+    This issue is tracked in the Debian bug #784720 (https://
+    bugs.debian.org/784720)
+
+5.6.8. systemd: behavior of 'halt' command
+
+    The sysvinit implementation of the halt command powered off the
+    machine as well. The systemd-sysv implementation halts the
+    system, but does not power off the machine. To halt the machine
+    and turn it off, use the poweroff command.
+
+    See also Debian bug #760923 (https://bugs.debian.org/760923)
+
+5.7. Požadované konfiguračné voľby jadra pre Jessie
+
+    Poznámka
+
+    Táto časť je len pre ľudí, ktorí si zostavujú vlastné jadro. Ak
+    používate jadrá, ktoré zostavil Debian, môžete túto časť
+    ignorovať.
+
+    The following kernel configuration options are now either
+    required or recommended for Jessie (in addition to existing ones
+    from previous releases):
+
+    # Voľbu vyžaduje udev
+    CONFIG_DEVTMPFS=y
+    # Voľbu vyžadujú *niektoré* služby systemd
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+    # Voľbu vyžaduje "bluez" (GNOME)
+    CONFIG_BT=y
+    # Voľbu vyžaduje cups + systemd.
+    CONFIG_PPDEV=y
+
+    The systemd services which require
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y will typically contain at
+    least one of the following directives:
+
+    PrivateTmp=yes
+    PrivateDevices=yes
+    PrivateNetwork=yes
+    ProtectSystem=yes
+
+    If you do not use systemd, or can assert that none of the systemd
+    services will use the above directives, the config option might
+    not be required for your particular system.
+
+    For more information about the requirements, please refer to the
+    section called "REQUIREMENTS" in the README (https://
+    sources.debian.net/src/systemd/jessie/README/) file for the
+    package systemd.
+
+5.8. Aktualizácia hostiteľov a kontajnerov LXC
+
+    Poznámka
+
+    Táto časť sa vzťahuje len na systémy, ktoré majú kontajnery alebo
+    hostiteľa LXC. Systémy bežných koncových používateľov ich
+    zvyčajne nemajú.
+
+    The upgrade from Wheezy to Jessie will migrate your system to the
+    systemd init system by default (see Oddiel 5.6, “Aktualizácia na
+    Jessie nainštaluje nový predvolený init systém”).
+
+    When upgrading an LXC container or an LXC virtual machine, this
+    will have different consequences depending on whether the host
+    system has already been upgraded to Jessie or not.
+
+5.8.1. Aktualizácia hosťov LXC bežiacich na hostiteľoch Wheezy
+
+    If you are upgrading an LXC guest container that is running on a 
+    Wheezy host system, then you will need to prevent the guest from
+    being automatically migrated to systemd. You prevent the
+    migration via pinning, as described in Oddiel 5.6, “Aktualizácia
+    na Jessie nainštaluje nový predvolený init systém”.
+
+    This is required as the Wheezy host lacks functionality to boot a
+    system running systemd.
+
+    You should be able to switch over to systemd inside the LXC guest
+    once you have upgraded the host system to Jessie. See the next
+    paragraph for things that need to be adapted on Jessie hosts.
+
+5.8.2. Aktualizácia hosťov LXC bežiacich na hostiteľoch Jessie
+
+    In order to be able to boot LXC guests with systemd, you need to
+    adapt your LXC container configuration. The container
+    configuration can usually be found in /var/lib/lxc/CONTAINER_NAME
+    /config You need to add the following two settings to the
+    configuration:
+
+    lxc.autodev = 1
+    lxc.kmsg = 0
+
+5.8.3. Ďalšie informácie
+
+    You can find further information on LXC in Debian in the Debian
+    wiki (https://wiki.debian.org/LXC) .
+
+5.9. Manual migration of disks encrypted with LUKS whirlpool
+(non-standard setups)
+
+    Poznámka
+
+    This section is only for people who have set up LUKS encrypted
+    disks themselves using the whirlpool hash. The debian-installer
+    has never supported creating such disks.
+
+    If you have manually set up an encrypted disk with LUKS
+    whirlpool, you will need to migrate it manually to a stronger
+    hash. You can check if your disk is using whirlpool by using the
+    following command:
+
+    # /sbin/cryptsetup luksDump <disk-device> | grep -i whirlpool
+
+    For more information on migrating, please see item "8.3 Gcrypt
+    1.6.x and later break Whirlpool" of the cryptsetup FAQ (https://
+    code.google.com/p/cryptsetup/wiki/FrequentlyAskedQuestions) .
+
+    Výstraha
+
+    If you have such a disk, cryptsetup will refuse to decrypt it by
+    default. If your rootdisk or other system disks (e.g. /usr) are
+    encrypted with whirlpool, you should migrate them prior to the
+    first reboot after upgrading cryptsetup.
+
+5.10. Pracovné prostredie GNOME vyžaduje základnú 3D grafiku
+
+    Pracovné prostredie GNOME 3.14 v Jessie už viac neobsahuje
+    záložnú podporu pre počítače bez základného urýchľovania 3D
+    grafiky. Aby správne bežalo, potrebuje buď dostatočne nové PC
+    (potrebnú podporu SSE2 by malo mať akékoľvek PC zostavené v
+    posledných 10 rokoch) alebo v prípade architektúr iných ako i386
+    a amd64, grafická karta s 3D akceleráciou a ovládačom s podporou
+    EGL.
+
+5.11. Pracovné prostredie GNOME nefunguje s proprietárnym ovládačom
+FGLRX od AMD
+
+    Na rozdiel od iných ovládačov OpenGL, ovládač AMD FGLRX pre karty
+    Radeon nepodporuje rozhranie EGL. Z toho dôvodu sa niekoľko
+    aplikácií GNOME vrátane jadra pracovného prostredia GNOME vôbec
+    nespustí ak sa používa tento ovládač.
+
+    Odporúča sa namiesto neho používať slobodný ovládač radeon, ktorý
+    je v jessie predvolený.
+
+5.12. Zmeny predvolených klávesových skratiek v GNOME
+
+    Predvolené klávesové skratky v GNOME sa zmenili, aby lepšie
+    zodpovedali svojim náprotivkom v niektorých iných operačných
+    systémoch.
+
+    Shortcut settings previously modified by the user will be
+    preserved upon upgrade. These settings can still be configured
+    from the GNOME control center, accessible from the top right menu
+    by clicking on the "settings" icon.
+
+5.13. Changes to default shell of system users provided by
+base-passwd
+
+    The upgrade of the base-passwd package will reset the shell of
+    some system users to the "nologin" shell. This includes the
+    following users:
+
+      * daemon
+
+      * bin
+
+      * sys
+
+      * sync
+
+      * games
+
+      * man
+
+      * lp
+
+      * mail
+
+      * news
+
+      * uucp
+
+      * proxy
+
+      * www-data
+
+      * backup
+
+      * list
+
+      * irc
+
+      * gnats
+
+      * nobody
+
+    If your local setup requires that any of these users have a
+    shell, you should say no to migrating, or migrate and then change
+    the shell of the corresponding users. Notable examples include
+    local backups done via the "backup" user with "ssh-key"
+    authentication.
+
+    Výstraha
+   
+    The migration will happen automatically if your debconf question
+    priority is "high" or above.
+
+    If you know you want to keep the current shell of a given user,
+    you can preseed the questions by using the following:
+
+    echo 'base-passwd base-passwd/system/username/shell/current-shell-mangled/_usr_sbin_nologin boolean false' | debconf-set-selections
+
+    Where username is the name of the user in question and
+    current-shell-mangled is the mangled name of the shell. The
+    mangling is done by replacing all characters other than
+    alphanumerics, dashes, and underscores with underscores. E.g. /
+    bin/bash becomes _bin_bash.
+
+5.14. Migration to new KDE E-mail, Calendar, and Contacts (Kontact)
+
+    The Kontact Personal Information Management system has received a
+    major upgrade. The new version makes much greater use of metadata
+    indexing and each user's data must be migrated into these new
+    indices.
+
+    E-mail, calendar events, and addressbook contacts are
+    automatically migrated when the user logs in and the relevant
+    component is started. Some advanced settings such as e-mail
+    filters and custom templates require manual intervention. Further
+    details and troubleshooting suggestions are collected on the
+    Debian Wiki (https://wiki.debian.org/KDE/Jessie/kontact) .
+
+5.15. Missing virtual consoles ("getty"s) with multiple desktop
+environments
+
+    Poznámka
+
+    This issue is currently reported as fixed in Jessie. Should you
+    still be able to reproduce it, then please follow up to Debian
+    Bug#766462 (https://bugs.debian.org/766462) . Note that you may
+    have to unarchive the issue first (please refer to the Debian BTS
+    control server (https://www.debian.org/Bugs/server-control)
+    documentation on how to unarchive bugs).
+
+    If you have multiple desktop environments installed, you may
+    experience that none of the "virtual consoles" show a login
+    prompt.
+
+    This issue seems to occur when plymouth, systemd, and GNOME are
+    all installed. This issue is reported as Debian Bug#766462
+    (https://bugs.debian.org/766462) .
+
+    It has been reported that removing the "splash" argument from the
+    kernel command-line may work around the issue. Please see /etc/
+    default/grub and remember to run update-grub after updating the
+    file.
+
+5.16. "VGA signal out of range" / blank screen during boot with
+grub-pc
+
+    There is a compatibility issue in grub-pc with older graphics
+    cards (e.g. the "ATI Rage 128 Pro Ultra TR") that can cause it to
+    show a blank screen during boot. The display may issue a "VGA
+    signal out of range" message (or something similar).
+
+    A simple work around is to set GRUB_TERMINAL=console in /etc/
+    default/grub.
+
+5.17. Stricter validation of cron files in crontab
+
+    The crontab program is now more strict and may refuse to save a
+    changed cron file if it is invalid. If you experience issues with
+    crontab -e, please review your crontab for existing mistakes.
+
+5.18. Change in handling of unreadable module paths by perl
+
+    From version 5.18 (and 5.20, which is included in Jessie), Perl
+    will exit with a fatal error if it encounters unreadable module
+    paths in @INC. The previous behavior was to skip such entries. It
+    is recommended to check the contents of @INC in your environment
+    for directories which are not world-readable, and take
+    appropriate action.
+
+    You can see the default @INC for Perl by running perl -V.
+
+5.19. Upgrade considerations for Ganeti clusters
+
+5.19.1. Problem upgrading Ganeti clusters with DRBD-backed instances
+[fixed in 8.1]
+
+    Poznámka
+   
+    This issue was fixed in the 8.1 Jessie point release.
+
+    The version of ganeti (2.12.0-3) released with Jessie does not
+    support migrations from installations running 2.5 or earlier
+    (including Wheezy) in cases where there are instances with DRBD
+    disks. It is hoped that this issue will be fixed in a point
+    release, and recommended that you do not upgrade affected Ganeti
+    clusters in the meantime. You can find more information about
+    this issue at Debian Bug#783186 (https://bugs.debian.org/783186)
+    .
+
+5.19.2. General notes on upgrading Ganeti clusters
+
+    The recommended procedure to upgrade a Ganeti cluster from
+    Wheezy's ganeti version (2.5.2-1) to Jessie's (2.12.0-3) is to
+    stop all instances and then upgrade and reboot all nodes at once.
+    This will ensure that all instances run with Jessie's hypervisor
+    version and that all nodes run the same versions of Ganeti and
+    DRBD.
+
+    Note that running a cluster with mixed 2.5 and 2.12 nodes is not
+    supported. Also note that, depending on the hypervisor, instance
+    live migrations may not work between Wheezy and Jessie hypervisor
+    versions.
+
+5.20. New requirements for file execution in Samba4
+
+    If a client requests that a file should be "opened for
+    execution", Samba4 will require the executable bit to be set on
+    the file in addition to the regular read permissions. This also
+    causes "netlogon" scripts to be silently ignored if they lack
+    this executable bit.
+
+5.21. Cryptsetup can break boot with BUSYBOX=n
+
+    Poznámka
+   
+    This section only applies to people that have manually changed
+    their /etc/initramfs-tools/initramfs.conf to not use busybox.
+
+    If you have both busybox and cryptsetup installed plus configured
+    initramfs to not use busybox, then it may render your system
+    unbootable.
+
+    Please check the value of your BUSYBOX setting in /etc/
+    initramfs-tools/initramfs.conf if you have both of these packages
+    installed. At this time, known work arounds are uninstalling
+    busybox or setting BUSYBOX=y in /etc/initramfs-tools/
+    initramfs.conf.
+
+    Varovanie
+
+    If you had to make any changes, please remember to run
+    update-initramfs -u to update your initramfs. Otherwise, you may
+    still end up with a broken boot.
+
+    Please see Debian Bug#783297 (https://bugs.debian.org/783297) for
+    more information.
+
+5.22. Backwards incompatible changes in the Squid webproxy
+
+    Poznámka
+   
+    This section only applies to people that have installed the squid
+    webproxy.
+
+    The configuration of squid has changed in an incompatible way.
+    Notably some of the squid "helpers" have changed their name. If
+    your configuration relies on old features no longer present or on
+    the old names for the helpers, your squid service may fail to
+    start after the upgrade.
+
+    Please see the upstream release notes for more information. These
+    are:
+
+      * Release notes for Squid 3.2 (http://www.squid-cache.org/
+        Versions/v3/3.2/RELEASENOTES.html) (The renamed helpers can
+        be found in 2.6 Helper Name Changes (http://
+        www.squid-cache.org/Versions/v3/3.2/RELEASENOTES.html#ss2.6)
+        )
+
+      * Release notes for Squid 3.3 (http://www.squid-cache.org/
+        Versions/v3/3.3/RELEASENOTES.html)
+
+      * Release notes for Squid 3.4 (http://www.squid-cache.org/
+        Versions/v3/3.4/RELEASENOTES.html)
+
+Kapitola 6. Ďalšie informácie o Debiane
+
+6.1. Ďalšie čítanie
+
+    Okrem týchto Poznámok k vydaniu a Inštalačnej príručky ďalšiu
+    dokumentáciu o systéme Debian nájdete v rámci Dokumentačného
+    projektu Debian (DDP), ktorého cieľom je tvoriť kvalitnú
+    dokumentáciu pre používateľov a vývojárov Debianu. Medzi dostupnú
+    dokumentáciu patrí Debian Reference, Debian New Maintainers
+    Guide, Debian FAQ a mnohé ďalšie. Podrobnosti o existujúcich
+    zdrojoch nájdete na webstránke DDP (https://www.debian.org/doc/)
+    a na Debian Wiki (https://wiki.debian.org/) .
+
+    Dokumentácia jednotlivých balíkov sa inštaluje do adresára /usr/
+    share/doc/balík. Sem patria informácie o autorských právach,
+    podrobnosti o balíku špecifické pre Debian a všetka dokumentácia
+    pochádzajúca od pôvodných autorov.
+
+6.2. Ako získať pomoc
+
+    Existuje mnoho spôsobov ako získať pomoc, rady a podporu pri
+    používaní Debianu, no mali by ste ich zvážiť až potom, čo ste pri
+    skúmaní dokumentácie problému vyčerpali všetky dostupné zdroje.
+    Tento oddiel poskytuje krátky úvod k tým informačným kanálom,
+    ktoré môžu pomôcť novým používateľom Debianu.
+
+6.2.1. Konferencie
+
+    Konferencie elektronickej pošty, ktoré najviac zaujímajú
+    používateľov Debianu, sú debian-user (po anglicky) a ostatné
+    konferencie debian-user-jazyk (v ostatných jazykoch). Informácie
+    o týchto konferenciách a ako sa do nich prihlásiť popisuje https:
+    //lists.debian.org/ (https://lists.debian.org/) . Rešpektujte
+    prosím štandardnú etiketu elektronickej komunikácie a konferencií
+    a než pošlete svoju otázku, pohľadajte najskôr v archívoch
+    konferencie či sa ju už niekto pýtal.
+
+6.2.2. Internet Relay Chat
+
+    Debian má na IRC sieti OFTC kanál určený na podporu a pomoc
+    používateľom Debianu. Kanál nájdete pod menom #debian na serveri
+    irc.debian.org.
+
+    Prosím, dodržiavajte pravidlá kanála a berte ohľad na ostatných
+    používateľov. Pravidlá nájdete na Debian Wiki (https://
+    wiki.debian.org/DebianIRC) .
+
+    Ďalšie informácie o OFTC nájdete na jeho webovej stránke (http://
+    www.oftc.net/) .
+
+6.3. Oznamovanie chýb
+
+    Snažíme sa, aby sme z Debianu urobili kvalitný operačný systém -
+    to však neznamená, že balíky, ktoré poskytujeme nemajú vôbec
+    žiadne chyby. V súlade s filozofiou “otvoreného vývoja” Debianu a
+    ako službu našim používateľom sprístupňujeme všetky informácie o
+    nahlásených chybách v našom vlastnom Systéme sledovania chýb
+    (BTS). BTS je možné prehliadať na adrese https://bugs.debian.org/
+    (https://bugs.debian.org/) .
+
+    Ak nájdete chybu v distribúcii alebo v niektorom z balíkov
+    softvéru, ktorý je jej súčasťou, oznámte ju prosím, aby ju bolo
+    možné riadne opraviť v ďalších vydaniach. Na oznámenie chyby je
+    potrebné mať platnú emailovú adresu. Vyžadujeme ju preto, aby sme
+    mohli sledovať chyby a aby mohli vývojári kontaktovať
+    oznamovateľov, ak potrebujú podrobnejšie informácie.
+
+    Hlásenie o chybe môžete poslať pomocou programu reportbug alebo
+    manuálne zaslaním emailu. Viac o Systéme sledovania chýb a ako ho
+    používať sa dozviete v jeho dokumentácii (v /usr/share/doc/debian
+    ak máte nainštalovaný balík doc-debian) alebo online na stránke
+    Systému sledovania chýb (https://bugs.debian.org/) .
+
+6.4. Ako prispievať do Debianu
+
+    Aby ste mohli prispievať do Debianu, nemusíte byť expert.
+    Komunite prospievate tým, že pomáhate ostatným používateľom v
+    rôznych konferenciách (https://lists.debian.org/) používateľskej
+    podpory. Identifikáciou (a tiež riešením) problémov týkajúcich sa
+    vývoja distribúcie, ak sa zapojíte do vývojárskych konferencií
+    (https://lists.debian.org/) môžete tiež veľmi pomôcť. Aby sa
+    udržala vysoká kvalita distribúcie Debian, posielajte hlásenia o
+    chybách (https://bugs.debian.org/) a pomáhajte vývojárom sledovať
+    a opraviť ich. Nástroj how-can-i-help (ako môžem pomôcť) vám
+    pomôže nájsť vhodné nahlásené chyby, na ktorých môžete pracovať.
+    Ak ste šikovný v písaní, môžete aktívnejšie prispieť tým, že
+    pomôžete písať dokumentáciu (https://www.debian.org/doc/) alebo
+    prekladať (https://www.debian.org/international/) existujúcu
+    dokumentáciu do svojho jazyka.
+
+    Ak chcete venovať viac času, môžete v rámci Debianu spravovať
+    časť kolekcie slobodného softvéru. Obzvlášť užitočné je, ak ľudia
+    prevezmú alebo začnú spravovať veci, ktoré si niekto vyžiadal
+    zaradiť do Debianu. Podrobnosti o tomto nájdete v databáze
+    balíkov, ktoré potrebujú pomoc a perspektívnych balíkov (https://
+    www.debian.org/devel/wnpp/) . Ak vás zaujímajú konkrétne skupiny,
+    môže vás baviť účasť v niektorom z podprojektov Debianu, kam
+    patria okrem iného porty na rôzne architektúry a Debian Pure
+    Blends (https://wiki.debian.org/DebianPureBlends) pre špecifické
+    skupiny používateľov.
+
+    V každom prípade, ak sa akýmkoľvek spôsobom podieľate na komunite
+    slobodného softvéru, či ako používateľ, programátor, tvorca
+    dokumentácie alebo prekladateľ, pomáhate tým hnutiu slobodného
+    softvéru. Prispievanie je veľmi užitočné a často aj zábavné,
+    umožňuje vám spoznať nových ľudí a dáva vám ťažko popísateľný
+    hrejivý pocit.
+
+Dodatok A. Ako spravovať váš systém wheezy pred aktualizáciou
+
+    Táto príloha obsahuje informácie o tom, ako sa môžete uistiť, že
+    dokážete inštalovať a aktualizovať balíky wheezy pred
+    aktualizáciou na jessie. Malo by to byť potrebné iba v určitých
+    situáciách.
+
+A.1. Ako aktualizovať váš systém wheezy
+
+    V podstate sa to nelíši od bežnej aktualizácie wheezy, akú ste
+    vykonávali doteraz. Jediný rozdiel je v tom, že sa musíte uistiť,
+    že váš zoznam balíkov ešte stále obsahuje odkazy na wheezy, ako
+    vysvetľuje Oddiel A.2, “Ako skontrolovať váš zoznam zdrojov”.
+
+    Ak aktualizujete svoj systém pomocou zrkadla Debianu, bude
+    automaticky aktualizovaný na najnovšiu aktualizáciu stabilnej
+    vetvy (point release) wheezy.
+
+A.2. Ako skontrolovať váš zoznam zdrojov
+
+    Ak ktorýkoľvek z riadkov vo vašom /etc/apt/sources.list odkazuje
+    na „stable“, už vlastne “používate” jessie. To nemusí byť to, čo
+    ste mali v úmysle, ak zatiaľ nie ste na aktualizáciu pripravený.
+    Ak ste už spustili apt-get update, ešte stále sa môžete vrátiť
+    späť bez problémov pomocou nasledovnej procedúry.
+
+    Ak ste už naviac nainštalovali balíky z jessie, už pravdepodobne
+    nemá zmysel inštalovať balíky z wheezy. V tom prípade sa budete
+    musieť sami rozhodnúť či chcete pokračovať alebo nie. Je možné
+    znížiť verziu balíkov, ale to tento dokument nepopisuje.
+
+    Otvorte súbor /etc/apt/sources.list vo svojom obľúbenom editore
+    (ako root) a skontrolujte všetky riadky začínajúce deb http:
+    alebo deb ftp: či obsahujú odkaz na „stable“. Ak nejaké nájdete,
+    zmeňte ich zo stable na wheezy.
+
+    Ak máte nejaké riadky začínajúce deb file:, musíte sami
+    skontrolovať, či miesto kam odkazujú obsahuje archív wheezy alebo
+    archív jessie.
+
+    Dôležité
+
+    Nemeňte žiadne riadky začínajúce deb cdrom:. Tým by ste riadok
+    zneplatnili a museli by ste znova spustiť apt-cdrom.
+    Neznepokojujte sa ak riadok so zdrojom „cdrom“ odkazuje na
+    „unstable“. Hoci to môže byť mätúce, je to v poriadku.
+
+    Ak ste vykonali nejaké zmeny, uložte súbor a spustite
+
+    # apt-get update
+
+    aby sa aktualizoval zoznam balíkov.
+
+A.3. Odstránenie zastaralých konfiguračných súborov
+
+    Pred aktualizáciou systému na jessie sa odporúča odstrániť zo
+    systému staré konfiguračné súbory (napríklad súbory *.dpkg-
+    {new,old} súbory v /etc).
+
+A.4. Aktualizácia starých locales na UTF-8
+
+    Ak je váš systém lokalizovaný a používa locale, ktoré nie je
+    založené na UTF-8, mali by ste silne zvážiť zmenu locales vášho
+    systému na UTF-8. V minulosti boli identifikované chyby^[6],
+    ktoré sa prejavujú iba pri locale, ktoré nie sú založené na
+    UTF-8. Na systéme s pracovným prostredím sú takéto staré locales
+    podporované iba škaredými kľučkami vnútri knižníc a nedokážeme
+    kvalitne podporovať používateľov, ktorí ich ešte používajú.
+
+    Locale svojho systému môžete nastaviť spustením dpkg-reconfigure
+    locales. Uistite sa, že ste zvolili UTF-8 locale, pri výbere
+    predvoleného locale systému. Okrem toho by ste mali skontrolovať
+    nastavenia locale svojich používateľov a ubezpečiť sa, že vo
+    svojej konfigurácii nepoužívajú staré locales.
+
+
+---------------------------------------------------------------------
+
+    ^[6] V šetriči obrazovky GNOME, ak nepoužívate UTF-8, používanie
+    hesiel s ne-ASCII znakmi, podpora pam_ldap alebo dokonca
+    schopnosť odomknúť obrazovku môžu byť nespoľahlivé. Čítačka
+    obrazovky GNOME trpí chybou #599197 (http://bugs.debian.org/
+    599197) . Správca súborov Nautilus (a všetky programy založené na
+    glib, a pravdepodobne tiež všetky programy založené na Qt)
+    predpokladajú, že názvy súborov sú v UTF-8, zatiaľčo shell
+    predpokladá, že sú v kódovaní podľa aktuálne nastaveného locale.
+    Ne-ASCII znaky v názvov sú tak na každodenné použitie v takomto
+    prostredí prakticky nepoužiteľné. Navyše čítačka obrazovky
+    gnome-orca (ktorá sprístupňuje zrakovo postihnutým používateľom
+    prístup k pracovnému prostrediu GNOME) vyžaduje od vydania
+    Squeeze locale UTF-8; pri použití staršej znakovej sady, nebude
+    schopná prečítať informácie okien prvkov pracovnej plochy ako
+    Nautilus/GNOME Panel alebo ponuku LeftAlt-F1.
+
+Dodatok B. Prispievatelia do Poznámok k vydaniu
+
+    Vzniku týchto Poznámok k vydaniu pomohli mnohí ľudia, okrem iných
+    aj
+
+    Adam Di Carlo, Andreas Barth, Andrei Popescu, Anne Bezemer, Bob 
+    Hilliard, Charles Plessy, Christian Perrier, Daniel Baumann, 
+    David Prévot, Eddy Petrișor, Emmanuel Kasper, Esko Arajärvi, 
+    Frans Pop, Giovanni Rapagnani, Gordon Farquharson, Javier 
+    Fernández-Sanguino Peña, Jens Seidel, Jonas Meurer, Jonathan 
+    Nieder, Joost van Baal-Ilić, Josip Rodin, Julien Cristau, Justin
+    B Rye, LaMont Jones, Luk Claes, Martin Michlmayr, Michael Biebl, 
+    Moritz Mühlenhoff, Niels Thykier, Noah Meyerhans, Noritada 
+    Kobayashi, Osamu Aoki, Peter Green, Rob Bradford, Samuel Thibault
+    , Simon Bienlein, Simon Paillard, Stefan Fritsch, Steve Langasek,
+    Steve McIntyre, Tobias Scherer, Vincent McIntyre a W. Martin 
+    Borgert.
+
+    Tento dokument bol preložený do mnohých jazykov. Vďaka
+    prekladateľom!
+
+    Do slovenčiny preložil: Ivan Masár.
+
+Zoznam
+
+A
+
+Abiword, Čo je nové v distribúcii?
+Apache, Čo je nové v distribúcii?
+
+B
+
+BIND, Čo je nové v distribúcii?
+Blu-ray, Disky CD, DVD a BD
+
+C
+
+Calligra, Čo je nové v distribúcii?
+CD, Disky CD, DVD a BD
+Courier, Čo je nové v distribúcii?
+
+D
+
+Dia, Čo je nové v distribúcii?
+DocBook XML, Zdroje tohto dokumentu
+DVD, Disky CD, DVD a BD
+
+E
+
+Evolution, Čo je nové v distribúcii?
+Exim, Čo je nové v distribúcii?
+
+G
+
+GCC, Čo je nové v distribúcii?
+GNOME, Čo je nové v distribúcii?
+GNUcash, Čo je nové v distribúcii?
+GNUmeric, Čo je nové v distribúcii?
+
+K
+
+KDE, Čo je nové v distribúcii?
+
+L
+
+LibreOffice, Čo je nové v distribúcii?
+LXDE, Čo je nové v distribúcii?
+
+O
+
+OpenSSH, Čo je nové v distribúcii?
+
+P
+
+packages
+
+    apache2, Nekompatibilné zmeny v Apache HTTPD 2.4
+    apt, Ako posielať správy o aktualizácii, Príprava zdrojov APT, 
+        Pridávanie internetových zdrojov APT, Pridanie zdrojov APT
+        lokálneho zrkadla
+    apt-listchanges, Minimálna aktualizácia systému
+    aptitude, Uistite sa, že na aktualizáciu máte dosť miesta na
+        disku, Vyčistenie (purge) odstránených balíkov
+    base-passwd, Changes to default shell of system users provided by
+        base-passwd
+    busybox, Cryptsetup can break boot with BUSYBOX=n
+    cryptsetup, Manual migration of disks encrypted with LUKS
+        whirlpool (non-standard setups), Cryptsetup can break boot
+        with BUSYBOX=n
+    dblatex, Zdroje tohto dokumentu
+    debian-goodies, Uistite sa, že na aktualizáciu máte dosť miesta
+        na disku
+    debian-kernel-handbook, Inštalácia metabalíka jadra
+    debian-security-support, Bezpečnosť, Obmedzenia bezpečnostnej
+        podpory
+    doc-debian, Oznamovanie chýb
+    docbook-xsl, Zdroje tohto dokumentu
+    dpkg, Ako posielať správy o aktualizácii
+    games-content-dev, Debian Games Blend
+    ganeti, Problem upgrading Ganeti clusters with DRBD-backed
+        instances [fixed in 8.1], General notes on upgrading Ganeti
+        clusters
+    gcc, Bezpečnosť
+    grub-pc, "VGA signal out of range" / blank screen during boot
+        with grub-pc
+    hardening-wrapper, Zavrhované komponenty
+    how-can-i-help, Ako prispievať do Debianu
+    initramfs-tools, Ladiaci shell počas štartu pomocou initrd, 
+        Aktualizácia jadra a súvisiacich balíkov, Zmeny pripájania a
+        kontroly koreňového súborového systému a /usr
+    libjpeg-progs, Zastaralé balíky
+    libjpeg-turbo-progs, Zastaralé balíky
+    libreoffice, Zastaralé balíky
+    libv8-3.14, Chýbajúca bezpečnostná podpora ekosystému okolo libv8
+        a Node.js
+    linux-image-*, Aktualizácia jadra a súvisiacich balíkov
+    linux-image-amd64, Inštalácia metabalíka jadra
+    linux-source, Inštalácia metabalíka jadra
+    localepurge, Uistite sa, že na aktualizáciu máte dosť miesta na
+        disku
+    mediawiki, Predčasné ukončenie bezpečnostnej podpory MediaWiki
+    mplayer, Zastaralé balíky
+    mplayer2, Zastaralé balíky
+    mpv, Zastaralé balíky
+    needrestart, Bezpečnosť
+    nodejs, Chýbajúca bezpečnostná podpora ekosystému okolo libv8 a
+        Node.js
+    openjdk-6-*, Zastaralé balíky
+    openjdk-7-*, Zastaralé balíky
+    openoffice.org, Zastaralé balíky
+    openssh-server, Server OpenSSH má štandardne nastavenú voľbu
+        „PermitRootLogin without-password“
+    perl, Change in handling of unreadable module paths by perl
+    php-horde, Aplikácie PHP
+    plymouth, Výzvy počas zavádzania systému so systemd vyžadujú
+        Plymouth, Missing virtual consoles ("getty"s) with multiple
+        desktop environments
+    popularity-contest, Uistite sa, že na aktualizáciu máte dosť
+        miesta na disku
+    postgresql-9.1, Zastaralé balíky
+    postgresql-9.4, Zastaralé balíky
+    postgresql-plperl-9.1, Zastaralé balíky
+    puppetmaster, Kompatibilita Puppet 2.7 / 3.7
+    python3.2, Zastaralé balíky
+    python3.4, Zastaralé balíky
+    release-notes, Ako oznamovať chyby v tomto dokumente
+    ruby, Zastaralé balíky
+    ruby1.8, Zastaralé balíky
+    ruby1.9.1, Zastaralé balíky
+    ruby2.1, Zastaralé balíky
+    squid, Zastaralé balíky
+    squid3, Zastaralé balíky
+    systemd, Nový predvolený init systém (systemd), Locally modified
+        init-scripts may need to be ported to systemd, Požadované
+        konfiguračné voľby jadra pre Jessie, Missing virtual consoles
+        ("getty"s) with multiple desktop environments
+    systemd-shim, Aktualizácia na Jessie nainštaluje nový predvolený
+        init systém
+    systemd-sysv, Nový predvolený init systém (systemd), Aktualizácia
+        na Jessie nainštaluje nový predvolený init systém, Prísnejší
+        prístup k súborovým systémom, ktoré sa nepodarilo pripojiť
+        počas štartu pod systemd, systemd: behavior of 'halt' command
+    sysvinit, Nový predvolený init systém (systemd), Ladiaci shell
+        počas štartu pomocou systemd, systemd: behavior of 'halt'
+        command
+    sysvinit-core, Aktualizácia na Jessie nainštaluje nový predvolený
+        init systém, Nepodporované funkcie crypttab pod systemd
+        (napríklad „keyscript=...“)
+    tinc, Pripravte bezpečné prostredie na aktualizáciu
+    udev, Aktualizácia jadra a súvisiacich balíkov
+    upgrade-reports, Ako posielať správy o aktualizácii
+    upstart, Aktualizácia na Jessie nainštaluje nový predvolený init
+        systém
+    xmlroff, Zdroje tohto dokumentu
+    xsltproc, Zdroje tohto dokumentu
+
+Perl, Čo je nové v distribúcii?
+PHP, Čo je nové v distribúcii?
+Postfix, Čo je nové v distribúcii?
+PostgreSQL, Čo je nové v distribúcii?
+
+X
+
+Xfce, Čo je nové v distribúcii?
+
+Slovník
+
+ACPI
+
+    Advanced Configuration and Power Interface
+
+ALSA
+
+    Advanced Linux Sound Architecture
+
+APM
+
+    Advanced Power Management
+
+BD
+
+    Blu-ray Disc
+
+CD
+
+    Compact Disc
+
+CD-ROM
+
+    Compact Disc Read Only Memory
+
+DHCP
+
+    Dynamic Host Configuration Protocol
+
+DNS
+
+    Domain Name System
+
+DVD
+
+    Digital Versatile Disc
+
+GIMP
+
+    GNU Image Manipulation Program
+
+GNU
+
+    GNU's Not Unix
+
+GPG
+
+    GNU Privacy Guard
+
+IDE
+
+    Integrated Drive Electronics
+
+LDAP
+
+    Lightweight Directory Access Protocol
+
+LILO
+
+    LInux LOader
+
+LSB
+
+    Linux Standard Base
+
+LVM
+
+    Logical Volume Manager
+
+MTA
+
+    Mail Transport Agent
+
+NBD
+
+    Sieťové blokové zariadenie (NBD)
+
+NFS
+
+    Network File System
+
+NIC
+
+    Network Interface Card
+
+NIS
+
+    Network Information Service
+
+OSS
+
+    Open Sound System
+
+RAID
+
+    Redundant Array of Independent Disks
+
+RPC
+
+    Remote Procedure Call
+
+SATA
+
+    Serial Advanced Technology Attachment
+
+SSL
+
+    Secure Sockets Layer
+
+TLS
+
+    Transport Layer Security
+
+UEFI
+
+    Unified Extensible Firmware Interface
+
+USB
+
+    Universal Serial Bus
+
+UUID
+
+    Universally Unique Identifier
+
+VGA
+
+    Video Graphics Array
+
+WPA
+
+    Wi-Fi Protected Access
+

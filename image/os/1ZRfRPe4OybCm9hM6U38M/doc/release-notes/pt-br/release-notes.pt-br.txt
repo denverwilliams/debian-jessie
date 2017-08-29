@@ -1,0 +1,3263 @@
+
+        Notas de lançamento do Debian 8 (jessie), PC 64 bits
+
+
+---------------------------------------------------------------------
+
+Projeto de Documentação Debian (http://www.debian.org/doc/)
+
+    Este documento é um software livre; você pode redistribuí-lo e/ou
+    modificá-lo sob os termos da Licença Pública Geral GNU, versão 2,
+    como publicada pela Free Software Foundation.
+
+    Este programa é distribuído na expectativa de que seja útil, mas
+    SEM NENHUMA GARANTIA; sem mesmo a garantia implícita de
+    COMERCIABILIDADE ou ADAPTAÇÃO A UM PROPÓSITO PARTICULAR. Veja a
+    Licença Pública Geral GNU (GPL) para mais detalhes.
+
+    Você deve ter recebido uma cópia da Licença Pública Geral GNU
+    (GPL) juntamente com este programa; caso contrário, escreva para
+    a Free Software Foundation, Inc., 51 Franklin Street, Fifth
+    Floor, Boston, MA 02110-1301 USA.
+
+    O texto da licença também pode ser encontrado em http://
+    www.gnu.org/licenses/gpl-2.0.html (http://www.gnu.org/licenses/
+    gpl-2.0.html) e no arquivo /usr/share/common-licenses/GPL-2 em
+    uma máquina Debian.
+
+---------------------------------------------------------------------
+
+Índice
+
+1. Introdução
+
+    1.1. Reportando bugs neste documento
+    1.2. Contribuindo com relatórios de atualização
+    1.3. Código fonte deste documento
+
+2. Quais as novidades no Debian 8
+
+    2.1. Arquiteturas suportadas
+    2.2. Quais as novidades na distribuição?
+
+        2.2.1. CDs, DVDs e BDs
+        2.2.2. Mudanças na área de trabalho GNOME
+        2.2.3. Novo sistema de inicialização padrão (systemd)
+        2.2.4. Segurança
+        2.2.5. MariaDB ao lado do MySQL
+        2.2.6. Aplicativos PHP
+        2.2.7. Blend Debian Games
+        2.2.8. Novidades da Blend Debian Med
+        2.2.9. Novidades da Blend Debian Science
+        2.2.10. Novidades da Blend Debian Geographical Information
+            Systems (GIS)
+        2.2.11. Novidades da equipe de Java do Debian
+
+3. Sistema de instalação
+
+    3.1. Quais as novidades do sistema de instalação?
+
+        3.1.1. Grandes mudanças
+        3.1.2. Instalação automatizada
+
+4. Atualizações a partir do Debian 7 (wheezy)
+
+    4.1. Preparando para a atualização
+
+        4.1.1. Faça backup de quaisquer dados ou informações de
+            configuração
+        4.1.2. Informe os usuários com antecedência
+        4.1.3. Preparar para a indisponibilidade dos serviços
+        4.1.4. Preparar para recuperação
+        4.1.5. Preparar um ambiente seguro para a atualização
+
+    4.2. Verificando a situação do sistema
+
+        4.2.1. Rever as ações pendentes no gerenciador de pacotes
+        4.2.2. Desabilitando o pinning do APT
+        4.2.3. Verificando a situação dos pacotes
+        4.2.4. A seção “proposed-updates”
+        4.2.5. Fontes não oficiais
+
+    4.3. Preparando as fontes para o APT
+
+        4.3.1. Adicionar fontes da Internet ao APT
+        4.3.2. Adicionando fontes ao APT para um espelho local
+        4.3.3. Adicionando fontes ao APT a partir de mídia ótica
+
+    4.4. Atualizando pacotes
+
+        4.4.1. Gravando a sessão
+        4.4.2. Atualizando a lista de pacotes
+        4.4.3. Certifique-se que você tem espaço suficiente para a
+            atualização
+        4.4.4. Atualização mínima do sistema
+        4.4.5. Atualizando o sistema
+
+    4.5. Possíveis problemas durante a atualização
+
+        4.5.1. O dist-upgrade falha com “Could not perform immediate
+            configuration”
+        4.5.2. Remoções esperadas
+        4.5.3. Loops de conflitos ou pré-dependências
+        4.5.4. Conflitos de arquivo
+        4.5.5. Mudanças de configuração
+        4.5.6. Mudança de sessão para o console
+        4.5.7. Cuidados especiais com pacotes específicos
+
+    4.6. Atualizando o seu kernel e pacotes relacionados
+
+        4.6.1. Instalando um metapacote do kernel
+        4.6.2. Mudanças na montagem e verificação do sistema de
+            arquivos raiz e /usr
+
+    4.7. Coisas para fazer antes de reinicializar
+    4.8. Preparar para a próxima versão
+
+        4.8.1. Expurgando pacotes removidos
+
+    4.9. Componentes obsoletos
+    4.10. Pacotes obsoletos
+
+        4.10.1. Pacotes fictícios
+
+5. Problemas a serem considerados para a jessie
+
+    5.1. Limitações no suporte de segurança
+
+        5.1.1. Situação da segurança dos navegadores web
+        5.1.2. Falta de suporte de segurança para o ecossistema em
+            torno da libv8 e Node.js
+        5.1.3. Término antecipado do suporte de segurança do
+            MediaWiki
+
+    5.2. O servidor OpenSSH predefine “PermitRootLogin
+        without-password”
+    5.3. Compatibilidade puppet 2.7 / 3.7
+    5.4. A atualização para PHP 5.6 tem mudanças de comportamento
+    5.5. Mudanças incompatíveis no Apache HTTPD 2.4
+    5.6. A atualização instala o novo sistema init padrão para Jessie
+
+        5.6.1. Tratamento mais rigoroso de falhas de montagem durante
+            a inicialização sob systemd
+        5.6.2. Scripts init obsoletos devem ser expurgados
+        5.6.3. Scripts init modificados localmente podem precisar ser
+            portados para o systemd
+        5.6.4. Necessidade do plymouth para prompts de inicialização
+            sob inicializações com systemd
+        5.6.5. Interação entre logind e acpid
+        5.6.6. Recursos do crypttab não suportados pelo systemd (por
+            exemplo, “keyscript=...”)
+        5.6.7. systemd: envia SIGKILL muito cedo [corrigido na 8.1]
+        5.6.8. systemd: comportamento do comando “halt”
+
+    5.7. Opções de configuração do kernel necessárias para a Jessie
+    5.8. Considerações de atualização para hospedeiros e contêineres
+        LXC
+
+        5.8.1. Atualizando hóspedes LXC em execução sob hospedeiros
+            Wheezy
+        5.8.2. Atualizando hóspedes LXC em execução sob hospedeiros
+            Jessie
+        5.8.3. Informações adicionais
+
+    5.9. Migração manual de discos criptografados com LUKS whirlpool
+        (configurações não padrão)
+    5.10. A área de trabalho GNOME necessita placa gráfica 3D básica
+    5.11. A área de trabalho GNOME não funciona com o driver FGLRX
+        proprietário da AMD
+    5.12. Mudanças nos atalhos de teclado padrão do GNOME
+    5.13. Mudanças do shell padrão dos usuários do sistema fornecidos
+        pelo base-passwd
+    5.14. Migração para os novos E-mail, Calendário e Contatos
+        (Kontact) do KDE
+    5.15. Falta de consoles virtuais (“getty”s) com múltiplos
+        ambientes de área de trabalho
+    5.16. “VGA signal out of range” / tela em branco durante a
+        inicialização com o grub-pc
+    5.17. Validação mais rigorosa de arquivos cron no crontab
+    5.18. Mudança no tratamento dos caminhos de módulo ilegíveis pelo
+        perl
+    5.19. Considerações de atualização para clusters Ganeti
+
+        5.19.1. Problema ao atualizar clusters Ganeti com instâncias
+            suportadas por DRBD [corrigido na 8.1]
+        5.19.2. Notas gerais sobre a atualização de clusters Ganeti
+
+    5.20. Novos requisitos para execução de arquivos no Samba4
+    5.21. O cryptsetup pode quebrar a inicialização com BUSYBOX=n
+    5.22. Backwards incompatible changes in the Squid webproxy
+
+6. Mais informações sobre o Debian
+
+    6.1. Leitura complementar
+    6.2. Obtendo ajuda
+
+        6.2.1. Listas de discussão
+        6.2.2. Internet Relay Chat
+
+    6.3. Relatando bugs
+    6.4. Contribuindo para o Debian
+
+A. Gerenciando seu sistema wheezy antes da atualização
+
+    A.1. Atualizando seu sistema wheezy
+    A.2. Verificando sua lista de fontes (sources list)
+    A.3. Removendo arquivos de configuração obsoletos
+    A.4. Atualizar locales antigos para UTF-8
+
+B. Colaboradores das notas de lançamento
+Índice Remissivo
+glossário
+
+Capítulo 1. Introdução
+
+    Este documento dá aos usuários da distribuição Debian informações
+    sobre grandes mudanças na versão 8 (codinome jessie).
+
+    As notas de lançamento fornecem informações sobre como atualizar
+    de forma segura a partir da versão 7 (codinome wheezy) para a
+    versão atual e dá aos usuários informações sobre potenciais
+    problemas conhecidos que eles possam encontrar nesse processo.
+
+    Você pode obter a versão mais recente deste documento na https://
+    www.debian.org/releases/jessie/releasenotes (https://
+    www.debian.org/releases/jessie/releasenotes) . Em caso de dúvida,
+    verifique a data na primeira página do documento para ter certeza
+    de que você está lendo uma versão atualizada.
+
+    Cuidado
+
+    Note que é impossível listar todos os problemas conhecidos e
+    portanto uma seleção foi feita baseada numa combinação da
+    quantidade esperada e do impacto desses problemas.
+
+    Por favor, note que só damos suporte e documentamos a atualização
+    a partir da versão anterior do Debian (nesse caso, a atualização
+    a partir da versão wheezy). Caso você precise atualizar a partir
+    de versões mais antigas, nós sugerimos que você leia as edições
+    anteriores das notas de lançamento e atualize para a wheezy
+    primeiro.
+
+1.1. Reportando bugs neste documento
+
+    Nós tentamos testar todos os diferentes passos de atualizações
+    descritos neste documento bem como antecipar todos os possíveis
+    problemas que nossos usuários possam encontrar.
+
+    Apesar disso, caso você acredite ter encontrado um bug
+    (informação incorreta ou informação que está faltando) nesta
+    documentação, por favor, registre um bug no sistema de
+    rastreamento de bugs (https://bugs.debian.org/) para o pacote
+    release-notes. É aconselhável que você reveja primeiro os
+    relatórios de bugs existentes (https://bugs.debian.org/
+    release-notes) caso a questão que você encontrou já tenha sido
+    relatada. Sinta-se livre para acrescentar informações adicionais
+    aos relatórios de bugs existentes, caso você possa contribuir com
+    conteúdo para este documento.
+
+    Apreciamos, e encorajamos, relatórios fornecendo patches para o
+    código fonte deste documento. Você encontrará mais informações
+    sobre como obter o código fonte deste documento na Seção 1.3,
+    “Código fonte deste documento”.
+
+1.2. Contribuindo com relatórios de atualização
+
+    Nós apreciamos quaisquer informações dos usuários relacionadas a
+    atualizações da wheezy para a jessie. Caso você esteja
+    interessado em compartilhar informação, por favor, registre um
+    bug no sistema de rastreamento de bugs (https://bugs.debian.org/)
+    para o pacote upgrade-reports com os seus resultados. Nós pedimos
+    que você compacte quaisquer anexos que venha a incluir (usando o 
+    gzip).
+
+    Por favor, inclua as seguintes informações quando enviar seu
+    relatório de atualização:
+
+      * O estado da sua base de dados de pacotes antes e depois da
+        atualização: a base de dados de estados do dpkg está
+        disponível em /var/lib/dpkg/status e a informação do estado
+        dos pacotes do apt está disponível em /var/lib/apt/
+        extended_states. Você deve ter feito backup antes da
+        atualização conforme descrito na Seção 4.1.1, “Faça backup de
+        quaisquer dados ou informações de configuração”, mas você
+        também pode encontrar backups do /var/lib/dpkg/status em /var
+        /backups.
+
+      * Registros da sessão criados usando o comando script, conforme
+        descrito na Seção 4.4.1, “Gravando a sessão”.
+
+      * Seus logs do apt, disponíveis em /var/log/apt/term.log, ou
+        seus logs do aptitude, disponíveis em /var/log/aptitude.
+
+    Nota
+
+    Você deve usar algum tempo para revisar e remover qualquer
+    informação sensível e/ou confidencial dos logs antes de
+    incluí-los no relatório de bug, pois a informação será
+    disponibilizada em um banco de dados público.
+
+1.3. Código fonte deste documento
+
+    O código fonte deste documento está no formato DocBook XML. A
+    versão HTML é gerada usando docbook-xsl e xsltproc. A versão PDF
+    é gerada usando dblatex ou xmlroff. Os códigos fonte das notas de
+    lançamento estão disponíveis no repositório SVN do Projeto de
+    Documentação Debian. Você pode usar a interface web (https://
+    anonscm.debian.org/viewvc/ddp/manuals/trunk/release-notes/) para
+    acessar seus arquivos individualmente através da web e ver suas
+    mudanças. Para mais informações sobre como acessar o SVN, por
+    favor, consulte as páginas de informação sobre o SVN do Projeto
+    de Documentação Debian (https://www.debian.org/doc/cvs) .
+
+Capítulo 2. Quais as novidades no Debian 8
+
+    O Wiki (https://wiki.debian.org/NewInJessie) contém mais
+    informações sobre esse tópico.
+
+2.1. Arquiteturas suportadas
+
+    O Debian 8 introduz duas novas arquiteturas:
+
+      * arm64, porte 64 bits para máquinas ARM.
+   
+      * ppc64el, porte little-endian 64 bits para máquinas POWER.
+
+    As seguintes arquiteturas são oficialmente suportadas pelo Debian
+    8:
+
+      * PC 32 bits (“i386”) e PC 64 bits (“amd64”)
+
+      * ARM 64 bits (“arm64”)
+
+      * ARM EABI (“armel”)
+
+      * ARMv7 (ARM com unidade de ponto flutuante, “armhf”)
+   
+      * MIPS (“mips” (big-endian) e “mipsel” (little-endian))
+
+      * PowerPC (“powerpc”)
+
+      * PowerPC little-endian 64 bits (“ppc64el”)
+
+      * IBM System z (“s390x”)
+
+    Três arquiteturas que fizeram parte do Debian 7 não foram
+    lançadas com a jessie.
+
+      * Como foi anunciado quando o Debian 7 foi lançado, o porte
+        s390 32 bits está descontinuado e foi substituído pelo s390x.
+
+      * Além disso, os portes para IA-64 e Sparc tiveram que ser
+        removidos desta versão devido ao suporte insuficiente de
+        desenvolvedores. Sparc tem sido uma arquitetura suportada no
+        Debian desde o 2.1 (1999), enquanto a ia64 foi introduzida no
+        Debian 3.0 (2002).
+
+   
+
+    Finally, the Debian ports to the FreeBSD kernel, kfreebsd-amd64
+    and kfreebsd-i386, included as technology previews in Debian 6.0
+    and Debian 7, are not part of this release.
+
+    Você pode ler mais sobre o estado dos portes e informações
+    específicas sobre o porte para sua arquitetura nas páginas web
+    dos portes Debian (https://www.debian.org/ports/) .
+
+2.2. Quais as novidades na distribuição?
+
+    Esta nova versão do Debian vem novamente com muito mais software
+    do que seu antecessor wheezy; a distribuição inclui mais de 12253
+    novos pacotes, de um total de mais de 43512 pacotes. A maioria do
+    software da distribuição foi atualizada: mais de 24573 pacotes de
+    software (isso é 66% de todos os pacotes no wheezy). Além disso,
+    um número significativo de pacotes (mais de 5441, 14% dos pacotes
+    no wheezy) foram, por várias razões, removidos da distribuição.
+    Você não verá atualizações para esses pacotes e eles serão
+    marcados como “obsoletos” nas interfaces de gerenciamento de
+    pacotes; veja Seção 4.10, “Pacotes obsoletos”.
+
+    O Debian mais uma vez vem com vários aplicativos e ambientes de
+    área de trabalho. Entre outros, agora inclui os ambientes de área
+    de trabalho GNOME 3.14, KDE 4.11, Xfce 4.10, e LXDE.
+
+    Os aplicativos de produtividade também foram atualizados,
+    incluindo as suítes de escritório:
+
+      * O LibreOffice está atualizado para a versão 4.3;
+
+      * O Calligra está atualizado para 2.8;
+
+      * O GNUcash está atualizado para 2.6;
+
+      * O GNUmeric está atualizado para 1.12;
+
+      * O Abiword está atualizado para 3.0.
+
+    As atualizações de outros aplicativos da área de trabalho incluem
+    a atualização para o Evolution 3.12.
+
+    Entre várias outras, esta versão também inclui as seguintes
+    atualizações de software:
+
+    +---------------------------------------------------------------+
+    |               Pacote                | Versão no 7  |Versão no |
+    |                                     |   (wheezy)   |8 (jessie)|
+    |-------------------------------------+--------------+----------|
+    |Apache                               |2.2.22        |2.4.10    |
+    |-------------------------------------+--------------+----------|
+    |Servidor DNS BIND                    |9.8           |9.9       |
+    |-------------------------------------+--------------+----------|
+    |Courier MTA                          |0.68          |0.73      |
+    |-------------------------------------+--------------+----------|
+    |Dia                                  |0.97.2        |0.97.3    |
+    |-------------------------------------+--------------+----------|
+    |Exim servidor de e-mail padrão       |4.80          |4.84      |
+    |-------------------------------------+--------------+----------|
+    |GNU Compiler Collection (Coleção de  |4.7 em PCs,   |          |
+    |Compiladores GNU) como compilador    |4.6 em outro  |4.9       |
+    |padrão                               |lugar         |          |
+    |-------------------------------------+--------------+----------|
+    |a biblioteca GNU C                   |2.13          |2.19      |
+    |-------------------------------------+--------------+----------|
+    |lighttpd                             |1.4.31        |1.4.35    |
+    |-------------------------------------+--------------+----------|
+    |imagem do kernel Linux               |séries 3.2    |séries    |
+    |                                     |              |3.16      |
+    |-------------------------------------+--------------+----------|
+    |OpenLDAP                             |2.4.31        |2.4.40    |
+    |-------------------------------------+--------------+----------|
+    |OpenSSH                              |6.0p1         |6.7p1     |
+    |-------------------------------------+--------------+----------|
+    |Perl                                 |5.14          |5.20      |
+    |-------------------------------------+--------------+----------|
+    |PHP                                  |5.4           |5.6       |
+    |-------------------------------------+--------------+----------|
+    |Postfix MTA                          |2.9           |2.11      |
+    |-------------------------------------+--------------+----------|
+    |PostgreSQL                           |9.1           |9.4       |
+    |-------------------------------------+--------------+----------|
+    |Python 3                             |3.2           |3.4       |
+    |-------------------------------------+--------------+----------|
+    |Samba                                |3.6           |4.1       |
+    +---------------------------------------------------------------+
+
+2.2.1. CDs, DVDs e BDs
+
+    A versão oficial do Debian agora vem em 9 a 10 DVDs com
+    executáveis ou 75 a 85 "CDs com executáveis (dependendo da
+    arquitetura) e 10 DVDs de códigos fonte ou 59 CDs de códigos
+    fonte. Adicionalmente, há um DVD multiarquitetura com um
+    subconjunto da versão para as arquiteturas amd64 e i386,
+    juntamente com o código fonte. O Debian também é lançado como
+    imagens Blu-ray (BD), 2 de cada para as arquiteturas amd64 e
+    i386, ou 2 para código fonte. Por razões de espaço, alguns
+    pacotes muito grandes foram omitidos nos formatos em CD; esses
+    pacotes cabem melhor nos formatos em DVD e BD, então, ainda estão
+    incluídos nesses.
+
+2.2.2. Mudanças na área de trabalho GNOME
+
+    Sendo atualizada para a versão 3.14, a nova área de trabalho
+    GNOME traz vários novos recursos e melhorias de usabilidade.
+
+    O design do GNOME shell foi atualizado. A barra de mensagens
+    inferior está maior, mais fácil de usar e menos propensa a
+    aparecer acidentalmente. Uma nova área de status do sistema no
+    canto superior direito põe todas configurações úteis no mesmo
+    lugar.
+
+    A proteção de tela foi substituída por um “bloqueio de tela” que
+    ainda traz funcionalidades mínimas quando o usuário estiver
+    ausente. Por exemplo, você pode pausar a música, ser informado de
+    uma nova mensagem de e-mail, ou mudar a luminosidade da tela,
+    tudo isso sem digitar uma senha. Ao pressionar a tecla Escape ou
+    iniciar a digitação da senha trará de volta a tela de login. O
+    gerenciador de tela do GNOME utiliza exatamente o mesmo design
+    para manter a coerência.
+
+    Diversos aplicativos, incluindo o gerenciador de arquivos
+    Nautilus, o editor de texto gedit e o visualizador de documentos
+    evince, tiveram o seu projeto refeito de forma muito mais
+    compacta, mesclando o título da janela com a barra de
+    ferramentas. Isso deixa muito mais espaço para os documentos nos
+    quais o usuário está trabalhando. As caixas de diálogo padrão
+    sofreram alterações semelhantes.
+
+    O suporte a telas sensíveis ao toque foi totalmente integrado,
+    incluindo gestos intuitivos baseados em múltiplos movimentos dos
+    dedos. O GNOME agora também suporta telas de alta resolução
+    (HiDPI), aproveitando ao máximo a pixelização fina para a
+    renderização mais clara.
+
+    O GNOME suporta geolocalização e inclui um aplicativo leve de
+    mapeamento e navegação.
+
+    A documentação do usuário está muito mais completa e inclui
+    tutoriais em vídeo para novos usuários.
+
+    Mais informações podem ser encontradas nas notas de lançamento do
+    GNOME 3.14 (https://help.gnome.org/misc/release-notes/3.14/) .
+
+2.2.3. Novo sistema de inicialização padrão (systemd)
+
+    Introduzido no Debian 7, o systemd agora é o sistema de
+    inicialização padrão. Ele fornece monitoração avançada, registro
+    e capacidade de gerenciamento de serviços.
+
+    Embora ele seja projetado como um substituto do sysvinit e, como
+    tal, faça uso dos scripts de inicialização SysV já existentes, o
+    pacote systemd pode ser seguramente instalado em conjunto com o
+    sysvinit e iniciado através da opção do kernel init=/bin/systemd.
+    O pacote systemd-sysv fornece o substituto do /sbin/init.
+
+    Para mais informações sobre esse assunto, veja o wiki (http://
+    wiki.debian.org/systemd) do Debian.
+
+2.2.4. Segurança
+
+    O antigo protocolo da camada de sockets de segurança SSLv3 foi
+    desativado nesta versão. Muitas bibliotecas de criptografia do
+    sistema, assim como servidores e aplicativos cliente, foram
+    compilados ou configurados sem suporte a esse protocolo.
+
+    O kernel Linux apresenta um mecanismo de segurança que anula
+    muitos ataques de link simbólico. Isso é ativado no kernel Linux
+    do Debian por padrão. Os bugs relacionados ao /tmp que se tornam
+    não exploráveis por esse mecanismo não são tratados como
+    vulnerabilidades de segurança. Caso você utilize um kernel Linux
+    personalizado, você deve ativar isso usando uma configuração do
+    sysctl:
+
+    echo 1 > /proc/sys/fs/protected_symlinks
+
+    Em alguns casos raros o suporte de segurança para um pacote
+    distribuído em uma versão do Debian precisa ser terminado antes
+    do fim do suporte para a distribuição inteira. A Jessie fornece
+    um novo pacote (debian-security-support) que emite um aviso caso
+    o suporte para um pacote precise ser terminado antecipadamente.
+    Ele também documenta os pacotes onde o escopo do suporte de
+    segurança é limitado. Como tal, é recomendado instalar o
+    debian-security-support em todos os sistemas onde a segurança
+    seja relevante.
+
+    Continuando o caminho definido pelo Wheezy, mais pacotes foram
+    construídos com sinalizadores fortalecidos do compilador. Também,
+    o sinalizador do protetor de pilha foi mudado para “
+    stack-protector-strong” para fortalecimento extra. Note que os
+    sinalizadores de construção fortalecidos não são ativados por
+    padrão no gcc, portanto, eles não são usados automaticamente
+    durante a construção local de um software.
+
+    O pacote needrestart é novo neste lançamento. Quando instalado,
+    ele fará uma verificação após cada sessão de atualização do APT.
+    Caso quaisquer serviços em execução no sistema exijam uma
+    reinicialização para aproveitar as mudanças nos pacotes
+    atualizados, então ele se oferece para realizar essas
+    reinicializações. É recomendado instalar o needrestart para
+    garantir que as atualizações de segurança nas bibliotecas sejam
+    propagadas para os serviços em execução.
+
+2.2.5. MariaDB ao lado do MySQL
+
+    Juntamente com o MySQL 5.5 mais antigo, a Jessie traz o novo
+    MariaDB 10.0. Veja a página wiki da equipe MySQL do Debian (http:
+    //wiki.debian.org/Teams/MySQL) para mais informações. Apenas um
+    deles é provável de ser incluído no Debian 9.
+
+    Note que o suporte do upstream para o MySQL 5.5 encerrará em
+    dezembro de 2018 (e o suporte de segurança do Debian terá que
+    acompanhar isso), enquanto o MariaDB 10.0 receberá suporte de
+    segurança do upstream até março de 2019.
+
+2.2.6. Aplicativos PHP
+
+    O Framework do aplicativo Horde está disponível no Jessie,
+    através do pacote php-horde.
+
+2.2.7. Blend Debian Games
+
+    A equipe Debian Games apresenta orgulhosamente a Blend (http://
+    blends.debian.org/blends/) Debian Games, que consiste de 33
+    metapacotes (https://tracker.debian.org/pkg/debian-games) que
+    simplificam a instalação de jogos por categoria. A seleção
+    inclui, entre muitos outros, jogos de estratégia, simulação,
+    cartas e jogos de programação. A Debian Games também oferece aos
+    desenvolvedores uma forma rápida de instalar programas
+    recomendados para desenvolver jogos nas linguagens de programação
+    C++, Java, Perl ou Python 3. Os desenvolvedores de conteúdo
+    encontrarão ferramentas úteis para criação de arte para jogos em
+    games-content-dev. A página do projeto fornece capturas de tela e
+    mais informações, e oferece uma visão geral compacta sobre todos
+    os jogos, incluindo os melhores jogos do Debian (http://
+    blends.debian.org/games/tasks/finest) .
+
+2.2.8. Novidades da Blend Debian Med
+
+    A equipe Debian Med teve novamente um aumento considerável não só
+    do múmero de pacotes nos campos da bilogia e medicina, mas também
+    a sua qualidade em termos de teste (durante o tempo de construção
+    do pacote, assim como o autopkgtest). Essas melhorias na versão
+    2.0 dos metapacotes da Blend Debian Med refletem a demanda dos
+    cientistas por software confiável, para fornecer resultados
+    reprodutíveis. Visite as páginas de tarefas da Debian Med (http:/
+    /blends.debian.org/med/tasks) para ver toda a gama software
+    médico e biológico no Debian.
+
+2.2.9. Novidades da Blend Debian Science
+
+    Devido ao trabalho contínuo da equipe Debian Science, foram
+    adicionados não só novos aplicativos científicas ao conjunto de
+    pacotes do Debian, mas também novos campos da ciência são
+    cobertos por certos aplicativos. Visite as páginas de tarefas da
+    Debian Science (http://blends.debian.org/science/tasks) para ver
+    toda a gama de software científico no Debian.
+
+2.2.10. Novidades da Blend Debian Geographical Information Systems
+(GIS)
+
+    Durante o ciclo de desenvolvimento da Jessie muitas mudanças do
+    UbuntuGIS foram incorporadas de volta a Debian GIS. A colaboração
+    com os projetos UbuntuGIS e OSGeo-Live foi melhorada, resultando
+    em novos pacotes e colaboradores. Visite as páginas de tarefas da
+    Debian GIS (http://blends.debian.org/gis/tasks) para ver toda a
+    gama de software para GIS do Debian e a página inicial da Debian
+    GIS (https://wiki.debian.org/DebianGis) para mais informações.
+
+2.2.11. Novidades da equipe de Java do Debian
+
+    A Jessie vem com 799 pacotes fonte (442 atualizados, +130 novos
+    desde a Wheezy) que serão mantidos pela equipe Java (https://
+    qa.debian.org/developer.php?login=
+    pkg-java-maintainers@lists.alioth.debian.org) . Mudanças
+    notáveis:
+
+      * A OpenJDK 7 é a nova runtime Java padrão suportada.
+
+      * A OpenJDK 8 estará disponível a partir do jessie-backports.
+   
+      * O Tomcat 7 e o Tomcat 8 são suportados, e o Tomcat 6 foi
+        removido.
+
+      * Novas ferramentas para desenvolvedores, incluindo o VisualVM,
+        o Dinamic Code Evolution VM (openjdk-7-jre-dcevm), Gradle,
+        eclipse-wtp-webtools, closure-compile e mais.
+
+      * Inclusão do androidsdk-tools (https://packages.debian.org/
+        source/jessie/androidsdk-tools)
+
+Capítulo 3. Sistema de instalação
+
+    O Instalador Debian é o sistema de instalação oficial para o
+    Debian. Ele oferece vários métodos de instalação. Os métodos
+    disponíveis para instalar seu sistema dependem da sua
+    arquitetura.
+
+    Imagens do instalador para a jessie podem ser encontradas
+    juntamente com o Guia de Instalação no site web do Debian (https:
+    //www.debian.org/releases/jessie/debian-installer/) .
+
+    O Guia de Instalação também está incluído no primeiro CD/DVD dos
+    conjuntos de CDs/DVDs oficiais do Debian, disponíveis em:
+
+    /doc/install/manual/idioma/index.html
+
+    Também pode ser do seu interesse verificar a errata (https://
+    www.debian.org/releases/jessie/debian-installer/index#errata) do
+    debian-installer que contém uma lista de problemas conhecidos.
+
+3.1. Quais as novidades do sistema de instalação?
+
+    Muito desenvolvimento foi feito no Instalador Debian desde seu
+    lançamento oficial anterior com o Debian 7, resultando tanto em
+    melhorias no suporte a hardware quanto em alguns novos recursos
+    muito interessantes.
+
+    Nas notas de lançamento nós iremos listar somente as grandes
+    mudanças do instalador. Caso você esteja interessado nas mudanças
+    detalhadas desde o wheezy, por favor, verifique os anúncios de
+    lançamento das versões beta e RC do jessie disponíveis a partir
+    do histórico de notícias (https://www.debian.org/devel/
+    debian-installer/News/) do Instalador Debian.
+
+3.1.1. Grandes mudanças
+
+    Portes removidos
+
+        O suporte para as arquiteturas “ia64” e “sparc” foi removido
+        do instalador, uma vez que elas foram removidas do
+        repositório.
+
+    Novos portes
+
+        O suporte para as arquiteturas “arm64” e “ppc64el” foi
+        adicionado ao instalador.
+
+    Novo sistema init padrão
+
+        O sistema de instalação agora instala o systemd como o
+        sistema init padrão.
+
+    Seleção da área de trabalho
+
+        A área de trabalho agora pode ser escolhida pelo tasksel
+        durante a instalação. Note que várias áreas de trabalho podem
+        ser selecionadas ao mesmo tempo, mas algumas combinações de
+        áreas de trabalho podem não ser co-instaláveis.
+
+    Substituindo "--" por "---" para parâmetros de inicialização
+
+        Devido a uma mudança por parte do kernel Linux, o separador “
+        ---” agora é usado em vez do histórico “--” para separar os
+        parâmetros do kernel dos parâmetros do ambiente do usuário.
+   
+    Novos idiomas
+
+        Graças aos enormes esforços dos tradutores, Debian agora pode
+        ser instalado em 75 idiomas, incluindo o Inglês. Isso
+        significa um idioma a mais do que na wheezy. A maioria dos
+        idiomas está disponível para instalação tanto na interface de
+        usuário baseada em texto quanto na interface de usuário
+        gráfica, enquanto alguns só estão disponíveis na interface de
+        usuário gráfica.
+
+        Os idiomas acrescentados nesta versão incluem:
+
+          + O Tajique foi adicionado ao instalador gráfico e baseado
+            em texto.
+
+        Os idiomas que só podem ser selecionados usando o instalador
+        gráfico, já que seus conjuntos de caracteres não podem ser
+        apresentados num ambiente não-gráfico, são: Amárico, Bengali,
+        Dzongkha, Gujarati, Hindi, Georgiano, Kannada, Khmer,
+        Malaiala, Marathi, Nepalês, Punjabi, Tamil, Telugu, Tibetano
+        e Uyghur.
+
+    Inicialização UEFI
+
+        O instalador do Jessie melhora o suporte para um monte de
+        firmware UEFI e também suporta instalação em firmware de 32
+        bits com um kernel de 64 bits.
+
+        Observe que isso não inclui suporte para “UEFI Secure Boot”.
+
+3.1.2. Instalação automatizada
+
+    Algumas mudanças mencionadas na seção anterior também implicam em
+    mudanças no suporte do instalador para instalação automatizada
+    utilizando arquivos de pré-configuração. Isso significa que, caso
+    você tenha arquivos configuração preexistentes que funcionaram
+    com o instalador wheezy, você não pode esperar que esses
+    funcionem com o novo instalador sem modificação.
+
+    O Guia de Instalação (https://www.debian.org/releases/jessie/
+    installmanual) possui um apêndice atualizado separado com uma
+    extensa documentação sobre como usar a pré-configuração.
+
+Capítulo 4. Atualizações a partir do Debian 7 (wheezy)
+
+4.1. Preparando para a atualização
+
+    Nós sugerimos que antes de atualizar você também leia as
+    informações na Capítulo 5, Problemas a serem considerados para a
+    jessie. Esse capítulo aborda potenciais problemas, os quais não
+    estão diretamente relacionados ao processo de atualização, mas
+    que ainda pode ser importante conhecer antes que você comece.
+
+4.1.1. Faça backup de quaisquer dados ou informações de configuração
+
+    Antes de atualizar o seu sistema, é fortemente recomendado que
+    você faça um backup completo ou, pelo menos, faça backup de
+    quaisquer dados ou informações de configuração que você não possa
+    perder. As ferramentas de atualização e o processo são bastante
+    confiáveis, mas uma falha de hardware no meio de uma atualização
+    pode resultar em um sistema severamente danificado.
+
+    As principais coisas que você terá que fazer backup são os
+    conteúdos do /etc, /var/lib/dpkg, /var/lib/apt/extended_states e
+    a saída do dpkg --get-selections "*" (as aspas são importantes).
+    Caso você utilize o aptitude para gerenciar pacotes em seu
+    sistema, você também terá que fazer backup do /var/lib/aptitude/
+    pkgstates.
+
+    O processo de atualização em si não modifica nada no diretório /
+    home. Porém, alguns aplicativos (por exemplo, partes da suíte
+    Mozilla e os ambientes de área de trabalho GNOME e KDE) são
+    conhecidos por sobrescrever as configurações existentes dos
+    usuários com novos padrões, quando uma nova versão do aplicativo
+    é iniciada pela primeira vez por um usuário. Como precaução, você
+    pode fazer um backup dos arquivos e diretórios ocultos (“dotfiles
+    ”) nos diretórios home dos usuários. Esse backup pode ajudar a
+    recuperar ou recriar antigas configurações. Você também pode
+    informar os usuários sobre isso.
+
+    Qualquer operação de instalação de pacote deve ser executada com
+    privilégios de superusuário, para isso, faça login como root ou
+    use o su ou o sudo para obter os direitos de acesso necessários.
+
+    A atualização possui algumas condições prévias; você deve
+    verificá-las antes de começar a executar a atualização.
+
+4.1.2. Informe os usuários com antecedência
+
+    É sensato informar a todos os usuários com antecedência sobre
+    qualquer atualização que você esteja planejando, embora os
+    usuários que acessem o seu sistema via uma conexão ssh pouco
+    devam notar durante a atualização, e devam ser capazes de
+    continuar trabalhando.
+
+    Caso você deseje tomar precauções extras, faça backup ou desmonte
+    a partição /home antes de atualizar.
+
+    Você terá que fazer uma atualização de kernel quando atualizar
+    para o jessie, então, uma reinicialização será necessária.
+    Normalmente, isso será feito depois que a atualização for
+    concluída.
+
+4.1.3. Preparar para a indisponibilidade dos serviços
+
+    Poderão haver serviços que são oferecidos pelo sistema que estão
+    associados aos pacotes que serão incluídos na atualização. Se
+    esse for o caso, por favor, note que durante a atualização esses
+    serviços serão interrompidos, enquanto os seus pacotes associados
+    estiverem sendo substituídos e configurados. Durante esse tempo,
+    esses serviços não estarão disponíveis.
+
+    O tempo exato de indisponibilidade desses serviços variará
+    dependendo do número de pacotes sendo atualizados no sistema, e
+    isso também inclui o tempo que o administrador do sistema gasta
+    respondendo a quaisquer perguntas de configuração das
+    atualizações dos pacotes. Observe que, se o processo de
+    atualização for deixado sem acompanhamento e o sistema solicitar
+    uma entrada durante a atualização, existe uma grande
+    possibilidade dos serviços ficarem indisponíveis^[1] por um
+    período significativo de tempo.
+
+    Se o sistema que está sendo atualizado fornecer serviços críticos
+    para os seus usuários ou para a rede^[2], você pode reduzir o
+    tempo de indisponibilidade caso você faça uma atualização mínima
+    do sistema, como descrito na Seção 4.4.4, “Atualização mínima do
+    sistema”, seguida de uma atualização do kernel e reinicialização,
+    e então atualizar os pacotes associados aos seus serviços
+    críticos. Atualize esses pacotes antes de fazer a atualização
+    completa descrita na Seção 4.4.5, “Atualizando o sistema”. Dessa
+    forma, você pode garantir que esses serviços essenciais estejam
+    funcionando e disponíveis durante o processo de atualização
+    completa, e o seu tempo de indisponibilidade seja reduzido.
+
+4.1.4. Preparar para recuperação
+
+    Embora o Debian tente garantir que o seu sistema permaneça
+    inicializável a todo o momento, sempre há uma chance de você ter
+    problemas ao reinicializar o seu sistema após a atualização.
+    Problemas possíveis conhecidos são documentados neste e nos
+    próximos capítulos destas notas de lançamento.
+
+    Por essa razão faz sentido garantir que você seja capaz de
+    recuperar o seu sistema caso não consiga reinicializar ou, para
+    sistemas gerenciados remotamente, não consiga levantar a rede.
+
+    Caso você esteja atualizando remotamente através de um link ssh,
+    é recomendado que você tome as precauções necessárias para ser
+    capaz de acessar o servidor por meio de um terminal serial
+    remoto. Há uma chance de que, após atualizar o kernel e
+    reinicializar, você tenha que corrigir a configuração do sistema
+    por meio de um console local. Além disso, se o sistema for
+    reinicializado acidentalmente no meio de uma atualização, existe
+    uma chance de que precise recuperá-lo usando um console local.
+
+    Geralmente, nós recomendamos usar o modo de recuperação do
+    Instalador Debian do jessie. A vantagem de usar o instalador é
+    que você pode escolher entre os seus vários métodos para
+    encontrar aquele que melhor se adéqua à sua situação. Para mais
+    informações, por favor, consulte a seção “Recuperando um sistema
+    quebrado” no capítulo 8 do Guia de Instalação (https://
+    www.debian.org/releases/jessie/installmanual) e a FAQ do
+    Instalador Debian (https://wiki.debian.org/DebianInstaller/FAQ) .
+
+    Se isso falhar, você precisará de uma forma alternativa de
+    inicializar seu sistema, e assim poder acessá-lo e repará-lo. Um
+    opção é usar uma imagem especial de recuperação ou um live CD de
+    Linux. Após a inicialização a partir dele, você deverá ser capaz
+    de montar o seu sistema de arquivos raiz e fazer chroot nele para
+    investigar e corrigir o problema.
+
+4.1.4.1. Shell de depuração durante a inicialização usando initrd
+
+    O pacote initramfs-tools inclui um shell de depuração^[3] nas
+    initrds que ele gera. Se, por exemplo, a initrd for incapaz de
+    montar o seu sistema de arquivos raiz, você será deixado nesse
+    shell de depuração que tem comandos básicos disponíveis para
+    ajudar a rastrear o problema e possivelmente corrigi-lo.
+
+    Coisas básicas a serem verificadas: presença dos arquivos de
+    dispositivo corretos em /dev; quais módulos estão carregados (cat
+    /proc/modules); saída do dmesg com erros de carregamento de
+    drivers. A saída do dmesg também exibirá quais arquivos de
+    dispositivo foram associados a quais discos; você deve verificar
+    isso com a saída do echo $ROOT para certificar-se que o sistema
+    de arquivos raiz está no dispositivo esperado.
+
+    Caso você consiga resolver o problema, digitando exit sairá do
+    shell de depuração e continuará o processo de inicialização a
+    partir do ponto em que ele falhou. Claro que você também
+    precisará corrigir a causa do problema e gerar novamente a
+    initrd, pois assim a próxima inicialização não falhará novamente.
+
+4.1.4.2. Shell de depuração durante a inicialização usando systemd
+
+    No caso da inicialização falhar sob o systemd, é possível obter
+    um shell root de depuração alterando-se a linha de comando do
+    kernel. Caso a inicialização básica funcione, mas alguns dos
+    serviços falhem ao iniciar, pode ser útil adicionar systemd.unit=
+    rescue.target aos parâmetros do kernel.
+
+    Caso contrário, o parâmetro do kernel systemd.unit=
+    emergency.target irá fornecer-lhe um shell root no momento mais
+    imediato possível. Porém, isso é feito antes da montagem do
+    sistema de arquivos raiz com permissões de leitura e escrita.
+    Você terá que fazer isso manualmente com:
+
+    mount -o remount,rw /
+
+    Mais informações sobre depuração de uma inicialização quebrada
+    sob systemd podem ser encontradas no artigo Diagnosticando
+    problemas de inicialização (http://freedesktop.org/wiki/Software/
+    systemd/Debugging/) .
+
+    Se tudo isso falhar, é provável que você possa inicializar
+    através do antigo sistema sysvinit. Isso requer que o sysvinit
+    ainda esteja instalado e o executável /lib/sysvinit/init esteja
+    incluído no seu initramfs. Caso estes requisitos sejam atendidos,
+    adicione init=/lib/sysvinit/init à linha de comando do kernel e
+    ele inicializará com o executável do sysvinit.
+
+4.1.5. Preparar um ambiente seguro para a atualização
+
+    A atualização da distribuição deve ser feita localmente a partir
+    de um console virtual em modo texto (ou um terminal serial
+    conectado diretamente), ou remotamente através de um link ssh.
+
+    Importante
+
+    Caso você esteja usando alguns serviços VPN (tais como tinc),
+    eles podem não estar disponíveis ao longo do processo de
+    atualização. Por favor, veja a Seção 4.1.3, “Preparar para a
+    indisponibilidade dos serviços”.
+
+    A fim de conseguir uma margem extra de segurança quando atualizar
+    remotamente, nós sugerimos que você execute o processo de
+    atualização no console virtual fornecido pelo programa screen,
+    que permite uma reconexão segura e garante que o processo de
+    atualização não seja interrompido mesmo se o processo de conexão
+    remota falhar.
+
+    Importante
+
+    Você não deve atualizar utilizando telnet, rlogin, rsh, ou a
+    partir de uma sessão X gerenciada por xdm, gdm ou kdm, etc., na
+    máquina que você estiver atualizando. Isso é porque cada um
+    desses serviços pode muito bem ser terminado durante a
+    atualização, o que pode resultar em um sistema inacessível que
+    está apenas parcialmente atualizado. O uso do aplicativo 
+    update-manager do GNOME é fortemente desencorajado para
+    atualizações para novas versões, pois essa ferramenta precisa que
+    a sessão da área de trabalho se mantenha ativa.
+
+4.2. Verificando a situação do sistema
+
+    O processo de atualização descrito neste capítulo foi idealizado
+    para atualizações a partir de sistemas wheezy “puros” sem pacotes
+    de terceiros. Para uma maior confiabilidade do processo de
+    atualização, você pode remover pacotes de terceiros do seu
+    sistema antes de começar a atualização.
+
+    Atualizações diretas a partir de versões do Debian mais antigas
+    do que a 7 (wheezy) não são suportadas. Por favor, siga as
+    instruções nas Notas de lançamento para Debian 7 (https://
+    www.debian.org/releases/wheezy/releasenotes) para atualizar para
+    7 primeiro.
+
+    Esse procedimento também assume que o seu sistema foi atualizado
+    para a versão pontual mais recente do wheezy. Caso você não tenha
+    feito isso ou não tenha certeza, siga as instruções na Seção A.1,
+    “Atualizando seu sistema wheezy”.
+
+4.2.1. Rever as ações pendentes no gerenciador de pacotes
+
+    Em alguns casos, o uso do apt-get para instalação de pacotes, em
+    vez do aptitude, pode fazer o aptitude considerar um pacote como 
+    “não usado” e agendá-lo para remoção. Em geral, você deve
+    certificar-se que o sistema está totalmente atualizado e “limpo”
+    antes de proceder com a atualização.
+
+    Por causa disso, você deve rever se existem quaisquer ações
+    pendentes no gerenciador de pacotes aptitude. Se um pacote
+    estiver agendado para remoção ou atualização no gerenciador de
+    pacotes, ele pode impactar negativamente no procedimento de
+    atualização. Note que só é possível corrigir isso se o seu
+    sources.list ainda apontar para o wheezy e não para stable ou 
+    jessie; veja a Seção A.2, “Verificando sua lista de fontes
+    (sources list)”.
+
+    Para fazer esta revisão, inicie o aptitude em “modo visual” e
+    pressione g (“Go”). Se ele mostrar quaisquer ações, você deve
+    revê-las e corrigi-las ou implementar as ações sugeridas. Se
+    nenhuma ação for sugerida será apresentada uma mensagem dizendo “
+    Nenhum pacote está agendado para ser instalado, removido ou
+    atualizado”.
+
+4.2.2. Desabilitando o pinning do APT
+
+    Caso você tenha configurado o APT para instalar determinados
+    pacotes a partir de uma distribuição diferente da "stable" (por
+    exemplo, da "testing"), você pode ter que mudar sua configuração
+    de pinning do APT (guardada em /etc/apt/preferences e /etc/apt/
+    preferences.d/) para permitir a atualização dos pacotes para as
+    versões existentes na nova versão "stable". Mais informações
+    sobre pinning do APT podem ser encontradas em apt_preferences(5).
+
+4.2.3. Verificando a situação dos pacotes
+
+    Independentemente do método usado para atualização, é recomendado
+    que você primeiro verifique a situação de todos os pacotes, e
+    verifique se todos estão em uma situação atualizável. O seguinte
+    comando exibirá quaisquer pacotes que tenham uma situação de “
+    Half-Installed” ou “Failed-Config”, e aqueles com alguma situação
+    de erro.
+
+    # dpkg --audit
+
+    Você também pode inspecionar o estado de todos os pacotes em seu
+    sistema utilizando o aptitude ou com comandos como
+
+    # dpkg -l | pager
+
+     ou
+
+    # dpkg --get-selections "*" > ~/curr-pkgs.txt
+
+    É desejável remover quaisquer retenções (holds) em pacotes antes
+    da atualização. Se qualquer pacote que seja essencial para a
+    atualização estiver retido, a atualização falhará.
+
+    Note que o aptitude usa um método para registrar os pacotes que
+    estão retidos diferente do apt-get e do dselect. Você pode
+    identificar pacotes retidos pelo aptitude com
+
+    # aptitude search "~ahold"
+
+    Caso você queira verificar quais pacotes você tem retidos pelo 
+    apt-get, você deve usar
+
+    # dpkg --get-selections | grep 'hold$'
+
+    Se você alterou e recompilou um pacote localmente, e não o
+    renomeou ou colocou uma época na versão, você deve colocá-lo em
+    retenção para evitar que seja atualizado.
+
+    O estado do pacote em “hold” pelo apt-get pode ser alterado
+    usando:
+
+    # echo nome_do_pacote hold | dpkg --set-selections
+
+    Substitua hold por install para remover o estado de “hold”.
+
+    Se existir alguma coisa que você precisa corrigir, é melhor
+    certificar-se que o seu sources.list ainda se refere a wheezy
+    como explicado na Seção A.2, “Verificando sua lista de fontes
+    (sources list)”.
+
+4.2.4. A seção “proposed-updates”
+
+    Caso você tenha a seção “proposed-updates” presente no seu
+    arquivo /etc/apt/sources.list, você deve removê-la desse arquivo
+    antes de tentar atualizar o seu sistema. Essa é uma precaução
+    para reduzir a probabilidade de conflitos.
+
+4.2.5. Fontes não oficiais
+
+    Caso você tenha quaisquer pacotes não-Debian no seu sistema, você
+    deve estar ciente de que esses podem ser removidos durante a
+    atualização por causa de dependências conflitantes. Se esses
+    pacotes foram instalados pela adição de um repositório extra no
+    seu /etc/apt/sources.list, você deve verificar se tal repositório
+    também oferece pacotes compilados para jessie e alterar a linha
+    da fonte correspondente ao mesmo tempo que alterar as suas linhas
+    das fontes para os pacotes Debian.
+
+    Alguns usuários podem ter versões atualizadas retroativamente (“
+    backported”) não-oficiais “mais novas” dos pacotes que estão no
+    Debian instaladas no seu sistema wheezy. Tais pacotes são mais
+    prováveis de causar problemas durante a atualização, pois podem
+    resultar em conflitos de arquivo^[4]. A Seção 4.5, “Possíveis
+    problemas durante a atualização” tem algumas informações sobre
+    como lidar com conflitos de arquivo caso eles devam ocorrer.
+
+4.3. Preparando as fontes para o APT
+
+    Antes de iniciar a atualização você deve ajustar as listas de
+    pacote no arquivo de configuração do apt, /etc/apt/sources.list.
+
+    O apt considerará todos os pacotes que possam ser encontrados
+    através de qualquer linha iniciada por “deb”, e instalará o
+    pacote com o número de versão mais elevado, dando prioridade à
+    primeira linha do arquivo (assim, onde você tiver múltiplas
+    localizações de espelhos, normalmente indicará primeiro um disco
+    rígido local, depois CD-ROMs, e então os espelhos HTTP/FTP).
+
+    Uma versão pode frequentemente ser referida tanto pelo seu
+    codinome (por exemplo, wheezy, jessie) como pelo seu nome de
+    estado (ou seja, oldstable, stable, testing, unstable).
+    Referir-se a uma versão pelo seu codinome tem a vantagem que você
+    nunca será surpreendido por uma nova versão, e por essa razão
+    essa abordagem é adotada aqui. Isso significa certamente que você
+    mesmo terá que ficar atento aos anúncios de lançamento. Caso você
+    use o nome de estado em vez disso, verá apenas grandes
+    quantidades de atualizações dos pacotes disponíveis assim que um
+    lançamento acontecer.
+
+4.3.1. Adicionar fontes da Internet ao APT
+
+    A configuração padrão é definida para instalação a partir dos
+    principais servidores do Debian na Internet, mas é possível que
+    você deseje modificar o /etc/apt/sources.list para usar outros
+    espelhos, preferencialmente um espelho que esteja localizado o
+    mais próximo de você em termos de rede.
+
+    Os endereços dos espelhos HTTP ou FTP do Debian podem ser
+    encontrados em https://www.debian.org/distrib/ftplist (https://
+    www.debian.org/distrib/ftplist) (veja na seção “lista de espelhos
+    do Debian”). Espelhos HTTP geralmente são mais rápidos do que
+    espelhos FTP.
+
+    Por exemplo, suponha que seu espelho Debian mais próximo seja
+    http://mirrors.kernel.org. Quando examinar esse espelho com um
+    navegador web ou programa de FTP, você notará que os diretórios
+    principais estão organizados assim:
+
+    http://mirrors.kernel.org/debian/dists/jessie/main/binary-amd64/...
+    http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-amd64/...
+
+    Para usar esse espelho com o apt, você adiciona esta linha ao seu
+    arquivo sources.list:
+
+    deb http://mirrors.kernel.org/debian jessie main contrib
+
+    Note que o “dists” é adicionado implicitamente, e os argumentos
+    após o nome da versão são usados para expandir o caminho em
+    múltiplos diretórios.
+
+    Após adicionar suas novas fontes, desabilite as linhas “deb”
+    previamente existentes em sources.list pondo um sinal de
+    cerquilha (#) no início delas.
+
+4.3.2. Adicionando fontes ao APT para um espelho local
+
+    Em vez de usar espelhos de pacotes HTTP ou FTP, é possível que
+    você deseje modificar o /etc/apt/sources.list para usar um
+    espelho em um disco local (possivelmente montado sobre NFS).
+
+    Por exemplo, seu espelho de pacotes pode estar sob /var/ftp/
+    debian/, e ter diretórios principais assim:
+
+    /var/ftp/debian/dists/jessie/main/binary-amd64/...
+    /var/ftp/debian/dists/jessie/contrib/binary-amd64/...
+
+    Para usar isso com o apt, adicione esta linha ao seu arquivo
+    sources.list:
+
+    deb file:/var/ftp/debian jessie main contrib
+
+    Note que o “dists” é adicionado implicitamente, e os argumentos
+    após o nome da versão são usados para expandir o caminho em
+    múltiplos diretórios.
+
+    Após adicionar suas novas fontes, desabilite as linhas “deb”
+    previamente existentes em sources.list pondo um sinal de
+    cerquilha (#) no início delas.
+
+4.3.3. Adicionando fontes ao APT a partir de mídia ótica
+
+    Caso você queira usar apenas CDs (ou mídias de DVDs ou Blu-ray),
+    comente as linhas “deb” já existentes em /etc/apt/sources.list
+    pondo um sinal de cerquilha (#) no início delas.
+
+    Certifique-se de que existe uma linha em /etc/fstab que habilite
+    a montagem do seu drive de CD-ROM no ponto de montagem /media/
+    cdrom. Por exemplo, caso /dev/sr0 seja o seu drive de CD-ROM, o /
+    etc/fstab deve conter uma linha como:
+
+    /dev/sr0 /media/cdrom auto noauto,ro 0 0
+
+    Note que não deve haver nenhum espaço entre as palavras noauto,ro
+    no quarto campo.
+
+    Para verificar se funciona, insira um CD e tente executar
+
+    # mount /media/cdrom    # isso montará o CD no ponto de montagem
+    # ls -alF /media/cdrom  # isso deverá exibir o diretório raiz do CD
+    # umount /media/cdrom   # isso desmontará o CD
+
+    Depois, execute:
+
+    # apt-cdrom add
+
+    para cada CD-ROM de binários do Debian que você tiver, para
+    adicionar os dados a respeito de cada CD à base de dados do APT.
+
+4.4. Atualizando pacotes
+
+    A forma recomendada para atualizar a partir de versões anteriores
+    do Debian é usar a ferramenta de gerenciamento de pacotes apt-get
+    . Nos lançamentos anteriores, o aptitude era recomendado para
+    esse propósito, mas as versões recentes do apt-get fornecem uma
+    funcionalidade equivalente e também têm demonstrado maior
+    consistência dando os resultados desejados nas atualizações.
+
+    Não esqueça de montar todas as partições necessárias
+    (especialmente as partições raiz e /usr) com permissões de
+    leitura e escrita, com um comando como:
+
+    # mount -o remount,rw /ponto-de-montagem
+
+    Em seguida, você deve confirmar novamente se as entradas das
+    fontes do APT (em /etc/apt/sources.list) referem-se a “jessie” ou
+    a “stable”. Não devem haver quaisquer entradas de fontes que
+    apontem para wheezy
+
+    +--------------------------------------------------+
+    |Nota                                              |
+    |                                                  |
+    |As linhas de fontes de um CD-ROM podem às vezes se|
+    |referir à “unstable”; embora isso possa ser       |
+    |confuso, você não deve alterá-las.                |
+    +--------------------------------------------------+
+
+4.4.1. Gravando a sessão
+
+    É fortemente recomendado que você utilize o programa /usr/bin/
+    script para gravar uma transcrição da sessão de atualização.
+    Então, se um problema ocorrer, você terá um registro do que
+    aconteceu e, se necessário, poderá fornecer informações precisas
+    em um relatório de bug. Para iniciar a gravação, digite:
+
+    # script -t 2>~/upgrade-jessie-etapa.hora -a ~/upgrade-jessie-etapa.script
+
+    ou semelhante. Caso você tenha que reexecutar a transcrição (por
+    exemplo, caso você tenha que reinicializar o sistema) use valores
+    diferentes para etapa para indicar qual etapa da atualização você
+    está registrando. Não ponha o arquivo de transcrição em um
+    diretório temporário como /tmp ou /var/tmp (arquivos nesses
+    diretórios podem ser excluídos durante a atualização ou durante
+    qualquer reinicialização).
+
+    A transcrição também permitirá que você reveja informações que
+    rolaram para fora da tela. Caso você esteja no console do
+    sistema, apenas mude para VT2 (usando Alt+F2) e, após se
+    autenticar, use less -R ~root/upgrade-jessie-etapa.script para
+    ver o arquivo.
+
+    Depois que você tiver completado a atualização, pode parar o 
+    script digitando exit no prompt.
+
+    Caso você tenha usado a opção -t para o script, você pode usar o
+    programa scriptreplay para reproduzir toda a sessão:
+
+    # scriptreplay ~/upgrade-jessie-etapa.hora ~/upgrade-jessie-etapa.script
+
+4.4.2. Atualizando a lista de pacotes
+
+    Primeiro, a lista de pacotes disponíveis para a nova versão
+    precisa ser obtida. Isso é feito executando:
+
+    # apt-get update
+
+4.4.3. Certifique-se que você tem espaço suficiente para a
+atualização
+
+    Você tem que se certificar, antes de atualizar o seu sistema, que
+    você terá espaço em disco rígido suficiente quando iniciar a
+    atualização completa do sistema descrita na Seção 4.4.5,
+    “Atualizando o sistema”. Primeiro, qualquer pacote necessário
+    para instalação que for obtido pela rede é armazenado em /var/
+    cache/apt/archives (e no subdiretório partial/, durante o
+    download), então você deve certificar-se que tem espaço
+    suficiente na partição do sistema de arquivos que contém o /var/
+    para download temporário dos pacotes que serão instalados em seu
+    sistema. Após o download, você provavelmente precisará de mais
+    espaço em outras partições de sistemas de arquivos, tanto para
+    instalação de pacotes atualizados (que podem conter executáveis
+    maiores ou mais dados) quanto para novos pacotes que serão
+    puxados pela atualização. Caso o seu sistema não tenha espaço
+    suficiente, você pode acabar com uma atualização incompleta que
+    pode ser difícil de recuperar.
+
+    O apt-get pode exibir informações detalhadas sobre o espaço em
+    disco necessário para a instalação. Antes de executar a
+    atualização, você pode ver essa estimativa executando:
+
+    # apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+    [ ... ]
+    XXX atualizados, XXX novos instalados, XXX para remover e XXX não atualizados.
+    Necessário obter xx.xMB de arquivos.
+    Após essa operação, AAAMB de espaço de disco adicional serão usados.
+
+    Nota
+
+    Ao executar esse comando no início do processo de atualização,
+    pode ocorrer um erro, devido às razões descritas nas próximas
+    seções. Nesse caso, você precisará esperar até que tenha feito a
+    atualização mínima do sistema, como na Seção 4.4.4, “Atualização
+    mínima do sistema”, antes de executar esse comando para estimar o
+    espaço em disco.
+
+    Caso você não tenha espaço suficiente em disco para a
+    atualização, o apt-get o avisará com uma mensagem como esta:
+
+    E: Você não tem espaço livre suficiente em /var/cache/apt/archives/.
+
+    Nessa situação, certifique-se de liberar espaço suficiente antes.
+    Você pode:
+
+      * Remover pacotes que tenham sido previamente baixados para
+        instalação (em /var/cache/apt/archives). Limpar o cache de
+        pacotes executando apt-get clean removerá todos os arquivos de
+        pacote previamente baixados.
+
+      * Remover pacotes esquecidos. Caso você tenha utilizado o aptitude
+        ou apt-get para instalar pacotes manualmente no wheezy, ele terá
+        mantido o registro desses pacotes que você instalou manualmente e
+        será capaz de marcar como redundantes aqueles pacotes obtidos
+        apenas por dependências que não são mais necessárias devido ao
+        pacote ter sido removido. Eles não marcarão para remoção pacotes
+        que você instalou manualmente. Para remover automaticamente
+        pacotes que não são mais usados, execute:
+
+        # apt-get autoremove
+
+        Você também pode usar o deborphan, debfoster ou cruft para
+        encontrar pacotes redundantes. Não remova cegamente os pacotes
+        apresentados por essas ferramentas, especialmente se você estiver
+        usando opções agressivas diferentes do padrão que são propensas a
+        falsos positivos. É altamente recomendado que você revise
+        manualmente os pacotes sugeridos para remoção (ou seja, seus
+        conteúdos, tamanhos e descrições) antes de removê-los.
+
+      * Remova pacotes que ocupam muito espaço e não são necessários
+        atualmente (você sempre pode reinstalá-los após a atualização).
+        Caso você tenha o popularity-contest instalado, você pode usar o 
+        popcon-largest-unused para listar os pacotes que você não usa e
+        que ocupam mais espaço. Você pode encontrar apenas os pacotes que
+        ocupam mais espaço em disco com dpigs (disponível no pacote
+        debian-goodies) ou com o wajig (executando wajig size). Eles
+        também podem ser encontrados com o aptitude. Inicie o aptitude em
+        “modo visual”, selecione Visões → Nova lista de pacotes plana,
+        pressione l e digite ~i, então pressione S e digite ~installsize.
+        Isso lhe dará uma lista conveniente para trabalhar.
+
+      * Remover traduções e arquivos de localização do sistema se eles
+        não forem necessários. Você pode instalar o pacote localepurge e
+        configurá-lo para que apenas alguns locales selecionados sejam
+        mantidos no sistema. Isso reduzirá o espaço de disco consumido em
+        /usr/share/locale.
+
+      * Mover temporariamente para um outro sistema, ou remover
+        permanentemente, registros do sistema existentes em /var/log/.
+
+      * Usar um /var/cache/apt/archives temporário: Você pode usar um
+        diretório de cache temporário de um outro sistema de arquivos
+        (dispositivo de armazenamento USB, disco rígido temporário,
+        sistema de arquivos já em uso, ...)
+
+        +-----------------------------------------------------+
+        |Nota                                                 |
+        |                                                     |
+        |Não use uma montagem NFS pois a conexão de rede pode |
+        |ser interrompida durante a atualização.              |
+        +-----------------------------------------------------+
+
+        Por exemplo, caso você tenha um pendrive USB montado em /media/
+        pendrive:
+
+         1. remova os pacotes que tenham sido previamente baixados para
+            instalação:
+
+            # apt-get clean
+
+         2. copie o diretório /var/cache/apt/archives para o drive USB:
+
+            # cp -ax /var/cache/apt/archives /media/pendrive/
+
+         3. monte o diretório de cache temporário no lugar do atual:
+
+            # mount --bind /media/pendrive/archives /var/cache/apt/archives
+
+         4. após a atualização, restaure o diretório /var/cache/apt/
+            archives original:
+
+            # umount /media/pendrive/archives
+
+         5. remova o /media/pendrive/archives restante.
+
+        Você pode criar o diretório de cache temporário em qualquer
+        sistema de arquivos que esteja montado em seu sistema.
+
+      * Fazer uma atualização mínima do sistema (veja a Seção 4.4.4,
+        “Atualização mínima do sistema”) ou atualizações parciais do
+        sistema seguidas por uma atualização completa. Isso permitirá
+        atualizar o sistema parcialmente, e permite limpar o cache de
+        pacotes antes da atualização completa.
+
+    Note que para remover pacotes com segurança, é aconselhável mudar
+    o seu sources.list de volta para wheezy como descrito na
+    Seção A.2, “Verificando sua lista de fontes (sources list)”.
+
+4.4.4. Atualização mínima do sistema
+
+    Em alguns casos, fazer a atualização completa (como descrito
+    abaixo) diretamente pode remover um grande número de pacotes que
+    você queira manter. Nós portanto recomendamos um processo de
+    atualização em duas partes: primeiro uma atualização mínima para
+    superar esses conflitos, depois uma atualização completa como
+    descrito na Seção 4.4.5, “Atualizando o sistema”.
+
+    Para fazer isso, primeiro execute:
+
+    # apt-get upgrade
+
+    Nota
+
+    O processo de atualização para algumas versões anteriores
+    recomendava o uso do aptitude para a atualização. Essa ferramenta
+    não é recomendada para atualizações do wheezy para a jessie.
+
+    Isso tem como efeito a atualização daqueles pacotes que podem ser
+    atualizados sem a necessidade de que quaisquer outros pacotes
+    sejam removidos ou instalados.
+
+    A atualização mínima do sistema também pode ser útil quando o
+    sistema estiver com pouco espaço e uma atualização completa não
+    puder ser feita devido às restrições de espaço.
+
+    Se o pacote apt-listchanges estiver instalado, ele mostrará (em
+    sua configuração padrão) informações importantes sobre pacotes
+    atualizados em um paginador. Pressione q após a leitura para sair
+    do paginador e continue a atualização.
+
+4.4.5. Atualizando o sistema
+
+    Uma vez que você tenha cumprido os passos anteriores, agora está
+    pronto para continuar com a parte principal da atualização.
+    Execute:
+
+    # apt-get dist-upgrade
+
+    Nota
+
+    O processo de atualização para algumas versões anteriores
+    recomendava o uso do aptitude para a atualização. Essa ferramenta
+    não é recomendada para atualizações do wheezy para a jessie.
+
+    Isso realizará uma atualização completa do sistema, instalando as
+    versões mais novas disponíveis de todos os pacotes, e resolvendo
+    todas as mudanças de dependências possíveis entre pacotes em
+    lançamentos diferentes. Se necessário, instalará alguns pacotes
+    novos (normalmente novas versões de bibliotecas, ou pacotes
+    renomeados), e removerá quaisquer pacotes obsoletos em conflito.
+
+    Quando atualizar a partir de um conjunto de CD-ROMs (ou DVDs),
+    será pedido para inserir CDs específicos em vários pontos durante
+    a atualização. Você pode ter que inserir o mesmo CD várias vezes;
+    isso é devido a pacotes inter-relacionados que foram espalhados
+    através dos CDs.
+
+    As novas versões dos pacotes instalados atualmente que não
+    puderem ser atualizadas sem mudar a situação da instalação de um
+    outro pacote serão deixadas em sua versão atual (exibidas como “
+    held back”). Isso pode ser resolvido tanto utilizando o aptitude
+    para escolher esses pacotes para instalação, como tentando
+    apt-get install pacote.
+
+4.5. Possíveis problemas durante a atualização
+
+    As seções seguintes descrevem problemas conhecidos que podem
+    aparecer durante uma atualização para a jessie.
+
+4.5.1. O dist-upgrade falha com “Could not perform immediate
+configuration”
+
+    Em alguns casos a etapa apt-get dist-upgrade pode falhar após baixar
+    os pacotes com:
+
+    E: Não foi possível realizar a configuração imediata no 'pacote'. Por favor, veja man 5 apt.conf sob APT::Immediate-Configure para detalhes.
+
+    Caso isso ocorra, executar apt-get dist-upgrade -o
+    APT::Immediate-Configure=0 em vez disso deve permitir que a
+    atualização prossiga.
+
+    Outra possível solução para esse problema é adicionar
+    temporariamente as fontes do wheezy e jessie ao seu sources.list
+    e executar apt-get update.
+
+4.5.2. Remoções esperadas
+
+    O processo de atualização para a jessie pode solicitar a remoção
+    de pacotes no sistema. A lista exata dos pacotes variará
+    dependendo do conjunto de pacotes que você tenha instalado. Estas
+    notas de lançamento dão conselhos gerais sobre essas remoções,
+    mas se estiver em dúvida, é recomendado que você examine as
+    remoções de pacotes propostas por cada método antes de
+    prosseguir. Para mais informações sobre pacotes obsoletos no
+    jessie, veja Seção 4.10, “Pacotes obsoletos”.
+
+4.5.3. Loops de conflitos ou pré-dependências
+
+    Algumas vezes é necessário habilitar a opção APT::Force-LoopBreak
+    no APT para que seja possível remover temporariamente um pacote
+    essencial devido a um loop de “Conflitos/Pré-Dependências”. O 
+    apt-get o alertará sobre isso e cancelará a atualização. Você
+    pode contornar isso especificando a opção -o APT::Force-LoopBreak
+    =1 na linha de comando do apt-get.
+
+    É possível que uma estrutura de dependências do sistema possa
+    estar tão corrompida de modo que necessite de intervenção manual.
+    Normalmente, isso significa usar o apt-get ou
+
+    # dpkg --remove nome_do_pacote
+
+    para eliminar alguns dos pacotes problemáticos, ou
+
+    # apt-get -f install
+    # dpkg --configure --pending
+
+    Em casos extremos, você poderá ter que forçar a reinstalação com
+    um comando como
+
+    # dpkg --install /caminho/para/nome_do_pacote.deb
+
+4.5.4. Conflitos de arquivo
+
+    Os conflitos de arquivo não devem ocorrer caso você atualize a
+    partir de um sistema “puro” wheezy, mas podem ocorrer caso você
+    tenha portes retroativos não oficiais instalados. Um conflito de
+    arquivo resultará em um erro como:
+
+    Descompactando <pacote-foo> (de <arquivo-de-pacote-foo>) ...
+    dpkg: erro processando <pacote-foo> (--install):
+     tentando sobrescrever '<algum-nome-de-arquivo>',
+     que também está no pacote <pacote-bar>
+    dpkg-deb: sub-processo de colagem morto pelo sinal (pipe quebrado)
+     Erros foram encontrados enquanto processando:
+     <pacote-foo>
+
+    Você pode tentar resolver um conflito de arquivo com a remoção
+    forçada do pacote mencionado na última linha da mensagem de erro:
+
+    # dpkg -r --force-depends nome_do_pacote
+
+    Após consertar as coisas, você deve ser capaz de continuar a
+    atualização repetindo os comandos do apt-get descritos
+    anteriormente.
+
+4.5.5. Mudanças de configuração
+
+    Durante a atualização, serão feitas perguntas com relação a
+    configuração ou reconfiguração de diversos pacotes. Quando você
+    for perguntado se algum arquivo no diretório /etc/init.d, ou o
+    arquivo /etc/manpath.config deve ser substituído pela versão do
+    mantenedor do pacote, normalmente é necessário responder “yes”
+    para garantir a coerência do sistema. Você sempre pode reverter
+    para as versões antigas, já que serão guardadas com uma extensão
+    .dpkg-old.
+
+    Caso você não tenha certeza do que fazer, anote o nome do pacote
+    ou arquivo e resolva em um momento posterior. Você pode procurar
+    no arquivo transcrito para rever as informações que estavam na
+    tela durante a atualização.
+
+4.5.6. Mudança de sessão para o console
+
+    Caso você esteja executando a atualização usando o console local
+    do sistema, você pode achar que em alguns momentos durante a
+    atualização o console é comutado para uma visão diferente e você
+    perde a visibilidade do processo de atualização. Por exemplo,
+    isso pode acontecer em sistemas desktop quando o gerenciador de
+    tela é reiniciado.
+
+    Para recuperar o console onde a atualização estava em execução
+    você terá que usar Ctrl+Alt+F1 (se estiver na tela de
+    inicialização gráfica) ou Alt+F1 (se estiver no console local em
+    modo texto) para mudar de volta para o terminal virtual 1.
+    Substitua F1 pela tecla de função com o mesmo número do terminal
+    virtual onde a atualização estava em execução. Você também pode
+    usar Alt+Seta Esquerda ou Alt+Seta Direita para mudar entre os
+    diferentes terminais em modo texto.
+
+4.5.7. Cuidados especiais com pacotes específicos
+
+    Na maioria dos casos, os pacotes deverão atualizar sem problemas
+    entre wheezy e jessie. Existe um pequeno número de casos onde
+    alguma intervenção pode ser necessária, seja antes ou durante a
+    atualização; esses estão detalhados a seguir baseados por pacote.
+
+4.5.7.1. systemd
+
+    A atualização do Debian de wheezy para jessie migrará, por
+    padrão, o seu sistema init do SysV para o systemd. Dependendo do
+    seu sistema e configuração, você pode precisar fazer algumas
+    alterações manuais. Nós detalhamos os problemas conhecidos em
+    Seção 5.6, “A atualização instala o novo sistema init padrão para
+    Jessie”.
+
+4.5.7.2. LXC
+
+    Caso você tenha o LXC instalado, você pode precisar tomar
+    cuidados especiais ao atualizar o seu sistema e os seus
+    contêineres. Por favor, dê uma olhada em Seção 5.8,
+    “Considerações de atualização para hospedeiros e contêineres LXC”
+    para problemas conhecidos e soluções.
+
+4.6. Atualizando o seu kernel e pacotes relacionados
+
+    Esta seção explica como atualizar o seu kernel e identifica
+    potenciais problemas relacionados com essa atualização. Você pode
+    instalar um dos pacotes linux-image-* fornecidos pelo Debian, ou
+    compilar um kernel customizado a partir do fonte.
+
+    Note que muitas das informações nesta seção são baseadas na
+    suposição de que você usará um dos kernels modulares do Debian,
+    juntamente com o initramfs-tools e o udev. Caso você escolha
+    utilizar um kernel customizado que não requeira uma initrd ou se
+    você utilizar um gerador de initrd diferente, algumas das
+    informações podem não ser relevantes para você.
+
+4.6.1. Instalando um metapacote do kernel
+
+    Quando você fizer dist-upgrade do wheezy para a jessie, é
+    fortemente recomendado que você instale um metapacote
+    linux-image-*, caso você não tenha feito isso antes. Esses
+    metapacotes trarão automaticamente uma nova versão do kernel
+    durante as atualizações. Você pode verificar se você tem um
+    instalado executando:
+
+    # dpkg -l "linux-image*" | grep ^ii | grep -i meta
+
+    Caso você não veja nenhuma saída, então você precisará instalar
+    um novo pacote linux-image manualmente ou instalar um metapacote
+    linux-image. Para ver uma lista dos metapacotes linux-image
+    disponíveis, execute:
+
+    # apt-cache search linux-image- | grep -i meta | grep -v transition
+
+    Caso você esteja inseguro sobre qual pacote selecionar, execute
+    uname -r e procure um pacote com um nome semelhante. Por exemplo,
+    caso você veja '2.6.32-5-amd64', é recomendado que você instale
+    linux-image-amd64. Você também pode usar apt-cache para ver uma
+    longa descrição de cada pacote a fim de ajudar a escolher o
+    melhor disponível. Por exemplo:
+
+    # apt-cache show linux-image-amd64
+
+    Você deve então usar apt-get install para instalá-lo. Uma vez que
+    o novo kernel esteja instalado, você deverá reinicializar assim
+    que for possível para obter os benefícios oferecidos pela nova
+    versão do kernel. Porém, por favor, dê uma olhada em Seção 4.7,
+    “Coisas para fazer antes de reinicializar” antes de realizar a
+    primeira reinicialização após a atualização.
+
+    Para os mais aventureiros, existe uma forma fácil de compilar seu
+    próprio kernel customizado no Debian. Instale os fontes do
+    kernel, fornecidos no pacote linux-source. Você pode fazer uso do
+    alvo deb-pkg disponível no makefile dos fontes para construir um
+    pacote binário. Mais informações podem ser encontradas no Debian
+    Linux Kernel Handbook (http://kernel-handbook.alioth.debian.org/)
+    , o qual também pode ser encontrado como o pacote
+    debian-kernel-handbook.
+
+    Se possível, é vantajoso atualizar o pacote do kernel
+    separadamente do dist-upgrade principal para reduzir as chances
+    de ter um sistema temporariamente não-inicializável. Note que
+    isso deve ser feito somente após o processo de atualização mínima
+    descrito na Seção 4.4.4, “Atualização mínima do sistema”.
+
+4.6.2. Mudanças na montagem e verificação do sistema de arquivos raiz
+e /usr
+
+    O initramfs-tools agora também executará o fsck no sistema de
+    arquivos raiz antes de montá-lo. Caso o programa init escolhido
+    seja o systemd e haja um sistema de arquivos /usr separado, ele
+    também fará o fsck e montará o /usr.
+
+      * Caso o /usr esteja em um sistema de arquivos separado em um
+        dispositivo RAID e a configuração do INITRDSTART em /etc/
+        default/mdadm não seja 'all', você precisará mudá-la para
+        incluir esse dispositivo.
+
+      * Caso o /usr esteja em um sistema de arquivos separado em um
+        volume lógico LVM, e a linha para o /usr em /etc/fstab
+        especifique o dispositivo pelo UUID ou LABEL, você deve
+        alterar esta linha para especificar o dispositivo usando o
+        formato /dev/mapper/VG-LV ou /dev/VG/LV.
+
+      * Não é mais possível fazer bind-mount no sistema de arquivos /
+        usr.
+
+      * Caso o RTC (relógio de tempo real) esteja ajustado para o
+        horário local e o horário local esteja à frente do UTC, o
+        e2fsck apresentará um aviso durante a inicialização sobre a
+        mudança de atraso do horário (bug #767040 (https://
+        bugs.debian.org/767040) ). Você pode desabilitar isso pondo
+        as seguintes linhas no /etc/e2fsck.conf:
+
+        [options]
+        broken_system_clock=1
+
+4.7. Coisas para fazer antes de reinicializar
+
+    Quando o apt-get dist-upgrade terminar, a atualização “formal”
+    estará completa, mas existem algumas outras coisas com as quais
+    deve-se ter cuidado antes da próxima reinicialização.
+
+      * Ao fazer a atualização de Wheezy para Jessie, pode ser uma
+        boa ideia expurgar pacotes antigos antes da primeira
+        reinicialização. Em particular, scripts de init obsoletos
+        podem causar problemas. Por favor, veja Seção 4.8.1,
+        “Expurgando pacotes removidos” para detalhes de como
+        encontrar e expurgar pacotes removidos.
+
+4.8. Preparar para a próxima versão
+
+    Após a atualização, existem diversas coisas que você pode fazer
+    para preparar para a próxima versão.
+
+      * Remova pacotes redundantes recentemente ou obsoletos como
+        descrito na Seção 4.4.3, “Certifique-se que você tem espaço
+        suficiente para a atualização” e Seção 4.10, “Pacotes
+        obsoletos”. Você deve rever quais arquivos de configuração
+        eles usam e considerar expurgar os pacotes para remover seus
+        arquivos de configuração. Veja também Seção 4.8.1,
+        “Expurgando pacotes removidos”.
+
+4.8.1. Expurgando pacotes removidos
+
+    Em geral, é aconselhável expurgar pacotes removidos. Isso é
+    especialmente verdadeiro caso os mesmos tenham sido removidos em
+    uma atualização da versão anterior (por exemplo, de uma
+    atualização do wheezy) ou foram fornecidos por terceiros. Em
+    particular, scripts antigos init.d têm sido conhecidos por
+    causarem problemas.
+
+    Cuidado
+
+    Ao expurgar um pacote, geralmente também expurgará os seus
+    arquivos de log, então, é possível que você queira fazer um
+    backup deles primeiro.
+
+    O seguinte comando apresenta uma lista de todos os pacotes
+    removidos que podem ter arquivos de configuração deixados no
+    sistema (se houver):
+
+    # dpkg -l | awk '/^rc/ { print $2 }'
+
+    Os pacotes podem ser removidos utilizando apt-get purge. Supondo
+    que você queira expurgar todos eles de uma vez, você pode usar o
+    seguinte comando:
+
+    # apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+
+    Caso você utilize o aptitude, você também pode usar a seguinte
+    alternativa para os comandos acima:
+
+    $ aptitude search '~c'
+    $ aptitude purge '~c'
+
+4.9. Componentes obsoletos
+
+    Com a próxima versão do Debian 9 (codinome stretch), alguns
+    recursos estarão obsoletos. Os usuários precisarão migrar para
+    outras alternativas para evitar aborrecimento quando atualizar
+    para 9.
+
+    Isso inclui os seguintes recursos:
+
+      * O pacote hardening-wrapper está obsoleto e espera-se que seja
+        removido no Stretch.
+
+4.10. Pacotes obsoletos
+
+    Ao introduzir vários novos pacotes, a jessie também aposenta e
+    omite completamente alguns pacotes antigos que estavam no wheezy.
+    Não é fornecido um caminho de atualização para esses pacotes
+    obsoletos. Apesar de nada lhe impedir de continuar a usar um
+    pacote obsoleto enquanto o desejar, o projeto Debian normalmente
+    descontinuará o suporte de segurança para o mesmo um ano após o
+    lançamento do jessie^[5], e não fornecerá normalmente outro
+    suporte nesse meio tempo. Substituí-los por alternativas
+    disponíveis, caso existam, é recomendado.
+
+    Existem muitas razões pela quais os pacotes podem ter sido
+    removidos da distribuição: eles não são mais mantidos pelo
+    upstream; não existe mais nenhum Desenvolvedor Debian interessado
+    em manter os pacotes; a funcionalidade que eles fornecem foi
+    substituída por um software diferente (ou uma nova versão); ou
+    eles não são mais considerados adequados para o jessie devido a
+    bugs nos mesmos. Nesse último caso, os pacotes podem ainda estar
+    presentes na distribuição “unstable”.
+
+    A detecção de quais pacotes são “obsoletos” em um sistema
+    atualizado é fácil, já que as interfaces de gerenciamento de
+    pacotes os marcarão como tal. Caso você esteja utilizando o 
+    aptitude, você verá uma lista desses pacotes na entrada “Pacotes
+    Criados Localmente e Obsoletos”.
+
+    O Sistema de Rastreamento de Bugs do Debian (https://
+    bugs.debian.org/) frequentemente fornece informações adicionais
+    sobre a razão da remoção do pacote. Você deve revisar tanto os
+    relatórios de bug arquivados para o próprio pacote quanto os
+    relatórios de bug arquivados para o pseudo-pacote ftp.debian.org
+    (https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org
+    &archive=yes) .
+
+    A lista dos pacotes obsoletos inclui:
+
+      * O sucessor do postgresql-9.1 é o postgresql-9.4. Uma vez que
+        a atualização do sistema operacional esteja concluída, você
+        também deve se planejar para atualizar os seus clusters de
+        bancos de dados do PostgreSQL 9.1 para a nova versão 9.4 do
+        PostgreSQL utilizando a ferramenta pg_upgradecluster. Para os
+        usuários da linguagem procedural PL/perl, o jessie fornece um
+        pacote postgresql-plperl-9.1 atualizado lincado com a versão
+        jessie da libperl, para possibilitar a atualização para a
+        nova versão do perl no jessie, enquanto mantém as antigas
+        funções de banco de dados PL/perl utilizáveis até que o banco
+        de dados também seja atualizado.
+
+      * O sucessor do python3.2 é o python3.4. (A versão 2.7 é
+        suportada tanto no wheezy quanto no jessie.)
+
+      * O sucessor do ruby1.8 e ruby1.9.1 é o ruby2.1. Por favor,
+        instale o pacote ruby para acompanhar automaticamente a
+        versão atual do ruby.
+
+      * As alternativas para o mplayer são mplayer2 e mpv (novo no
+        jessie). Enquanto o primeiro é mais compatível com o mplayer
+        em termos de argumentos de linha de comando e configuração (e
+        adiciona alguns novos recursos também), o último adiciona
+        vários novos recursos e melhorias, e é ativamente mantido
+        pelo upstream.
+
+      * openoffice.org; por favor, use o libreoffice.
+
+      * O sucessor do squid é o squid3.
+
+      * O sucessor do libjpeg-progs é o libjpeg-turbo-progs.
+
+      * O sucessor do openjdk-6-* é o openjdk-7-*.
+
+4.10.1. Pacotes fictícios
+
+    Alguns pacotes do wheezy foram separados em diversos pacotes no
+    jessie, muitas vezes para melhorar a manutenção do sistema. Para
+    facilitar o caminho de atualização em tais casos, a jessie
+    geralmente fornece pacotes “fictícios”: pacotes vazios que têm o
+    mesmo nome como nos antigos pacotes do wheezy, com dependências
+    que fazem com que os novos pacotes sejam instalados. Esses
+    pacotes “fictícios” são considerados redundantes após a
+    atualização e podem ser seguramente removidos.
+
+    A maioria (mas não todas) das descrições dos pacotes fictícios
+    indica o seu propósito. As descrições de pacotes para pacotes
+    fictícios não são uniformes, porém, você pode também considerar
+    útil o deborphan com as opções --guess-* (por exemplo,
+    --guess-dummy) para detectá-los em seu sistema. Note que alguns
+    pacotes fictícios não têm como finalidade serem removidos após
+    uma atualização mas são, em vez disso, usados para acompanhar a
+    atual versão disponível de um programa ao longo do tempo.
+
+
+---------------------------------------------------------------------
+
+    ^[1] Se a prioridade do debconf estiver configurada em um nível
+    muito alto, você pode evitar perguntas de configuração, mas os
+    serviços que dependam de respostas predefinidas que não são
+    aplicáveis aos seu sistema falharão ao iniciar.
+
+    ^[2] Por exemplo: serviços de DNS ou DHCP, especialmente quando
+    não há redundância ou substituto em caso de falha (“failover”).
+    No caso do DHCP, os usuários finais poderão ser desconectados da
+    rede se o tempo de concessão (“lease time”) for menor do que o
+    tempo que leva para completar o processo de atualização.
+
+    ^[3] Esse recurso pode ser desabilitado adicionando o parâmetro
+    panic=0 aos seus parâmetros de inicialização.
+
+    ^[4] O sistema de gerenciamento de pacotes do Debian normalmente
+    não permite que um pacote remova ou atualize um arquivo
+    pertencente a outro pacote, a menos que ele tenha sido definido
+    para substituir esse pacote.
+
+    ^[5] Ou enquanto não existir outro lançamento durante esse
+    período de tempo. Normalmente, apenas duas versões estáveis são
+    suportadas em um dado momento.
+
+Capítulo 5. Problemas a serem considerados para a jessie
+
+    Algumas vezes, mudanças introduzidas em uma nova versão têm
+    efeitos colaterais que não podem ser evitados ou que acabam
+    expondo bugs em outros locais. Esta seção documenta problemas
+    conhecidos. Por favor, também leia a errata, a documentação dos
+    pacotes relevantes, relatórios de bugs e outras informações
+    mencionadas na Seção 6.1, “Leitura complementar”.
+
+5.1. Limitações no suporte de segurança
+
+    Há alguns pacotes onde o Debian não pode prometer fornecer portes
+    retroativos mínimos para problemas de segurança. Esses são
+    abordados nas subseções a seguir.
+
+    Note que o pacote debian-security-support, introduzido no Jessie,
+    ajuda a acompanhar a situação do suporte de segurança dos pacotes
+    instalados.
+
+5.1.1. Situação da segurança dos navegadores web
+
+    O Debian 8 inclui diversos motores de navegadores que são
+    afetados por um fluxo constante de vulnerabilidades de segurança.
+    A alta taxa de vulnerabilidades e a ausência parcial de suporte
+    do upstream na forma de ramos de longo prazo tornam muito difícil
+    o suporte a esses navegadores com correções de segurança portadas
+    retroativamente. Além disso, as interdependências das bibliotecas
+    tornam impossível atualizar para uma versão upstream mais nova.
+    Por isso, navegadores feitos sobre os motores webkit, qtwebkit e
+    khtml foram incluídos no Jessie, mas não estão cobertos pelo
+    suporte de segurança. Esses navegadores não devem ser usados em
+    sites web não confiáveis.
+
+    Para uso geral de navegador web recomendamos Iceweasel ou
+    Chromium.
+
+    Chromium - enquanto construído sobre a base de código Webkit - é
+    um pacote sem dependência, que será mantido atualizado através da
+    reconstrução das versões atuais do Chromium para a estável. O
+    Iceweasel e o Icedove também serão mantidos atualizados através
+    da reconstrução das versões ESR atuais para a estável.
+
+5.1.2. Falta de suporte de segurança para o ecossistema em torno da
+libv8 e Node.js
+
+    A plataforma Node.js é construída em cima da libv8-3.14, que
+    vivencia um alto volume de problemas de segurança, mas atualmente
+    não há voluntários no projeto ou na equipe de segurança
+    suficientemente interessados e dispostos a gastar a grande
+    quantidade de tempo necessária para conter esses problemas
+    encontrados.
+
+    Infelizmente, isso significa que a libv8-3.14, o nodejs e o
+    ecossistema de pacotes node-* associados não devem ser atualmente
+    utilizados com conteúdo não confiável, tal como dados não
+    avaliados oriundos da Internet.
+
+    Além disso, esses pacotes não receberão quaisquer atualizações de
+    segurança durante o tempo de vida da versão Jessie.
+
+5.1.3. Término antecipado do suporte de segurança do MediaWiki
+
+    O suporte do upstream para a série 1.19 do mediawiki termina
+    durante o ciclo de vida esperado da Jessie. O pacote mediawiki
+    está incluído na Jessie para satisfazer dependências em outros
+    pacotes.
+
+    O suporte de segurança para o mediawiki terminará juntamente com
+    o suporte para o Wheezy em abril de 2016.
+
+5.2. O servidor OpenSSH predefine “PermitRootLogin without-password”
+
+    Em uma tentativa de fortalecer a configuração padrão, a
+    configuração do openssh-server agora predefinirá "PermitRootLogin
+    without-password". Caso você confie na autenticação por senha
+    para o usuário root, você pode ser afetado por essa mudança.
+
+    O openssh-server tentará detectar esses casos e aumentar a
+    prioridade dos seus avisos do debconf.
+
+    Caso você queira manter a autenticação por senha para o usuário root,
+    você também pode predefinir esta pergunta usando:
+   
+    # The "false" value is in fact correct despite being confusing.
+    $ echo 'openssh-server openssh-server/permit-root-login boolean false' | debconf-set-selections
+
+5.3. Compatibilidade puppet 2.7 / 3.7
+
+    Caso você esteja usando Puppet, por favor, esteja ciente de que o
+    Puppet 3.7 não é compatível com o anterior Puppet 2.7. Além de
+    outras coisas, as regras de escopo mudaram e muitas estruturas de
+    controle (“constructs”) obsoletas foram removidas. Veja as notas
+    de lançamento do Puppet 3.x (https://docs.puppetlabs.com/puppet/3
+    /reference/release_notes.html#puppet-300) para algumas das
+    mudanças, apesar de estar ciente de que há mudanças adicionais no
+    3.7.
+
+    Verificar os arquivos de log do seu “puppetmaster” atual em busca
+    de advertências de código obsoleto e resolver todas essas
+    advertências antes de proceder com a atualização fará com que
+    seja muito mais fácil completar a atualização. Alternativamente,
+    ou adicionalmente, testar os manifestos com uma ferramenta como o
+    teste de catálogo Puppet (https://github.com/duritong/
+    puppet_catalog_test) também pode encontrar possíveis problemas
+    antes da atualização.
+
+    Quando atualizar um sistema gerenciado pelo Puppet de Wheezy para
+    Jessie, você deve garantir que o puppetmaster correspondente
+    execute, pelo menos, a versão 3.7 do Puppet. Caso o mestre esteja
+    executando o puppetmaster do Wheezy, o sistema Jessie gerenciado
+    não será capaz de conectar ao mesmo.
+
+    Para mais informações sobre as alterações incompatíveis, por
+    favor, dê uma olhada em problemas de atualização Telly (https://
+    projects.puppetlabs.com/projects/puppet/wiki/
+    Telly_Upgrade_Issues) e “The Angry Guide to Puppet 3” (http://
+    somethingsinistral.net/blog/the-angry-guide-to-puppet-3/) .
+
+5.4. A atualização para PHP 5.6 tem mudanças de comportamento
+
+    A atualização para Jessie inclui uma atualização do PHP de 5.4
+    para 5.6. Isso pode afetar quaisquer scripts PHP e você é
+    aconselhado a verificar esses scripts antes de atualizar. Abaixo,
+    está um subconjunto selecionado desses problemas:
+
+      * Para prevenir ataques do tipo “man-in-the-middle” contra
+        transferências criptografadas, os streams de clientes agora
+        verificam os certificados dos pares por padrão.
+
+        Como resultado dessa mudança, um código existente usando “
+        wrappers” de stream ssl:// ou tls:// (por exemplo,
+        file_get_contents(), fsockopen(), stream_socket_client())
+        pode não conectar-se mais com sucesso sem desabilitar
+        manualmente a verificação de pares através do ajuste “
+        verify_peer” no contexto do stream.
+
+        Para mais informações sobre esse problema específico, por
+        favor, leia este documento (https://wiki.php.net/rfc/
+        tls-peer-verification) .
+
+      * PHP muda o tratamento de insensibilidade a maiúsculas e
+        minúsculas em muitos casos:
+
+          + Todo tratamento interno de insensibilidade a maiúsculas e
+            minúsculas para nomes de classes, funções e constantes é
+            feito de acordo com as regras ASCII. As regras do locale
+            atual são ignoradas.
+
+          + As chaves “self”, “parent” e “static” agora são sempre
+            insensíveis a maiúsculas e minúsculas.
+   
+          + A função json_decode() não aceita mais variantes não
+            minúsculas dos valores “boolean”.
+
+      * As funções de GUID logo (por exemplo, php_logo_guid()) foram
+        removidas.
+
+      * Não é mais possível sobrescrever chaves em matrizes escalares
+        estáticas. Por favor, veja o bug 66015 do PHP (https://
+        bugs.php.net/bug.php?id=66015) para um exemplo e mais
+        informações sobre esse problema específico.
+
+      * As funções mcrypt_encrypt(), mcrypt_decrypt() e mcrypt_{MODE}
+        () não aceitam mais chaves ou VIs com tamanhos incorretos.
+        Além disso, um VI agora é necessário caso o modo de
+        codificação de bloco utilizado o requeira.
+
+      * Por razões legais, a implementação do JSON distribuída com o
+        PHP foi substituída pela versão fornecida pelo módulo PECL “
+        jsonc”. O código que faz suposições sobre os detalhes de
+        implementação mais finos do parser JSON PHP pode precisar de
+        ser revisado.
+
+      * The "short_open_tag" setting is now disabled by default. The
+        ASP variant of the short tags ("<%" and "%>") are scheduled
+        for removal in PHP7.
+
+    Para mais informações ou a lista completa de possíveis problemas,
+    por favor, dê uma olhada na lista do upstream de mudanças
+    incompatíveis com versões anteriores para o PHP 5.5 (https://
+    php.net/manual/en/migration55.incompatible.php) e 5.6 (https://
+    php.net/manual/en/migration56.incompatible.php) .
+
+5.5. Mudanças incompatíveis no Apache HTTPD 2.4
+
+    Nota
+   
+    Esta seção se aplica apenas a sistemas que tenham um servidor
+    Apache HTTPD instalado e configurado manualmente.
+
+    Houve uma série de mudanças na configuração do servidor HTTPD
+    Apache na versão 2.4. No lado do upstream, a sintaxe mudou.
+    Notavelmente, as diretivas de controle de acesso mudaram
+    consideravelmente e precisarão de migração manual para as novas
+    diretivas.
+
+    O módulo mod_access_compat é mencionado no guia de atualização do
+    upstream como uma alternativa possível para migração imediata.
+    Porém, os relatos sugerem que ele pode nem sempre funcionar.
+
+    O gerenciamento dos arquivos de configuração também mudou no
+    empacotamento do Debian. Em particular, todos os arquivos de
+    configuração e sites agora devem terminar com “.conf” para serem
+    analisados por padrão. Essa mudança também substitui o uso já
+    existente do /etc/apache2/conf.d/.
+
+    Nota
+
+    Durante a atualização, você também pode ver avisos sobre arquivos
+    de configuração colocados em /etc/apache2/conf.d/, que são
+    fornecidos por pacotes do Debian. Este aviso é inevitável, mas
+    inofensivo, pois os pacotes afetados moverão suas configurações
+    uma vez que suas atualizações sejam concluídas (o que geralmente
+    acontecerá depois que o HTTPD Apache emitir o seu alerta).
+
+    Para mais informações e a lista completa das mudanças, por favor,
+    consulte:
+
+      * O documento Atualizando para 2.4 a partir de 2.2 (http://
+        httpd.apache.org/docs/2.4/upgrading.html) fornecido pela
+        Apache por parte do upstream.
+
+      * O arquivo /usr/share/doc/apache2/NEWS.Debian.gz fornecido
+        pelo pacote apache2.
+
+5.6. A atualização instala o novo sistema init padrão para Jessie
+
+    A Jessie vem com o systemd-sysv como sistema init padrão. Esse
+    pacote é instalado automaticamente nas atualizações.
+
+    Caso você tenha uma preferência por outro init, tal como
+    sysvinit-core ou upstart, é recomendado configurar o pinning do
+    APT antes da atualização. Isso também pode ser necessário se você
+    estiver atualizando contêineres do LXC antes do hospedeiro. Nesse
+    caso, por favor, consulte Seção 5.8.1, “Atualizando hóspedes LXC
+    em execução sob hospedeiros Wheezy”.
+
+    Como um exemplo, para evitar que o systemd-sysv seja instalado
+    durante a atualização, você pode criar um arquivo chamado /etc/
+    apt/preferences.d/local-pin-init com o seguinte conteúdo:
+
+    Package: systemd-sysv
+    Pin: release o=Debian
+    Pin-Priority: -1
+
+    Cuidado
+
+    Esteja ciente de que alguns pacotes podem ter um comportamento
+    degradado ou podem faltar recursos sob um sistema init não
+    padrão.
+
+    Por favor, note que a atualização pode instalar pacotes contendo 
+    “systemd” em seu nome, mesmo com o pinning do APT. Esses sozinhos
+    não alteram o seu sistema init. Para usar o systemd como o seu
+    sistema init, o pacote systemd-sysv deve ser instalado primeiro.
+
+    Caso o APT ou aptitude tenham problemas para calcular um caminho
+    de atualização com o pinning habilitado, é possível que você seja
+    capaz de ajudá-los instalando manualmente tanto o sysvinit-core
+    quanto o systemd-shim.
+
+5.6.1. Tratamento mais rigoroso de falhas de montagem durante a
+inicialização sob systemd
+
+    O novo sistema init padrão, systemd-sysv, tem um tratamento mais
+    rigoroso das falhas de montagem do tipo “auto” durante a
+    inicialização, comparado ao sysvinit. Caso ele falhe ao montar
+    uma montagem do tipo “auto” (sem a opção “nofail”), o systemd
+    cairá em um shell de emergência em vez de continuar a
+    inicialização.
+
+    Recomendamos que todos os pontos de montagem removíveis ou “
+    opcionais” (por exemplo, unidades de rede não críticas) listados
+    em /etc/fstab tenham a opção “noauto” ou a “nofail”.
+
+5.6.2. Scripts init obsoletos devem ser expurgados
+
+    Caso você esteja atualizando a partir de uma versão anterior, o
+    seu sistema pode conter scripts init obsoletos fornecidos por
+    pacotes (agora) removidos. Esses scripts podem ter metadados de
+    dependência imprecisos ou inexistentes, que podem levar a ciclos
+    de dependência na sua configuração de init.
+
+    Para evitar isso, recomendamos que você reveja a lista de pacotes
+    que estão em estado “rc” (“Removido, mas permanecem arquivos de
+    configuração”), e expurgue, pelo menos, todos aqueles que
+    contenham scripts init.
+
+    Por favor, veja Seção 4.8.1, “Expurgando pacotes removidos” para
+    detalhes sobre como encontrar e expurgar pacotes removidos.
+
+5.6.3. Scripts init modificados localmente podem precisar ser
+portados para o systemd
+
+    Nota
+   
+    Esta seção se aplica apenas aos sistemas onde os scripts init
+    fornecidos no Debian foram modificados localmente.
+
+    Caso você tenha modificado alguns dos scripts init fornecidos
+    pelo Debian, por favor, esteja ciente que esses podem agora ter
+    sido substituídos por um arquivo de unidade systemd ou pelo
+    próprio systemd. Caso você tenha o debsums instalado, você pode
+    verificar scripts init modificados localmente usando o seguinte
+    comando shell.
+
+    debsums -c -e | grep ^/etc/init.d
+
+    Alternativamente, pode ser usado o seguinte na ausência do
+    debsums.
+
+    dpkg-query --show -f'${Conffiles}' | sed 's, /,\n/,g' | \
+      grep /etc/init.d | awk 'NF,OFS="  " {print $2, $1}' | \
+      md5sum --quiet -c
+
+    Caso um dos comandos sinalize quaisquer arquivos e seus pacotes
+    correspondentes ou o systemd agora forneça um arquivo de unidade
+    systemd para esse serviço, o arquivo de unidade systemd
+    prevalecerá sobre o seu script init modificado localmente.
+    Dependendo da natureza da mudança, há formas diferentes de
+    realizar a migração.
+
+    Caso necessário, é possível substituir o arquivo de unidade
+    systemd para que inicie o script sysvinit. Para mais informações
+    sobre arquivos de unidade systemd, por favor, dê uma olhada nos
+    seguintes recursos.
+
+      * Como eu converto um script init SysV em um arquivo de serviço
+        systemd? (http://0pointer.de/blog/projects/
+        systemd-for-admins-3.html)
+
+      * systemd.special — Unidades especiais systemd (http://
+        0pointer.de/public/systemd-man/systemd.special.html)
+
+      * Meu serviço não consegue tempo real! (http://
+        www.freedesktop.org/wiki/Software/systemd/
+        MyServiceCantGetRealtime/) (também contém uma menção bem
+        curta sobre como invocar scripts init a partir de arquivos de
+        unidade)
+
+5.6.4. Necessidade do plymouth para prompts de inicialização sob
+inicializações com systemd
+
+    Caso a sua inicialização seja interativa (por exemplo, precise de
+    uma senha para um disco criptografado), por favor, certifique-se
+    de que você tem o plymouth instalado e configurado. Por favor,
+    consulte o /usr/share/doc/plymouth/README.Debian para informações
+    sobre como configurar o plymouth.
+
+    Sem o plymouth, você pode descobrir que o prompt de inicialização
+    desaparece. Relatos sugerem que o prompt do cryptsetup ainda
+    aceita entrada apesar de não estar visível. Se você enfrentar
+    esse problema, digitar a senha correta pode ainda funcionar.
+
+5.6.5. Interação entre logind e acpid
+
+    Eventos ACPI podem ser tratados pelo logind ou acpid. No caso de
+    ambos os serviços estarem configurados para tratarem os eventos
+    de maneiras diferentes, isso pode levar a resultados
+    indesejáveis.
+
+    Recomendamos migrar todas as configurações não padrão para logind
+    e desinstalar o acpid. Alternativamente, também é possível
+    configurar o logind para ignorar eventos ACPI adicionando:
+
+    HandlePowerKey=ignore
+    HandleSuspendKey=ignore
+    HandleHibernateKey=ignore
+    HandleLidSwitch=ignore
+
+    ao /etc/systemd/logind.conf. Note que isso pode mudar o
+    comportamento dos ambientes de área de trabalho que dependem do
+    logind.
+
+5.6.6. Recursos do crypttab não suportados pelo systemd (por exemplo,
+“keyscript=...”)
+
+    Há alguns recursos do cryptsetup que, infelizmente, não são
+    suportados quando se está usando o systemd como sistema init.
+    Esses são:
+
+      * precheck
+
+      * check
+
+      * checkargs
+   
+      * noearly
+
+      * loud
+
+      * keyscript
+
+    Caso o seu sistema dependa de qualquer um desses recursos para
+    inicializar com sucesso, você terá que usar o sysvinit
+    (sysvinit-core) como sistema init. Por favor, consulte Seção 5.6,
+    “A atualização instala o novo sistema init padrão para Jessie”
+    para saber como evitar um sistema init em particular.
+
+    Você pode verificar se alguma dessas opções está em uso em seu
+    sistema executando o seguinte comando:
+
+    grep -e precheck -e check -e checkargs -e noearly -e loud -e keyscript /etc/crypttab
+
+    Se não houver saída no comando acima, o seu sistema não utiliza
+    nenhuma das opções afetadas.
+
+5.6.7. systemd: envia SIGKILL muito cedo [corrigido na 8.1]
+
+    Nota
+   
+    Esse problema foi corrigido no lançamento pontual Jessie 8.1.
+
+    Uma regressão foi relatada no systemd após o lançamento da
+    Jessie. A falha ocorre durante o desligamento ou reinicialização,
+    onde o systemd não dá nenhum atraso razoável antes de enviar
+    SIGKILL aos processos. Isso pode levar à perda de dados em
+    processos que não tenham salvado todos os dados no momento da
+    reinicialização (por exemplo, bancos de dados em execução).
+
+    Esse problema é monitorado no bug #784720 do Debian (https://
+    bugs.debian.org/784720)
+
+5.6.8. systemd: comportamento do comando “halt”
+
+    A implementação do comando halt do sysvinit também desligava a
+    máquina. A implementação do systemd-sysv faz o sistema parar, mas
+    não desliga a máquina. Para fazer a máquina parar e desligá-la,
+    use o comando poweroff.
+
+    Veja também o bug #760923 do Debian (https://bugs.debian.org/
+    760923)
+
+5.7. Opções de configuração do kernel necessárias para a Jessie
+
+    Nota
+
+    Esta seção é apenas para pessoas que compilam o seu próprio
+    kernel. Caso você utilize os kernels compilados pelo Debian, pode
+    ignorar esta seção.
+
+    As seguintes opções de configuração do kernel agora são
+    necessárias ou recomendadas para a Jessie (além das existentes de
+    versões anteriores):
+
+    # Necessária para udev
+    CONFIG_DEVTMPFS=y
+    # Necessária para *alguns* serviços do systemd
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y
+    # Necessária para "bluez" (GNOME)
+    CONFIG_BT=y
+    # Necessária para cups + systemd.
+    CONFIG_PPDEV=y
+
+    Os serviços do systemd que requerem
+    CONFIG_DEVPTS_MULTIPLE_INSTANCES=y tipicamente conterão, pelo
+    menos, uma das seguintes diretivas:
+
+    PrivateTmp=yes
+    PrivateDevices=yes
+    PrivateNetwork=yes
+    ProtectSystem=yes
+
+    Se você não usar o systemd, ou puder afirmar que nenhum dos
+    serviços do systemd usará as diretivas acima, a opção de
+    configuração pode não ser necessária para o seu sistema em
+    particular.
+
+    Para mais informações sobre os requisitos, por favor, consulte a
+    seção chamada “REQUIREMENTS” no arquivo README (https://
+    sources.debian.net/src/systemd/jessie/README/) para o pacote
+    systemd.
+
+5.8. Considerações de atualização para hospedeiros e contêineres LXC
+
+    Nota
+
+    Esta seção se aplica apenas a sistemas que tenham contêineres e
+    hospedeiros LXC. Sistemas de usuários finais normais geralmente
+    não dispõem disso.
+
+    A atualização de Wheezy para Jessie migrará o seu sistema para o
+    sistema init systemd por padrão (veja Seção 5.6, “A atualização
+    instala o novo sistema init padrão para Jessie”).
+
+    Ao atualizar um contêiner LXC ou uma máquina virtual LXC, isso
+    terá diferentes consequências dependendo se o sistema do
+    hospedeiro já tiver sido atualizado para Jessie ou não.
+
+5.8.1. Atualizando hóspedes LXC em execução sob hospedeiros Wheezy
+
+    Caso você esteja atualizando um contêiner hóspede LXC que esteja
+    sendo executado em um sistema hospedeiro Wheezy, então você
+    precisará evitar que o hóspede seja automaticamente migrado para
+    systemd. Você evita a migração através de pinning, como descrito
+    em Seção 5.6, “A atualização instala o novo sistema init padrão
+    para Jessie”.
+
+    Isso é necessário porque o hospedeiro Wheezy não possui
+    funcionalidades para inicializar um sistema executando o systemd.
+
+    Você deve ser capaz de mudar para o systemd dentro do hóspede LXC
+    uma vez que você tenha atualizado o sistema hospedeiro para
+    Jessie. Veja o próximo parágrafo para as coisas que precisam ser
+    adaptadas em hospedeiros Jessie.
+
+5.8.2. Atualizando hóspedes LXC em execução sob hospedeiros Jessie
+
+    Para ser capaz de inicializar hóspedes LXC com systemd, você
+    precisa adaptar a sua configuração do contêiner LXC. A
+    configuração do contêiner pode normalmente ser encontrada em /var
+    /lib/lxc/NOME_DO_CONTEINER/config. Você precisa adicionar os dois
+    seguintes ajustes na configuração:
+
+    lxc.autodev = 1
+    lxc.kmsg = 0
+
+5.8.3. Informações adicionais
+
+    Você pode encontrar informações adicionais sobre LXC no Debian no
+    wiki do Debian (https://wiki.debian.org/LXC) .
+
+5.9. Migração manual de discos criptografados com LUKS whirlpool
+(configurações não padrão)
+
+    Nota
+
+    Esta seção é apenas para pessoas que criaram discos
+    criptografados com LUKS utilizando a hash whirlpool. O
+    debian-installer nunca suportou a criação de tais discos.
+
+    Caso você tenha configurado manualmente um disco criptografado
+    com LUKS whirlpool, precisará migrá-lo manualmente para uma hash
+    mais forte. Você pode verificar se o seu disco está usando
+    whirlpool utilizando o seguinte comando:
+
+    # /sbin/cryptsetup luksDump <disk-device> | grep -i whirlpool
+
+    Para mais informações sobre migração, por favor, veja o item “8.3
+    Gcrypt 1.6.x and later break Whirlpool” da FAQ cryptsetup (https:
+    //code.google.com/p/cryptsetup/wiki/FrequentlyAskedQuestions) .
+
+    Cuidado
+
+    Caso você tenha um tal disco, o cryptsetup recusará
+    descriptografá-lo por padrão. Caso o seu disco raiz ou outros
+    discos de sistema (por exemplo, /usr) estejam criptografados com
+    whirlpool, você deve migrá-los antes da primeira reinicialização
+    após atualizar o cryptsetup.
+
+5.10. A área de trabalho GNOME necessita placa gráfica 3D básica
+
+    A área de trabalho GNOME 3.14 na Jessie não tem mais suporte
+    alternativo para máquinas sem placas gráficas 3D básicas. Para
+    funcionar adequadamente, é necessário um PC suficientemente
+    recente (qualquer PC fabricado nos últimos 10 anos deve ter o
+    suporte necessário a SSE2) ou, para arquiteturas diferentes de
+    i386 e amd64, um adaptador gráfico com aceleração 3D com drivers
+    EGL.
+
+5.11. A área de trabalho GNOME não funciona com o driver FGLRX
+proprietário da AMD
+
+    Ao contrário de outros drivers OpenGL, o driver FGLRX da AMD para
+    placas Radeon não suporta a interface EGL. Como tal, vários
+    aplicativos GNOME, incluindo o núcleo da área de trabalho GNOME,
+    não iniciarão quando esse driver estiver em uso.
+
+    Em vez disso, é recomendado usar o driver livre radeon, que é o
+    padrão na jessie.
+
+5.12. Mudanças nos atalhos de teclado padrão do GNOME
+
+    O atalhos de teclado padrão na área de trabalho GNOME mudaram
+    para melhor corresponder aos utilizados em alguns outros sistemas
+    operacionais.
+
+    As definições de atalho previamente modificadas pelo usuário
+    serão preservadas na atualização. Essas definições ainda podem
+    ser configuradas pelo centro de controle do GNOME, acessível a
+    partir do menu superior direito, clicando no ícone “configurações
+    ”.
+
+5.13. Mudanças do shell padrão dos usuários do sistema fornecidos
+pelo base-passwd
+
+    A atualização do pacote base-passwd redefinirá o shell de alguns
+    usuários do sistema para o shell “nologin”. Isso inclui os
+    seguintes usuários:
+
+      * daemon
+
+      * bin
+
+      * sys
+
+      * sync
+
+      * games
+
+      * man
+
+      * lp
+
+      * mail
+
+      * news
+
+      * uucp
+
+      * proxy
+
+      * www-data
+
+      * backup
+
+      * list
+
+      * irc
+
+      * gnats
+
+      * nobody
+
+    Caso a sua configuração local necessite que qualquer um desses
+    usuários tenha um shell, você deve dizer não à migração, ou
+    migrar e então mudar o shell dos usuários correspondentes.
+    Exemplos notáveis incluem backups locais feitos através do
+    usuário “backup” com autenticação “ssh-key”.
+
+    Cuidado
+   
+    A migração acontecerá automaticamente se a sua prioridade de
+    pergunta do debconf for “alta” ou superior.
+
+    Caso você saiba que quer manter o shell atual de um determinado
+    usuário, você pode pré-configurar as perguntas usando o seguinte:
+
+    echo 'base-passwd base-passwd/system/nome_do_usuario/shell/shell-atual-modificado/_usr_sbin_nologin boolean false' | debconf-set-selections
+
+    Onde nome_do_usuario é o nome do usuário em questão e
+    shell-atual-modificado é o nome modificado do shell. A
+    modificação é feita substituindo todos os caracteres que não
+    sejam alfanuméricos, hifens e sublinhados por sublinhados. Por
+    exemplo, /bin/bash torna-se _bin_bash.
+
+5.14. Migração para os novos E-mail, Calendário e Contatos (Kontact)
+do KDE
+
+    O sistema de gerenciamento de informações pessoais Kontact
+    recebeu uma grande atualização. A nova versão torna muito maior o
+    uso da indexação de metadados e os dados de cada usuário devem
+    ser migrados para esses novos índices.
+
+    E-mail, eventos do calendário e contatos da lista de endereços
+    são automaticamente migrados quando o usuário fizer login e o
+    componente relevante for iniciado. Algumas configurações
+    avançadas, tais como filtros de e-mail e modelos personalizados,
+    necessitam de intervenção manual. Detalhes adicionais e sugestões
+    de solução de problemas estão coletados na Wiki do Debian (https:
+    //wiki.debian.org/KDE/Jessie/kontact) .
+
+5.15. Falta de consoles virtuais (“getty”s) com múltiplos ambientes
+de área de trabalho
+
+    Nota
+
+    Esse problema está atualmente relatado como corrigido na Jessie.
+    Se você ainda for capaz de reproduzi-lo, então, por favor,
+    acompanhe o bug #766462 do Debian (https://bugs.debian.org/
+    766462) . Note que você pode ter que desarquivar o problema
+    primeiro (por favor, consulte a documentação do servidor de
+    controle BTS do Debian (https://www.debian.org/Bugs/
+    server-control) sobre como desarquivar bugs).
+
+    Caso você tenha múltiplos ambientes de área de trabalho
+    instalados, é possível que nenhum dos “consoles virtuais”
+    apresente um aviso de login.
+
+    Esse problema parece ocorrer quando plymouth, systemd e GNOME
+    estão todos instalados. Esse problema está relatado como bug #
+    766462 do Debian (https://bugs.debian.org/766462) .
+
+    Foi relatado que removendo o argumento “splash” da linha de
+    comando do kernel pode-se contornar o problema. Por favor, veja o
+    /etc/default/grub e lembre-se de executar update-grub após
+    atualizar o arquivo.
+
+5.16. “VGA signal out of range” / tela em branco durante a
+inicialização com o grub-pc
+
+    Há um problema de compatibilidade no grub-pc com placas gráficas
+    mais antigas (por exemplo, a “ATI Rage 128 Pro Ultra TR”) que
+    pode fazer com que uma tela em branco seja mostrada durante a
+    inicialização. O monitor pode emitir uma mensagem “VGA signal out
+    of range” (ou algo semelhante).
+
+    Uma solução simples é definir GRUB_TERMINAL=console em /etc/
+    default/grub.
+
+5.17. Validação mais rigorosa de arquivos cron no crontab
+
+    O programa crontab agora é mais rigoroso e pode se recusar a
+    salvar um arquivo cron modificado caso ele seja inválido. Caso
+    você tenha problemas com o crontab -e, por favor, revise o seu
+    crontab em busca de erros existentes.
+
+5.18. Mudança no tratamento dos caminhos de módulo ilegíveis pelo
+perl
+
+    A partir da versão 5.18 (e 5.20, que está incluída na Jessie), o
+    Perl sairá com um erro fatal caso ele encontre caminhos de módulo
+    ilegíveis em @INC. O comportamento anterior era ignorar tais
+    entradas. É recomendado verificar o conteúdo do @INC em seu
+    ambiente em busca de diretórios que não possam ser lidos por todo
+    mundo e tomar a medida apropriada.
+
+    Você pode ver o @INC padrão para Perl executando perl -V.
+
+5.19. Considerações de atualização para clusters Ganeti
+
+5.19.1. Problema ao atualizar clusters Ganeti com instâncias
+suportadas por DRBD [corrigido na 8.1]
+
+    Nota
+   
+    Esse problema foi corrigido no lançamento pontual Jessie 8.1.
+
+    A versão do ganeti (2.12.0-3) lançada com a Jessie não suporta
+    migrações de instalações que utilizam a versão 2.5 ou mais
+    antigas (incluindo Wheezy) nos casos onde há instâncias com
+    discos DRBD. Espera-se que esse problema seja corrigido em um
+    lançamento pontual, e recomenda-se que você não atualize clusters
+    Ganeti afetados enquanto isso. Você pode encontrar mais
+    informações sobre esse problema no bug #783186 do Debian (https:/
+    /bugs.debian.org/783186) .
+
+5.19.2. Notas gerais sobre a atualização de clusters Ganeti
+
+    O procedimento recomendado para atualizar um cluster Ganeti da
+    versão do ganeti da Wheezy (2.5.2-1) para o da Jessie (2.12.0-3)
+    é parar todas as instâncias e então atualizar e reinicializar
+    todos os nós de uma só vez. Isso garantirá que todas as
+    instâncias funcionem com a versão do hypervisor da Jessie e que
+    todos os nós funcionem com as mesmas versões do Ganeti e DRBD.
+
+    Note que a execução de um cluster com um misto de nós 2.5 e 2.12
+    não é suportado. Também note que, dependendo do hypervisor,
+    migrações em tempo real de instâncias podem não funcionar entre
+    as versões do hypervisor da Wheezy e da Jessie.
+
+5.20. Novos requisitos para execução de arquivos no Samba4
+
+    Caso um cliente solicite que um arquivo deve ser “aberto para
+    execução”, o Samba4 exigirá que o bit executável esteja ativado
+    no arquivo, além das permissões normais de leitura. Isso também
+    faz com que os scripts “netlogon” sejam silenciosamente ignorados
+    caso eles não tenham esse bit executável ativado.
+
+5.21. O cryptsetup pode quebrar a inicialização com BUSYBOX=n
+
+    Nota
+   
+    Esta seção se aplica apenas a pessoas que alteraram manualmente o
+    seu /etc/initramfs-tools/initramfs.conf para não usar o busybox.
+
+    Caso você tenha tanto o busybox quanto o cryptsetup instalados,
+    além do initramfs configurado para não usar o busybox, então ele
+    pode tornar o seu sistema não inicializável.
+
+    Por favor, verifique o valor do sua configuração do BUSYBOX no /
+    etc/initramfs-tools/initramfs.conf caso você tenha ambos os
+    pacotes instalados. Neste momento, alternativas conhecidas são
+    desinstalar o busybox ou definir BUSYBOX=y no /etc/
+    initramfs-tools/initramfs.conf.
+
+    Atenção
+
+    Caso você tenha que fazer alguma mudança, por favor, lembre-se de
+    executar update-initramfs -u para atualizar o seu initramfs. Caso
+    contrário, você ainda pode acabar com uma inicialização quebrada.
+
+    Por favor, veja o bug #783297 do Debian (https://bugs.debian.org/
+    783297) para mais informações.
+
+5.22. Backwards incompatible changes in the Squid webproxy
+
+    Nota
+   
+    This section only applies to people that have installed the squid
+    webproxy.
+
+    The configuration of squid has changed in an incompatible way.
+    Notably some of the squid "helpers" have changed their name. If
+    your configuration relies on old features no longer present or on
+    the old names for the helpers, your squid service may fail to
+    start after the upgrade.
+
+    Please see the upstream release notes for more information. These
+    are:
+
+      * Release notes for Squid 3.2 (http://www.squid-cache.org/
+        Versions/v3/3.2/RELEASENOTES.html) (The renamed helpers can
+        be found in 2.6 Helper Name Changes (http://
+        www.squid-cache.org/Versions/v3/3.2/RELEASENOTES.html#ss2.6)
+        )
+
+      * Release notes for Squid 3.3 (http://www.squid-cache.org/
+        Versions/v3/3.3/RELEASENOTES.html)
+
+      * Release notes for Squid 3.4 (http://www.squid-cache.org/
+        Versions/v3/3.4/RELEASENOTES.html)
+
+Capítulo 6. Mais informações sobre o Debian
+
+6.1. Leitura complementar
+
+    Além destas notas de lançamento e do guia de instalação, mais
+    documentação sobre o Debian está disponível a partir do Projeto
+    de Documentação Debian (DDP), cujo objetivo é criar documentação
+    de alta qualidade para usuários e desenvolvedores Debian. A
+    documentação disponível inclui a Referência Debian, o Guia de
+    Novos Mantenedores Debian, o Debian FAQ e muito mais. Para todos
+    os detalhes dos recursos existentes veja o site web de
+    Documentação do Debian (https://www.debian.org/doc/) e o site web
+    do Wiki do Debian (https://wiki.debian.org/) .
+
+    Documentação para pacotes individuais é instalada em /usr/share/
+    doc/pacote. Isso pode incluir informação de copyright, detalhes
+    específicos do Debian e documentação do autor do software.
+
+6.2. Obtendo ajuda
+
+    Há várias fontes de ajuda, aconselhamento e suporte para usuários
+    Debian, mas essas só deveriam ser consideradas se a pesquisa na
+    documentação pelo problema exauriu todos os recursos. Esta seção
+    fornece uma pequena introdução para essas fontes que podem ser
+    úteis para novos usuários Debian.
+
+6.2.1. Listas de discussão
+
+    As listas de discussão de maior interesse para usuários Debian
+    são as listas debian-user (em inglês) e outras listas
+    debian-user-idioma (para outros idiomas). Por exemplo, a
+    debian-user-portuguese (http://lists.debian.org/
+    debian-user-portuguese) para usuários que falam o idioma
+    português do Brasil. Para informações sobre essas listas e
+    detalhes sobre como se inscrever, veja https://lists.debian.org/
+    (https://lists.debian.org/) . Por favor, verifique no histórico
+    de mensagens se já existem respostas para suas perguntas antes de
+    enviar algo e também respeite a etiqueta padrão para listas.
+
+6.2.2. Internet Relay Chat
+
+    O Debian possui um canal IRC dedicado para o suporte e ajuda de
+    usuários Debian, localizado na rede de IRC OFTC. Para acessar o
+    canal, aponte seu cliente de IRC favorito para irc.debian.org e
+    entre no canal #debian (em inglês). Também é possível usar o
+    canal #debian-br para obter suporte em português do Brasil.
+
+    Por favor, siga as regras de conduta do canal, respeitando os
+    outros usuários. As regras de conduta estão disponíveis no Wiki
+    do Debian (https://wiki.debian.org/DebianIRC) .
+
+    Para mais informações sobre a OFTC, por favor, visite o site web
+    (http://www.oftc.net/) .
+
+6.3. Relatando bugs
+
+    Nos empenhamos para tornar o Debian um sistema operacional de
+    alta qualidade; porém, isso não significa que os pacotes que
+    disponibilizamos sejam totalmente livres de bugs. Coerentes com a
+    filosofia de “desenvolvimento aberto” do Debian e como um serviço
+    aos nossos usuários, nós fornecemos toda a informação sobre bugs
+    relatados em nosso próprio Sistema de Rastreamento de Bugs (BTS).
+    O BTS está acessível em https://bugs.debian.org/ (https://
+    bugs.debian.org/) .
+
+    Caso você encontre um bug na distribuição ou no software
+    empacotado que faz parte dela, por favor, relate-o para que possa
+    ser corrigido adequadamente em futuros lançamentos. Para relatar
+    bugs é necessário um endereço de e-mail válido. Nós pedimos isso
+    para que possamos seguir os bugs e os desenvolvedores possam
+    entrar em contato com quem os submeteu, caso seja necessário
+    obter informação adicional.
+
+    Você pode submeter um relatório de bug utilizando o programa 
+    reportbug ou manualmente usando e-mail. Você pode entender mais a
+    respeito do Sistema de Rastreamento de Bugs (BTS) e de como
+    utilizá-lo lendo a documentação de referência (disponível em /usr
+    /share/doc/debian, caso você tenha instalado o doc-debian) ou
+    online no Sistema de Rastreamento de Bugs (https://
+    bugs.debian.org/) .
+
+6.4. Contribuindo para o Debian
+
+    Você não precisa ser um especialista para contribuir com o
+    Debian. Ao ajudar outros usuários com problemas nas várias listas
+    (https://lists.debian.org/) de suporte a usuário você está
+    contribuindo com a comunidade. Identificar (e também resolver)
+    problemas relacionados com o desenvolvimento da distribuição
+    através da participação nas listas (https://lists.debian.org/) de
+    desenvolvimento é também extremamente útil. Para manter a alta
+    qualidade da distribuição Debian, submeta relatórios de bugs
+    (https://bugs.debian.org/) e ajude os desenvolvedores a
+    encontrá-los e a corrigi-los. A ferramenta how-can-i-help ajuda
+    você a encontrar bugs relatados adequados para trabalhar. Caso
+    você tenha jeito com as palavras então pode contribuir mais
+    ativamente ajudando a escrever documentação (https://
+    www.debian.org/doc/cvs) ou traduzir (https://www.debian.org/
+    international/) a documentação existente para o seu próprio
+    idioma.
+
+    Caso você possa dedicar mais tempo, poderá administrar uma parte
+    da coleção de Software Livre dentro do Debian. É especialmente
+    útil se as pessoas adotarem ou mantiverem itens que foram pedidos
+    para serem incluídos no Debian. A base de dados de Pacotes
+    Possíveis e que Necessitam de Trabalho (https://www.debian.org/
+    devel/wnpp/) detalha essa informação. Caso você tenha interesse
+    em grupos específicos então poderá achar agradável contribuir
+    para alguns dos subprojetos (https://www.debian.org/devel/#
+    projects) do Debian que incluem portes para arquiteturas
+    específicas e Misturas Puras do Debian (“Debian Pure Blends”)
+    (https://wiki.debian.org/DebianPureBlends) para grupos
+    específicos de usuários, entre muitos outros.
+
+    Em todo caso, se você estiver trabalhando na comunidade de
+    software livre de qualquer forma, como utilizador, programador,
+    escritor ou tradutor, você já está ajudando o esforço do software
+    livre. A contribuição é recompensadora e divertida, além disso
+    permite-lhe conhecer novas pessoas, dando-lhe aquela estranha
+    sensação calorosa por dentro.
+
+Apêndice A. Gerenciando seu sistema wheezy antes da atualização
+
+    Este apêndice contém informações sobre como assegurar-se de que
+    você consegue instalar ou atualizar pacotes da wheezy antes de
+    atualizar para a jessie. Isso só será necessário em situações
+    específicas.
+
+A.1. Atualizando seu sistema wheezy
+
+    Basicamente, isso não é diferente de qualquer outra atualização
+    do wheezy que você tenha feito. A única diferença é que você
+    precisa ter certeza de que sua lista de pacotes ainda contém
+    referências para o wheezy conforme explicado na Seção A.2,
+    “Verificando sua lista de fontes (sources list)”.
+
+    Caso você atualize o seu sistema usando um espelho Debian, ele
+    automaticamente atualizará para a última versão pontual do
+    wheezy.
+
+A.2. Verificando sua lista de fontes (sources list)
+
+    Se qualquer uma das linhas no seu arquivo /etc/apt/sources.list
+    fizer referência a “stable”, você já está efetivamente “usando” a
+    jessie. Isso pode não ser o que você quer caso você não esteja
+    pronto ainda para a atualização. Caso você já tenha executado
+    apt-get update, você ainda pode voltar atrás sem problemas
+    seguindo o procedimento abaixo.
+
+    Caso você também já tenha instalado pacotes do jessie,
+    provavelmente não há razão para instalar pacotes do wheezy. Neste
+    caso, você terá que decidir se quer continuar ou não. É possível
+    rebaixar a versão (“downgrade”) dos pacotes, mas isso não é
+    abordado neste documento.
+
+    Abra o arquivo /etc/apt/sources.list com seu editor favorito
+    (como root) e verifique todas as linhas começando com deb http:
+    ou deb ftp: para determinar se existe uma referência a “stable”.
+    Caso você encontre qualquer uma, altere de stable para wheezy.
+
+    Caso você tenha linhas começando com deb file:, você mesmo terá
+    que verificar se o local indicado contém um repositório do wheezy
+    ou do jessie.
+
+    Importante
+
+    Não mude nenhuma linha que comece com deb cdrom:. Fazer isso
+    invalidaria a linha e você teria que executar o apt-cdrom
+    novamente. Não se assuste se uma linha para uma fonte do tipo
+    'cdrom' apontar para “unstable”. Embora confuso, isso é normal.
+
+    Caso você tenha feito quaisquer mudanças, salve o arquivo e
+    execute
+
+    # apt-get update
+
+    para atualizar a lista de pacotes.
+
+A.3. Removendo arquivos de configuração obsoletos
+
+    Antes de atualizar o seu sistema para jessie, é recomendado
+    remover arquivos de configuração antigos (tais como arquivos
+    *.dpkg-{new,old} em /etc) do sistema.
+
+A.4. Atualizar locales antigos para UTF-8
+
+    Caso o seu sistema esteja localizado e utilizando um locale que
+    não é baseado em UTF-8 você deve fortemente considerar a mudança
+    do seu sistema para utilizar locales do tipo UTF-8. No passado,
+    existiram bugs^[6] identificados que só se manifestavam ao
+    utilizar um locale não-UTF-8. No ambiente de trabalho, tais
+    locales antigos são suportados através de truques feitos no
+    interior das bibliotecas, e nós não podemos prestar um bom
+    suporte aos usuários que ainda os utilizem.
+
+    Para configurar os locales do seu sistema você pode executar 
+    dpkg-reconfigure locales. Certifique-se de selecionar um locale
+    UTF-8 quando for perguntado sobre qual locale utilizar por padrão
+    no sistema. Além disso, você deve rever as configurações do
+    locale dos seus usuários e garantir que eles não tenham
+    definições antigas em seus ambientes de configuração.
+
+
+---------------------------------------------------------------------
+
+    ^[6] No protetor de tela do GNOME, o uso de senhas com caracteres
+    não-ASCII, suporte a pam_ldap, ou até mesmo a capacidade de
+    desbloquear a tela pode não ser confiável quando não estiver
+    usando UTF-8. O leitor de tela do GNOME é afetado pelo bug #
+    599197 (http://bugs.debian.org/599197) . O gerenciador de
+    arquivos Nautilus (e todos os programas baseados na glib, e
+    provavelmente também todos os programas baseados na Qt) assume
+    que os nomes de arquivos estão em UTF-8, enquanto o shell assume
+    que eles estão na codificação atual do “locale”. No uso diário,
+    nomes de arquivo não-ASCII são simplesmente inutilizáveis em tais
+    configurações. Além disso, o leitor de tela gnome-orca (o qual
+    permite que usuários com deficiência visual acessem o ambiente de
+    trabalho GNOME) requer um locale UTF-8 desde o Squeeze; sob um
+    conjunto de caracteres antigo, ele será incapaz de ler a
+    informação da tela para elementos do ambiente de trabalho, tais
+    como o Nautilus/Painel do GNOME ou o menu Alt-F1.
+
+Apêndice B. Colaboradores das notas de lançamento
+
+    Várias pessoas ajudaram com as notas de lançamento, incluindo,
+    mas não se limitando a:
+
+    Adam Di Carlo, Andreas Barth, Andrei Popescu, Anne Bezemer, Bob 
+    Hilliard, Charles Plessy, Christian Perrier, Daniel Baumann, 
+    David Prévot, Eddy Petrișor, Emmanuel Kasper, Esko Arajärvi, 
+    Frans Pop, Giovanni Rapagnani, Gordon Farquharson, Javier 
+    Fernández-Sanguino Peña, Jens Seidel, Jonas Meurer, Jonathan 
+    Nieder, Joost van Baal-Ilić, Josip Rodin, Julien Cristau, Justin
+    B Rye, LaMont Jones, Luk Claes, Martin Michlmayr, Michael Biebl, 
+    Moritz Mühlenhoff, Niels Thykier, Noah Meyerhans, Noritada 
+    Kobayashi, Osamu Aoki, Peter Green, Rob Bradford, Samuel Thibault
+    , Simon Bienlein, Simon Paillard, Stefan Fritsch, Steve Langasek,
+    Steve McIntyre, Tobias Scherer, Vincent McIntyre e W. Martin 
+    Borgert.
+
+    Este documento foi traduzido em vários idiomas. Muito obrigado
+    aos tradutores!
+
+    Traduzido para português do Brasil por: Adriano Rafael Gomes, 
+    Chanely Marques, Éverton Arruda, Felipe Augusto van de Wiel e 
+    Marcelo Santana.
+
+Índice Remissivo
+
+A
+
+Abiword, Quais as novidades na distribuição?
+Apache, Quais as novidades na distribuição?
+
+B
+
+BIND, Quais as novidades na distribuição?
+Blu-ray, CDs, DVDs e BDs
+
+C
+
+Calligra, Quais as novidades na distribuição?
+CD, CDs, DVDs e BDs
+Courier, Quais as novidades na distribuição?
+
+D
+
+Dia, Quais as novidades na distribuição?
+DocBook XML, Código fonte deste documento
+DVD, CDs, DVDs e BDs
+
+E
+
+Evolution, Quais as novidades na distribuição?
+Exim, Quais as novidades na distribuição?
+
+G
+
+GCC, Quais as novidades na distribuição?
+GNOME, Quais as novidades na distribuição?
+GNUcash, Quais as novidades na distribuição?
+GNUmeric, Quais as novidades na distribuição?
+
+K
+
+KDE, Quais as novidades na distribuição?
+
+L
+
+LibreOffice, Quais as novidades na distribuição?
+LXDE, Quais as novidades na distribuição?
+
+O
+
+OpenSSH, Quais as novidades na distribuição?
+
+P
+
+packages
+
+    apache2, Mudanças incompatíveis no Apache HTTPD 2.4
+    apt, Contribuindo com relatórios de atualização, Preparando as
+        fontes para o APT, Adicionar fontes da Internet ao APT, 
+        Adicionando fontes ao APT para um espelho local
+    apt-listchanges, Atualização mínima do sistema
+    aptitude, Certifique-se que você tem espaço suficiente para a
+        atualização, Expurgando pacotes removidos
+    base-passwd, Mudanças do shell padrão dos usuários do sistema
+        fornecidos pelo base-passwd
+    busybox, O cryptsetup pode quebrar a inicialização com BUSYBOX=n
+    cryptsetup, Migração manual de discos criptografados com LUKS
+        whirlpool (configurações não padrão), O cryptsetup pode
+        quebrar a inicialização com BUSYBOX=n
+    dblatex, Código fonte deste documento
+    debian-goodies, Certifique-se que você tem espaço suficiente para
+        a atualização
+    debian-kernel-handbook, Instalando um metapacote do kernel
+    debian-security-support, Segurança, Limitações no suporte de
+        segurança
+    doc-debian, Relatando bugs
+    docbook-xsl, Código fonte deste documento
+    dpkg, Contribuindo com relatórios de atualização
+    games-content-dev, Blend Debian Games
+    ganeti, Problema ao atualizar clusters Ganeti com instâncias
+        suportadas por DRBD [corrigido na 8.1], Notas gerais sobre a
+        atualização de clusters Ganeti
+    gcc, Segurança
+    grub-pc, “VGA signal out of range” / tela em branco durante a
+        inicialização com o grub-pc
+    hardening-wrapper, Componentes obsoletos
+    how-can-i-help, Contribuindo para o Debian
+    initramfs-tools, Shell de depuração durante a inicialização
+        usando initrd, Atualizando o seu kernel e pacotes
+        relacionados, Mudanças na montagem e verificação do sistema
+        de arquivos raiz e /usr
+    libjpeg-progs, Pacotes obsoletos
+    libjpeg-turbo-progs, Pacotes obsoletos
+    libreoffice, Pacotes obsoletos
+    libv8-3.14, Falta de suporte de segurança para o ecossistema em
+        torno da libv8 e Node.js
+    linux-image-*, Atualizando o seu kernel e pacotes relacionados
+    linux-image-amd64, Instalando um metapacote do kernel
+    linux-source, Instalando um metapacote do kernel
+    localepurge, Certifique-se que você tem espaço suficiente para a
+        atualização
+    mediawiki, Término antecipado do suporte de segurança do
+        MediaWiki
+    mplayer, Pacotes obsoletos
+    mplayer2, Pacotes obsoletos
+    mpv, Pacotes obsoletos
+    needrestart, Segurança
+    nodejs, Falta de suporte de segurança para o ecossistema em torno
+        da libv8 e Node.js
+    openjdk-6-*, Pacotes obsoletos
+    openjdk-7-*, Pacotes obsoletos
+    openoffice.org, Pacotes obsoletos
+    openssh-server, O servidor OpenSSH predefine “PermitRootLogin
+        without-password”
+    perl, Mudança no tratamento dos caminhos de módulo ilegíveis pelo
+        perl
+    php-horde, Aplicativos PHP
+    plymouth, Necessidade do plymouth para prompts de inicialização
+        sob inicializações com systemd, Falta de consoles virtuais
+        (“getty”s) com múltiplos ambientes de área de trabalho
+    popularity-contest, Certifique-se que você tem espaço suficiente
+        para a atualização
+    postgresql-9.1, Pacotes obsoletos
+    postgresql-9.4, Pacotes obsoletos
+    postgresql-plperl-9.1, Pacotes obsoletos
+    puppetmaster, Compatibilidade puppet 2.7 / 3.7
+    python3.2, Pacotes obsoletos
+    python3.4, Pacotes obsoletos
+    release-notes, Reportando bugs neste documento
+    ruby, Pacotes obsoletos
+    ruby1.8, Pacotes obsoletos
+    ruby1.9.1, Pacotes obsoletos
+    ruby2.1, Pacotes obsoletos
+    squid, Pacotes obsoletos
+    squid3, Pacotes obsoletos
+    systemd, Novo sistema de inicialização padrão (systemd), Scripts
+        init modificados localmente podem precisar ser portados para
+        o systemd, Opções de configuração do kernel necessárias para
+        a Jessie, Falta de consoles virtuais (“getty”s) com múltiplos
+        ambientes de área de trabalho
+    systemd-shim, A atualização instala o novo sistema init padrão
+        para Jessie
+    systemd-sysv, Novo sistema de inicialização padrão (systemd), A
+        atualização instala o novo sistema init padrão para Jessie, 
+        Tratamento mais rigoroso de falhas de montagem durante a
+        inicialização sob systemd, systemd: comportamento do comando
+        “halt”
+    sysvinit, Novo sistema de inicialização padrão (systemd), Shell
+        de depuração durante a inicialização usando systemd, systemd:
+        comportamento do comando “halt”
+    sysvinit-core, A atualização instala o novo sistema init padrão
+        para Jessie, Recursos do crypttab não suportados pelo systemd
+        (por exemplo, “keyscript=...”)
+    tinc, Preparar um ambiente seguro para a atualização
+    udev, Atualizando o seu kernel e pacotes relacionados
+    upgrade-reports, Contribuindo com relatórios de atualização
+    upstart, A atualização instala o novo sistema init padrão para
+        Jessie
+    xmlroff, Código fonte deste documento
+    xsltproc, Código fonte deste documento
+
+Perl, Quais as novidades na distribuição?
+PHP, Quais as novidades na distribuição?
+Postfix, Quais as novidades na distribuição?
+PostgreSQL, Quais as novidades na distribuição?
+
+X
+
+Xfce, Quais as novidades na distribuição?
+
+glossário
+
+ACPI
+
+    Advanced Configuration and Power Interface
+
+ALSA
+
+    Advanced Linux Sound Architecture
+
+APM
+
+    Advanced Power Management
+
+BD
+
+    Blu-ray Disc
+
+CD
+
+    Compact Disc
+
+CD-ROM
+
+    Compact Disc Read Only Memory
+
+DHCP
+
+    Dynamic Host Configuration Protocol
+
+DNS
+
+    Domain Name System
+
+DVD
+
+    Digital Versatile Disc
+
+GIMP
+
+    GNU Image Manipulation Program
+
+GNU
+
+    GNU's Not Unix
+
+GPG
+
+    GNU Privacy Guard
+
+IDE
+
+    Integrated Drive Electronics
+
+LDAP
+
+    Lightweight Directory Access Protocol
+
+LILO
+
+    LInux LOader
+
+LSB
+
+    Linux Standard Base
+
+LVM
+
+    Logical Volume Manager
+
+MTA
+
+    Mail Transport Agent
+
+NBD
+
+    Network Block Device
+
+NFS
+
+    Network File System
+
+NIC
+
+    Network Interface Card
+
+NIS
+
+    Network Information Service
+
+OSS
+
+    Open Sound System
+
+RAID
+
+    Redundant Array of Independent Disks
+
+RPC
+
+    Remote Procedure Call
+
+SATA
+
+    Serial Advanced Technology Attachment
+
+SSL
+
+    Secure Sockets Layer
+
+TLS
+
+    Transport Layer Security
+
+UEFI
+
+    Unified Extensible Firmware Interface
+
+USB
+
+    Universal Serial Bus
+
+UUID
+
+    Universally Unique Identifier
+
+VGA
+
+    Video Graphics Array
+
+WPA
+
+    Wi-Fi Protected Access
+

@@ -1,0 +1,15 @@
+{
+  "@uuid": "1ZRfRPe4OybCm9hM6U38M",
+  "@version": 1,
+  "@classname": "ProjectHanlon::ImageService::OSInstall",
+  "@is_template": false,
+  "@noun": "image",
+  "@path_prefix": "os",
+  "@description": "OS Install",
+  "@hidden": false,
+  "@filename": "debian-8.9.0-amd64-netinst.iso",
+  "@mount_method": "mount",
+  "@verification_hash": "bcd6ae9f6808ea0db15981031a9acade4a8f8b6821cdd5f56055df611582de47",
+  "@os_name": "debian-jessie",
+  "@os_version": "8.9.0"
+}

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Глава 2. Что нового в Debian 8</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.ru.html" title="Информация о выпуске Debian 8 (jessie) для архитектуры 64-bit PC" /><link rel="up" href="index.ru.html" title="Информация о выпуске Debian 8 (jessie) для архитектуры 64-bit PC" /><link rel="prev" href="ch-about.ru.html" title="Глава 1. Введение" /><link rel="next" href="ch-installing.ru.html" title="Глава 3. Система установки" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Глава 2. Что нового в Debian 8</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-about.ru.html"><img src="images/prev.png" alt="Пред." /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-installing.ru.html"><img src="images/next.png" alt="След." /></a></td></tr></table><hr /></div><div xml:lang="ru" class="chapter" lang="ru"><div class="titlepage"><div><div><h1 class="title"><a id="ch-whats-new"></a>Глава 2. Что нового в Debian 8</h1></div></div></div><div class="toc"><p><strong>Содержание</strong></p><dl class="toc"><dt><span class="section"><a href="ch-whats-new.ru.html#idp61905664">2.1. Поддерживаемые архитектуры</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#newdistro">2.2. Что нового в дистрибутиве?</a></span></dt><dd><dl><dt><span class="section"><a href="ch-whats-new.ru.html#cd">2.2.1. Носители CD, DVD и BD</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#new-gnome314">2.2.2. Изменения в окружении рабочего стола GNOME</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#systemd">2.2.3. Новая система инициализации по умолчанию (systemd)</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#security">2.2.4. Безопасность</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#mariadb">2.2.5. MariaDB на замену MySQL</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#idp62075200">2.2.6. Приложения PHP</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#debian-games">2.2.7. Смесь Debian Games</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#debian-med">2.2.8. Новости Debian Med</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#debian-science">2.2.9. Новости Debian Science</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#debian-gis">2.2.10. Новости от Debian Geographical Information Systems (GIS)</a></span></dt><dt><span class="section"><a href="ch-whats-new.ru.html#debian-java">2.2.11. Новости команды Debian Java</a></span></dt></dl></dd></dl></div><p>
+Эта тема хорошо описана в <a class="ulink" href="https://wiki.debian.org/NewInJessie" target="_top">вики</a>-страницах.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idp61905664"></a>2.1. Поддерживаемые архитектуры</h2></div></div></div><p>
+  Debian 8 поддерживает две новые архитектуры:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      arm64, 64-битный перенос для машин ARM.
+    </p></li><li class="listitem"><p>
+      ppc64el, 64-битный перенос для машин POWER с порядком байтов от младшего к
+старшему.
+    </p></li></ul></div><p>
+Список официально поддерживаемых архитектур для Debian 8:
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+32-битный ПК («i386») и 64-битный ПК («amd64»)
+</p></li><li class="listitem"><p>
+64-битный ARM («arm64»)
+</p></li><li class="listitem"><p>
+ARM EABI («armel»)
+</p></li><li class="listitem"><p>
+ARMv7 (EABI hard-float ABI, «armhf»)
+</p></li><li class="listitem"><p>
+MIPS («mips» (big-endian) и «mipsel» (little-endian))
+</p></li><li class="listitem"><p>
+PowerPC («powerpc»)
+</p></li><li class="listitem"><p>
+64-битный PowerPC с порядком байтов от младшего к старшему ('ppc64el')
+</p></li><li class="listitem"><p>
+IBM System z («s390x»)
+</p></li></ul></div><p>
+Три архитектуры, которые были частью Debian 7, не вошли в
+jessie.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Как было анонсировано в момент выпуска Debian 7, 32-битный
+перенос на <code class="systemitem">s390</code> заменён на <code class="systemitem">s390x</code>.
+</p></li><li class="listitem"><p>
+Кроме того, переносы на IA-64 и Sparc пришлось удалить из этого выпуска
+из-за того, что они недостаточно поддерживались разработчиками.  Архитектура
+Sparc поддерживалась Debian с выпуска 2.1 (1999 год), а архитектура
+<code class="systemitem">ia64</code> была добавлена в Debian 3.0 (2002
+год).
+</p></li></ul></div><div class="variablelist"><dl class="variablelist"></dl></div><p>
+Finally, the Debian ports to the FreeBSD kernel, <code class="systemitem">kfreebsd-amd64</code> and <code class="systemitem">kfreebsd-i386</code>, included as technology previews in
+Debian 6.0 and Debian 7, are not part of this release.
+</p><p>
+Более подробную информацию о переносе на различные архитектуры и сведения,
+относящиеся к конкретным переносам, вы можете получить на <a class="ulink" href="https://www.debian.org/ports/" target="_top">странице переносов Debian</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newdistro"></a>2.2. Что нового в дистрибутиве?</h2></div></div></div><p>
+Новый выпуск Debian опять содержит намного больше программ, чем его
+предшественник, wheezy. Дистрибутив включает в себя более
+12253 новых пакетов, всего их стало более 43512. Большая
+часть программ, входящих в дистрибутив, была обновлена: более
+24573 пакетов (что составляет 66%
+дистрибутива wheezy). Также, по различным причинам многие пакеты
+(более 5441, 14% дистрибутива
+wheezy) были удалены из дистрибутива. Эти пакеты не будут
+обновляться, в инструментах управления пакетами они будут помечены как
+"устаревшие" (obsolete).
+</p><p>
+  Debian продолжает поддерживать несколько окружений и программ для рабочего
+стола. Теперь среди них есть окружения рабочего стола
+GNOME<a id="idp61931952" class="indexterm"></a> 3.14,
+KDE<a id="idp61932704" class="indexterm"></a> 4.11,
+Xfce<a id="idp61933456" class="indexterm"></a> 4.10 и
+LXDE<a id="idp61934256" class="indexterm"></a>.
+</p><p>
+  Также были обновлены офисные приложения, включая следующие комплекты: 
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      LibreOffice<a id="idp61936576" class="indexterm"></a> обновлён до
+версии 4.3;
+    </p></li><li class="listitem"><p>
+      Calligra<a id="idp61938208" class="indexterm"></a> обновлёна до
+версии 2.8.
+    </p></li><li class="listitem"><p>
+      GNUcash<a id="idp61939840" class="indexterm"></a> обновлён до версии
+2.6;
+    </p></li><li class="listitem"><p>
+      GNUmeric<a id="idp61941472" class="indexterm"></a> обновлён до
+версии 1.12;
+    </p></li><li class="listitem"><p>
+      Abiword<a id="idp61943104" class="indexterm"></a> обновлён до версии
+3.0.
+    </p></li></ul></div><p>
+  Среди других обновлений приложений присутствует обновление
+Evolution<a id="idp61944880" class="indexterm"></a> до версии 3.12.
+</p><p>
+В этом выпуске, среди прочего, было обновлено следующее программное
+обеспечение:
+</p><div class="informaltable"><table width="100%" border="1"><colgroup><col align="justify" /><col align="justify" /><col align="justify" /></colgroup><thead><tr><th align="justify">Пакет</th><th align="justify">Версия в 7 (wheezy)</th><th align="justify">Версия в 8 (jessie)</th></tr></thead><tbody><tr><td align="justify"><a id="new-apache2"></a>Apache<a id="idp61952368" class="indexterm"></a></td><td align="justify">2.2.22</td><td align="justify">2.4.10</td></tr><tr><td align="justify"><a id="new-bind9"></a>BIND<a id="idp61954864" class="indexterm"></a> <acronym title="система доменных имён">DNS</acronym>
+сервер</td><td align="justify">9.8</td><td align="justify">9.9</td></tr><tr><td align="justify"><a id="new-courier"></a>Courier<a id="idp61957824" class="indexterm"></a>
+<acronym title="агент пересылки почты">MTA</acronym></td><td align="justify">0.68</td><td align="justify">0.73</td></tr><tr><td align="justify"><a id="new-dia"></a>Dia<a id="idp61801056" class="indexterm"></a></td><td align="justify">0.97.2</td><td align="justify">0.97.3</td></tr><tr><td align="justify"><a id="new-exim4"></a>Exim<a id="idp61803456" class="indexterm"></a>, почтовый сервер по
+умолчанию</td><td align="justify">4.80</td><td align="justify">4.84</td></tr><tr><td align="justify"><a id="new-gcc"></a><acronym title="GNU не Unix">GNU</acronym> Compiler Collection, компилятор по
+умолчанию<a id="idp61986752" class="indexterm"></a></td><td align="justify">4.7 для ПК, 4.6 на других</td><td align="justify">4.9</td></tr><tr><td align="justify"><a id="new-libc6"></a><acronym title="GNU не Unix">GNU</acronym> библиотека C</td><td align="justify">2.13</td><td align="justify">2.19</td></tr><tr><td align="justify"><a id="new-lighttpd"></a>lighttpd</td><td align="justify">1.4.31</td><td align="justify">1.4.35</td></tr><tr><td align="justify"><a id="new-linux-image"></a>Образ ядра Linux</td><td align="justify">ветка 3.2</td><td align="justify">ветка 3.16</td></tr><tr><td align="justify"><a id="new-openldap"></a>OpenLDAP</td><td align="justify">2.4.31</td><td align="justify">2.4.40</td></tr><tr><td align="justify"><a id="new-openssh"></a>OpenSSH<a id="idp61996608" class="indexterm"></a></td><td align="justify">6.0p1</td><td align="justify">6.7p1</td></tr><tr><td align="justify"><a id="new-perl"></a>Perl<a id="idp61999008" class="indexterm"></a></td><td align="justify">5.14</td><td align="justify">5.20</td></tr><tr><td align="justify"><a id="new-php"></a>PHP<a id="idp62001296" class="indexterm"></a></td><td align="justify">5.4</td><td align="justify">5.6</td></tr><tr><td align="justify"><a id="new-postfix"></a>Postfix<a id="idp62003696" class="indexterm"></a>
+<acronym title="агент пересылки почты">MTA</acronym></td><td align="justify">2.9</td><td align="justify">2.11</td></tr><tr><td align="justify"><a id="new-postgresql"></a>PostgreSQL<a id="idp62006480" class="indexterm"></a></td><td align="justify">9.1</td><td align="justify">9.4</td></tr><tr><td align="justify"><a id="new-python3"></a>Python 3</td><td align="justify">3.2</td><td align="justify">3.4</td></tr><tr><td align="justify"><a id="new-samba"></a>Samba</td><td align="justify">3.6</td><td align="justify">4.1</td></tr></tbody></table></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cd"></a>2.2.1. Носители CD, DVD и BD</h3></div></div></div><p>
+Официальный дистрибутив Debian теперь занимает от 9 до 10
+<acronym title="цифровой многоцелевой диск">DVD</acronym> <a id="idp62013792" class="indexterm"></a>или от
+75 до 85 <acronym title="компакт-диск">CD</acronym> <a id="idp62014928" class="indexterm"></a>
+(в зависимости от архитектуры) с собранными пакетами, и 10
+<acronym title="цифровой многоцелевой диск">DVD</acronym> или 59 <acronym title="компакт-диск">CD</acronym> дисков занимают пакеты с
+исходным кодом. Также доступна <span class="emphasis"><em>мультиархитектурная</em></span>
+версия дистрибутива на <acronym title="цифровой многоцелевой диск">DVD</acronym>, включающая архитектуры
+<code class="literal">amd64</code>, <code class="literal">i386</code> и исходный код. Кроме
+этого Debian выпущен в виде образов Blu-ray
+<a id="idp62019376" class="indexterm"></a>, 2 образа для архитектур
+<code class="literal">amd64</code>, <code class="literal">i386</code> на каждый и 2 для
+исходного кода. Из-за размеров, очень большие пакеты не попали в сборки для
+<acronym title="компакт-диск">CD</acronym>; эти пакеты есть на <acronym title="цифровой многоцелевой диск">DVD</acronym> и
+<acronym title="диск Blu-ray">BD</acronym>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="new-gnome314"></a>2.2.2. Изменения в окружении рабочего стола GNOME</h3></div></div></div><p>
+    Окружение рабочего стола GNOME обновлено до версии 3.14 и содержит множество
+новых возможностей, а также улучшений в плане простоты использования.
+  </p><p>
+    Оформление GNOME shell было обновлено. Нижний лоток для сообщений стал
+больше, проще, также он теперь реже появляется без повода. Новая область с
+информацией о статусе системы находится в верхнем правом углу, она содержит
+все полезные настройки. 
+  </p><p>
+    Хранитель экрана заменён на "блокировщик экрана", предоставляющий
+минимальную функциональность в случае отсутствия пользователя за
+компьютером. Например, вы можете ставить музыку на паузу, получать
+уведомления о новых сообщениях электронной почты, изменять яркость экрана
+без введения пароля. Нажатие клавиши Escape или начало ввода пароля приводит
+к открытию диалога ввода пароля. В дисплейном менеджере GNOME используется
+то же оформление.
+  </p><p>
+    Несколько приложений, включая файловый менеджер Nautilus, текстовый редактор
+gedit и просмотрщик документов evince получили более компактное оформление,
+в котором объединены заголовок окна и панель инструментов. Такое оформление
+оставляет документам, с которыми работает пользователь, больше
+места. Стандартные диалоговые окошки претерпели такие же изменения.
+  </p><p>
+    Полностью была добавлена поддержка сенсорных панелей, включая интуитивные
+жесты на основе движения нескольких пальцев. Теперь GNOME поддерживает
+экраны высокого разрешения (HiDPI), отрисовка стала более чёткой благодаря
+более точной пикселизации.
+  </p><p>
+    GNOME поддерживает геолокацию и содержит приложение для просмотра карт и
+навигации.
+  </p><p>
+    Пользовательская документация стала более полной, новым пользователям
+предлагаются видео-инструкции.
+  </p><p>
+    Дополнительная информация может быть найдена в <a class="ulink" href="https://help.gnome.org/misc/release-notes/3.14/" target="_top">информации о выпуске
+GNOME 3.14</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="systemd"></a>2.2.3. Новая система инициализации по умолчанию (systemd)</h3></div></div></div><p>
+    В Debian 7 была добавлена система инициализации <code class="systemitem">systemd</code><a id="idp61812224" class="indexterm"></a>, теперь это система инициализации по
+умолчанию. Она предоставляет продвинутые возможности мониторинга, записи
+журнала и управления службами.
+  </p><p>
+    
+Так как она разрабатывалась для замены <code class="systemitem">sysvinit</code><a id="idp62046816" class="indexterm"></a> и использует существующие сценарии
+инициализации SysV, пакет <code class="systemitem">systemd</code><a id="idp62048560" class="indexterm"></a>
+можно без проблем устанавливать вместе с <code class="systemitem">sysvinit</code><a id="idp62050240" class="indexterm"></a> и запускать через параметр ядра
+<code class="literal">init=/bin/systemd</code>. Пакет <code class="systemitem">systemd-sysv</code><a id="idp62052512" class="indexterm"></a> предоставляет замену
+<code class="literal">/sbin/init</code>.
+
+  </p><p>
+    Дополнительную информацию по этому теме см. в <a class="ulink" href="http://wiki.debian.org/systemd" target="_top">вики</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="security"></a>2.2.4. Безопасность</h3></div></div></div><p>Устаревший протокол уровня защищённых сокетов SSLv3 был отключен в данном
+выпуске. Многие библиотеки систем шифрования, а также клиентские и серверные
+приложения заново скомпилированы или настроены на работу без этого
+протокола.</p><p>
+    Ядро Linux содержит специальный механизм безопасности, которое нейтрализует
+атаки через символические ссылки. Он по умолчанию включен в ядре Linux для
+Debian. Ошибки, связанные с /tmp, не могут использоваться благодаря этому
+механизму, поэтому такие ошибки не считаются уявимостями. Если вы
+используете собственное ядро Linux, вам следует включить этот механизм,
+используя параметр sysctl:
+    </p><pre class="screen">echo 1 &gt; /proc/sys/fs/protected_symlinks</pre><p>
+  </p><p>
+    В некоторых редких случаях поддержка безопасности в выпуске Debian
+завершается до окончания поддержки безопасности для всего дистрибутива. В
+Jessie имеется новый пакет (<code class="systemitem">debian-security-support</code><a id="idp62061728" class="indexterm"></a>), который выводит
+предупреждение в том случае, если в скором времени какой-то поддержка
+безопасности какого-то пакета будет прекращена. Кроме того, этот пакет
+отслеживает информацию о времени прекращения поддержки
+безопасности. Рекомендуется установить пакет debian-security-support на всех
+системах, для которых важно обеспечение безопасности.
+  </p><p>Продолжая путь Wheezy, более количество пакетов было собрано с
+использованием специальных флагов безопасности для компиляторов. Кроме того,
+флаг защиты стека теперь имеет значение stack-protector-strong для
+обеспечения дополнительной безопасности. Заметьте, что флаги безопасности в
+<code class="systemitem">gcc</code><a id="idp62065904" class="indexterm"></a> по умолчанию не включены,
+поэтому они не используются автоматически при локальной сборке ПО.
+  </p><p>В этом выпуске появился пакет <code class="systemitem">needrestart</code><a id="idp62068160" class="indexterm"></a>. Если этот пакет установлен, то он
+после каждой сессии обновления APT выполняет специальную проверку. Если
+какая-то служба, запущенная в системе, требует перезапуска для использования
+возможностей обновлённого пакета, то указанный пакет предлагает выполнить
+этот перезапуск. Рекомендуется установить пакет <code class="systemitem">needrestart</code><a id="idp62070288" class="indexterm"></a> для того, чтобы гарантировать, что
+обновления безопасности становятся доступны работающим службам.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="mariadb"></a>2.2.5. MariaDB на замену MySQL</h3></div></div></div><p>Наравне с более старой версией MySQL 5.5 Jessie содержит новую версию
+MariaDB 10.0. Дополнительную информацию см. на <a class="ulink" href="http://wiki.debian.org/Teams/MySQL" target="_top">вики-странице команды
+MySQL</a>. Выпуск Debian 9 будет скорее всего содержать
+только одну из эти СУБД.
+  </p><p>
+    Заметьте, что поддержка основной ветки разработки MySQL 5.5 будет прекращена
+в декабре 2018 год (поддержка безопасности Debian для этих пакетов будет
+вестись вплоть до этого момента), а MariaDB 10.0 будет получать поддержку
+безопасности из основной ветки разработки вплоть до марта 2019 год.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="idp62075200"></a>2.2.6. Приложения PHP</h3></div></div></div><p>Инфраструктура приложений Horde доступна в Jessie в пакете
+<code class="systemitem">php-horde</code><a id="idp62076992" class="indexterm"></a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-games"></a>2.2.7. Смесь Debian Games</h3></div></div></div><p>Команда Debian Games с радостью представляет <a class="ulink" href="http://blends.debian.org/blends/" target="_top">смесь</a> Debian Games, состоящую
+из <a class="ulink" href="https://tracker.debian.org/pkg/debian-games" target="_top">33
+метапакетов</a>, упрощающих установку игр по категориям. Выборка
+включает помимо прочего стратегии, симуляторы, карточные игры и игры на
+программирование. Debian Games также предлагает разработчикам быстрый способ
+установки рекомендованного ПО для разработки игр на C++, Java, Perl и Python
+3. Разработчики ресурсов найдут в пакете <code class="systemitem">games-content-dev</code><a id="idp62082128" class="indexterm"></a> полезные инструменты для
+создания ресурсов для игр.  На домашней странице проекта имеются снимки
+экранов и дополнительная информация, а также краткий обзор всех игр, включая
+<a class="ulink" href="http://blends.debian.org/games/tasks/finest" target="_top">список самых
+интересных игр в Debian</a>.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-med"></a>2.2.8. Новости Debian Med</h3></div></div></div><p>Команда Debian Med в очередной раз значительно выросла не только по числу
+пакетов в таких областях как биология и медицина, но также и в плане
+качества тестирования этих пакетов (во время сборки пакетов, а также с
+помощью autopkgtest). Эти улучшения в версии 2.0 метапакетов Debian Med
+отражают запрос учёных в предоставлении надёжного ПО для получения
+воспроизводимых результатов. Посетите <a class="ulink" href="http://blends.debian.org/med/tasks" target="_top">страницы задач Debian Med</a>,
+чтобы узнать о том, какое ПО для биологических и медицинских исследований
+доступно в Debian.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-science"></a>2.2.9. Новости Debian Science</h3></div></div></div><p>Благодаря продолжению работ, проводимых командой Debian Science, не только
+новое ПО для научных исследований было добавлено в архив пакетов Debian, но
+и ПО для новых областей исследований. Посетите <a class="ulink" href="http://blends.debian.org/science/tasks" target="_top">страницу задач Debian
+Science</a>, чтобы узнать о том, какое ПО для научных исследований
+доступно в Debian.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-gis"></a>2.2.10. Новости от Debian Geographical Information Systems (GIS)</h3></div></div></div><p>Во время цикла разработки jessie множество изменений из UbuntuGIS были
+добавлены в Debian GIS. Была улучшена совместная работа с проектами
+UbuntuGIS и OSGeo-Live, что привело к появлению новых пакетов и новых
+участников. Посетите <a class="ulink" href="http://blends.debian.org/gis/tasks" target="_top">страницы задач Debian GIS</a>,
+чтобы узнать, какое ПО для GIS имеется в архиве Debian, а также <a class="ulink" href="https://wiki.debian.org/DebianGis" target="_top">домашнюю страницу Debian GIS</a>
+для получения дополнительной информации.
+    </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="debian-java"></a>2.2.11. Новости команды Debian Java</h3></div></div></div><p>Jessie содержит 799 пакетов с исходным кодом (442 пакета обновлены, 130
+пакетов добавлено с момента выпуска Wheezy), пакеты сопровождаются <a class="ulink" href="https://qa.debian.org/developer.php?login=pkg-java-maintainers@lists.alioth.debian.org" target="_top">командой
+Java</a>. Наиболее значимые изменения:
+    </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Теперь новой поддерживаемой по умолчанию средой является OpenJDK 7.</p></li><li class="listitem"><p>Среда OpenJDK 8 будет доступна из jessie-backports.</p></li><li class="listitem"><p>Поддерживаются Tomcat 7 и Tomcat 8, а Tomcat 6 был удалён.</p></li><li class="listitem"><p>Среди новых инструментов разработчика имеются VisualVM, Dynamic Code
+Evolution VM (openjdk-7-jre-dcevm), Gradle, eclipse-wtp-webtools,
+closure-compiler и др.
+            </p></li><li class="listitem"><p>Добавлен пакет <a class="ulink" href="https://packages.debian.org/source/jessie/androidsdk-tools" target="_top">androidsdk-tools</a>
+            </p></li></ul></div><p>
+    </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-about.ru.html"><img src="images/prev.png" alt="Пред." /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-installing.ru.html"><img src="images/next.png" alt="След." /></a></td></tr><tr><td width="40%" align="left" valign="top">Глава 1. Введение </td><td width="20%" align="center"><a accesskey="h" href="index.ru.html"><img src="images/home.png" alt="Начало" /></a></td><td width="40%" align="right" valign="top"> Глава 3. Система установки</td></tr></table></div></body></html>

@@ -1,0 +1,1036 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapitre 4. Mises à niveau depuis Debian 7 (Wheezy)</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="up" href="index.fr.html" title="Notes de publication pour Debian 8 (« Jessie »), PC 64 bits" /><link rel="prev" href="ch-installing.fr.html" title="Chapitre 3. Système d'installation" /><link rel="next" href="ch-information.fr.html" title="Chapitre 5. Problèmes à connaître pour Jessie" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapitre 4. Mises à niveau depuis Debian 7 (Wheezy)</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-installing.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch-information.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr></table><hr /></div><div xml:lang="fr" class="chapter" lang="fr"><div class="titlepage"><div><div><h1 class="title"><a id="ch-upgrading"></a>Chapitre 4. Mises à niveau depuis Debian 7 (Wheezy)</h1></div></div></div><div class="toc"><p><strong>Table des matières</strong></p><dl class="toc"><dt><span class="section"><a href="ch-upgrading.fr.html#backup">4.1. Actions nécessaires avant la mise à niveau</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#data-backup">4.1.1. Sauvegarder toutes les données et informations de configuration</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#inform-users">4.1.2. Informer les utilisateurs à l'avance</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#services-downtime">4.1.3. Préparez-vous à un arrêt des services</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#recovery">4.1.4. Soyez prêts à récupérer le système</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#upgrade-preparations">4.1.5. Préparer un environnement sain pour la mise à niveau</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#system-status">4.2. Vérifier l'état du système</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#review-actions">4.2.1. Vérifier les actions en cours dans le gestionnaire de paquets</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#disable-apt-pinning">4.2.2. Désactiver l'épinglage APT</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#package-status">4.2.3. Vérification de l'état des paquets</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#proposed-updates">4.2.4. La section proposed-updates</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#unofficial-sources">4.2.5. Sources non officielles</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#upgrade-process">4.3. Préparer les sources d'APT</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#network">4.3.1. Ajouter des sources Internet à APT</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#localmirror">4.3.2. Ajouter les sources d'un miroir local à APT</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#cdroms">4.3.3. Ajouter les sources d'un média optique à APT</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#upgradingpackages">4.4. Mettre à niveau les paquets</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#record-session">4.4.1. Enregistrer la session</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#updating-lists">4.4.2. Mettre à jour la liste des paquets</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#sufficient-space">4.4.3. Assurez-vous d'avoir suffisamment d'espace disque pour la mise à niveau</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#minimal-upgrade">4.4.4. Mise à niveau minimale du système</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#upgrading-full">4.4.5. Mettre à niveau le système</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#trouble">4.5. Problèmes possibles pendant une mise à niveau</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#immediate-configure">4.5.1. La mise à niveau échoue avec <span class="quote">« <span class="quote">Impossible de faire une configuration
+immédiate</span> »</span>.</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#expected-removals">4.5.2. Suppressions attendues</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#conflicts-loops">4.5.3. Boucles de conflits ou de prédépendances</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#file-conflicts">4.5.4. Conflits de fichiers</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#configuration-changes">4.5.5. Changements de configuration</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#console-change">4.5.6. Changement de session sur la console</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#package-specific-issues">4.5.7. Attention particulière à porter à certains paquets</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#newkernel">4.6. Mise à niveau du noyau et des paquets liés</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#kernel-metapackage">4.6.1. Installer un métapaquet du noyau</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#initramfs-tools-issues">4.6.2. Modifications apportées au montage des systèmes de fichiers racine et
+<code class="filename">/usr</code> et à leur vérification.</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#nownownow">4.7. Choses à faire avant le prochain redémarrage</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#for-next">4.8. Préparations pour la prochaine version</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#purge-removed-packages">4.8.1. Purger les paquets supprimés</a></span></dt></dl></dd><dt><span class="section"><a href="ch-upgrading.fr.html#deprecated">4.9. Composants obsolètes</a></span></dt><dt><span class="section"><a href="ch-upgrading.fr.html#obsolete">4.10. Paquets obsolètes</a></span></dt><dd><dl><dt><span class="section"><a href="ch-upgrading.fr.html#dummy">4.10.1. Paquets factices</a></span></dt></dl></dd></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="backup"></a>4.1. Actions nécessaires avant la mise à niveau</h2></div></div></div><p>
+Nous vous suggérons, avant la mise à niveau, de lire les informations du
+<a class="xref" href="ch-information.fr.html" title="Chapitre 5. Problèmes à connaître pour Jessie">Chapitre 5, <em>Problèmes à connaître pour Jessie</em></a>. Ce chapitre couvre des problèmes
+potentiels qui ne sont pas directement liés au processus de mise à niveau,
+mais qu'il est important de connaître avant de commencer.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="data-backup"></a>4.1.1. Sauvegarder toutes les données et informations de configuration</h3></div></div></div><p>
+Avant de mettre à niveau le système, il est fortement conseillé de faire une
+sauvegarde complète ou, du moins, une sauvegarde des données et des
+informations de configuration que vous ne pouvez pas vous permettre de
+perdre. Les outils de mise à niveau sont tout à fait fiables, mais une panne
+matérielle au milieu de la mise à niveau peut fortement endommager le
+système.
+</p><p>
+Ce que vous devriez principalement sauvegarder est le contenu des
+répertoires <code class="filename">/etc</code> et <code class="filename">/var/lib/dpkg</code>,
+du fichier <code class="filename">/var/lib/apt/extended_states</code> et la sortie de
+<code class="literal">dpkg --get-selections "*"</code>  (les guillemets sont
+importants). Si vous utilisez <span class="command"><strong>aptitude</strong></span> pour gérer les
+paquets du système, vous devriez aussi sauvegarder
+<code class="filename">/var/lib/aptitude/pkgstates</code>.
+</p><p>
+Le processus de mise à niveau en lui-même ne modifie rien dans le répertoire
+<code class="filename">/home</code>. Cependant, certaines applications (par exemple,
+des parties de la suite Mozilla et les environnements de bureau GNOME et
+KDE) sont connues pour écraser des paramètres utilisateur existants avec de
+nouvelles valeurs par défaut quand une nouvelle version de l'application est
+lancée pour la première fois par un utilisateur. Par précaution, vous pouvez
+faire une sauvegarde des fichiers et répertoires cachés (les
+<span class="quote">« <span class="quote">dotfiles</span> »</span>) dans les répertoires personnels des
+utilisateurs. Vous pouvez également informer les utilisateurs de ce
+problème.
+</p><p>
+Toutes les opérations d'installation de paquets doivent être exécutées avec
+les privilèges du superutilisateur, vous devez donc soit vous connecter en
+tant que <code class="literal">root</code>, soit utiliser <span class="command"><strong>su</strong></span> ou
+<span class="command"><strong>sudo</strong></span> pour obtenir les droits nécessaires.
+</p><p>
+Il existe quelques conditions préalables à la mise à niveau ; vous
+devriez les vérifier avant d'effectuer réellement la mise à niveau.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="inform-users"></a>4.1.2. Informer les utilisateurs à l'avance</h3></div></div></div><p>
+Il est sage d'informer à l'avance tous les utilisateurs que vous planifiez
+une mise à niveau, même si les utilisateurs accédant au système par
+connexion <span class="command"><strong>ssh</strong></span> ne devraient pas remarquer grand-chose
+durant la mise à niveau et devraient pouvoir continuer à travailler. 
+</p><p>
+Si vous voulez prendre des précautions supplémentaires, sauvegardez ou
+démontez la partition <code class="filename">/home</code> avant la mise à niveau.
+</p><p>
+Vous devrez probablement faire une mise à niveau du noyau lors de la mise à
+niveau vers Jessie, un redémarrage sera donc normalement
+nécessaire.En général, celui-ci a lieu à la fin de la mise à niveau.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="services-downtime"></a>4.1.3. Préparez-vous à un arrêt des services</h3></div></div></div><p>
+Certains services fournis par le système peuvent être associés à des paquets
+concernés par une mise à niveau. Dans ce cas, ces services seront
+interrompus lorsque les paquets correspondants seront remplacés et
+configurés. Pendant ce temps, ces services seront indisponibles.
+</p><p>
+Le temps d'arrêt de ces services va dépendre du nombre de paquets mis à
+niveau sur le système et du temps mis par l'administrateur système pour
+répondre aux possibles questions de configuration posées lors de la mise à
+niveau. Veuillez noter que si le processus de mise à niveau est laissé sans
+surveillance et que le système demande une information à un moment de la
+mise à niveau, il y a de grandes chances que des services soient ensuite
+indisponibles<a href="#ftn.idp59928544" class="footnote" id="idp59928544"><sup class="footnote">[1]</sup></a> pour une longue durée.
+</p><p>
+Si le système devant être mis à niveau fournit des services critiques pour
+vos utilisateurs ou le réseau<a href="#ftn.idp59930272" class="footnote" id="idp59930272"><sup class="footnote">[2]</sup></a>, vous
+pouvez réduire le temps d'arrêt en faisant une mise à niveau minimale du
+système (consultez <a class="xref" href="ch-upgrading.fr.html#minimal-upgrade" title="4.4.4. Mise à niveau minimale du système">Section 4.4.4, « Mise à niveau minimale du système »</a>), puis une mise à
+niveau du noyau et un redémarrage, et ensuite une mise à niveau des paquets
+fournissant vos services critiques. Mettez-les à niveau avant de lancer la
+mise à niveau totale (<a class="xref" href="ch-upgrading.fr.html#upgrading-full" title="4.4.5. Mettre à niveau le système">Section 4.4.5, « Mettre à niveau le système »</a>) pour vous assurer
+que ces services critiques sont lancés et sont disponibles pendant la mise à
+niveau, et réduisez ainsi leur temps d'arrêt.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="recovery"></a>4.1.4. Soyez prêts à récupérer le système</h3></div></div></div><p>
+Bien que Debian essaie d'assurer que votre système puisse être redémarré à
+tout moment, il y a toujours un risque que vous rencontriez des problèmes
+lors du redémarrage du système après la mise à niveau. Des problèmes
+potentiels connus sont documentés dans les chapitres de ces notes de
+publication.
+</p><p>
+Pour cette raison, il est raisonnable de s'assurer que vous pourrez
+récupérer le système s'il ne redémarrait pas, ou, pour les systèmes gérés à
+distance, si la connexion au réseau échouait.
+</p><p>
+Si vous effectuez une mise à niveau à distance par un lien
+<span class="command"><strong>ssh</strong></span>, il est recommandé de prendre toutes les précautions
+nécessaires pour pouvoir accéder au serveur par un terminal série
+distant. Il est possible qu'après la mise à niveau du noyau et le
+redémarrage, vous deviez corriger la configuration du système depuis une
+console locale. Par ailleurs, si le système est redémarré accidentellement
+au milieu de la mise à niveau, il est possible que vous deviez utiliser une
+console locale pour réparer le système.
+</p><p>
+Nous recommandons généralement d'utiliser le <span class="emphasis"><em>mode de
+secours</em></span> (« rescue mode ») de l'installateur Debian de
+Jessie. L'avantage d'utiliser l'installateur est que vous pouvez
+choisir l'option qui convient le mieux à votre situation parmi ses
+nombreuses méthodes d'installation. Pour plus d'informations, veuillez
+consulter la section <span class="quote">« <span class="quote">Récupérer un système cassé</span> »</span> du chapitre 8
+du <a class="ulink" href="https://www.debian.org/releases/jessie/installmanual" target="_top">manuel d'installation</a> et la
+<a class="ulink" href="https://wiki.debian.org/DebianInstaller/FAQ" target="_top">FAQ de l'installateur
+Debian</a>.
+</p><p>
+Si cela échoue, vous aurez besoin d'une autre méthode pour amorcer le
+système et le réparer. Une option est d'utiliser une image de récupération
+spéciale ou un CD autonome Linux (« Live CD »). Après avoir démarré à partir
+de ce support, vous devriez pouvoir monter le système de fichiers racine et
+effectuer un <code class="literal">chroot</code> dans celui-ci pour analyser et
+corriger le problème.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-initrd"></a>4.1.4.1. Interpréteur de commande de débogage pendant l'amorçage utilisant un initrd</h4></div></div></div><p>
+Le paquet <code class="systemitem">initramfs-tools</code><a id="idp59945408" class="indexterm"></a> fournit un
+interpréteur de commande de débogage<a href="#ftn.idp59946288" class="footnote" id="idp59946288"><sup class="footnote">[3]</sup></a>
+dans les initrd qu'il génère. Si, par exemple, l'initrd ne peut pas monter
+le système de fichiers racine, vous vous retrouverez dans cet interpréteur
+de commande de débogage. Celui-ci possède des commandes de base qui
+permettent d'identifier l'origine du problème et peut-être de le corriger.
+</p><p>
+Les points de base à vérifier sont : la présence de fichiers de
+périphériques corrects dans <code class="filename">/dev</code> ; les modules chargés
+(<code class="literal">cat /proc/modules</code>) ; la sortie de
+<span class="command"><strong>dmesg</strong></span> pour des erreurs liées au chargement de pilotes. La
+sortie de <span class="command"><strong>dmesg</strong></span> affichera également les fichiers de
+périphériques qui ont été assignés aux disques ; vous devriez vérifier ces
+points et les comparer à l'affichage de <code class="literal">echo $ROOT</code> pour
+vous assurer que le système de fichiers racine est sur le périphérique
+attendu.
+</p><p>
+Si vous parvenez à corriger le problème, entrez <code class="literal">exit</code> pour
+arrêter l'interpréteur de commande de débogage et continuer le processus
+d'amorçage au point où il avait échoué. Bien sûr, vous devrez également
+corriger le problème sous-jacent et régénérer l'initrd afin d'éviter un
+nouvel échec au prochain amorçage.
+</p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="recovery-shell-systemd"></a>4.1.4.2. Interpréteur de commande de débogage pendant l'amorçage utilisant systemd</h4></div></div></div><p>
+    Si le démarrage échoue sous systemd, il est possible d'obtenir une invite de
+commande de débogage pour l'utilisateur root en modifiant la ligne de
+commande du noyau. Si le démarrage de base fonctionne, mais que certains
+services ne parviennent pas à se lancer, il peut être utile d'ajouter
+<code class="literal">systemd.unit=rescue.target</code> aux paramètres du noyau.
+  </p><p>
+    Autrement, le paramètre du noyau
+<code class="literal">systemd.unit=emergency.target</code> vous fournira une invite de
+commande pour l'utilisateur root dès que possible. Cependant, cela se
+produira avant le montage du système de fichiers racine avec les permissions
+de lecture et écriture. Vous devrez le monter manuellement avec :
+  </p><pre class="screen">
+mount -o remount,rw /
+</pre><p>
+    De plus amples informations sur le débogage d'un démarrage cassé sous
+systemd sont disponibles dans l'article <a class="ulink" href="http://freedesktop.org/wiki/Software/systemd/Debugging/" target="_top">Diagnosing
+Boot Problems</a>.
+  </p><p>
+    Si tout le reste échoue, vous pourriez parvenir à démarrer avec l'ancien
+système sysvinit. Cela nécessite que <code class="systemitem">sysvinit</code><a id="idp59962560" class="indexterm"></a> soit toujours installé et que
+l'exécutable <code class="filename">/lib/sysvinit/init</code> soit présent dans votre
+initramfs. Si ces prérequis sont remplis, ajoutez
+<code class="literal">init=/lib/sysvinit/init</code> à la ligne de commande du
+noyau. Celui-ci démarrera avec l'exécutable sysvinit.
+  </p></div></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrade-preparations"></a>4.1.5. Préparer un environnement sain pour la mise à niveau</h3></div></div></div><p>
+Vous devez faire la mise à niveau de la distribution soit localement, à
+partir d'une console texte virtuelle ou d'un terminal série directement
+connecté, soit à distance à l'aide d'une connexion <span class="command"><strong>ssh</strong></span>. 
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/important.png" /></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p>
+  Si vous utilisez des services VPN (par exemple <code class="systemitem">tinc</code><a id="idp59969472" class="indexterm"></a>), ils ne seront peut-être pas disponibles
+en permanence pendant la mise à niveau. Veuillez consultez la <a class="xref" href="ch-upgrading.fr.html#services-downtime" title="4.1.3. Préparez-vous à un arrêt des services">Section 4.1.3, « Préparez-vous à un arrêt des services »</a>.
+  </p></td></tr></table></div><p>
+Pour avoir une marge de sécurité supplémentaire lors des mises à niveau à
+distance, nous vous suggérons d'exécuter les processus de mise à niveau dans
+la console virtuelle fournie par le programme <span class="command"><strong>screen</strong></span> qui
+permet de se reconnecter en cas de coupure et garantit que le processus de
+mise à niveau ne sera pas interrompu même si le processus de connexion à
+distance a été coupé.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Important]" src="images/important.png" /></td><th align="left">Important</th></tr><tr><td align="left" valign="top"><p>
+    Important : vous <span class="emphasis"><em>ne devez pas</em></span> effectuer la mise à
+niveau en utilisant <span class="command"><strong>telnet</strong></span>, <span class="command"><strong>rlogin</strong></span>,
+<span class="command"><strong>rsh</strong></span>, ou depuis une session X gérée par
+<span class="command"><strong>gdm</strong></span>, <span class="command"><strong>kdm</strong></span>, etc., sur la machine que
+vous mettez à niveau. En effet, chacun de ces services pourrait être
+interrompu pendant la mise à niveau, ce qui peut rendre
+<span class="emphasis"><em>inaccessible</em></span> un système à moitié mis à niveau. Utiliser
+l'application GNOME <span class="command"><strong>update-manager</strong></span> est
+<span class="emphasis"><em>fortement déconseillé</em></span> pour une mise à jour vers une
+nouvelle version de Debian, car cet outil suppose que la session graphique
+restera active.
+  </p></td></tr></table></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="system-status"></a>4.2. Vérifier l'état du système</h2></div></div></div><p>
+Le processus de mise à niveau décrit dans ce chapitre a été conçu pour des
+mises à niveau des systèmes Wheezy <span class="quote">« <span class="quote">purs</span> »</span> sans paquet
+provenant d'autres sources. Pour une meilleure fiabilité du processus de
+mise à niveau, vous pouvez supprimer ces paquets du système avant de
+commencer la mise à niveau.
+</p><p>
+Les mises à niveau directement depuis des versions de Debian plus vieilles
+que 7 (Wheezy) ne sont pas prises en charge. Merci de
+suivre les instructions dans les <a class="ulink" href="https://www.debian.org/releases/wheezy/releasenotes" target="_top">notes de
+publication</a> et de mettre la machine à niveau vers 7
+d'abord.
+</p><p>
+Cette procédure suppose également que le système a été mis à niveau jusqu'à
+la dernière révision de Wheezy. Si vous ne l'avez pas fait ou si
+vous n'en êtes pas certain, veuillez suivre les instructions en <a class="xref" href="ap-old-stuff.fr.html#old-upgrade" title="A.1. Mettre à niveau le système Wheezy">Section A.1, « Mettre à niveau le système Wheezy »</a>.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="review-actions"></a>4.2.1. Vérifier les actions en cours dans le gestionnaire de paquets</h3></div></div></div><p>
+Dans certains cas, l'utilisation d'<span class="command"><strong>apt-get</strong></span> pour
+l'installation de paquets au lieu d'<span class="command"><strong>aptitude</strong></span> peut induire
+<span class="command"><strong>aptitude</strong></span> à considérer un paquet comme
+<span class="quote">« <span class="quote">unused</span> »</span> (inutilisé) et à le programmer pour être supprimé. En
+général, vous devez vous assurer que le système est complètement à jour et
+<span class="quote">« <span class="quote">propre</span> »</span> avant de commencer la mise à niveau.
+</p><p>
+Ainsi, vous devez commencer par vérifier s'il y a des actions en attente
+dans le gestionnaire de paquets <span class="command"><strong>aptitude</strong></span>. Si un paquet
+est programmé pour être supprimé ou mis à jour dans le gestionnaire des
+paquets, cela peut poser problème lors de la procédure de mise à
+niveau. Notez que la correction d'un tel problème n'est possible que si le
+fichier <code class="filename">sources.list</code> pointe encore vers
+<span class="emphasis"><em>wheezy</em></span> et pas vers
+<span class="emphasis"><em>stable</em></span> ou <span class="emphasis"><em>jessie</em></span> ;
+consultez la <a class="xref" href="ap-old-stuff.fr.html#old-sources" title="A.2. Vérifier la liste de sources">Section A.2, « Vérifier la liste de sources »</a>.
+</p><p>
+Pour faire cette vérification, vous devez lancer <span class="command"><strong>aptitude</strong></span>
+en <span class="quote">« <span class="quote">mode interactif</span> »</span> et appuyer sur <span class="keycap"><strong>g</strong></span>
+(<span class="quote">« <span class="quote">Go</span> »</span>). S'il affiche une ou plusieurs action(s), vous devez les
+contrôler et les corriger ou les mettre en œuvre. Si aucune action n'est
+suggérée, un message sera affiché indiquant <span class="quote">« <span class="quote">Il n'est prévu
+d'installer, mettre à jour ou enlever aucun paquet.</span> »</span>
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="disable-apt-pinning"></a>4.2.2. Désactiver l'épinglage APT</h3></div></div></div><p>
+Si vous avez configuré APT pour installer certains paquets d'une
+distribution autre que <span class="emphasis"><em>stable</em></span> (par exemple, de
+<span class="emphasis"><em>testing</em></span>), il se peut que vous deviez changer la
+configuration d'épinglage APT (« APT pinning ») (stockée dans
+<code class="filename">/etc/apt/preferences</code> et
+<code class="filename">/etc/apt/preferences.d</code>) pour permettre la mise à niveau
+de paquets vers les versions de la nouvelle version stable. Vous trouverez
+plus d'informations sur l'épinglage dans <span class="citerefentry"><span class="refentrytitle">apt_preferences</span>(5)</span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-status"></a>4.2.3. Vérification de l'état des paquets</h3></div></div></div><p>
+Quelle que soit la méthode utilisée pour mettre à niveau, il est recommandé
+de tester d'abord l'état de tous les paquets et de vérifier que tous les
+paquets se trouvent dans un état permettant la mise à niveau. La commande
+suivante vous indiquera tous les paquets qui sont dans l'état
+« Half-Installed » ou « Failed-Config », ainsi que ceux
+qui sont dans un état d'erreur :
+</p><pre class="screen">
+# dpkg --audit
+</pre><p>
+Vous pouvez aussi vérifier l'état de tous les paquets du système en
+utilisant <span class="command"><strong>aptitude</strong></span>, ou avec des commandes comme :
+</p><pre class="screen">
+# dpkg -l | pager
+</pre><p>
+ou :
+</p><pre class="screen">
+# dpkg --get-selections "*" &gt; ~/paquets-actuels.txt
+</pre><p>
+Il est souhaitable d'enlever tous les blocages de paquets (<span class="emphasis"><em>on
+hold</em></span>) avant de passer à la nouvelle version. Si un paquet
+essentiel pour la mise à niveau est bloqué, la mise à niveau va échouer.
+</p><p>
+Notez que pour enregistrer les paquets qui sont bloqués,
+<span class="command"><strong>aptitude</strong></span> utilise une méthode différente de celles
+d'<span class="command"><strong>apt-get</strong></span> et <span class="command"><strong>dselect</strong></span>. Vous pouvez
+identifier les paquets bloqués pour <span class="command"><strong>aptitude</strong></span> avec :
+</p><pre class="screen">
+# aptitude search "~ahold" 
+</pre><p>
+Si vous désirez vérifier quels paquets étaient bloqués pour
+<span class="command"><strong>apt-get</strong></span>, il vous faudra utiliser :
+</p><pre class="screen">
+# dpkg --get-selections | grep 'hold$'
+</pre><p>
+Si vous aviez modifié et recompilé un paquet localement, sans changer son
+nom et sans mettre d'époque (« epoch ») dans la version, vous
+devez le bloquer pour éviter qu'il ne soit mis à niveau.
+</p><p>
+Vous pouvez activer un blocage sur un paquet pour <span class="command"><strong>apt-get</strong></span>
+en utilisant :
+</p><pre class="screen">
+# echo <em class="replaceable"><code>package_name</code></em> hold | dpkg --set-selections
+</pre><p>
+Remplacez <code class="literal">hold</code> par <code class="literal">install</code> pour
+débloquer un paquet.
+</p><p>
+Si vous devez corriger quelque chose, il est préférable de vous assurer que
+<code class="filename">sources.list</code> fait toujours référence à Wheezy
+comme expliqué en <a class="xref" href="ap-old-stuff.fr.html#old-sources" title="A.2. Vérifier la liste de sources">Section A.2, « Vérifier la liste de sources »</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="proposed-updates"></a>4.2.4. La section proposed-updates</h3></div></div></div><p>
+    Si vous avez ajouté la section <code class="literal">proposed-updates</code> dans le
+fichier <code class="filename">/etc/apt/sources.list</code>, il est conseillé de la
+supprimer avant de tenter la mise à niveau. Il s'agit essentiellement d'une
+précaution pour éviter des conflits possibles.
+  </p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="unofficial-sources"></a>4.2.5. Sources non officielles</h3></div></div></div><p>
+Si des paquets non-Debian sont présents sur le système, vous devez savoir
+qu'ils peuvent être supprimés pendant la mise à niveau à cause de
+dépendances conflictuelles. Si ces paquets ont été installés par l'ajout
+d'une archive de paquets dans <code class="filename">/etc/apt/sources.list</code>,
+vous devez vérifier si cette archive propose également des paquets compilés
+pour Jessie et changer la ligne de source en conséquence en même
+temps que les lignes de source pour les paquets Debian.
+</p><p>
+Certains utilisateurs peuvent avoir installé sur leur système
+Wheezy des versions non officielles rétroportées de paquets plus
+récentes que celles qui <span class="emphasis"><em>sont</em></span> dans Debian. De tels
+paquets sont les plus susceptibles de poser problème lors d'une mise à
+niveau car ils peuvent entraîner un conflit de fichiers<a href="#ftn.idp60032848" class="footnote" id="idp60032848"><sup class="footnote">[4]</sup></a>. La <a class="xref" href="ch-upgrading.fr.html#trouble" title="4.5. Problèmes possibles pendant une mise à niveau">Section 4.5, « Problèmes possibles pendant une mise à niveau »</a> donne quelques
+informations sur la façon de gérer les conflits de fichiers s'ils se
+produisent.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgrade-process"></a>4.3. Préparer les sources d'APT</h2></div></div></div><p>
+Avant de commencer la mise à niveau, vous devez ajuster le fichier de
+configuration des listes de paquets d'<code class="systemitem">apt</code><a id="idp60037328" class="indexterm"></a>, <code class="filename">/etc/apt/sources.list</code>.
+</p><p>
+<code class="systemitem">apt</code><a id="idp60040000" class="indexterm"></a> prendra en compte tout paquet
+qui peut être trouvé par chacune des lignes
+<span class="quote">« <span class="quote"><code class="literal">deb</code></span> »</span> et installera le paquet ayant le
+numéro de version le plus élevé, en donnant la priorité aux premières lignes
+mentionnées (ainsi, dans le cas de plusieurs miroirs, on indiquera d'abord
+un disque dur local, puis des <acronym title="Compact Disc (disque compact)">CD</acronym>, puis les miroirs FTP et
+HTTP).
+</p><p>
+Une version peut être référencée à la fois par son nom de code (par exemple,
+<code class="literal">wheezy</code>, <code class="literal">jessie</code>) et
+par son nom d'état (c'est-à-dire <span class="emphasis"><em>oldstable</em></span>,
+<span class="emphasis"><em>stable</em></span>, <span class="emphasis"><em>testing</em></span>,
+<span class="emphasis"><em>unstable</em></span>). Se référer à une version par son nom de code
+évite d'être surpris par une nouvelle version et c'est pour cette raison que
+cette approche a été choisie ici. Bien sûr, vous devez surveiller vous-même
+les annonces des nouvelles versions. Si vous utilisez les noms d'état, vous
+verrez simplement une grande quantité de mises à jour de paquets disponibles
+dès qu'une publication a eu lieu.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="network"></a>4.3.1. Ajouter des sources Internet à APT</h3></div></div></div><p>
+La configuration par défaut est faite pour une installation depuis les
+principaux serveurs de Debian sur Internet, mais vous pouvez modifier
+<code class="filename">/etc/apt/sources.list</code> pour utiliser d'autres miroirs,
+de préférence plus proches de vous au sens réseau du terme.
+</p><p>
+Les adresses des miroirs Debian HTTP et FTP se trouvent à <a class="ulink" href="https://www.debian.org/distrib/ftplist" target="_top">https://www.debian.org/distrib/ftplist</a> (regardez dans la section <span class="quote">« <span class="quote">liste
+complète des miroirs</span> »</span>). Les miroirs HTTP sont en général plus rapides
+que les miroirs FTP.
+</p><p>
+Par exemple, supposons que le miroir Debian le plus proche soit
+<code class="literal">http://mirrors.kernel.org</code>. Si vous consultez ce miroir avec
+un navigateur web ou FTP, vous verrez que les répertoires principaux sont
+organisés comme ceci :
+</p><pre class="programlisting">
+http://mirrors.kernel.org/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+http://mirrors.kernel.org/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Pour utiliser ce miroir avec <code class="systemitem">apt</code><a id="idp60056240" class="indexterm"></a>,
+ajoutez cette ligne au fichier <code class="filename">sources.list</code> :
+</p><pre class="programlisting">deb http://mirrors.kernel.org/debian jessie main contrib</pre><p>
+Notez que <span class="quote">« <span class="quote"><code class="literal">dists</code></span> »</span> est ajouté
+automatiquement, et les paramètres qui suivent le nom de version donnent
+accès à plusieurs répertoires.
+</p><p>
+Après avoir ajouté les nouvelles sources, commentez les lignes
+<span class="quote">« <span class="quote"><code class="literal">deb</code></span> »</span> préexistantes dans le fichier
+<code class="filename">sources.list</code> en plaçant des caractères
+<code class="literal">#</code> au début des lignes.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="localmirror"></a>4.3.2. Ajouter les sources d'un miroir local à APT</h3></div></div></div><p>
+Plutôt que d'utiliser des miroirs HTTP ou FTP, vous pouvez modifier
+<code class="filename">/etc/apt/sources.list</code> pour utiliser un miroir sur un
+disque local (éventuellement monté par NFS).
+</p><p>
+Par exemple, le miroir de paquets peut être sous
+<code class="filename">/var/ftp/debian/</code>, et avoir des répertoires principaux
+tels que : 
+</p><pre class="programlisting">
+/var/ftp/debian/dists/jessie/main/binary-<span class="phrase">amd64</span>/...
+/var/ftp/debian/dists/jessie/contrib/binary-<span class="phrase">amd64</span>/...
+</pre><p>
+Pour utiliser ce miroir avec <code class="systemitem">apt</code><a id="idp60070208" class="indexterm"></a>,
+ajoutez cette ligne au fichier <code class="filename">sources.list</code> :
+</p><pre class="programlisting">deb file:/var/ftp/debian jessie main contrib</pre><p>
+Notez que <span class="quote">« <span class="quote"><code class="literal">dists</code></span> »</span> est ajouté
+automatiquement, et les paramètres qui suivent le nom de version donnent
+accès à plusieurs répertoires.
+</p><p>
+Après avoir ajouté les nouvelles sources, commentez les lignes
+<span class="quote">« <span class="quote"><code class="literal">deb</code></span> »</span> préexistantes dans le fichier
+<code class="filename">sources.list</code> en plaçant des caractères
+<code class="literal">#</code> au début des lignes.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="cdroms"></a>4.3.3. Ajouter les sources d'un média optique à APT</h3></div></div></div><p>
+Si vous ne voulez utiliser <span class="emphasis"><em>que</em></span> les CD (ou DVD ou
+Blu-ray), commentez les lignes <span class="quote">« <span class="quote"><code class="literal">deb</code></span> »</span>
+existantes dans le fichier <code class="filename">sources.list</code> en plaçant des
+<code class="literal">#</code> au début des lignes.
+</p><p>
+Assurez-vous de la présence d'une ligne dans <code class="filename">/etc/fstab</code>
+qui autorise le montage du CD au point de montage
+<code class="filename">/media/cdrom</code>. Par exemple, si
+<code class="filename">/dev/sr0</code> est le lecteur de CD, le fichier
+<code class="filename">/etc/fstab</code> devrait contenir une ligne comme celle-ci :
+</p><pre class="programlisting">
+/dev/sr0 /media/cdrom auto noauto,ro 0 0
+</pre><p>
+Remarquez qu'il <span class="emphasis"><em>ne doit pas</em></span> y avoir d'espace entre les
+mots <code class="literal">noauto,ro</code> dans la quatrième colonne.
+</p><p>
+Pour vérifier que cela fonctionne, insérez un CD et essayez d'exécuter :
+</p><pre class="screen">
+# mount /media/cdrom    # montera le CD au point de montage /media/cdrom
+# ls -alF /media/cdrom  # devrait afficher le contenu de la racine du CD
+# umount /media/cdrom   # démontera le CD
+</pre><p>
+Puis, lancez :
+</p><pre class="screen">
+# apt-cdrom add
+</pre><p>
+pour chaque CD binaire Debian en votre possession, afin d'ajouter ses
+données dans la base d'APT.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="upgradingpackages"></a>4.4. Mettre à niveau les paquets</h2></div></div></div><p>
+Pour une mise à niveau des versions précédentes de Debian, il est
+recommandé d'utiliser le gestionnaire de paquets
+<span class="command"><strong>apt-get</strong></span>. Lors des versions précédentes,
+<span class="command"><strong>aptitude</strong></span> était recommandé, mais les dernières versions
+d'<span class="command"><strong>apt-get</strong></span> fournissent des fonctions équivalentes et se
+sont montrées plus robustes pour fournir le résultat attendu pour la mise à
+niveau.
+</p><p>
+N'oubliez pas de monter les partitions requises (notamment les partitions
+racine et <code class="filename">/usr</code>) en lecture et écriture, avec une
+commande du type :
+</p><pre class="screen">
+# mount -o remount,rw /<em class="replaceable"><code>point_de_montage</code></em>
+</pre><p>
+Puis, vérifiez à nouveau que les sources d'APT (dans
+<code class="filename">/etc/apt/sources.list</code>) se réfèrent soit à
+<span class="quote">« <span class="quote"><code class="literal">jessie</code></span> »</span> soit à
+<span class="quote">« <span class="quote"><code class="literal">stable</code></span> »</span>. Il ne doit y avoir aucune source
+pointant vers Wheezy.
+</p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+    Les lignes de source pour un CD font souvent référence à
+<span class="quote">« <span class="quote"><code class="literal">unstable</code></span> »</span> ; bien que cela soit trompeur,
+vous ne devez <span class="emphasis"><em>pas</em></span> les changer.
+  </p></td></tr></table></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="record-session"></a>4.4.1. Enregistrer la session</h3></div></div></div><p>
+Il est fortement recommandé d'utiliser le programme
+<span class="command"><strong>/usr/bin/script</strong></span> pour enregistrer une transcription de la
+session de mise à niveau. Ainsi, quand un problème survient, vous avez un
+enregistrement de ce qui s'est passé, et vous pouvez fournir les
+informations exactes pour un rapport de bogue. Pour démarrer un
+enregistrement, saisissez :
+</p><pre class="screen">
+# script -t 2&gt;~/upgrade-jessie<em class="replaceable"><code>etape</code></em>.time -a ~/upgrade-jessie<em class="replaceable"><code>etape</code></em>.script
+</pre><p>
+ou quelque chose d'équivalent. Si vous devez utiliser à nouveau le script
+d'enregistrement (par exemple suite à un redémarrage), utilisez une nouvelle
+valeur pour <em class="replaceable"><code>etape</code></em> afin d'indiquer quelle étape
+vous enregistrez. Ne mettez pas le fichier d'enregistrement dans un
+répertoire temporaire tel que <code class="filename">/tmp</code> ou
+<code class="filename">/var/tmp</code> (les fichiers de ces répertoires peuvent être
+détruits pendant la mise à niveau ou pendant un redémarrage).
+</p><p>
+Le fichier d'enregistrement vous permettra également de revoir les
+informations qui ont défilé. Basculez simplement sur la deuxième console (en
+utilisant <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F2</strong></span>) et, après
+la connexion, utilisez <code class="literal">less -R
+~root/upgrade-jessie<em class="replaceable"><code>etape</code></em>.script</code>
+pour voir le fichier.
+</p><p>
+Après avoir terminé la mise à niveau, vous pouvez stopper l'enregistrement
+en entrant <code class="literal">exit</code> à l'invite de commande.
+</p><p>
+Si vous avez utilisé l'option <span class="emphasis"><em>-t</em></span> de
+<span class="command"><strong>script</strong></span>, vous pouvez utiliser le programme
+<span class="command"><strong>scriptreplay</strong></span> pour rejouer la session entière :
+</p><pre class="screen">
+# scriptreplay ~/upgrade-jessie<em class="replaceable"><code>etape</code></em>.time ~/upgrade-jessie<em class="replaceable"><code>etape</code></em>.script
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="updating-lists"></a>4.4.2. Mettre à jour la liste des paquets</h3></div></div></div><p>
+La liste des paquets disponibles pour la nouvelle version doit tout d'abord
+être récupérée, avec cette commande :
+</p><pre class="screen">
+# apt-get update
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="sufficient-space"></a>4.4.3. Assurez-vous d'avoir suffisamment d'espace disque pour la mise à niveau</h3></div></div></div><p>
+Avant de faire la mise à niveau complète du système, telle qu'elle est
+décrite en <a class="xref" href="ch-upgrading.fr.html#upgrading-full" title="4.4.5. Mettre à niveau le système">Section 4.4.5, « Mettre à niveau le système »</a>, vous devez vous assurer d'avoir
+suffisamment d'espace disque. En effet, tous les paquets nécessaires à
+l'installation sont stockés dans
+<code class="filename">/var/cache/apt/archives</code> (et dans le sous-répertoire
+<code class="filename">partial/</code> pendant le téléchargement). Vous devez donc
+vous assurer d'avoir suffisamment de place sur la partition qui contient
+<code class="filename">/var/</code>. Après le téléchargement, vous aurez probablement
+encore besoin de plus d'espace disque sur les autres partitions de système
+de fichiers pour pouvoir installer à la fois les paquets mis à niveau (qui
+peuvent contenir des binaires plus gros ou davantage de données) et les
+nouveaux paquets. Si l'espace disque vient à manquer, la mise à niveau sera
+incomplète, ce qui peut rendre le système difficile à récupérer.
+</p><p>
+Le programme <span class="command"><strong>apt-get</strong></span> peut afficher des informations
+détaillées à propos de l'espace disque nécessaire à l'installation. Vous
+pouvez obtenir cette estimation avant d'effectuer vraiment la mise à niveau
+avec la commande :
+</p><pre class="screen">
+# apt-get -o APT::Get::Trivial-Only=true dist-upgrade
+[ ... ]
+XXX paquets mis à jour, XXX nouvellement installés, XXX à enlever et XXX non mis à jour.
+Il est nécessaire de télécharger xx,x Mo d'archives. 
+Après dépaquetage, AAA Mo seront utilisés.
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+Exécuter cette commande au début du processus de mise à niveau peut
+provoquer une erreur pour les raisons décrites dans les sections
+suivantes. Dans ce cas, vous devez attendre d'avoir effectué la mise à
+niveau minimale du système comme décrit en <a class="xref" href="ch-upgrading.fr.html#minimal-upgrade" title="4.4.4. Mise à niveau minimale du système">Section 4.4.4, « Mise à niveau minimale du système »</a>
+avant d'exécuter cette commande pour estimer l'espace disque nécessaire.
+</p></td></tr></table></div><p>
+Si vous n'avez pas assez d'espace disque pour la mise à niveau,
+<span class="command"><strong>apt-get</strong></span> vous enverra un message comme :
+</p><pre class="screen">
+E: Vous n'avez pas assez d'espace disponible dans /var/cache/apt/archives/.
+</pre><p>Si vous n'avez pas assez d'espace disque pour la mise à niveau, assurez-vous
+d'en libérer. Vous pouvez :
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+supprimer les paquets qui ont été téléchargés auparavant (dans
+<code class="filename">/var/cache/apt/archives</code>). Nettoyer le cache des paquets
+avec <span class="command"><strong>apt-get clean</strong></span> supprimera tous les paquets
+téléchargés auparavant ;
+</p></li><li class="listitem"><p>
+supprimer les paquets oubliés. Si vous avez utilisé
+<span class="command"><strong>aptitude</strong></span> ou <span class="command"><strong>apt-get</strong></span> pour installer
+manuellement des paquets dans Wheezy, le programme aura gardé la
+trace de ces paquets ; ainsi, quand un paquet est supprimé, le programme
+peut marquer comme redondants les paquets installés par le seul jeu des
+dépendances et qui ne sont plus nécessaires. Ils ne marquent pas pour la
+suppression les paquets que vous avez installés, au contraire de ceux qui
+ont été installés automatiquement par les dépendances. Pour supprimer les
+paquets installés automatiquement et qui ne sont plus utilisés, tapez :
+</p><pre class="screen">
+# apt-get autoremove
+</pre><p>
+Vous pouvez également utiliser <span class="command"><strong>deborphan</strong></span>,
+<span class="command"><strong>debfoster</strong></span> ou <span class="command"><strong>cruft</strong></span> pour trouver les
+paquets redondants. Ne supprimez pas aveuglément les paquets que ces outils
+présentent, particulièrement si vous utilisez des options non standard
+agressives, car ils sont susceptibles de produire des faux positifs. Il est
+hautement recommandé d'examiner manuellement les paquets suggérés à la
+suppression (c'est-à-dire leurs contenu, taille et description) avant de les
+supprimer.
+</p></li><li class="listitem"><p>
+supprimer les paquets qui prennent trop d'espace et qui ne sont pas
+actuellement nécessaires (vous pourrez les réinstaller après la mise à
+niveau). Si <code class="systemitem">popularity-contest</code><a id="idp60146160" class="indexterm"></a> est
+installé, vous pouvez utiliser <span class="command"><strong>popcon-largest-unused</strong></span> pour
+faire la liste des paquets occupant le plus d'espace. Vous pouvez afficher
+les paquets qui prennent le plus de place avec <span class="command"><strong>dpigs</strong></span>
+(disponible dans le paquet <code class="systemitem">debian-goodies</code><a id="idp60149488" class="indexterm"></a>) ou avec <span class="command"><strong>wajig</strong></span>
+(en lançant <code class="literal">wajig size</code>). Ils peuvent également être
+trouvés avec <code class="systemitem">aptitude</code><a id="idp60152720" class="indexterm"></a>. Lancez
+<span class="command"><strong>aptitude</strong></span> en <span class="emphasis"><em>mode interactif</em></span>,
+choisissez <span class="guimenu">Vues</span> → <span class="guimenuitem">Nouvelle vue des
+paquets</span>, tapez <span class="keycap"><strong>l</strong></span> puis
+<code class="literal">~i</code>, tapez <span class="keycap"><strong>S</strong></span> puis
+<code class="literal">~installsize</code>, ce qui créera une liste pratique pour
+travailler. 
+</p></li><li class="listitem"><p>
+  supprimer les traductions et les fichiers de localisation du système, s'ils
+ne sont pas nécessaires. Vous pouvez installer le paquet <code class="systemitem">localepurge</code><a id="idp60161216" class="indexterm"></a> et le configurer de manière à ce
+qu'un jeu restreint de paramètres régionaux (« locales ») soit conservé sur
+le système. Cela réduira la place occupée dans
+<code class="filename">/usr/share/locale</code>.
+</p></li><li class="listitem"><p>
+   déplacer temporairement vers un autre système les journaux système résidant
+sous<code class="filename">/var/log/</code> (ou les supprimer définitivement).
+</p></li><li class="listitem"><p>
+    utiliser un répertoire <code class="filename">/var/cache/apt/archives</code>
+temporaire. Vous pouvez utiliser un cache temporaire depuis un autre système
+de fichiers, un périphérique de stockage par <acronym title="Universal Serial Bus (bus série universel)">USB</acronym>, un
+disque dur temporaire, un système de fichiers déjà utilisé, etc.
+  </p><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      N'utilisez pas de montage <acronym title="Network File System (système de fichiers en réseau)">NFS</acronym> car la connexion réseau
+pourrait être interrompue au cours de la mise à niveau.
+    </p></td></tr></table></div><p>
+  Par exemple, si une clé <acronym title="Universal Serial Bus (bus série universel)">USB</acronym> est montée sur
+<code class="filename">/media/cleusb</code> :
+  </p><div class="orderedlist"><ol class="orderedlist" type="1"><li class="listitem"><p>
+	supprimez les paquets téléchargés lors d'une précédente installation :
+
+	</p><pre class="screen"># apt-get clean</pre><p>
+      </p></li><li class="listitem"><p>
+	copiez le répertoire <code class="filename">/var/cache/apt/archives</code> sur le
+disque <acronym title="Universal Serial Bus (bus série universel)">USB</acronym> :
+
+	</p><pre class="screen"># cp -ax /var/cache/apt/archives /media/cleusb/</pre><p>
+      </p></li><li class="listitem"><p>
+	montez le répertoire de cache temporaire à la place de l'actuel :
+
+	</p><pre class="screen"># mount --bind /media/cleusb/archives /var/cache/apt/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	après la mise à niveau, rétablissez le répertoire
+<code class="filename">/var/cache/apt/archives</code> initial :
+
+	</p><pre class="screen"># umount /media/cleusb/archives</pre><p>
+      </p></li><li class="listitem"><p>
+	supprimez le répertoire subsistant
+<code class="filename">/media/cleusb/archives</code>.
+      </p></li></ol></div><p>
+  Vous pouvez créer le répertoire de cache temporaire dans n'importe quel
+système de fichiers monté sur le système.
+  </p></li><li class="listitem"><p>
+    Effectuez une mise à niveau minimale (consultez la <a class="xref" href="ch-upgrading.fr.html#minimal-upgrade" title="4.4.4. Mise à niveau minimale du système">Section 4.4.4, « Mise à niveau minimale du système »</a>) ou partielle suivie par une mise à niveau
+complète. Cela vous permettra de mettre à niveau partiellement le système,
+et de nettoyer le cache avant la mise à niveau complète.
+  </p></li></ul></div><p>
+Notez que pour supprimer des paquets sans dommage, il est conseillé de
+changer <code class="filename">sources.list</code> pour pointer vers
+wheezy, comme décrit en <a class="xref" href="ap-old-stuff.fr.html#old-sources" title="A.2. Vérifier la liste de sources">Section A.2, « Vérifier la liste de sources »</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="minimal-upgrade"></a>4.4.4. Mise à niveau minimale du système</h3></div></div></div><p>
+Il est possible que le lancement d'une mise à niveau complète (décrite
+ci-dessous) supprime un grand nombre de paquets que vous voudriez
+garder. Nous recommandons donc une action en deux temps : commencer par une
+mise à niveau minimale pour éviter ces conflits, puis faire une mise à
+niveau totale (consultez la <a class="xref" href="ch-upgrading.fr.html#upgrading-full" title="4.4.5. Mettre à niveau le système">Section 4.4.5, « Mettre à niveau le système »</a>). 
+</p><p>
+Pour ce faire, exécutez d'abord :
+</p><pre class="screen">
+# apt-get upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Nous recommandions d'utiliser <span class="command"><strong>aptitude</strong></span> lors du processus
+de mise à niveau pour certaines versions précédentes. Cet outil n'est pas
+recommandé pour les mises à niveau de Wheezy à Jessie.
+    </p></td></tr></table></div><p>
+Cette commande met à niveau les paquets qui peuvent l'être sans entraîner
+l'installation ou la suppression d'autres paquets.
+</p><p>
+La mise à niveau minimale peut aussi être utilisée sur un système limité en
+taille, sur lequel une mise à niveau complète prendrait trop d'espace.
+</p><p>
+  Si le paquet <code class="systemitem">apt-listchanges</code><a id="idp60194000" class="indexterm"></a> est
+installé avec sa configuration par défaut, il affichera de manière
+interactive les informations importantes sur les paquets mis à jour. Il est
+nécessaire d'utiliser la touche <span class="keycap"><strong>q</strong></span> une fois ces informations
+lues afin de quitter l'affichage interactif et poursuivre la mise à jour.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="upgrading-full"></a>4.4.5. Mettre à niveau le système</h3></div></div></div><p>
+Vous êtes maintenant prêt à continuer avec la partie principale de la mise à
+niveau. Exécutez :
+</p><pre class="screen">
+# apt-get dist-upgrade
+</pre><div class="note"><table border="0" summary="Note"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Note]" src="images/note.png" /></td><th align="left">Note</th></tr><tr><td align="left" valign="top"><p>
+      Nous recommandions d'utiliser <span class="command"><strong>aptitude</strong></span> lors du processus
+de mise à niveau pour certaines versions précédentes. Cet outil n'est pas
+recommandé pour les mises à niveau de Wheezy à Jessie.
+    </p></td></tr></table></div><p>
+Cette commande effectue une mise à niveau complète du système, en installant
+les versions les plus récentes de tous les paquets, et en résolvant tous les
+changements possibles de dépendances entre paquets des différentes
+versions. Si nécessaire, elle installe de nouveaux paquets (habituellement
+de nouvelles versions de bibliothèques, ou des paquets ayant changé de nom),
+et retire les paquets obsolètes en conflit.
+</p><p>
+Lorsque la mise à niveau se fait à partir d'un ensemble de CD (ou DVD), on
+vous demandera d'insérer d'autres CD ou DVD à plusieurs moments de la mise à
+niveau. Vous pourriez devoir insérer plusieurs fois le même CD ou DVD. Cela
+est dû aux relations entre paquets répartis sur plusieurs supports.
+</p><p>
+Les paquets déjà installés ayant une nouvelle version, mais qui ne peuvent
+être installés sans modifier l'état d'un autre paquet, seront laissés dans
+leur version actuelle (et affichés comme retenus — <span class="quote">« <span class="quote">held
+back</span> »</span>). Cela peut être résolu soit en utilisant
+<span class="command"><strong>aptitude</strong></span> et en choisissant d'installer ces paquets, soit
+en essayant <code class="literal">apt-get install
+<em class="replaceable"><code>paquet</code></em></code>.
+</p></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="trouble"></a>4.5. Problèmes possibles pendant une mise à niveau</h2></div></div></div><p>
+Les parties suivantes décrivent les problèmes connus pouvant survenir lors
+d'une mise à niveau vers Jessie.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="immediate-configure"></a>4.5.1. La mise à niveau échoue avec <span class="quote">« <span class="quote">Impossible de faire une configuration
+immédiate</span> »</span>.</h3></div></div></div><p>
+Dans certains cas, l'étape <span class="command"><strong>apt-get dist-upgrade</strong></span> peut
+échouer après le téléchargement des paquets avec :
+</p><pre class="screen">
+E: Impossible de faire une configuration immédiate sur '<em class="replaceable"><code>paquet</code></em>. Veuillez consulter man 5 apt.conf à la section APT::Immediate-Configure pour plus de précisions.
+</pre><p>
+</p><p>
+Si cela se produit, lancer <span class="command"><strong>apt-get dist-upgrade -o
+APT::Immediate-Configure=0</strong></span> à la place devrait permettre à la mise
+à niveau d'avoir lieu.
+</p><p>
+Une autre possibilité pouvant permettre de contourner ce problème consiste à
+ajouter temporairement des sources pour wheezy et jessie
+dans le fichier <code class="filename">sources.list</code> puis d'exécuter la
+commande <span class="command"><strong>apt-get update</strong></span>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="expected-removals"></a>4.5.2. Suppressions attendues</h3></div></div></div><p>
+La mise à niveau vers Jessie peut demander la suppression de paquets
+sur le système. Leur liste exacte dépendra des paquets installés sur le
+système. Ces notes de publication donnent des conseils généraux sur la
+méthode à utiliser, mais en cas de doute, il est recommandé d'examiner les
+suppressions de paquets proposées par chacune des méthodes avant de les
+effectuer réellement. Pour plus d'informations au sujet des paquets devenus
+obsolètes dans Jessie, veuillez consulter <a class="xref" href="ch-upgrading.fr.html#obsolete" title="4.10. Paquets obsolètes">Section 4.10, « Paquets obsolètes »</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="conflicts-loops"></a>4.5.3. Boucles de conflits ou de prédépendances</h3></div></div></div><p>
+Il est parfois nécessaire d'activer l'option d'APT
+<code class="literal">APT::Force-LoopBreak</code> pour pouvoir temporairement retirer
+un paquet essentiel à cause de boucles
+« Conflicts/Pre-Depends ». <span class="command"><strong>apt-get</strong></span> vous
+alertera à ce propos et interrompra la mise à niveau. Vous pouvez contourner
+ce problème en passant l'option <code class="literal">-o APT::Force-LoopBreak=1</code>
+sur la ligne de commande d'<span class="command"><strong>apt-get</strong></span>.
+</p><p>
+Il est possible que la structure de dépendances d'un système soit tellement
+défectueuse qu'elle requiert une intervention manuelle. Habituellement, cela
+signifie qu'il faut utiliser <span class="command"><strong>apt-get</strong></span> ou :
+</p><pre class="screen">
+# dpkg --remove <em class="replaceable"><code>nom_du_paquet</code></em>
+</pre><p>
+pour éliminer certains des paquets en cause, ou :
+</p><pre class="screen">
+# apt-get -f install
+# dpkg --configure --pending
+</pre><p>
+Dans certains cas extrêmes, vous pourriez devoir forcer une réinstallation à
+l'aide d'une commande comme :
+</p><pre class="screen">
+# dpkg --install <em class="replaceable"><code>/chemin/vers/nom_du_paquet.deb</code></em>
+</pre></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="file-conflicts"></a>4.5.4. Conflits de fichiers</h3></div></div></div><p>
+Les conflits de fichiers ne devraient pas se produire si vous mettez à
+niveau depuis un système Wheezy <span class="quote">« <span class="quote">pur</span> »</span>, mais ils
+peuvent se produire si des rétroportages non officiels sont installés. Un
+conflit de fichiers entraînera une erreur de ce type :
+</p><pre class="screen">
+Préparation du remplacement de <em class="replaceable"><code>&lt;paquet-toto&gt;</code></em> (en utilisant <em class="replaceable"><code>&lt;fichier-paquet-toto&gt;</code></em>) ...
+dpkg: erreur de traitement de <em class="replaceable"><code>&lt;paquet-toto&gt;</code></em> (--install):
+ tentative de remplacement de « <em class="replaceable"><code>&lt;un-nom-de-fichier&gt;</code></em> »,
+ qui appartient aussi au paquet <em class="replaceable"><code>&lt;paquet-titi&gt;</code></em>
+dpkg-deb: sous-processus paste tué par le signal (Broken pipe)
+ Des erreurs ont été rencontrées pendant l'exécution :
+ <em class="replaceable"><code>&lt;paquet-toto&gt;</code></em>
+</pre><p>
+Vous pouvez tenter de résoudre un conflit de fichiers en forçant la
+suppression du paquet mentionné sur la <span class="emphasis"><em>dernière</em></span> ligne
+du message d'erreur :
+</p><pre class="screen">
+# dpkg -r --force-depends <em class="replaceable"><code>nom_du_paquet</code></em>
+</pre><p>
+Après cela, vous devriez être en mesure de continuer la mise à niveau, en
+utilisant les commandes d'<span class="command"><strong>apt-get</strong></span> précédemment décrites.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="configuration-changes"></a>4.5.5. Changements de configuration</h3></div></div></div><p>
+Durant la mise à niveau, on vous posera des questions pour configurer ou
+reconfigurer de nombreux paquets. Quand on vous demandera si des fichiers du
+répertoire <code class="filename">/etc/init.d</code> ou le fichier
+<code class="filename">/etc/manpath.config</code> doivent être remplacés par la
+version du responsable du paquet, il est généralement nécessaire de répondre
+<span class="quote">« <span class="quote">oui</span> »</span> pour assurer la cohérence du système. Vous pouvez
+toujours revenir aux versions précédentes, puisqu'elles sont sauvegardées
+avec une extension <code class="literal">.dpkg-old</code>.
+</p><p>
+Si vous n'êtes pas certain de ce qu'il faut faire, notez le nom du paquet ou
+du fichier et examinez le problème plus tard. Vous pouvez chercher dans le
+fichier d'enregistrement pour revoir les informations qui étaient à l'écran
+lors de la mise à niveau.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="console-change"></a>4.5.6. Changement de session sur la console</h3></div></div></div><p>
+Si vous utilisez le système depuis la console locale, il est possible qu'à
+certains moments de la mise à niveau la console passe à une vue différente,
+et que la mise à niveau du système ne soit plus observable. Cela peut par
+exemple être le cas pour les systèmes de bureau quand le gestionnaire
+d'écran de connexion est relancé.
+</p><p>
+Pour revenir à la console traitant le processus de mise à niveau, utilisez
+les touches <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span>
+(si vous avez une interface de connexion graphique) ou <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>F1</strong></span> (si vous
+avez une console texte locale) pour revenir au terminal virtuel 1. Remplacez
+F1 avec la touche Fx où x correspond au numéro du terminal sur lequel se
+déroule la mise à niveau. Vous pouvez aussi utiliser <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>flèche gauche</strong></span>
+ou <span class="keycap"><strong>Alt</strong></span>+<span class="keycap"><strong>flèche
+droite</strong></span> pour passer d'un terminal en mode texte à un
+autre.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="package-specific-issues"></a>4.5.7. Attention particulière à porter à certains paquets</h3></div></div></div><p>
+La plupart des paquets devrait passer docilement de Wheezy à
+Jessie. Il y a cependant un petit nombre de cas où une intervention
+manuelle peut être nécessaire, que ce soit avant ou pendant la mise à
+niveau. Ces interventions sont détaillées ci-dessous en fonction du paquet
+impliqué.
+</p><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-systemd"></a>4.5.7.1. systemd</h4></div></div></div><p>
+    La mise à niveau de Debian depuis Wheezy vers Jessie va par
+défaut faire migrer votre système d'init de SysV vers systemd. En fonction
+de votre système et de votre installation, vous pouvez avoir besoin de faire
+des changements manuellement. Les problèmes connus sont détaillés dans <a class="xref" href="ch-information.fr.html#systemd-upgrade-default-init-system" title="5.6. La mise à niveau installe le nouveau système d'initialisation par défaut de Jessie">Section 5.6, « La mise à niveau installe le nouveau système d'initialisation par défaut de
+Jessie »</a>.
+  </p></div><div class="section"><div class="titlepage"><div><div><h4 class="title"><a id="issues-lxc"></a>4.5.7.2. LXC</h4></div></div></div><p>
+    Si LXC est installé, vous pouvez devoir prendre des précautions
+supplémentaires lors de la mise à niveau de votre système et de vos
+conteneurs. Veuiller consulter <a class="xref" href="ch-information.fr.html#lxc-upgrade-issues" title="5.8. Considérations au sujet de la mise à niveau des hôtes et conteneurs LXC">Section 5.8, « Considérations au sujet de la mise à niveau des hôtes et conteneurs LXC »</a> au
+sujet des problèmes connus et de leurs solutions.
+  </p></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="newkernel"></a>4.6. Mise à niveau du noyau et des paquets liés</h2></div></div></div><p>
+Cette section explique comment mettre à niveau le noyau et identifie les
+problèmes potentiels liés à cette mise à niveau. Vous pouvez soit installer
+l'un des paquets <code class="systemitem">linux-image-*</code><a id="idp60265680" class="indexterm"></a>
+fournis dans Debian ou compiler un noyau personnalisé à partir des sources.
+</p><p>
+Veuillez noter que beaucoup d'informations dans cette section sont basées
+sur l'hypothèse que vous utilisez l'un des noyaux modulaires de Debian, avec
+les paquets <code class="systemitem">initramfs-tools</code><a id="idp60268256" class="indexterm"></a> et
+<code class="systemitem">udev</code><a id="idp60269952" class="indexterm"></a>. Si vous choisissez d'utiliser
+un noyau personnalisé qui ne nécessite pas d'initrd ou si vous utilisez un
+générateur d'initrd différent, certaines informations peuvent ne pas vous
+concerner.
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="kernel-metapackage"></a>4.6.1. Installer un métapaquet du noyau</h3></div></div></div><p>
+Quand vous faites une mise à niveau de Wheezy vers Jessie,
+il est fortement recommandé d'installer un métapaquet linux-image-*, si cela
+n’avait pas été déjà fait. Ces métapaquets vont automatiquement récupérer
+une nouvelle version par le processus de mise à niveau. Vous pouvez vérifier
+cela en exécutant :
+</p><pre class="screen">
+# dpkg -l "linux-image*" | grep ^ii | grep -i meta
+</pre><p>
+Si cela ne donne rien, vous devez alors soit installer un nouveau paquet
+linux-image vous-même ou installer un métapaquet linux-image. Pour voir la
+liste des métapaquets linux-image disponibles, exécutez :
+</p><pre class="screen">
+# apt-cache search linux-image- | grep -i meta | grep -v transition
+</pre><p>
+Si vous ne savez pas quel paquet sélectionner, exécutez <code class="literal">uname
+-r</code> et recherchez un paquet avec un nom similaire. Par exemple, si
+<code class="literal">2.6.32-5-amd64</code> apparaît, il est recommandé d'installer
+<code class="systemitem">linux-image-amd64</code><a id="idp60278432" class="indexterm"></a>. Vous pouvez
+également utiliser <span class="command"><strong>apt-cache</strong></span> pour voir une description
+longue de chaque paquet. Cela peut vous aider à choisir le meilleur paquet
+disponible. Par exemple :
+</p><pre class="screen">
+# apt-cache show linux-image-amd64
+</pre><p>
+Vous pouvez alors installer le paquet choisi en utilisant la commande
+<code class="literal">apt-get install</code>. Une fois ce nouveau noyau installé, vous
+devriez redémarrer dès que possible afin de profiter des améliorations
+fournies par la nouvelle version du noyau. Néanmoins, veuillez consulter
+<a class="xref" href="ch-upgrading.fr.html#nownownow" title="4.7. Choses à faire avant le prochain redémarrage">Section 4.7, « Choses à faire avant le prochain redémarrage »</a> avant de lancer le premier redémarrage suivant
+la mise à niveau.
+</p><p>
+Pour les plus courageux, il existe un moyen facile pour compiler votre
+propre noyau sous Debian. Installez les sources du noyau fournies pas le
+paquet <code class="systemitem">linux-source</code><a id="idp60284640" class="indexterm"></a>. Vous pouvez
+utiliser la cible <code class="literal">deb-pkg</code> du fichier Makefile fourni dans
+les sources pour construire un paquet binaire. Plus d'informations sont
+disponibles dans le <a class="ulink" href="http://kernel-handbook.alioth.debian.org/" target="_top">Manuel du noyau Linux de
+Debian</a>, qui peut également être trouvé dans le paquet <code class="systemitem">debian-kernel-handbook</code><a id="idp60288032" class="indexterm"></a>.
+</p><p>
+Si possible, vous devriez mettre à niveau le noyau (par le paquet idoine)
+séparément de la mise à niveau (<code class="literal">dist-upgrade</code>) principale
+pour réduire les risques d'avoir un système temporairement non
+amorçable. Notez que cela devrait être effectué uniquement après le
+processus de mise à niveau minimal décrit en <a class="xref" href="ch-upgrading.fr.html#minimal-upgrade" title="4.4.4. Mise à niveau minimale du système">Section 4.4.4, « Mise à niveau minimale du système »</a>.
+</p></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="initramfs-tools-issues"></a>4.6.2. Modifications apportées au montage des systèmes de fichiers racine et
+<code class="filename">/usr</code> et à leur vérification.</h3></div></div></div><p>
+    Désormais, <code class="systemitem">initramfs-tools</code><a id="idp60294336" class="indexterm"></a> lancera
+également <code class="literal">fsck</code> sur le système de fichiers racine avant de
+le monter. Si le programe de démarrage choisi est <code class="literal">systemd</code>
+et si le système de fichiers <code class="filename">/usr</code> est séparé, il
+lancera aussi fcsk avant de monter <code class="filename">/usr</code>.
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	Si <code class="filename">/usr</code> est un système de fichiers séparé sur un
+périphérique RAID et que l'option <code class="literal">INITRDSTART</code> de
+<code class="filename">/etc/default/mdadm</code> n'est pas réglée à
+<code class="literal">all</code>, vous devrez la modifier pour inclure ce
+périphérique.
+      </p></li><li class="listitem"><p>
+	Si <code class="filename">/usr</code> est un système de fichiers séparé sur un volume
+logique LVM et que la ligne concernant <code class="filename">/usr</code> dans
+<code class="filename">/etc/fstab</code> désigne le périphérique par son
+<code class="literal">UUID</code> ou son <code class="literal">LABEL</code>, vous devez modifier
+cette ligne pour désigner le périphérique en utilisant le format
+<code class="filename">/dev/mapper/<em class="replaceable"><code>VG</code></em>-<em class="replaceable"><code>LV</code></em></code>
+ou
+<code class="filename">/dev/<em class="replaceable"><code>VG</code></em>/<em class="replaceable"><code>LV</code></em></code>.
+      </p></li><li class="listitem"><p>
+	Il n'est plus possible de monter en « bind » le système de fichiers
+<code class="filename">/usr</code>.
+      </p></li><li class="listitem"><p>
+	Si la RTC (« real time clock » — horloge en temps réel) est réglée sur
+l'heure locale et que l'heure locale est en avance sur l'heure UTC,
+<code class="literal">e2fsck</code> affichera un avertissement lors du démarrage au
+sujet de l'heure décalée en arrière (<a class="ulink" href="https://bugs.debian.org/767040" target="_top">bogue nº 767040</a>). Vous pouvez
+désactiver cet avertissement en ajoutant les lignes suivantes dans
+<code class="filename">/etc/e2fsck.conf</code> :
+      </p><pre class="screen">
+[options]
+broken_system_clock=1
+</pre></li></ul></div></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="nownownow"></a>4.7. Choses à faire avant le prochain redémarrage</h2></div></div></div><p>
+Lorsque <code class="literal">apt-get dist-upgrade</code> est terminé, la mise à
+niveau <span class="quote">« <span class="quote">formelle</span> »</span> est terminée, mais il reste quelques petites
+choses dont vous devriez vous occuper <span class="emphasis"><em>avant</em></span> le prochain
+redémarrage.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+      Lors de la mise à niveau de Wheezy vers Jessie, purger les
+anciens paquets <span class="emphasis"><em>avant</em></span> le premier redémarrage peut être
+une bonne idée. En particulier, les scripts de démarrage obsolètes peuvent
+causer des problèmes. Veuillez consulter <a class="xref" href="ch-upgrading.fr.html#purge-removed-packages" title="4.8.1. Purger les paquets supprimés">Section 4.8.1, « Purger les paquets supprimés »</a> pour de plus amples informations sur la
+recherche et la purge des paquets supprimés.
+    </p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="for-next"></a>4.8. Préparations pour la prochaine version</h2></div></div></div><p>
+Après la mise à niveau, il y a plusieurs choses que vous pouvez faire pour
+préparer la prochaine version.
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+Supprimez tous les paquets nouvellement redondants ou obsolètes comme
+décrits en <a class="xref" href="ch-upgrading.fr.html#sufficient-space" title="4.4.3. Assurez-vous d'avoir suffisamment d'espace disque pour la mise à niveau">Section 4.4.3, « Assurez-vous d'avoir suffisamment d'espace disque pour la mise à niveau »</a> et <a class="xref" href="ch-upgrading.fr.html#obsolete" title="4.10. Paquets obsolètes">Section 4.10, « Paquets obsolètes »</a>. Vous devriez contrôler les fichiers de configuration
+qu'ils utilisent et envisager de purger les paquets pour supprimer leurs
+fichiers de configuration. Veuillez également consulter <a class="xref" href="ch-upgrading.fr.html#purge-removed-packages" title="4.8.1. Purger les paquets supprimés">Section 4.8.1, « Purger les paquets supprimés »</a>.
+</p></li></ul></div><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="purge-removed-packages"></a>4.8.1. Purger les paquets supprimés</h3></div></div></div><p>
+    Il est généralement conseillé de purger les paquets supprimés. C'est
+particulièrement vrai si ceux-ci ont été supprimés lors d'une mise à niveau
+précédente (par exemple la mise à niveau vers Wheezy) ou s'ils ont
+été fournis par des vendeurs tiers. En particulier, les anciens scripts
+init.d sont connus pour causer des problèmes.
+  </p><div class="caution"><table border="0" summary="Caution"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Attention]" src="images/caution.png" /></td><th align="left">Attention</th></tr><tr><td align="left" valign="top"><p>
+      En général, purger un paquet purgera également ses fichiers de journaux,
+donc vous pourriez vouloir les sauvegarder d'abord.
+    </p></td></tr></table></div><p>
+    La commande suivante affiche une liste de tous les paquets supprimés qui
+pourraient avoir laissé des fichiers de configuration sur le système (s'il y
+en a) :
+  </p><pre class="screen">
+# dpkg -l | awk '/^rc/ { print $2 }'
+</pre><p>
+    Les paquets peuvent être supprimés en utilisant <span class="command"><strong>apt-get
+purge</strong></span>. En supposant que vous souhaitiez tous les purger en une
+seule fois, vous pouvez utiliser la commande suivante :
+  </p><pre class="screen">
+# apt-get purge $(dpkg -l | awk '/^rc/ { print $2 }')
+</pre><p>
+    Si vous utilisez <code class="systemitem">aptitude</code><a id="idp60335728" class="indexterm"></a>, vous
+pouvez également utiliser cette commande au lieu de la précédente :
+  </p><pre class="screen">
+$ aptitude search '~c'
+$ aptitude purge '~c'
+</pre></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="deprecated"></a>4.9. Composants obsolètes</h2></div></div></div><p>
+Avec la publication de Debian 9 (nom de code
+Stretch), un nombre important de fonctions seront obsolètes, et
+les utilisateurs devront changer pour de nouvelles alternatives pour prévoir
+le passage en 9.
+</p><p>
+Cela inclut les fonctions suivantes :
+</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Le paquet <code class="systemitem">hardening-wrapper</code><a id="idp60341744" class="indexterm"></a> est
+déprécié et devrait être supprimé de Stretch.
+		</p></li></ul></div></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="obsolete"></a>4.10. Paquets obsolètes</h2></div></div></div><p>
+Avec Jessie, plusieurs milliers de nouveaux paquets apparaissent,
+tandis que bon nombre d'anciens paquets présents dans Wheezy
+disparaissent. Il n'est pas prévu de procédure de mise à niveau pour ces
+paquets obsolètes. Bien que rien ne vous empêche de continuer à utiliser ces
+paquets si vous le désirez, le projet Debian arrête habituellement leur
+suivi de sécurité un an après la sortie de Jessie<a href="#ftn.idp60345264" class="footnote" id="idp60345264"><sup class="footnote">[5]</sup></a>, et n'assure normalement pas d'autre prise en
+charge dans l'intervalle. Il est recommandé de remplacer ces paquets par
+leurs alternatives disponibles quand elles existent.
+</p><p>
+Il y a plusieurs raisons pour lesquelles un paquet peut avoir été retiré de
+la distribution : il n'est plus maintenu en amont, il n'y a plus de
+responsable Debian intéressé par la maintenance du paquet, la fonctionnalité
+fournie par le paquet a été remplacée par un logiciel différent (ou une
+nouvelle version) ou il n'est plus considéré comme convenable pour
+Jessie en raison de ses bogues. Dans ce dernier cas, le paquet peut
+cependant toujours être présent dans la distribution
+<span class="quote">« <span class="quote">unstable</span> »</span>.
+</p><p>
+Détecter quels paquets sont <span class="quote">« <span class="quote">obsolètes</span> »</span> dans un système à jour
+est facile car les interfaces de gestion des paquets les marquent comme
+tels. Si vous utilisez <span class="command"><strong>aptitude</strong></span>, vous verrez une liste de
+ces paquets sous l'entrée <span class="quote">« <span class="quote">Paquets obsolètes ou créés
+localement</span> »</span>.
+</p><p>
+Le <a class="ulink" href="https://bugs.debian.org/" target="_top">système de suivi des bogues de Debian</a>
+fournit souvent des informations complémentaires sur les raisons pour
+lesquelles un paquet a été retiré. Vous devriez consulter à la fois les
+comptes-rendus de bogue archivés pour le paquet lui-même et ceux du <a class="ulink" href="https://bugs.debian.org/cgi-bin/pkgreport.cgi?pkg=ftp.debian.org&amp;archive=yes" target="_top">pseudo-paquet
+ftp.debian.org</a>.
+</p><p>
+  La liste des paquets obsolètes comprend :
+  </p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>
+	<code class="systemitem">postgresql-9.1</code><a id="idp60355104" class="indexterm"></a>, dont le successeur
+est <code class="systemitem">postgresql-9.4</code><a id="idp60356816" class="indexterm"></a>. Après la mise à
+niveau du système, vous devriez également prévoir de mettre vos bases de
+données PostgreSQL 9.1 à niveau vers PostgreSQL 9.4 en utilisant l'outil
+<span class="command"><strong>pg_upgradecluster</strong></span>. Pour les utilisateurs du langage
+procédural PL/perl, Jessie fournit un paquet <code class="systemitem">postgresql-plperl-9.1</code><a id="idp60359712" class="indexterm"></a> lié à la version de Jessie
+de libperl afin de permettre la mise à niveau vers la nouvelle version de
+perl dans Jessie tout en gardant les fonctions de l'ancienne base de données
+PL/perl utilisables jusqu'à ce que la base de données soit également mise à
+niveau.
+      </p></li><li class="listitem"><p>
+        
+        
+<code class="systemitem">python3.2</code><a id="idp60366784" class="indexterm"></a>, dont le successeur est
+<code class="systemitem">python3.4</code><a id="idp60368496" class="indexterm"></a> (la version 2.7 est prise
+en charge dans à la fois Wheezy et Jessie.)
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">ruby1.8</code><a id="idp60371104" class="indexterm"></a> et <code class="systemitem">ruby1.9.1</code><a id="idp60372800" class="indexterm"></a>, dont le successeur est <code class="systemitem">ruby2.1</code><a id="idp60374512" class="indexterm"></a>. Veuillez installer le paquet
+<code class="systemitem">ruby</code><a id="idp60376224" class="indexterm"></a> pour suivre automatiquement la
+version actuelle de ruby.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">mplayer</code><a id="idp60378736" class="indexterm"></a> ; les alternatives sont
+<code class="systemitem">mplayer2</code><a id="idp60380448" class="indexterm"></a> et <code class="systemitem">mpv</code><a id="idp60382160" class="indexterm"></a> (nouveau dans Jessie). Veuillez noter
+que bien que <code class="systemitem">ffmpeg</code><a id="idp60383856" class="indexterm"></a> ne soit pas
+livré avec Jessie, il sera certainement réintroduit dans
+Stretch. Veuillez également consulter le rapport de bogue <a class="ulink" href="http://bugs.debian.org/732159" target="_top">nº 732159</a>.
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openoffice.org</code><a id="idp60387296" class="indexterm"></a>, dont le successeur
+est <code class="systemitem">libreoffice</code><a id="idp60389008" class="indexterm"></a> ;
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">squid</code><a id="idp60391472" class="indexterm"></a>, dont le successeur est
+<code class="systemitem">squid3</code><a id="idp60393184" class="indexterm"></a> ;
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">libjpeg-progs</code><a id="idp60395648" class="indexterm"></a>, dont le successeur
+est <code class="systemitem">libjpeg-turbo-progs</code><a id="idp60397360" class="indexterm"></a> ;
+      </p></li><li class="listitem"><p>
+        <code class="systemitem">openjdk-6-*</code><a id="idp60399824" class="indexterm"></a>, dont le successeur est
+<code class="systemitem">openjdk-7-*</code><a id="idp60401536" class="indexterm"></a>.
+      </p></li></ul></div><p>
+</p><div class="section"><div class="titlepage"><div><div><h3 class="title"><a id="dummy"></a>4.10.1. Paquets factices</h3></div></div></div><p>
+Certains paquets de la version Wheezy ont été divisés en plusieurs
+paquets dans Jessie, souvent pour améliorer la maintenabilité du
+système. Pour faciliter la mise à niveau dans de tels cas, Jessie
+fournit souvent des paquets <span class="quote">« <span class="quote">factices</span> »</span> (<span class="quote">« <span class="quote">dummy
+packages</span> »</span> en anglais) : des paquets vides qui ont le même nom que
+l'ancien paquet de la version Wheezy et dont les dépendances
+entraînent l'installation des nouveaux paquets. Ces paquets factices sont
+considérés comme des paquets redondants après la mise à niveau et peuvent
+être supprimés sans problème.
+</p><p>
+La plupart des descriptions des paquets factices signalent le but de ces
+paquets. Cependant, elles ne sont pas uniformes, et le programme
+<span class="command"><strong>deborphan</strong></span>, avec les options de type
+<code class="literal">--guess-<em class="replaceable"><code>*</code></em></code>, peut être utile
+pour détecter ces paquets sur le système. Notez que certains paquets
+factices ne sont pas destinés à être supprimés après une mise à niveau car
+ils sont utilisés pour déterminer quelle est la version actuellement
+disponible d'un programme.
+</p></div></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp59928544" class="footnote"><p><a href="#idp59928544" class="para"><sup class="para">[1] </sup></a>Si la priorité de debconf est configurée à un très haut niveau, certaines
+demandes de configuration seront passées sous silence, mais les services qui
+dépendent de réponses par défaut qui ne s'appliquent pas au système ne vont
+pas pouvoir démarrer.</p></div><div id="ftn.idp59930272" class="footnote"><p><a href="#idp59930272" class="para"><sup class="para">[2] </sup></a>Par exemple : les services DNS ou DCHP, en particulier s'il n'y a pas de
+redondance ou de serveur de secours. Dans le cas de DHCP, l'utilisateur peut
+être déconnecté du réseau si le temps d'attribution de l'adresse est
+inférieur à celui mis pour terminer le processus de mise à niveau.</p></div><div id="ftn.idp59946288" class="footnote"><p><a href="#idp59946288" class="para"><sup class="para">[3] </sup></a> Cette fonctionnalité peut être désactivée en ajoutant le paramètre
+<code class="literal">panic=0</code> aux paramètres d'amorçage.  </p></div><div id="ftn.idp60032848" class="footnote"><p><a href="#idp60032848" class="para"><sup class="para">[4] </sup></a> Le système de gestion des paquets de Debian ne permet pas qu'un paquet
+supprime ou remplace un fichier appartenant à un autre paquet sauf si ce
+paquet est prévu pour remplacer cet autre paquet.  </p></div><div id="ftn.idp60345264" class="footnote"><p><a href="#idp60345264" class="para"><sup class="para">[5] </sup></a> Ou aussi longtemps qu'il n'y a pas de nouvelle version pendant cet
+intervalle de temps. Il n'y a typiquement qu'au plus deux versions stables
+supportées à tout moment.  </p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-installing.fr.html"><img src="images/prev.png" alt="Précédent" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch-information.fr.html"><img src="images/next.png" alt="Suivant" /></a></td></tr><tr><td width="40%" align="left" valign="top">Chapitre 3. Système d'installation </td><td width="20%" align="center"><a accesskey="h" href="index.fr.html"><img src="images/home.png" alt="Sommaire" /></a></td><td width="40%" align="right" valign="top"> Chapitre 5. Problèmes à connaître pour Jessie</td></tr></table></div></body></html>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Anhang A. Verwalten Ihres Wheezy-Systems vor dem Upgrade</title><link rel="stylesheet" type="text/css" href="debian.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.78.1" /><link rel="home" href="index.de.html" title="Hinweise zur Debian-Veröffentlichung Version 8 (Jessie) auf 64-Bit-PC" /><link rel="up" href="index.de.html" title="Hinweise zur Debian-Veröffentlichung Version 8 (Jessie) auf 64-Bit-PC" /><link rel="prev" href="ch-moreinfo.de.html" title="Kapitel 6. Zusätzliche Informationen zu Debian" /><link rel="next" href="apb.de.html" title="Anhang B. Mitwirkende bei den Veröffentlichungshinweisen" /><meta xmlns="" name="viewport" content="width=device-width, initial-scale=1" /><style xmlns="" type="text/css">
+      body {
+        background-repeat: no-repeat;
+        background-image: none;
+      }
+    </style></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Anhang A. Verwalten Ihres Wheezy-Systems vor dem Upgrade</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch-moreinfo.de.html"><img src="images/prev.png" alt="Zurück" /></a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="apb.de.html"><img src="images/next.png" alt="Weiter" /></a></td></tr></table><hr /></div><div xml:lang="de" class="appendix" lang="de"><div class="titlepage"><div><div><h1 class="title"><a id="ap-old-stuff"></a>Anhang A. Verwalten Ihres Wheezy-Systems vor dem Upgrade</h1></div></div></div><div class="toc"><p><strong>Inhaltsverzeichnis</strong></p><dl class="toc"><dt><span class="section"><a href="ap-old-stuff.de.html#old-upgrade">A.1. Upgrade Ihres Wheezy-Systems</a></span></dt><dt><span class="section"><a href="ap-old-stuff.de.html#old-sources">A.2. Überprüfen Ihrer Paketquellen</a></span></dt><dt><span class="section"><a href="ap-old-stuff.de.html#old-config">A.3. Veraltete Konfigurationsdateien entfernen</a></span></dt><dt><span class="section"><a href="ap-old-stuff.de.html#switch-utf8">A.4. Upgrade von veralteten Locales auf UTF-8</a></span></dt></dl></div><p>
+Dieser Anhang enthält Informationen darüber, wie Sie sicherstellen, dass Sie
+ein Upgrade von Paketen aus Wheezy durchführen oder diese
+installieren können, bevor Sie das Upgrade auf Jessie
+durchführen. Dies sollte nur in besonderen Situationen notwendig sein.
+</p><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-upgrade"></a>A.1. Upgrade Ihres Wheezy-Systems</h2></div></div></div><p>
+Dem Grunde nach ist dies nichts anderes als jedes bisherige Upgrade von
+Wheezy. Der einzige Unterschied besteht darin, dass Sie zuerst
+sicherstellen müssen, dass Ihre Paketliste noch Referenzen aus
+wheezy enthält, wie es in <a class="xref" href="ap-old-stuff.de.html#old-sources" title="A.2. Überprüfen Ihrer Paketquellen">Abschnitt A.2, „Überprüfen Ihrer Paketquellen“</a> erklärt
+ist.
+</p><p>
+Falls Sie zum Upgrade Ihres Systems einen Debian-Spiegel nutzen, so erfolgt
+das Upgrade automatisch auf die neueste Zwischenveröffentlichung
+(sogenanntes Point-Release) von Wheezy.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-sources"></a>A.2. Überprüfen Ihrer Paketquellen</h2></div></div></div><p>
+Falls sich Zeilen in Ihrer Datei <code class="filename">/etc/apt/sources.list</code>
+auf <span class="quote">„<span class="quote">stable</span>“</span> beziehen, <span class="quote">„<span class="quote">verwenden</span>“</span> Sie effektiv
+schon Jessie. Dies ist möglicherweise nicht das, was Sie möchten,
+falls Sie noch nicht bereit für das Upgrade sind. Wenn Sie bereits
+<code class="literal">apt-get update</code> ausgeführt haben, können Sie ohne Probleme
+mit der unten aufgeführten Anweisung wieder auf den alten Zustand
+zurückkehren.
+</p><p>
+Falls Sie bereits Pakete aus Jessie installiert haben, ergibt es
+wahrscheinlich keinen Sinn mehr, Pakete aus Wheezy zu
+installieren. In diesem Fall müssen Sie selbst entscheiden, ob Sie
+fortfahren wollen oder nicht. Es besteht die Möglichkeit, zu alten
+Paketversionen zurückzukehren, dies wird hier aber nicht beschrieben.
+</p><p>
+Bearbeiten Sie als <code class="literal">root</code> die Datei
+<code class="filename">/etc/apt/sources.list</code> mit einem Editor und überprüfen
+Sie alle Zeilen, die mit <code class="literal">deb http:</code> oder <code class="literal">deb
+ftp:</code> beginnen, ob sie Referenzen auf
+<span class="quote">„<span class="quote"><code class="literal">stable</code></span>“</span> enthalten. Falls ja, ändern Sie
+diese von <code class="literal">stable</code> auf <code class="literal">wheezy</code>.
+</p><p>
+Falls Zeilen vorkommen, die mit <code class="literal">deb file:</code> beginnen,
+müssen Sie selbst überprüfen, ob der darin angegebene Ort ein Archiv von
+Wheezy oder Jessie enthält.
+</p><div class="important"><table border="0" summary="Important"><tr><td rowspan="2" align="center" valign="top" width="25"><img alt="[Wichtig]" src="images/important.png" /></td><th align="left">Wichtig</th></tr><tr><td align="left" valign="top"><p>
+    Ändern Sie keine Zeilen, die mit <code class="literal">deb cdrom:</code>
+anfangen. Dies würde dazu führen, dass die Zeile ungültig wird und Sie
+<span class="command"><strong>apt-cdrom</strong></span> erneut ausführen müssen. Es ist kein Problem,
+falls eine <span class="quote">„<span class="quote">cdrom</span>“</span>-Quellzeile
+<span class="quote">„<span class="quote"><code class="literal">unstable</code></span>“</span> enthält. Dies ist zwar
+verwirrend, aber normal.
+  </p></td></tr></table></div><p>
+Falls Sie Änderungen vorgenommen haben, speichern Sie die Datei und führen
+Sie 
+</p><pre class="screen">
+# apt-get update
+</pre><p>
+aus, um die Paketliste erneut einzulesen.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="old-config"></a>A.3. Veraltete Konfigurationsdateien entfernen</h2></div></div></div><p>
+Bevor Sie Ihr System auf Jessie aktualisieren, wird empfohlen, alte
+Konfigurationsdateien (wie <code class="filename">*.dpkg-{new,old}</code>-Dateien in
+<code class="filename">/etc</code>) vom System zu entfernen.
+</p></div><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="switch-utf8"></a>A.4. Upgrade von veralteten Locales auf UTF-8</h2></div></div></div><p>
+Wenn Ihr System lokalisiert ist und eine Locale verwendet, die nicht auf
+UTF-8 basiert, sollten Sie dringend in Erwägung ziehen, Ihr System auf die
+Verwendung von UTF-8-Locales umzustellen. In der Vergangenheit wurden Fehler
+<a href="#ftn.idp63331104" class="footnote" id="idp63331104"><sup class="footnote">[6]</sup></a>identifiziert, die nur bei Nutzung
+einer nicht-UTF-8-Locale auftreten. Auf dem Desktop werden solche veralteten
+Locales nur durch böse Hacks in den Bibliotheksinternas unterstützt, und wir
+können Benutzern, die sie immer noch verwenden, keine vernünftige
+Unterstützung anbieten.
+</p><p>
+Um die Locale Ihres Systems zu konfigurieren, können Sie
+<span class="command"><strong>dpkg-reconfigure locales</strong></span> ausführen. Wenn Ihnen die Frage
+gestellt wird, welche Locale Sie als Standard in Ihrem System verwenden
+möchten, wählen Sie unbedingt eine UTF-8-Locale aus. Zusätzlich sollten Sie
+die eingestellten Locales Ihrer Systemnutzer kontrollieren und
+sicherstellen, dass diese keine veralteten Locale-Definitionen in ihren
+Konfigurationsumgebungen haben.
+</p></div><div class="footnotes"><br /><hr width="100" align="left" /><div id="ftn.idp63331104" class="footnote"><p><a href="#idp63331104" class="para"><sup class="para">[6] </sup></a>Wenn bei dem GNOME-Bildschirmschoner Passwörter mit Nicht-ASCII-Zeichen
+verwendet werden, könnte die Unterstützung für pam_ldap oder sogar die
+Funktionalität zur Entsperrung des Bildschirms unzuverlässig sein, wenn
+UTF-8 nicht genutzt wird. Der GNOME-Bildschirmschoner ist von dem Fehler
+<a class="ulink" href="http://bugs.debian.org/599197" target="_top">#599197</a> betroffen. Der
+Nautilus-Dateimanager (und alle glib-basierten Programme sowie
+höchstwahrscheinlich auch alle Qt-basierten Programme) gehen davon aus, dass
+Dateinamen in UTF-8 kodiert sind, während die Shell voraussetzt, dass sie in
+der Kodierung der aktuellen Locale kodiert sind. Für die alltägliche Arbeit
+sind Nicht-ASCII-Dateinamen in solchen Umgebungen nicht nutzbar. Desweiteren
+erfordert der gnome-orca-Screenreader (der sehbehinderten Benutzern Zugriff
+auf die GNOME-Desktop-Umgebung erlaubt) seit Squeeze eine UTF-8-Locale; bei
+Nutzung einer Legacy-Zeichenbelegung wird es gnome-orca nicht möglich sein,
+Fensterinformationen für Desktop-Elemente wie die Nautilus-/GNOME-Leiste
+oder das Alt-F1-Menü auszulesen.</p></div></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch-moreinfo.de.html"><img src="images/prev.png" alt="Zurück" /></a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="apb.de.html"><img src="images/next.png" alt="Weiter" /></a></td></tr><tr><td width="40%" align="left" valign="top">Kapitel 6. Zusätzliche Informationen zu Debian </td><td width="20%" align="center"><a accesskey="h" href="index.de.html"><img src="images/home.png" alt="Zum Anfang" /></a></td><td width="40%" align="right" valign="top"> Anhang B. Mitwirkende bei den Veröffentlichungshinweisen</td></tr></table></div></body></html>
