@@ -9,7 +9,7 @@
   "@hidden": false,
   "@filename": "debian-8.9.0-amd64-netinst.iso",
   "@mount_method": "mount",
-  "@verification_hash": "bcd6ae9f6808ea0db15981031a9acade4a8f8b6821cdd5f56055df611582de47",
+  "@verification_hash": "814cc23afbf49509eef8e926783a68115f74ef8a224f83195fcba078a72b9a78",
   "@os_name": "debian-jessie",
   "@os_version": "8.9.0"
 }
